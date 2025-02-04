@@ -6,15 +6,24 @@ import br.ufrpe.ip.projeto.enums.StatusBoletoEnum;
 import br.ufrpe.ip.projeto.enums.StatusContratoEnum;
 import br.ufrpe.ip.projeto.models.Contrato;
 import br.ufrpe.ip.projeto.models.GrupoConsorcio;
+import br.ufrpe.ip.projeto.repositories.interfaces.IContratoRepository;
 import br.ufrpe.ip.projeto.models.Cliente;
 import br.ufrpe.ip.projeto.models.Boleto;
 
-public class ContratoRepository {
+public class ContratoRepository implements IContratoRepository{
+    private static ContratoRepository instancia;
     private ArrayList<Contrato> contratos;
     
 
     public ContratoRepository() {
         this.contratos = new ArrayList<>();
+    }
+    
+    public static ContratoRepository getInstancia() {
+        if (instancia == null) {
+            instancia = new ContratoRepository();
+        }
+        return instancia;
     }
 
     public void getAllContratos() {
@@ -26,7 +35,7 @@ public class ContratoRepository {
             }
         }
         System.out.println("Todos os contratos foram listados acima.");
-    }
+    } // retornar string
 
     public void getAllContratosByCPF(Cliente cliente) {
         for (Contrato contrato : contratos) {
@@ -35,7 +44,7 @@ public class ContratoRepository {
             } 
         }
         System.out.println("Todos os contratos do cliente foram listados acima.");
-    }
+    } // reestruturar método para receber parametro string
     
     public Contrato getContratoByCPFNomeGrupo(Cliente cliente, GrupoConsorcio grupoAssociado) {
         for (Contrato contrato : contratos) {
@@ -45,7 +54,7 @@ public class ContratoRepository {
         }
         System.out.println("Cliente não encontrado");
         return null;
-    }
+    } // receber parametri string em vez de cliente
 
     public String getContratosByNomeGrupo(GrupoConsorcio grupoAssociado) {
         for (Contrato contrato : contratos) {
@@ -62,7 +71,7 @@ public class ContratoRepository {
             }
         }
         return "Grupo não encontrado.";
-    }
+    } 
 
     public void createContrato(Cliente cliente, GrupoConsorcio grupoAssociado) {
         Contrato contrato = new Contrato(cliente, grupoAssociado);
@@ -74,7 +83,7 @@ public class ContratoRepository {
         } else {
             System.out.println("Contrato pertencente a este cliente neste grupo já existe.");
         }
-    }
+    } // receber string cpf em vez de cliente
 
     private void updateContrato(Cliente cliente, int novasParcelas, double novoSaldoDevedor, Boleto boleto) {
         for(Contrato contrato : contratos) {
@@ -93,7 +102,7 @@ public class ContratoRepository {
                 }
             }
         }
-    }
+    } // método genérico não é a call, vi no projeto de jp. vou refazer tudo em metodos especificos
 
     public void pagarParcela(Cliente cliente, GrupoConsorcio grupoAssociado, Boleto boleto) {
         if (getContratoByCPFNomeGrupo(cliente, grupoAssociado) != null & !(getContratoByCPFNomeGrupo(cliente, grupoAssociado).getListaBoletosPagos().contains(boleto))) {
@@ -109,7 +118,7 @@ public class ContratoRepository {
         } else {
             System.out.println("O cliente não foi encontrado ou o boleto já foi pago.");
         }
-    }
+    } // reestruturar método para receber Contrato e Boleto como parametros 
 
     public void cancelarContrato(Cliente cliente, GrupoConsorcio grupoAssociado) {
         if (getContratoByCPFNomeGrupo(cliente, grupoAssociado) != null) {
@@ -120,7 +129,7 @@ public class ContratoRepository {
         } else {
             System.out.println("Contrato não encontrado não pôde ser cancelado.");
         }
-    }
+    } // refazer a estrutura do método para parâmetro único (Contrato)
 
     public void deleteContrato(Cliente cliente, GrupoConsorcio grupoAssociado) {
         Contrato contrato = getContratoByCPFNomeGrupo(cliente, grupoAssociado);
@@ -130,5 +139,41 @@ public class ContratoRepository {
         } else {
             System.out.println("Contrato não encontrado não pôde ser removido.");
         }
+    } // refazer a estrutura do método para parâmetro único (Contrato)
+
+    @Override
+    public void getAllContratosByCPF() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAllContratosByCPF'");
+    }
+
+    @Override
+    public Contrato getContratoByCPFNomeGrupo() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getContratoByCPFNomeGrupo'");
+    }
+
+    @Override
+    public void createContrato() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'createContrato'");
+    }
+
+    @Override
+    public void pagarParcela() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'pagarParcela'");
+    }
+
+    @Override
+    public void cancelarContrato() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'cancelarContrato'");
+    }
+
+    @Override
+    public void deleteContrato() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'deleteContrato'");
     }
 }
