@@ -1,4 +1,4 @@
-package Models;
+package br.ufrpe.ip.projeto.models;
 
 import java.util.ArrayList;
 

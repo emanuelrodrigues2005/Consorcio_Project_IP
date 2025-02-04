@@ -1,13 +1,13 @@
-package Repository;
+package br.ufrpe.ip.projeto.repositories;
 
 import java.util.ArrayList;
 
-import Enums.StatusBoletoEnum;
-import Enums.StatusContratoEnum;
-import Models.Contrato;
-import Models.GrupoConsorcio;
-import Models.Cliente;
-import Models.Boleto;
+import br.ufrpe.ip.projeto.enums.StatusBoletoEnum;
+import br.ufrpe.ip.projeto.enums.StatusContratoEnum;
+import br.ufrpe.ip.projeto.models.Contrato;
+import br.ufrpe.ip.projeto.models.GrupoConsorcio;
+import br.ufrpe.ip.projeto.models.Cliente;
+import br.ufrpe.ip.projeto.models.Boleto;
 
 public class ContratoRepository {
     private ArrayList<Contrato> contratos;

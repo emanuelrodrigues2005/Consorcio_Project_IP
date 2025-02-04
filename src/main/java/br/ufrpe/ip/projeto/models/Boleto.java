@@ -1,6 +1,6 @@
-package Models;
+package br.ufrpe.ip.projeto.models;
 
-import Enums.StatusBoletoEnum;
+import br.ufrpe.ip.projeto.enums.StatusBoletoEnum;
 
 import java.time.LocalDate;
 import java.util.HashSet;
