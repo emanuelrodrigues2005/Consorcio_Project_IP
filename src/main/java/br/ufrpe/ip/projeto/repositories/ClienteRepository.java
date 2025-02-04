@@ -15,7 +15,7 @@ public class ClienteRepository implements IClienteRepository {
         this.clientes = new ArrayList<>();
     }
 
-    public ClienteRepository getInstance() {
+    public static ClienteRepository getInstance() {
         if(ClienteRepository.instance == null) {
             ClienteRepository.instance = new ClienteRepository();
         }
