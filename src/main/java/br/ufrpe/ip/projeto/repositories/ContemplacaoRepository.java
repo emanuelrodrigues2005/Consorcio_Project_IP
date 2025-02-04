@@ -1,10 +1,10 @@
-package Repository; 
+package br.ufrpe.ip.projeto.repositories;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import Models.Contemplacao;
-import Models.Contrato;
+import br.ufrpe.ip.projeto.models.Contemplacao;
+import br.ufrpe.ip.projeto.models.Contrato;
 
 public class ContemplacaoRepository {
     private ArrayList<Contemplacao> contemplacoes;

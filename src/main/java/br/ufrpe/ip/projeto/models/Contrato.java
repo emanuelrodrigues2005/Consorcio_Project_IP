@@ -1,6 +1,6 @@
-package Models;
+package br.ufrpe.ip.projeto.models;
 
-import Enums.StatusContratoEnum;
+import br.ufrpe.ip.projeto.enums.StatusContratoEnum;
 
 
 import java.time.LocalDate;

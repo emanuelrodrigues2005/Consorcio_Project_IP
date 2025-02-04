@@ -1,7 +1,7 @@
-package Repository;
+package br.ufrpe.ip.projeto.repositories;
 
-import Enums.StatusGrupoConsorcioEnum;
-import Models.GrupoConsorcio;
+import br.ufrpe.ip.projeto.enums.StatusGrupoConsorcioEnum;
+import br.ufrpe.ip.projeto.models.GrupoConsorcio;
 import java.util.ArrayList;
 
 public class GrupoConsorcioRepository {

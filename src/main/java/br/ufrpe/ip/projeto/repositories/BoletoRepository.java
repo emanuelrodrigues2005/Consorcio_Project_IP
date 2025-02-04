@@ -1,8 +1,8 @@
-package Repository;
+package br.ufrpe.ip.projeto.repositories;
 
-import Models.Boleto;
-import Models.Contrato;
-import Enums.StatusBoletoEnum;
+import br.ufrpe.ip.projeto.models.Boleto;
+import br.ufrpe.ip.projeto.models.Contrato;
+import br.ufrpe.ip.projeto.enums.StatusBoletoEnum;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
