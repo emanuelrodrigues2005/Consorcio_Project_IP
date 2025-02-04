@@ -1,6 +1,7 @@
 package br.ufrpe.ip.projeto.repositories;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import br.ufrpe.ip.projeto.enums.StatusBoletoEnum;
 import br.ufrpe.ip.projeto.enums.StatusContratoEnum;
@@ -26,83 +27,43 @@ public class ContratoRepository implements IContratoRepository{
         return instancia;
     }
 
-    public void getAllContratos() {
+    public List<Contrato> getAllContratos() {
         if (contratos.isEmpty()) {
-            System.out.println("Nenhum contrato foi criado");
-        } else {
-            for(Contrato contrato : contratos) {
-                System.out.println(contrato);
-            }
-        }
-        System.out.println("Todos os contratos foram listados acima.");
-    } // retornar string
+            return null;
+        } 
+        return contratos;
+    }
 
-    public void getAllContratosByCPF(Cliente cliente) {
-        for (Contrato contrato : contratos) {
-            if (contrato.getCliente().getCpf().equalsIgnoreCase(cliente.getCpf())) {
-                System.out.println(contrato.toString());
-            } 
+    public List<Contrato> getAllContratosByCPF(Cliente cliente) {
+        if (cliente.getContratos().isEmpty()) {
+            return null;
         }
-        System.out.println("Todos os contratos do cliente foram listados acima.");
-    } // reestruturar método para receber parametro string
+        return cliente.getContratos();
+    } 
     
     public Contrato getContratoByCPFNomeGrupo(Cliente cliente, GrupoConsorcio grupoAssociado) {
         for (Contrato contrato : contratos) {
-            if (contrato.getCliente().getCpf().equalsIgnoreCase(cliente.getCpf()) && contrato.getGrupoAssociado().getNomeGrupo().equalsIgnoreCase(grupoAssociado.getNomeGrupo())) {
+            if (contrato.getCliente().getCpf().equalsIgnoreCase(cliente.getCpf()) && 
+                contrato.getGrupoAssociado().getNomeGrupo().equalsIgnoreCase(grupoAssociado.getNomeGrupo())) {
                 return contrato;
             }
         }
-        System.out.println("Cliente não encontrado");
         return null;
-    } // receber parametri string em vez de cliente
-
-    public String getContratosByNomeGrupo(GrupoConsorcio grupoAssociado) {
-        for (Contrato contrato : contratos) {
-            if(contrato.getGrupoAssociado().getNomeGrupo().equalsIgnoreCase(grupoAssociado.getNomeGrupo())) {
-                int counter = 0;
-                for(Contrato contratoListado : contrato.getGrupoAssociado().getListaContratos()) {
-                    System.out.println(contratoListado);
-                    counter++;
-                }
-                if (counter > 0) {
-                    return "Todos os contratos do grupo foram listados acima.";
-                }
-                return "O grupo não possui contratos ativos.";
-            }
-        }
-        return "Grupo não encontrado.";
     } 
 
+    public List<Contrato> getContratosByNomeGrupo(GrupoConsorcio grupoAssociado) {
+        if (grupoAssociado.getListaContratos().isEmpty()) {
+            return null;
+        }
+        return grupoAssociado.getListaContratos();
+    }
+    
     public void createContrato(Cliente cliente, GrupoConsorcio grupoAssociado) {
         Contrato contrato = new Contrato(cliente, grupoAssociado);
-        if (getContratoByCPFNomeGrupo(cliente, grupoAssociado) == null)  {
-            contratos.add(contrato);
-            grupoAssociado.getListaContratos().add(contrato);
-            cliente.getContratos().add(contrato);
-            System.out.printf("Contrato do cliente %s, pertencente ao grupo %s foi criado com sucesso.\n", cliente.getNome(), grupoAssociado.getNomeGrupo());
-        } else {
-            System.out.println("Contrato pertencente a este cliente neste grupo já existe.");
-        }
-    } // receber string cpf em vez de cliente
+        contratos.add(contrato);
+    } // exceptions: Contrato já existe, clienteInvalido, grupoInvalido
 
-    private void updateContrato(Cliente cliente, int novasParcelas, double novoSaldoDevedor, Boleto boleto) {
-        for(Contrato contrato : contratos) {
-            if(contrato.getCliente().getCpf().equalsIgnoreCase(cliente.getCpf())) {
-                if (novasParcelas > contrato.getParcelasPagas()) {
-                    contrato.setParcelasPagas(novasParcelas);
-                }
-                if (novoSaldoDevedor < contrato.getSaldoDevedor()) {
-                    contrato.setSaldoDevedor(novoSaldoDevedor);
-                }
-                if (boleto != null) {
-                    if (contrato.getListaBoletosAtrasados().contains(boleto)) {
-                        contrato.getListaBoletosAtrasados().remove(boleto);
-                    }
-                    contrato.addBoleto(boleto);
-                }
-            }
-        }
-    } // método genérico não é a call, vi no projeto de jp. vou refazer tudo em metodos especificos
+    public void update
 
     public void pagarParcela(Cliente cliente, GrupoConsorcio grupoAssociado, Boleto boleto) {
         if (getContratoByCPFNomeGrupo(cliente, grupoAssociado) != null & !(getContratoByCPFNomeGrupo(cliente, grupoAssociado).getListaBoletosPagos().contains(boleto))) {
