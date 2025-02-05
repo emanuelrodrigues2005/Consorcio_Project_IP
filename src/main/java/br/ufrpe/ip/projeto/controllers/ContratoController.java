@@ -26,6 +26,12 @@ public class ContratoController {
         return instancia;
     }
 
+    public void createContrato(Cliente cliente, GrupoConsorcio grupoConsorcio) {
+        if (!repositorioContrato.existeContrato(repositorioContrato.getContratoByCPFNomeGrupo(cliente, grupoConsorcio))) {
+            repositorioContrato.createContrato(cliente, grupoConsorcio);
+        }
+    } // exceptions: contratoDuplicado, clienteInvalido, grupoInvalido, contratoInvalido
+
     
 
     public boolean cancelarContrato(Cliente cliente, GrupoConsorcio grupoAssociado) {
@@ -53,5 +59,6 @@ public class ContratoController {
     //     } else {
     //         System.out.println("O cliente não foi encontrado ou o boleto já foi pago.");
     //     }
-    // } // reestruturar método para receber Contrato e Boleto como parametros 
+    // } // reestruturar completamente método
+    //   // registrarPagamento()
 }

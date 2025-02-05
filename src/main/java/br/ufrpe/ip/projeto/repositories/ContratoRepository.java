@@ -33,7 +33,14 @@ public class ContratoRepository implements IContratoRepository{
 
     @Override
     public List<Contrato> getAllContratosByCPF(Cliente cliente) {
-        return cliente.getContratos();
+        List<Contrato> contratosCliente = new ArrayList<>();
+        for (Contrato contrato : contratos) {
+            if (contrato.getCliente().getCpf().equalsIgnoreCase(cliente.getCpf())) {
+                contratosCliente.add(contrato);
+            }
+            
+        }
+        return contratosCliente;
     } // exceptions: clienteInvalido
 
     @Override
@@ -49,9 +56,16 @@ public class ContratoRepository implements IContratoRepository{
 
     @Override
     public List<Contrato> getContratosByNomeGrupo(GrupoConsorcio grupoAssociado) {
-        return grupoAssociado.getListaContratos();
+        List<Contrato> contratosGrupo = new ArrayList<>();
+        for (Contrato contrato : contratos) {
+            if (contrato.getGrupoAssociado().getIdGrupo() == grupoAssociado.getIdGrupo()) {
+                contratosGrupo.add(contrato);
+            }
+        }
+        return contratosGrupo;
     } // exceptions: grupoInvalido
 
+    @Override
     public boolean existeContrato(Contrato contrato) {
         for (Contrato contrato2 : contratos) {
             if (contrato2.getIdContrato() == contrato.getIdContrato()) {
@@ -65,7 +79,7 @@ public class ContratoRepository implements IContratoRepository{
     public void createContrato(Cliente cliente, GrupoConsorcio grupoAssociado) {
         Contrato contrato = new Contrato(cliente, grupoAssociado);
         contratos.add(contrato);
-    } // exceptions: contratoDuplicado, clienteInvalido, grupoInvalido
+    } 
 
     @Override
     public void updateParcelasPagas(Contrato contrato) {

@@ -18,6 +18,8 @@ public interface IContratoRepository {
 
     List<Contrato> getContratosByNomeGrupo(GrupoConsorcio grupoConsorcio);
 
+    boolean existeContrato(Contrato contrato);
+
     void createContrato(Cliente cliente, GrupoConsorcio grupoConsorcio);
 
     void updateParcelasPagas(Contrato contrato);
