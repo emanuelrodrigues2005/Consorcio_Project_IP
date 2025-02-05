@@ -24,6 +24,14 @@ public class BoletoRepository implements IBoletoRepository {
     }
 
     @Override
+    public ArrayList<Boleto> getAllBoletos() {
+        if (boletos.isEmpty()) {
+            return null;
+        }
+        return boletos;
+    }
+
+    @Override
     public int getIdBoleto(Contrato contrato, int numeroParcela) {
         for (Boleto boleto : boletos) {
             if (boleto.getContratoBoleto().equals(contrato) &&

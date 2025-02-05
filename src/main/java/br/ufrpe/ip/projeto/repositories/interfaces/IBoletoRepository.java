@@ -5,8 +5,11 @@ import br.ufrpe.ip.projeto.models.Boleto;
 import br.ufrpe.ip.projeto.models.Contrato;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public interface IBoletoRepository {
+    ArrayList<Boleto> getAllBoletos();
+
     int getIdBoleto(Contrato contrato, int numeroParcela);
 
     Boleto getBoletoById(int idBoleto);
