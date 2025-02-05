@@ -46,14 +46,23 @@ public class ClienteRepository implements IClienteRepository {
    }
 
    @Override
-   public Cliente updateCliente(Cliente cliente) {
-        Cliente c = this.getClienteByCpf(cliente.getCpf());
-        c.setNome(cliente.getNome());
-        c.setCpf(cliente.getCpf());
-        c.setTelefone(cliente.getTelefone());
-        c.setEmail(cliente.getEmail());
-        return c;
-   }
+    public void updateNome(Cliente cliente, String nome) {
+        cliente.setNome(nome);
+    }
+
+    @Override
+    public void updateCpf(Cliente cliente, String novoCpf) {
+        cliente.setCpf(novoCpf);
+    }
+
+    @Override
+    public void updateTelefone(Cliente cliente, String telefone) {
+        cliente.setTelefone(telefone);
+    }
+    @Override
+    public void updateEmail(Cliente cliente, String email) {
+        cliente.setEmail(email);
+    }
 
    @Override
     public void deleteCliente(String cpf) {
