@@ -83,24 +83,6 @@ public class ContratoRepository implements IContratoRepository{
         return (contrato.getGrupoAssociado().getValorTotal() / contrato.getGrupoAssociado().getNumeroParticipantes()) * contrato.getParcelasPagas();
     } // exceptions: contratoInexistente
 
-
-
-    public void pagarParcela(Cliente cliente, GrupoConsorcio grupoAssociado, Boleto boleto) {
-        if (getContratoByCPFNomeGrupo(cliente, grupoAssociado) != null & !(getContratoByCPFNomeGrupo(cliente, grupoAssociado).getListaBoletosPagos().contains(boleto))) {
-            if (boleto.getStatusBoleto() == StatusBoletoEnum.PAGO) {
-                Contrato contrato = getContratoByCPFNomeGrupo(cliente, grupoAssociado);
-                updateContrato(cliente, contrato.getParcelasPagas() + 1, contrato.getSaldoDevedor() - contrato.getGrupoAssociado().getValorParcela(), boleto);
-                System.out.println("A parcela foi paga com sucesso.");
-            } else if (boleto.getStatusBoleto() == StatusBoletoEnum.PENDENTE) {
-                System.out.println("O boleto ainda está pendente de pagamento. Operação negada");
-            } else if (boleto.getStatusBoleto() == StatusBoletoEnum.ATRASADO) {
-                System.out.println("O boleto ainda está pendente de pagamento e está atrasado no momento. Operação negada");
-            } 
-        } else {
-            System.out.println("O cliente não foi encontrado ou o boleto já foi pago.");
-        }
-    } // reestruturar método para receber Contrato e Boleto como parametros 
-
     public void cancelarContrato(Cliente cliente, GrupoConsorcio grupoAssociado) {
         if (getContratoByCPFNomeGrupo(cliente, grupoAssociado) != null) {
             Contrato contrato = getContratoByCPFNomeGrupo(cliente, grupoAssociado);
