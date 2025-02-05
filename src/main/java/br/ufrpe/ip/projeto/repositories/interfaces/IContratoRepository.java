@@ -12,17 +12,21 @@ public interface IContratoRepository {
 
     List<Contrato> getAllContratos();
     
-    void getAllContratosByCPF();
+    List<Contrato> getAllContratosByCPF(Cliente cliente);
 
-    Contrato getContratoByCPFNomeGrupo();
+    Contrato getContratoByCPFNomeGrupo(Cliente cliente, GrupoConsorcio grupoConsorcio);
 
     List<Contrato> getContratosByNomeGrupo(GrupoConsorcio grupoConsorcio);
 
-    void createContrato();
+    void createContrato(Cliente cliente, GrupoConsorcio grupoConsorcio);
 
-    void pagarParcela();
+    void updateParcelasPagas(Contrato contrato);
 
-    void cancelarContrato();
+    void updateSaldoDevedor(Contrato contrato);
 
-    void deleteContrato();
+    void updateValorPago(Contrato contrato);
+
+    void updateSaldoDevolução(Contrato contrato);
+
+    void deleteContrato(Contrato contrato);
 }
