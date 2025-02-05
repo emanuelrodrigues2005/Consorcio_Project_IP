@@ -1,7 +1,9 @@
 package br.ufrpe.ip.projeto.repositories.interfaces;
 
+import java.time.LocalDate;
 import java.util.List;
 
+import br.ufrpe.ip.projeto.enums.StatusContratoEnum;
 import br.ufrpe.ip.projeto.models.Cliente;
 import br.ufrpe.ip.projeto.models.Contrato;
 import br.ufrpe.ip.projeto.models.GrupoConsorcio;
@@ -25,6 +27,10 @@ public interface IContratoRepository {
     void updateValorPago(Contrato contrato);
 
     void updateSaldoDevolução(Contrato contrato);
+
+    void updateStatusContrato(Contrato contrato, StatusContratoEnum status);
+
+    void updateDataEncerramento(Contrato contrato, LocalDate data);
 
     void deleteContrato(Contrato contrato);
 }

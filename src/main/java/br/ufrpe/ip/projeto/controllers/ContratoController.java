@@ -1,5 +1,7 @@
 package br.ufrpe.ip.projeto.controllers;
 
+import java.time.LocalDate;
+
 import br.ufrpe.ip.projeto.enums.StatusBoletoEnum;
 import br.ufrpe.ip.projeto.enums.StatusContratoEnum;
 import br.ufrpe.ip.projeto.models.Boleto;
@@ -23,7 +25,20 @@ public class ContratoController {
         }
         return instancia;
     }
+
     
+
+    public boolean cancelarContrato(Cliente cliente, GrupoConsorcio grupoAssociado) {
+        Contrato contrato = repositorioContrato.getContratoByCPFNomeGrupo(cliente, grupoAssociado);
+        if (contrato != null) {
+            repositorioContrato.updateStatusContrato(contrato, StatusContratoEnum.ENCERRADO);
+            repositorioContrato.updateSaldoDevolução(contrato);
+            repositorioContrato.updateDataEncerramento(contrato, LocalDate.now());
+            return true;
+        }
+        return false;
+    } 
+
     // public void pagarParcela(Cliente cliente, GrupoConsorcio grupoAssociado, Boleto boleto) {
     //     if (getContratoByCPFNomeGrupo(cliente, grupoAssociado) != null & !(getContratoByCPFNomeGrupo(cliente, grupoAssociado).getListaBoletosPagos().contains(boleto))) {
     //         if (boleto.getStatusBoleto() == StatusBoletoEnum.PAGO) {
@@ -39,15 +54,4 @@ public class ContratoController {
     //         System.out.println("O cliente não foi encontrado ou o boleto já foi pago.");
     //     }
     // } // reestruturar método para receber Contrato e Boleto como parametros 
-
-    // public void cancelarContrato(Cliente cliente, GrupoConsorcio grupoAssociado) {
-    //     if (getContratoByCPFNomeGrupo(cliente, grupoAssociado) != null) {
-    //         Contrato contrato = getContratoByCPFNomeGrupo(cliente, grupoAssociado);
-    //         contrato.setStatusContrato(StatusContratoEnum.ENCERRADO);
-    //         contrato.setSaldoDevolucao(calcularSaldoDevolucao(contrato));
-    //         System.out.printf("Contrato cancelado com sucesso, suas parcelas pagas serão devolvidas após o término do consórcio.\n" );
-    //     } else {
-    //         System.out.println("Contrato não encontrado não pôde ser cancelado.");
-    //     }
-    // } // refazer a estrutura do método para parâmetro único (Contrato)
 }
