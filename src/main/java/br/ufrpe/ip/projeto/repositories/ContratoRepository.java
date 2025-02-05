@@ -63,7 +63,27 @@ public class ContratoRepository implements IContratoRepository{
         contratos.add(contrato);
     } // exceptions: Contrato já existe, clienteInvalido, grupoInvalido
 
-    public void update
+    public void updateParcelasPagas(Contrato contrato) {
+        contrato.setParcelasPagas(contrato.getParcelasPagas() + 1);
+    } // exceptions: contratoInexistente
+
+    public void updateSaldoDevedor(Contrato contrato) {
+        contrato.setSaldoDevedor(contrato.getSaldoDevedor() - contrato.getGrupoAssociado().getValorParcela());
+    } // exceptions: contratoInexistente
+
+    public void updateValorPago(Contrato contrato) {
+        contrato.setValorPago(contrato.getValorPago() + contrato.getGrupoAssociado().getValorParcela());
+    } // exceptions: contratoInexistente
+
+    public void updateSaldoDevolução(Contrato contrato) {
+        contrato.setSaldoDevolucao(calcularSaldoDevolucao(contrato));
+    } // exceptions: contratoInexistente
+
+    private double calcularSaldoDevolucao(Contrato contrato) {
+        return (contrato.getGrupoAssociado().getValorTotal() / contrato.getGrupoAssociado().getNumeroParticipantes()) * contrato.getParcelasPagas();
+    } // exceptions: contratoInexistente
+
+
 
     public void pagarParcela(Cliente cliente, GrupoConsorcio grupoAssociado, Boleto boleto) {
         if (getContratoByCPFNomeGrupo(cliente, grupoAssociado) != null & !(getContratoByCPFNomeGrupo(cliente, grupoAssociado).getListaBoletosPagos().contains(boleto))) {
