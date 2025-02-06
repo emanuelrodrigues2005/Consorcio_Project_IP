@@ -38,7 +38,6 @@ public class ContratoRepository implements IContratoRepository{
             if (contrato.getCliente().getCpf().equalsIgnoreCase(cliente.getCpf())) {
                 contratosCliente.add(contrato);
             }
-            
         }
         return contratosCliente;
     } // exceptions: clienteInvalido

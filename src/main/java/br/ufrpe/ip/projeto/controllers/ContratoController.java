@@ -32,7 +32,9 @@ public class ContratoController {
         }
     } // exceptions: contratoDuplicado, clienteInvalido, grupoInvalido, contratoInvalido
 
-    
+    public void registrarPagamento(Cliente cliente, GrupoConsorcio grupoConsorcio, Boleto boleto) {
+        Contrato contrato = repositorioContrato.getContratoByCPFNomeGrupo(cliente, grupoConsorcio);
+    }
 
     public boolean cancelarContrato(Cliente cliente, GrupoConsorcio grupoAssociado) {
         Contrato contrato = repositorioContrato.getContratoByCPFNomeGrupo(cliente, grupoAssociado);
