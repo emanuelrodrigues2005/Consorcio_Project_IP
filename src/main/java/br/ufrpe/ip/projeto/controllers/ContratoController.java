@@ -83,5 +83,5 @@ public class ContratoController {
         if (contrato != null) {
             this.repositorioContrato.deleteContrato(contrato);
         }
-    }
+    } //throw contratoInexistente, contratoInvalido
 }
