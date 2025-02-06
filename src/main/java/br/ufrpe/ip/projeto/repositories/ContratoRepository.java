@@ -43,10 +43,10 @@ public class ContratoRepository implements IContratoRepository{
     } // exceptions: clienteInvalido
 
     @Override
-    public Contrato getContratoByCPFNomeGrupo(Cliente cliente, GrupoConsorcio grupoAssociado) {
+    public Contrato getContratoByCPFIdGrupo(Cliente cliente, GrupoConsorcio grupoAssociado) {
         for (Contrato contrato : contratos) {
             if (contrato.getCliente().getCpf().equalsIgnoreCase(cliente.getCpf()) && 
-                contrato.getGrupoAssociado().getNomeGrupo().equalsIgnoreCase(grupoAssociado.getNomeGrupo())) {
+                contrato.getGrupoAssociado().getIdGrupo() == grupoAssociado.getIdGrupo()) {
                 return contrato;
             }
         }

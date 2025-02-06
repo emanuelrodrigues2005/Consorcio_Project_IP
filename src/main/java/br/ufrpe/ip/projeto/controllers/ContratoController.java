@@ -28,13 +28,13 @@ public class ContratoController {
     }
 
     public void createContrato(Cliente cliente, GrupoConsorcio grupoConsorcio) {
-        if (!this.repositorioContrato.existeContrato(this.repositorioContrato.getContratoByCPFNomeGrupo(cliente, grupoConsorcio))) {
+        if (!this.repositorioContrato.existeContrato(this.repositorioContrato.getContratoByCPFIdGrupo(cliente, grupoConsorcio))) {
             this.repositorioContrato.createContrato(cliente, grupoConsorcio);
         }
     } // exceptions: contratoDuplicado, clienteInvalido, grupoInvalido, contratoInvalido
 
     public void registrarPagamento(Cliente cliente, GrupoConsorcio grupoConsorcio, Boleto boleto) {
-        Contrato contrato = this.repositorioContrato.getContratoByCPFNomeGrupo(cliente, grupoConsorcio);
+        Contrato contrato = this.repositorioContrato.getContratoByCPFIdGrupo(cliente, grupoConsorcio);
         if (boleto.getStatusBoleto() == StatusBoletoEnum.PAGO) {
             this.repositorioContrato.updateParcelasPagas(contrato);
             this.repositorioContrato.updateSaldoDevedor(contrato);
@@ -45,7 +45,7 @@ public class ContratoController {
     }
 
     public Contrato getContratoByCPFNomeGrupo(Cliente cliente, GrupoConsorcio grupoAssociado) {
-        return this.repositorioContrato.getContratoByCPFNomeGrupo(cliente, grupoAssociado);
+        return this.repositorioContrato.getContratoByCPFIdGrupo(cliente, grupoAssociado);
     }
 
     public List<Contrato> getAllContratos() {
@@ -69,7 +69,7 @@ public class ContratoController {
     }
 
     public boolean cancelarContrato(Cliente cliente, GrupoConsorcio grupoAssociado) {
-        Contrato contrato = this.repositorioContrato.getContratoByCPFNomeGrupo(cliente, grupoAssociado);
+        Contrato contrato = this.repositorioContrato.getContratoByCPFIdGrupo(cliente, grupoAssociado);
         if (contrato != null) {
             this.repositorioContrato.updateStatusContrato(contrato, StatusContratoEnum.ENCERRADO);
             this.repositorioContrato.updateSaldoDevolução(contrato);
