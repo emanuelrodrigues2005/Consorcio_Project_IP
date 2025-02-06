@@ -23,10 +23,11 @@ public class ClienteRepository implements IClienteRepository {
     }
 
     @Override
-    public void getAllClientes() {
-        for (Cliente cliente : clientes) {
-            cliente.toString();
+    public ArrayList<Cliente> getAllClientes() {
+        if(clientes.isEmpty()) {
+            return null;
         }
+        return clientes;
     }
 
     @Override
