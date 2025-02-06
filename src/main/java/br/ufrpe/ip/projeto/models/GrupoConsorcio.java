@@ -4,9 +4,11 @@ import br.ufrpe.ip.projeto.enums.StatusContratoEnum;
 import br.ufrpe.ip.projeto.enums.StatusGrupoConsorcioEnum;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GrupoConsorcio {
     private String nomeGrupo;
+    private int idGrupo;
     private int numeroParticipantes;
     private double valorTotal;
     private double taxaAdmin;
@@ -17,6 +19,7 @@ public class GrupoConsorcio {
 
     public GrupoConsorcio(String nomeGrupo, int numeroParticipantes, double valorTotal, double taxaAdmin) {
         this.nomeGrupo = nomeGrupo;
+        this.idGrupo = new Random().nextInt();
         this.numeroParticipantes = numeroParticipantes;
         this.valorTotal = valorTotal;
         this.taxaAdmin = taxaAdmin;
@@ -28,6 +31,10 @@ public class GrupoConsorcio {
 
     public String getNomeGrupo() {
         return nomeGrupo;
+    }
+
+    public int getIdGrupo() {
+        return idGrupo;
     }
 
     public void setNomeGrupo(String nomeGrupo) {

@@ -1,6 +1,9 @@
 package br.ufrpe.ip.projeto.controllers;
 
+import java.time.LocalDate;
+
 import br.ufrpe.ip.projeto.enums.StatusBoletoEnum;
+import br.ufrpe.ip.projeto.enums.StatusContratoEnum;
 import br.ufrpe.ip.projeto.models.Boleto;
 import br.ufrpe.ip.projeto.models.Cliente;
 import br.ufrpe.ip.projeto.models.Contrato;
@@ -22,7 +25,26 @@ public class ContratoController {
         }
         return instancia;
     }
+
+    public void createContrato(Cliente cliente, GrupoConsorcio grupoConsorcio) {
+        if (!repositorioContrato.existeContrato(repositorioContrato.getContratoByCPFNomeGrupo(cliente, grupoConsorcio))) {
+            repositorioContrato.createContrato(cliente, grupoConsorcio);
+        }
+    } // exceptions: contratoDuplicado, clienteInvalido, grupoInvalido, contratoInvalido
+
     
+
+    public boolean cancelarContrato(Cliente cliente, GrupoConsorcio grupoAssociado) {
+        Contrato contrato = repositorioContrato.getContratoByCPFNomeGrupo(cliente, grupoAssociado);
+        if (contrato != null) {
+            repositorioContrato.updateStatusContrato(contrato, StatusContratoEnum.ENCERRADO);
+            repositorioContrato.updateSaldoDevolução(contrato);
+            repositorioContrato.updateDataEncerramento(contrato, LocalDate.now());
+            return true;
+        }
+        return false;
+    } 
+
     // public void pagarParcela(Cliente cliente, GrupoConsorcio grupoAssociado, Boleto boleto) {
     //     if (getContratoByCPFNomeGrupo(cliente, grupoAssociado) != null & !(getContratoByCPFNomeGrupo(cliente, grupoAssociado).getListaBoletosPagos().contains(boleto))) {
     //         if (boleto.getStatusBoleto() == StatusBoletoEnum.PAGO) {
@@ -37,5 +59,6 @@ public class ContratoController {
     //     } else {
     //         System.out.println("O cliente não foi encontrado ou o boleto já foi pago.");
     //     }
-    // } // reestruturar método para receber Contrato e Boleto como parametros 
+    // } // reestruturar completamente método
+    //   // registrarPagamento()
 }
