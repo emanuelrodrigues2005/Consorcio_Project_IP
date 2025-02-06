@@ -11,7 +11,7 @@ public class GrupoConsorcioRepository implements IGrupoConsorcioRepository {
     private static GrupoConsorcioRepository instancia;
     private ArrayList<GrupoConsorcio> grupos;
 
-    public GrupoConsorcioRepository() {
+    private GrupoConsorcioRepository() {
         this.grupos = new ArrayList<>();
     }
 

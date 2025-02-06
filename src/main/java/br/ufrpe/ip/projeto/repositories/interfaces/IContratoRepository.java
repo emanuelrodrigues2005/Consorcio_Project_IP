@@ -30,7 +30,7 @@ public interface IContratoRepository {
 
     void updateValorPago(Contrato contrato);
 
-    void updateSaldoDevolução(Contrato contrato);
+    void updateSaldoDevolucao(Contrato contrato);
 
     void updateStatusContrato(Contrato contrato, StatusContratoEnum status);
 

@@ -15,7 +15,7 @@ public class GrupoConsorcioController {
     private static GrupoConsorcioController instancia;
     private final IGrupoConsorcioRepository repositorioGrupo;
 
-    public GrupoConsorcioController() {
+    private GrupoConsorcioController() {
         this.repositorioGrupo = GrupoConsorcioRepository.getInstancia();
     }
 
