@@ -14,11 +14,13 @@ public interface IContratoRepository {
     
     List<Contrato> getAllContratosByCPF(Cliente cliente);
 
-    Contrato getContratoByCPFNomeGrupo(Cliente cliente, GrupoConsorcio grupoConsorcio);
+    Contrato getContratoByCPFIdGrupo(Cliente cliente, GrupoConsorcio grupoConsorcio);
 
-    List<Contrato> getContratosByNomeGrupo(GrupoConsorcio grupoConsorcio);
+    List<Contrato> getContratosByIdGrupo(GrupoConsorcio grupoConsorcio);
 
     boolean existeContrato(Contrato contrato);
+
+    Contrato getContratoByIdContrato(int idContrato);
 
     void createContrato(Cliente cliente, GrupoConsorcio grupoConsorcio);
 
