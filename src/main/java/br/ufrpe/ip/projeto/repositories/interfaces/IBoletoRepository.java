@@ -14,13 +14,11 @@ public interface IBoletoRepository {
 
     Boleto getBoletoById(int idBoleto);
 
-    Boleto createBoleto(Contrato contrato, LocalDate dataEmissao, LocalDate dataVencimento, int numeroParcela);
+    Boleto getBoletoByContrato(Contrato contrato);
 
-    void updateDataVencimento(Boleto boleto, LocalDate dataVencimento);
+    Boleto createBoleto(Contrato contrato, LocalDate dataVencimento, int numeroParcela);
 
-    void updateDataEmissao(Boleto boleto, LocalDate dataEmissao);
-
-    void updateDataPagamento(Boleto boleto, LocalDate dataPagamento);
+    void updateDataPagamento(Boleto boleto);
 
     void updateStatusBoleto(Boleto boleto, StatusBoletoEnum statusBoleto);
 

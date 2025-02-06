@@ -54,25 +54,25 @@ public class BoletoRepository implements IBoletoRepository {
     }
 
     @Override
-    public Boleto createBoleto(Contrato contrato, LocalDate dataEmissao, LocalDate dataVencimento, int numeroParcela) {
-        Boleto boleto = new Boleto(contrato, dataEmissao, dataVencimento, numeroParcela);
+    public Boleto getBoletoByContrato(Contrato contrato) {
+        for (Boleto boleto : boletos) {
+            if(boleto.getContratoBoleto().getIdContrato() == contrato.getIdContrato()) {
+                return boleto;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Boleto createBoleto(Contrato contrato, LocalDate dataVencimento, int numeroParcela) {
+        Boleto boleto = new Boleto(contrato, dataVencimento, numeroParcela);
         boletos.add(boleto);
         return boleto;
     }
 
     @Override
-    public void updateDataVencimento(Boleto boleto, LocalDate dataVencimento) {
-        boleto.setDataVencimento(dataVencimento);
-    }
-
-    @Override
-    public void updateDataEmissao(Boleto boleto, LocalDate dataEmissao) {
-        boleto.setDataEmissao(dataEmissao);
-    }
-
-    @Override
-    public void updateDataPagamento(Boleto boleto, LocalDate dataPagamento) {
-        boleto.setDataPagamento(dataPagamento);
+    public void updateDataPagamento(Boleto boleto) {
+        boleto.setDataPagamento(LocalDate.now());
     }
 
     @Override
@@ -84,5 +84,4 @@ public class BoletoRepository implements IBoletoRepository {
     public void deleteBoleto(int idBoleto) {
         boletos.remove(getBoletoById(idBoleto));
     }
-
 }
