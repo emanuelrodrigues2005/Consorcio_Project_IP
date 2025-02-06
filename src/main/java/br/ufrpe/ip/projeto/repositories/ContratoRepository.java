@@ -15,7 +15,7 @@ public class ContratoRepository implements IContratoRepository{
     private ArrayList<Contrato> contratos;
     
 
-    public ContratoRepository() {
+    private ContratoRepository() {
         this.contratos = new ArrayList<>();
     }
     
@@ -106,7 +106,7 @@ public class ContratoRepository implements IContratoRepository{
     } // exceptions: contratoInexistente
 
     @Override
-    public void updateSaldoDevolução(Contrato contrato) {
+    public void updateSaldoDevolucao(Contrato contrato) {
         contrato.setSaldoDevolucao(calcularSaldoDevolucao(contrato));
     } // exceptions: contratoInexistente
 

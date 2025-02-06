@@ -10,7 +10,7 @@ public class ClienteController {
     private static ClienteController instancia;
     private final IClienteRepository repositorioCliente;
 
-    public ClienteController() {
+    private ClienteController() {
         this.repositorioCliente = ClienteRepository.getInstance();
     }
 

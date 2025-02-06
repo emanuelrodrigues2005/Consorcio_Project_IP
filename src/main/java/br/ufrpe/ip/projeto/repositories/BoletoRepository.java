@@ -12,7 +12,7 @@ public class BoletoRepository implements IBoletoRepository {
     private static BoletoRepository instance;
     private ArrayList<Boleto> boletos;
 
-    public BoletoRepository() {
+    private BoletoRepository() {
         this.boletos = new ArrayList<>();
     }
 

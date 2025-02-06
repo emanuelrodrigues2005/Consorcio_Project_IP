@@ -11,7 +11,7 @@ public class ContemplacaoRepository implements IContemplacaoRepository {
     private static ContemplacaoRepository instance;
     private ArrayList<Contemplacao> contemplacoes;
 
-    public ContemplacaoRepository() {
+    private ContemplacaoRepository() {
         this.contemplacoes = new ArrayList<>();
     }
 

@@ -13,8 +13,8 @@ public class BoletoController {
     private static BoletoController instance;
     private final IBoletoRepository repositoryBoleto;
 
-    public BoletoController() {
-        repositoryBoleto = new BoletoRepository();
+    private BoletoController() {
+        this.repositoryBoleto = BoletoRepository.getInstance();
     }
 
     public static BoletoController getInstance() {
