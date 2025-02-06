@@ -2,8 +2,10 @@ package br.ufrpe.ip.projeto.repositories.interfaces;
 
 import br.ufrpe.ip.projeto.models.Cliente;
 
+import java.util.ArrayList;
+
 public interface IClienteRepository {
-    void getAllClientes();
+    ArrayList<Cliente> getAllClientes();
 
     Cliente getClienteByCpf(String cpf);
 
