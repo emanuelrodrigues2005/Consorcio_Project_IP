@@ -57,6 +57,10 @@ public class GrupoConsorcioRepository implements IGrupoConsorcioRepository {
         grupoConsorcio.setStatusGrupoConsorcio(novoStatus);
     }
     @Override
+    public void updateValorParcela(GrupoConsorcio grupoConsorcio, double novoValor) {
+        grupoConsorcio.setValorParcela(novoValor);
+    }
+    @Override
     public void deleteGrupoConsorcio(GrupoConsorcio grupoConsorcio) {
         grupos.remove(grupoConsorcio);
     }

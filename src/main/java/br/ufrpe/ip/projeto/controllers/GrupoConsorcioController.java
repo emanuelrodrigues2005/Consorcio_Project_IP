@@ -2,9 +2,13 @@ package br.ufrpe.ip.projeto.controllers;
 
 import java.util.List;
 
+import br.ufrpe.ip.projeto.enums.StatusContratoEnum;
 import br.ufrpe.ip.projeto.enums.StatusGrupoConsorcioEnum;
+import br.ufrpe.ip.projeto.models.Contrato;
 import br.ufrpe.ip.projeto.models.GrupoConsorcio;
+import br.ufrpe.ip.projeto.repositories.ContratoRepository;
 import br.ufrpe.ip.projeto.repositories.GrupoConsorcioRepository;
+import br.ufrpe.ip.projeto.repositories.interfaces.IContratoRepository;
 import br.ufrpe.ip.projeto.repositories.interfaces.IGrupoConsorcioRepository;
 
 public class GrupoConsorcioController {
@@ -56,11 +60,38 @@ public class GrupoConsorcioController {
     }
 
     public void updateStatusGrupo(GrupoConsorcio grupoConsorcio, StatusGrupoConsorcioEnum novoStatus) {
-        if (grupoConsorcio.getStatusGrupoConsorcio() != novoStatus) {
-
+        if (grupoConsorcio.getStatusGrupoConsorcio() != novoStatus && statusValido(novoStatus)) {
+            this.repositorioGrupo.updateStatusGrupo(grupoConsorcio, novoStatus);
         }
     }
 
+    private boolean statusValido(StatusGrupoConsorcioEnum status) {
+        switch (status) {
+            case StatusGrupoConsorcioEnum.ATIVO: return true;
+            case StatusGrupoConsorcioEnum.ENCERRADO: return true;
+            default: return false;
+        }
+    }
 
-    
+    public void deleteGrupoConsorcio(GrupoConsorcio grupoConsorcio) {
+        if (this.repositorioGrupo.getAllGrupos().contains(grupoConsorcio)) {
+            this.repositorioGrupo.deleteGrupoConsorcio(grupoConsorcio);
+        }
+    }
+
+    public void reajusteParcela(GrupoConsorcio grupoConsorcio) {
+        IContratoRepository repositorioContratos = ContratoRepository.getInstancia();
+        int desistentes = 0;
+        for (Contrato contrato : repositorioContratos.getAllContratos()) {
+            if (contrato.getGrupoAssociado().getIdGrupo() == grupoConsorcio.getIdGrupo() && contrato.getStatusContrato() == StatusContratoEnum.ENCERRADO) {
+                desistentes++;
+            }
+        }
+        if (desistentes > 0) {
+            int novoNumParticipantes = grupoConsorcio.getNumeroParticipantes() - desistentes;
+            this.repositorioGrupo.updateParticipantes(grupoConsorcio, novoNumParticipantes);
+            double novoValorParcela = ((grupoConsorcio.getValorTotal() + grupoConsorcio.getValorTotal() * grupoConsorcio.getTaxaAdmin()) / novoNumParticipantes);
+            this.repositorioGrupo.updateValorParcela(grupoConsorcio, novoValorParcela);
+        }
+    }
 }

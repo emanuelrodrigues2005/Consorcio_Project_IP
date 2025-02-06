@@ -23,4 +23,6 @@ public interface IGrupoConsorcioRepository {
 
     void deleteGrupoConsorcio(GrupoConsorcio grupoConsorcio);
 
+    void updateValorParcela(GrupoConsorcio grupoConsorcio, double novoValor);
+
 }
