@@ -19,12 +19,12 @@ public class Boleto {
     private StatusBoletoEnum statusBoleto;
     private int numeroParcela;
 
-    public Boleto(Contrato contratoBoleto, LocalDate dataEmissao, LocalDate dataVencimento, int numeroParcela) {
+    public Boleto(Contrato contratoBoleto, LocalDate dataVencimento, int numeroParcela) {
         this.idBoleto = gerarIdUnico();
         this.contratoBoleto = contratoBoleto;
         this.numeroParcela = numeroParcela;
         this.valorBoleto = contratoBoleto.getGrupoAssociado().getValorParcela();
-        this.dataEmissao = dataEmissao;
+        this.dataEmissao = LocalDate.now();
         this.dataVencimento = dataVencimento;
         this.statusBoleto = StatusBoletoEnum.PENDENTE;
         this.dataPagamento = null;
@@ -45,6 +45,10 @@ public class Boleto {
     public Contrato getContratoBoleto() { return contratoBoleto; }
 
     public double getValorBoleto() { return valorBoleto; }
+
+    public void setValorBoleto(double valorBoleto) {
+        this.valorBoleto = valorBoleto;
+    }
 
     public LocalDate getDataVencimento() { return dataVencimento; }
 
