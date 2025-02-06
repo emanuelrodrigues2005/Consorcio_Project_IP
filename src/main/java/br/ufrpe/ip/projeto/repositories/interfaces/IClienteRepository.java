@@ -9,11 +9,9 @@ public interface IClienteRepository {
 
     Cliente getClienteByCpf(String cpf);
 
-    Cliente createCliente(Cliente cliente);
+    void createCliente(String nomeCliente, String cpfCliente, String telefoneCliente, String emailCliente);
 
     void updateNome(Cliente cliente, String nome);
-
-    void updateCpf(Cliente cliente, String cpf);
 
     void updateTelefone(Cliente cliente, String telefone);
 

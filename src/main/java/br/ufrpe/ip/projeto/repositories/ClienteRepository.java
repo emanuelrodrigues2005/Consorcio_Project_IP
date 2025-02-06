@@ -41,9 +41,9 @@ public class ClienteRepository implements IClienteRepository {
     }
 
    @Override
-   public Cliente createCliente(Cliente cliente) {
+   public void createCliente(String nomeCliente, String cpfCliente, String telefoneCliente, String emailCliente) {
+        Cliente cliente = new Cliente(nomeCliente, cpfCliente, telefoneCliente, emailCliente);
         this.clientes.add(cliente);
-        return cliente;
    }
 
    @Override
@@ -52,14 +52,10 @@ public class ClienteRepository implements IClienteRepository {
     }
 
     @Override
-    public void updateCpf(Cliente cliente, String novoCpf) {
-        cliente.setCpf(novoCpf);
-    }
-
-    @Override
     public void updateTelefone(Cliente cliente, String telefone) {
         cliente.setTelefone(telefone);
     }
+
     @Override
     public void updateEmail(Cliente cliente, String email) {
         cliente.setEmail(email);
