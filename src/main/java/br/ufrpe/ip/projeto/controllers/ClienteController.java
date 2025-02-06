@@ -4,7 +4,6 @@ import br.ufrpe.ip.projeto.models.Cliente;
 import br.ufrpe.ip.projeto.repositories.ClienteRepository;
 import br.ufrpe.ip.projeto.repositories.interfaces.IClienteRepository;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ClienteController {

@@ -33,7 +33,7 @@ public class ContemplacaoRepository implements IContemplacaoRepository {
     @Override
     public Contemplacao getContemplacaoByContrato(Contrato contrato) {
         for (Contemplacao contemplacao : contemplacoes) {
-            if(contemplacao.getContratoContemplacao().equals(contrato)) {
+            if(contemplacao.getContratoContemplacao().getIdContrato() == contrato.getIdContrato()) {
                 return contemplacao;
             }
         }
@@ -51,10 +51,9 @@ public class ContemplacaoRepository implements IContemplacaoRepository {
     }
 
     @Override
-    public Contemplacao createContemplacao(Contrato contratoContemplcao) {
+    public void createContemplacao(Contrato contratoContemplcao) {
         Contemplacao contemplacao = new Contemplacao(contratoContemplcao);
-        contemplacoes.add(contemplacao);
-        return contemplacao;
+        this.contemplacoes.add(contemplacao);
     }
 
     @Override
