@@ -16,7 +16,7 @@ public interface IContratoRepository {
 
     Contrato getContratoByCPFNomeGrupo(Cliente cliente, GrupoConsorcio grupoConsorcio);
 
-    List<Contrato> getContratosByNomeGrupo(GrupoConsorcio grupoConsorcio);
+    List<Contrato> getContratosByIdGrupo(GrupoConsorcio grupoConsorcio);
 
     boolean existeContrato(Contrato contrato);
 

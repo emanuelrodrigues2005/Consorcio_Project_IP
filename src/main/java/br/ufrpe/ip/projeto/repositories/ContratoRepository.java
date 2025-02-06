@@ -54,7 +54,7 @@ public class ContratoRepository implements IContratoRepository{
     } // exceptions: clienteInvalido, grupoInvalido, contratoInexistente
 
     @Override
-    public List<Contrato> getContratosByNomeGrupo(GrupoConsorcio grupoAssociado) {
+    public List<Contrato> getContratosByIdGrupo(GrupoConsorcio grupoAssociado) {
         List<Contrato> contratosGrupo = new ArrayList<>();
         for (Contrato contrato : contratos) {
             if (contrato.getGrupoAssociado().getIdGrupo() == grupoAssociado.getIdGrupo()) {
