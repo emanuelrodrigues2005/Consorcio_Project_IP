@@ -34,6 +34,7 @@ public class ContratoController {
 
     public void registrarPagamento(Cliente cliente, GrupoConsorcio grupoConsorcio, Boleto boleto) {
         Contrato contrato = repositorioContrato.getContratoByCPFNomeGrupo(cliente, grupoConsorcio);
+        
     }
 
     public boolean cancelarContrato(Cliente cliente, GrupoConsorcio grupoAssociado) {

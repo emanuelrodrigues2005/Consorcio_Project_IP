@@ -75,6 +75,16 @@ public class ContratoRepository implements IContratoRepository{
     }
 
     @Override
+    public Contrato getContratoByIdContrato(int idContrato) {
+        for (Contrato contrato : contratos) {
+            if (contrato.getIdContrato() == idContrato) {
+                return contrato;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public void createContrato(Cliente cliente, GrupoConsorcio grupoAssociado) {
         Contrato contrato = new Contrato(cliente, grupoAssociado);
         contratos.add(contrato);

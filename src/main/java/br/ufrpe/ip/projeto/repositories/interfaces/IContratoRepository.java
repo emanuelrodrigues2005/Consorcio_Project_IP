@@ -20,6 +20,8 @@ public interface IContratoRepository {
 
     boolean existeContrato(Contrato contrato);
 
+    Contrato getContratoByIdContrato(int idContrato);
+
     void createContrato(Cliente cliente, GrupoConsorcio grupoConsorcio);
 
     void updateParcelasPagas(Contrato contrato);
