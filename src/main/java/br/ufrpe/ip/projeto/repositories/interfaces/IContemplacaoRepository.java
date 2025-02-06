@@ -13,7 +13,7 @@ public interface IContemplacaoRepository {
 
     Contemplacao getContemplacaoById(int idContemplacao);
 
-    Contemplacao createContemplacao(Contrato contratoContemplacao);
+    void createContemplacao(Contrato contratoContemplacao);
 
     void updateDataContemplacao(int idContemplacao, LocalDate dataContemplacao);
 
