@@ -64,7 +64,7 @@ public class ContratoController {
         return this.repositorioContrato.existeContrato(contrato);
     }
 
-    public Contrato getContratoByIdContrato(int idContrato) {
+    public Contrato getContratoByIdContrato(String idContrato) {
         return this.repositorioContrato.getContratoByIdContrato(idContrato);
     }
 
@@ -105,7 +105,7 @@ public class ContratoController {
 
     public void deleteContrato(Contrato contrato) {
         if (contrato != null) {
-            this.repositorioContrato.deleteContrato(contrato);
+            this.repositorioContrato.deleteContrato(contrato); //fornecer o idContrato como parâmetro ao invés do contrato em si
         }
     } //throw contratoInexistente, contratoInvalido
 }

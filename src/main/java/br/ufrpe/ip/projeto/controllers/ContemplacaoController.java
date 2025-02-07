@@ -26,11 +26,11 @@ public class ContemplacaoController {
         return instance;
     }
 
-    public ArrayList<Contemplacao> getAllContemplacoes() {
+    public List<Contemplacao> getAllContemplacoes() {
         return this.repositoryContemplacao.getAllContemplacoes();
     } //exceptions: ArrayVazio
 
-    public Contemplacao getContemplacaoById(int idContemplacao) {
+    public Contemplacao getContemplacaoById(String idContemplacao) {
         return this.repositoryContemplacao.getContemplacaoById(idContemplacao);
     } //exceptions: ContemplacaoInexistente
 
@@ -38,15 +38,15 @@ public class ContemplacaoController {
         this.repositoryContemplacao.createContemplacao(contratoContemplacao);
     } //exceptions: CampoInvalido, ContemplacaoExistente
 
-    public void updateDataContemplacao(int idContemplacao, LocalDate dataContemplacao) {
+    public void updateDataContemplacao(String idContemplacao, LocalDate dataContemplacao) {
         this.repositoryContemplacao.updateDataContemplacao(idContemplacao, dataContemplacao);
     } //exceptions: ContemplacaoInexistente, DataContemplacaoInvalida
 
-    public void deleteContemplacao(int idContemplacao) {
+    public void deleteContemplacao(String idContemplacao) {
         this.repositoryContemplacao.deleteContemplacao(idContemplacao);
     } //exceptions: ContemplacaoInexistente
 
-    public int sorteioContemplacao() {
+    public String sorteioContemplacao() {
         ContratoController contratoController = ContratoController.getInstancia();
         List<Contrato> contratosAtivos = new ArrayList<>();
 
@@ -57,7 +57,7 @@ public class ContemplacaoController {
         }
 
         if (contratosAtivos.isEmpty()) {
-            return -1;
+            return null;
         }
 
         Random random = new Random();

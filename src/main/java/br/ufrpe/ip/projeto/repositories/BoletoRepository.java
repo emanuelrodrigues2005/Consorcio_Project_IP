@@ -7,6 +7,8 @@ import br.ufrpe.ip.projeto.repositories.interfaces.IBoletoRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class BoletoRepository implements IBoletoRepository {
     private static BoletoRepository instance;
@@ -24,29 +26,26 @@ public class BoletoRepository implements IBoletoRepository {
     }
 
     @Override
-    public ArrayList<Boleto> getAllBoletos() {
-        if (boletos.isEmpty()) {
-            return null;
-        }
-        return boletos;
+    public List<Boleto> getAllBoletos() {
+        return Collections.unmodifiableList(boletos);
     }
 
     @Override
-    public int getIdBoleto(Contrato contrato, int numeroParcela) {
+    public String getIdBoleto(Contrato contrato, int numeroParcela) {
         for (Boleto boleto : boletos) {
             if (boleto.getContratoBoleto().equals(contrato) &&
                     boleto.getContratoBoleto().getCliente().getCpf().equals(contrato.getCliente().getCpf()) &&
                     boleto.getNumeroParcela() == numeroParcela) {
-                return boleto.getIdBoleto();
+                    return boleto.getIdBoleto();
             }
         }
-        return -1;
+        return null;
     }
 
     @Override
-    public Boleto getBoletoById(int idBoleto) {
+    public Boleto getBoletoById(String idBoleto) {
         for (Boleto boleto : boletos) {
-            if (boleto.getIdBoleto() == idBoleto) {
+            if (boleto.getIdBoleto().equals(idBoleto)) {
                 return boleto;
             }
         }
@@ -56,7 +55,7 @@ public class BoletoRepository implements IBoletoRepository {
     @Override
     public Boleto getBoletoByContrato(Contrato contrato) {
         for (Boleto boleto : boletos) {
-            if(boleto.getContratoBoleto().getIdContrato() == contrato.getIdContrato()) {
+            if(boleto.getContratoBoleto().getIdContrato().equals(contrato.getIdContrato())) {
                 return boleto;
             }
         }
@@ -81,7 +80,7 @@ public class BoletoRepository implements IBoletoRepository {
     }
 
     @Override
-    public void deleteBoleto(int idBoleto) {
+    public void deleteBoleto(String idBoleto) {
         boletos.remove(getBoletoById(idBoleto));
     }
 }
