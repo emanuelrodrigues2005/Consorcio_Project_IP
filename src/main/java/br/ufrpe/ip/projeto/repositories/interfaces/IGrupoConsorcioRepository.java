@@ -9,7 +9,7 @@ public interface IGrupoConsorcioRepository {
 
     List<GrupoConsorcio> getAllGrupos();
 
-    GrupoConsorcio getGrupoById(int idGrupo);
+    GrupoConsorcio getGrupoById(String idGrupo);
 
     void createGrupoConsorcio(String nomeGrupo, int numeroParticipantes, double valorTotal, double taxaAdmin);
 
