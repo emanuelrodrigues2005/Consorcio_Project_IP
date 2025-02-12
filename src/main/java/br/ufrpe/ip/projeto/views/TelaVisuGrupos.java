@@ -59,11 +59,19 @@ public class TelaVisuGrupos {
         System.out.println("Botão Perfil clicado");
     }
 
-    private void setAllFields(String idGrupo) {
+    private void setLbAutoConsor(String idGrupo) {
         lbAutoConsor.setText(grupoConsorcioController.getGrupoById(idGrupo).getNomeGrupo());
-        lbValorTotal.setText(String.valueOf(grupoConsorcioController.getGrupoById(idGrupo).getValorTotal()));
-        lbTaxaAdmin.setText(String.valueOf(grupoConsorcioController.getGrupoById(idGrupo).getTaxaAdmin()));
-        lbValorPago.setText(String.valueOf(grupoConsorcioController.getValorPago(idGrupo)));
     }
 
+    private void setLbValorTotal(String idGrupo) {
+        lbValorTotal.setText(String.valueOf(grupoConsorcioController.getGrupoById(idGrupo).getValorTotal()));
+    }
+
+    private void setLbTaxaAdmin(String idGrupo) {
+        lbTaxaAdmin.setText(String.valueOf(grupoConsorcioController.getGrupoById(idGrupo).getTaxaAdmin()));
+    }
+
+    private void setLbValorPago(String idGrupo) {
+        lbValorPago.setText(String.valueOf(grupoConsorcioController.getValorPago(idGrupo)));
+    }
 }
