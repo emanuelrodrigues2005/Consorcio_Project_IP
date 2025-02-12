@@ -1,13 +1,17 @@
-package br.ufrpe.ip.projeto.views;
+package br.ufrpe.ip.projeto.gui.views;
 
-import br.ufrpe.ip.projeto.controllers.ClienteController;
-import br.ufrpe.ip.projeto.controllers.GrupoConsorcioController;
+import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
+import br.ufrpe.ip.projeto.controllers.IConsorcio;
+import br.ufrpe.ip.projeto.gui.Gerenciador;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class TelaVisuGrupos {
+public class TelaVisuGrupoController {
+    private final IConsorcio sistema = ConsorcioFachada.getInstance();
+    private Gerenciador screenManager;
+
     @FXML
     private Button btHome;
 
@@ -32,9 +36,6 @@ public class TelaVisuGrupos {
     @FXML
     private Label lbValorPago;
 
-    private ClienteController clienteController;
-    private GrupoConsorcioController grupoConsorcioController;
-
     @FXML
     public void initialize() {
         lbAutoConsor.setText("-");
@@ -42,6 +43,10 @@ public class TelaVisuGrupos {
         lbTaxaAdmin.setText("-");
         lbValorPago.setText("-");
         txtTotalParticipantes.setText("");
+    }
+
+    public void setScreenManager(Gerenciador screenManager) {
+        this.screenManager = screenManager;
     }
 
     @FXML
@@ -60,18 +65,18 @@ public class TelaVisuGrupos {
     }
 
     private void setLbAutoConsor(String idGrupo) {
-        lbAutoConsor.setText(grupoConsorcioController.getGrupoById(idGrupo).getNomeGrupo());
+        lbAutoConsor.setText(sistema.getGrupoById(idGrupo).getNomeGrupo());
     }
 
     private void setLbValorTotal(String idGrupo) {
-        lbValorTotal.setText(String.valueOf(grupoConsorcioController.getGrupoById(idGrupo).getValorTotal()));
+        lbValorTotal.setText(String.valueOf(sistema.getGrupoById(idGrupo).getValorTotal()));
     }
 
     private void setLbTaxaAdmin(String idGrupo) {
-        lbTaxaAdmin.setText(String.valueOf(grupoConsorcioController.getGrupoById(idGrupo).getTaxaAdmin()));
+        lbTaxaAdmin.setText(String.valueOf(sistema.getGrupoById(idGrupo).getTaxaAdmin()));
     }
 
     private void setLbValorPago(String idGrupo) {
-        lbValorPago.setText(String.valueOf(grupoConsorcioController.getValorPago(idGrupo)));
+        lbValorPago.setText(String.valueOf(sistema.getValorPago(idGrupo)));
     }
 }
