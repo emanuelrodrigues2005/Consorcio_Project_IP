@@ -6,13 +6,14 @@ import br.ufrpe.ip.projeto.models.Contrato;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface IBoletoRepository {
-    ArrayList<Boleto> getAllBoletos();
+    List<Boleto> getAllBoletos();
 
-    int getIdBoleto(Contrato contrato, int numeroParcela);
+    String getIdBoleto(Contrato contrato, int numeroParcela);
 
-    Boleto getBoletoById(int idBoleto);
+    Boleto getBoletoById(String idBoleto);
 
     Boleto getBoletoByContrato(Contrato contrato);
 
@@ -22,5 +23,5 @@ public interface IBoletoRepository {
 
     void updateStatusBoleto(Boleto boleto, StatusBoletoEnum statusBoleto);
 
-    void deleteBoleto(int idBoleto);
+    void deleteBoleto(String idBoleto);
 }

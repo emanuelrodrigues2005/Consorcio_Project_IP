@@ -4,6 +4,8 @@ import br.ufrpe.ip.projeto.models.Cliente;
 import br.ufrpe.ip.projeto.repositories.interfaces.IClienteRepository;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class ClienteRepository implements IClienteRepository {
     private ArrayList<Cliente> clientes;
@@ -21,11 +23,8 @@ public class ClienteRepository implements IClienteRepository {
     }
 
     @Override
-    public ArrayList<Cliente> getAllClientes() {
-        if(clientes.isEmpty()) {
-            return null;
-        }
-        return clientes;
+    public List<Cliente> getAllClientes() {
+        return Collections.unmodifiableList(clientes);
     }
 
     @Override

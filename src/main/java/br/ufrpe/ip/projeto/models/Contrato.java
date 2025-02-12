@@ -10,7 +10,7 @@ public class Contrato {
     private Cliente cliente;
     private GrupoConsorcio grupoAssociado;
     private String idContrato;
-    private int parcelasPagas;
+    private int parcelasPagas; //retirar
     private double valorPago;
     private double saldoDevedor;
     private double saldoDevolucao;
@@ -37,7 +37,7 @@ public class Contrato {
     public LocalDate getDataInicio() {
         return dataInicio;
     }
-    
+
     public LocalDate getDataEncerramento() {
         return dataEncerramento;
     }
@@ -92,7 +92,7 @@ public class Contrato {
 
     public void setSaldoDevolucao(double novoSaldoDevolucao) {
         this.saldoDevolucao = novoSaldoDevolucao;
-    } 
+    }
 
     public String toString() {
         return "Cliente: " + this.getCliente().getNome() + "\nCPF: " + this.getCliente().getCpf() + "\nGrupo associado: " + this.getGrupoAssociado().getNomeGrupo() + "\nStatus: " + this.getStatusContrato() + "\nParcelas pagas: " + this.getParcelasPagas() + "\nSaldo devedor: " + this.getSaldoDevedor() + "\n";

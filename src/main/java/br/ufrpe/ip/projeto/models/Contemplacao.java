@@ -1,19 +1,17 @@
 package br.ufrpe.ip.projeto.models;
 
 import java.time.LocalDate;
-
-import java.util.Random;
 import java.util.UUID;
 
 public class Contemplacao {
 	private String idContemplacao;
-    private Contrato contratoContemplacao;
+	private Contrato contratoContemplacao;
 	private LocalDate dataContemplacao;
-	
+
 	public Contemplacao(Contrato contratoContemplacao) {
 		this.contratoContemplacao = contratoContemplacao;
-		this.dataContemplacao = java.time.LocalDate.now();
-		idContemplacao = UUID.randomUUID().toString();
+		this.dataContemplacao = LocalDate.now();
+		this.idContemplacao = UUID.randomUUID().toString();
 	}
 
 	public Contrato getContratoContemplacao() {
@@ -38,6 +36,6 @@ public class Contemplacao {
 
 	@Override
 	public String toString() {
-		return "\n" + getContratoContemplacao() + "(Data: " + getDataContemplacao() + ")\nId: " + getIdContemplacao();
+		return "\n" + getContratoContemplacao() + " (Data: " + getDataContemplacao() + ")\nId: " + getIdContemplacao();
 	}
 }

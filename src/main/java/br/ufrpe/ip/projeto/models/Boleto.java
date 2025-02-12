@@ -3,11 +3,9 @@ package br.ufrpe.ip.projeto.models;
 import br.ufrpe.ip.projeto.enums.StatusBoletoEnum;
 
 import java.time.LocalDate;
-import java.util.Random;
 import java.util.UUID;
 
 public class Boleto {
-    private static final Random random = new Random();
     private String idBoleto;
     private Contrato contratoBoleto;
     private double valorBoleto;
