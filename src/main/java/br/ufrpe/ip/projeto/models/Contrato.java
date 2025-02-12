@@ -2,13 +2,14 @@ package br.ufrpe.ip.projeto.models;
 
 import java.time.LocalDate;
 import java.util.Random;
+import java.util.UUID;
 
 import br.ufrpe.ip.projeto.enums.StatusContratoEnum;
 
 public class Contrato {
     private Cliente cliente;
     private GrupoConsorcio grupoAssociado;
-    private int idContrato;
+    private String idContrato;
     private int parcelasPagas;
     private double valorPago;
     private double saldoDevedor;
@@ -20,7 +21,7 @@ public class Contrato {
     public Contrato(Cliente cliente, GrupoConsorcio grupoAssociado) {
         this.cliente = cliente;
         this.grupoAssociado = grupoAssociado;
-        this.idContrato = new Random().nextInt();
+        this.idContrato = UUID.randomUUID().toString();
         this.parcelasPagas = 0;
         this.valorPago = 0;
         this.saldoDevedor = grupoAssociado.getValorTotal() + (grupoAssociado.getValorTotal() * grupoAssociado.getTaxaAdmin());
@@ -29,7 +30,7 @@ public class Contrato {
         this.dataInicio = LocalDate.now();
     }
 
-    public int getIdContrato() {
+    public String getIdContrato() {
         return idContrato;
     }
 

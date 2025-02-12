@@ -1,10 +1,8 @@
 package br.ufrpe.ip.projeto.repositories;
 
 import br.ufrpe.ip.projeto.models.Cliente;
-import br.ufrpe.ip.projeto.models.Contrato;
 import br.ufrpe.ip.projeto.repositories.interfaces.IClienteRepository;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ClienteRepository implements IClienteRepository {
