@@ -27,13 +27,7 @@ public class TelaVisuGrupos {
     private TextField txtTotalParticipantes;
 
     @FXML
-    private Label lbDtInicio;
-
-    @FXML
-    private Label lbDtTermino;
-
-    @FXML
-    private Label lbParcelasAd;
+    private Label lbTaxaAdmin;
 
     @FXML
     private Label lbValorPago;
@@ -45,9 +39,7 @@ public class TelaVisuGrupos {
     public void initialize() {
         lbAutoConsor.setText("-");
         lbValorTotal.setText("-");
-        lbDtInicio.setText("-");
-        lbDtTermino.setText("-");
-        lbParcelasAd.setText("-");
+        lbTaxaAdmin.setText("-");
         lbValorPago.setText("-");
         txtTotalParticipantes.setText("");
     }
@@ -67,31 +59,11 @@ public class TelaVisuGrupos {
         System.out.println("Botão Perfil clicado");
     }
 
-    public void setAutoConsorciado() {
-        lbAutoConsor.setText(grupoConsorcioController.);
+    private void setAllFields(String idGrupo) {
+        lbAutoConsor.setText(grupoConsorcioController.getGrupoById(idGrupo).getNomeGrupo());
+        lbValorTotal.setText(String.valueOf(grupoConsorcioController.getGrupoById(idGrupo).getValorTotal()));
+        lbTaxaAdmin.setText(String.valueOf(grupoConsorcioController.getGrupoById(idGrupo).getTaxaAdmin()));
+        lbValorPago.setText(String.valueOf(grupoConsorcioController.getValorPago(idGrupo)));
     }
 
-    public void setValorTotal(String valorTotal) {
-        lbValorTotal.setText(valorTotal);
-    }
-
-    public void setDtInicio(String dtInicio) {
-        lbDtInicio.setText(dtInicio);
-    }
-
-    public void setDtTermino(String dtTermino) {
-        lbDtTermino.setText(dtTermino);
-    }
-
-    public void setParcelasAdimplentes(String parcelasAd) {
-        lbParcelasAd.setText(parcelasAd);
-    }
-
-    public void setValorPago(String valorPago) {
-        lbValorPago.setText(valorPago);
-    }
-
-    public void setTotalParticipantes(String totalParticipantes) {
-        txtTotalParticipantes.setText(totalParticipantes);
-    }
 }

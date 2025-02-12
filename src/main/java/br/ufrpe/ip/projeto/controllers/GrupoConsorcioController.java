@@ -94,4 +94,14 @@ public class GrupoConsorcioController {
             this.repositorioGrupo.updateValorParcela(grupoConsorcio, novoValorParcela);
         }
     }
+
+    public double getValorPago(String idGrupo) {
+        IContratoRepository repositorioContratos = ContratoRepository.getInstancia();
+        double somaValorPago = 0;
+
+        for(Contrato contrato : repositorioContratos.getContratosByIdGrupo(repositorioGrupo.getGrupoById(idGrupo))) {
+            somaValorPago = somaValorPago + contrato.getValorPago();
+        }
+        return somaValorPago;
+    }
 }
