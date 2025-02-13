@@ -4,6 +4,7 @@ import br.ufrpe.ip.projeto.gui.views.TelaCadastroController;
 import br.ufrpe.ip.projeto.gui.views.TelaLoginController;
 import br.ufrpe.ip.projeto.gui.views.TelaPerfilClienteController;
 import br.ufrpe.ip.projeto.gui.views.TelaVisuGrupoController;
+import br.ufrpe.ip.projeto.models.Cliente;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -80,7 +81,13 @@ public class Gerenciador {
         scenePrincipal.setRoot(telaCadastro);
     }
 
-    public void abrirPerfilCliente() {
+    public void abrirTelaPrincipalCliente() {
+        scenePrincipal.setRoot(telaPerfilCliente);
+    }
+
+    public void abrirPerfilCliente(Cliente cliente) {
+        telaPerfilClienteController.setCliente(cliente);
+        telaPerfilClienteController.initialize();
         scenePrincipal.setRoot(telaPerfilCliente);
     }
 }

@@ -58,7 +58,7 @@ public class TelaLoginController {
             if(this.sistema.getClienteLogado() instanceof Admin) {
                 //this.gerenciador.abrirTelaIncialAdmin
             }
-            //this.gerenciador.abrirTelaInicialCliente
+            this.gerenciador.abrirTelaPrincipalCliente();
             clearCampos();
         } catch(Exception e) {
             //exceptions: ClienteInexistente, ClienteSenhaIncorreta, ClienteJaLogado, Exception e
