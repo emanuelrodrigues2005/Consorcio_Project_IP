@@ -45,7 +45,7 @@ public class TelaVisuGrupoController {
         txtTotalParticipantes.setText("");
     }
 
-    public void setScreenManager(Gerenciador screenManager) {
+    public void setGerenciador(Gerenciador screenManager) {
         this.screenManager = screenManager;
     }
 
