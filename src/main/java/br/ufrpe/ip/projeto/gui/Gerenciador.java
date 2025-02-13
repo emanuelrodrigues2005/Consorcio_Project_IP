@@ -67,7 +67,7 @@ public class Gerenciador {
     public void iniciarTelas() {
         stagePrincipal.setTitle("ConsorX");
         stagePrincipal.setResizable(false);
-        scenePrincipal = new Scene(telaPerfilCliente, 1280, 720);
+        scenePrincipal = new Scene(telaLogin, 1280, 720);
         stagePrincipal.setScene(scenePrincipal);
         stagePrincipal.show();
     }

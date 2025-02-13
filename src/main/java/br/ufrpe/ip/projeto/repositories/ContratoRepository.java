@@ -68,7 +68,7 @@ public class ContratoRepository implements IContratoRepository{
     @Override
     public boolean existeContrato(Contrato contrato) {
         for (Contrato contrato2 : contratos) {
-            if (contrato2.getIdContrato().equals(contrato.getIdContrato())) {
+            if (contrato != null && contrato2.getIdContrato().equals(contrato.getIdContrato())) {
                 return true;
             }
         }
