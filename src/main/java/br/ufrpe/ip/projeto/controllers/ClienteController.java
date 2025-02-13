@@ -29,10 +29,10 @@ public class ClienteController {
         return this.repositorioCliente.getClienteByCpf(cpf);
     } //exceptions: ClienteInexistente
 
-    public void createCliente(String nomeCliente, String cpfCliente, String telefoneCliente, String emailCliente) {
+    public void createCliente(String nomeCliente, String cpfCliente, String telefoneCliente, String emailCliente, String senhaCliente) {
         if(validarCpf(cpfCliente)) {
             if(repositorioCliente.getClienteByCpf(cpfCliente) == null) {
-                repositorioCliente.createCliente(nomeCliente, cpfCliente, telefoneCliente, emailCliente);
+                repositorioCliente.createCliente(nomeCliente, cpfCliente, telefoneCliente, emailCliente, senhaCliente);
             }
         }
     } //exceptions: ClienteDuplicado, CampoInvalido
@@ -48,6 +48,10 @@ public class ClienteController {
     public void updateEmail(String emailCliente, String cpfCliente) {
         this.repositorioCliente.updateEmail(getClienteByCpf(cpfCliente), emailCliente);
     } //exceptions: CampoInvalido, ClienteInexistente
+
+    public void updateSenha(String senhaCliente, String cpfCliente) {
+        this.repositorioCliente.updateSenha(getClienteByCpf(cpfCliente), senhaCliente);
+    }
 
     public void deleteCliente(String cpfCliente) {
         if(repositorioCliente.getClienteByCpf(cpfCliente) != null) {

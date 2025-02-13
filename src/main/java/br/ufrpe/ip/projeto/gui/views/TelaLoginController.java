@@ -3,6 +3,7 @@ package br.ufrpe.ip.projeto.gui.views;
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
+import br.ufrpe.ip.projeto.models.Admin;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -49,20 +50,18 @@ public class TelaLoginController {
 
     @FXML
     private void openGerenciamentoAdmin(ActionEvent event) {
-        String cpf = txtCpf.getText();
-        String senha = txtSenha.getText();
-        boolean manterConectado = cbManterConectado.isSelected();
+        String cpf = this.txtCpf.getText();
+        String senha = this.txtSenha.getText();
 
-        System.out.println("Tentando login com:");
-        System.out.println("CPF: " + cpf);
-        System.out.println("Senha: " + senha);
-        System.out.println("Manter conectado: " + manterConectado);
-
-        if (cpf.equalsIgnoreCase("admin") && senha.equals("1234")) {
-            this.sistema.getClienteByCpf(cpf);
-            System.out.println("Login realizado com sucesso!");
-        } else {
-            System.out.println("Login ou Senha inválidos!");
+        try {
+            this.sistema.efutuarLogin(cpf, senha);
+            if(this.sistema.getClienteLogado() instanceof Admin) {
+                //this.gerenciador.abrirTelaIncialAdmin
+            }
+            //this.gerenciador.abrirTelaInicialCliente
+            clearCampos();
+        } catch(Exception e) {
+            //exceptions: ClienteInexistente, ClienteSenhaIncorreta, ClienteJaLogado, Exception e
         }
     }
 

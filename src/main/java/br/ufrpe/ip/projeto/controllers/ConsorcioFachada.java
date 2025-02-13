@@ -16,6 +16,7 @@ public class ConsorcioFachada implements IConsorcio{
     private final ContratoController contratoController;
     private final ContemplacaoController contemplacaoController;
     private final GrupoConsorcioController grupoConsorcioController;
+    private final LoginController loginController;
 
     private ConsorcioFachada() {
         this.boletoController = BoletoController.getInstance();
@@ -23,6 +24,7 @@ public class ConsorcioFachada implements IConsorcio{
         this.grupoConsorcioController = GrupoConsorcioController.getInstancia();
         this.contemplacaoController = ContemplacaoController.getInstance();
         this.contratoController = ContratoController.getInstancia();
+        this.loginController = LoginController.getInstance();
     }
 
     public static ConsorcioFachada getInstance() {
@@ -98,8 +100,8 @@ public class ConsorcioFachada implements IConsorcio{
     }
 
     @Override
-    public void createCliente(String nomeCliente, String cpfCliente, String telefoneCliente, String emailCliente) {
-        this.clienteController.createCliente(nomeCliente, cpfCliente, telefoneCliente, emailCliente);
+    public void createCliente(String nomeCliente, String cpfCliente, String telefoneCliente, String emailCliente, String senhaCliente) {
+        this.clienteController.createCliente(nomeCliente, cpfCliente, telefoneCliente, emailCliente, senhaCliente);
     }
 
     @Override
@@ -115,6 +117,11 @@ public class ConsorcioFachada implements IConsorcio{
     @Override
     public void updateEmail(String emailCliente, String cpfCliente) {
         this.clienteController.updateEmail(emailCliente, cpfCliente);
+    }
+
+    @Override
+    public void updateSenha(String senhaCliente, String cpfCliente) {
+        this.clienteController.updateSenha(senhaCliente, cpfCliente);
     }
 
     @Override
@@ -280,5 +287,15 @@ public class ConsorcioFachada implements IConsorcio{
     @Override
     public double getValorPago(String idGrupo) {
         return this.grupoConsorcioController.getValorPago(idGrupo);
+    }
+
+    @Override
+    public void efutuarLogin(String cpf, String senha) {
+        this.loginController.efetuarLogin(cpf, senha);
+    }
+
+    @Override
+    public Cliente getClienteLogado() {
+        return this.loginController.getClienteLogado();
     }
 }
