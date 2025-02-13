@@ -46,7 +46,7 @@ public class TelaEditGrupoController {
 	
 	private ObservableList<Cliente> pessoas = FXCollections.observableArrayList();
 
-	@FXML
+	/*@FXML
 	public void onBtAddAction() {
 		
 		 Cliente novoCliente = new Cliente(nomeAdd.getText(), "12345", "99999", "novo@cliente.com");
@@ -54,7 +54,7 @@ public class TelaEditGrupoController {
 	     pessoas.add(novoCliente);
 
 	     nMembros.setText(String.valueOf(pessoas.size()));
-	}
+	}*/
 	
 	@FXML
 	public void onBtRemoveAction() {
