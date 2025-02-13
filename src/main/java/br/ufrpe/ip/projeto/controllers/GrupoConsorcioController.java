@@ -35,35 +35,35 @@ public class GrupoConsorcioController {
 
     public GrupoConsorcio getGrupoById(String idGrupo) {
         return this.repositorioGrupo.getGrupoById(idGrupo);
-    }
+    } //IdGrupoConsorcioInexistente
 
     public List<GrupoConsorcio> getAllGrupos() {
         return this.repositorioGrupo.getAllGrupos();
-    }
+    } //ArrayVazio
 
     public void updateParticipantes(GrupoConsorcio grupoConsorcio, int novoNumParticipantes) {
         if (grupoConsorcio.getNumeroParticipantes() != novoNumParticipantes) {
             this.repositorioGrupo.updateParticipantes(grupoConsorcio, novoNumParticipantes);   
         }
-    }
+    } //GrupoConsorcioInexistente, CampoInvalido
 
     public void updateNomeGrupo(GrupoConsorcio grupoConsorcio, String novoNome) {
         if (grupoConsorcio.getNomeGrupo().equals(novoNome)) {
             this.repositorioGrupo.updateNomeGrupo(grupoConsorcio, novoNome);
         }
-    }
+    } //GrupoConsorcioInexistente, CampoInvalido
 
     public void updateTaxaAdmin(GrupoConsorcio grupoConsorcio, double novaTaxa) {
         if (grupoConsorcio.getTaxaAdmin() != novaTaxa && novaTaxa > 0) {
             this.repositorioGrupo.updateTaxaAdmin(grupoConsorcio, novaTaxa);
         }
-    }
+    } //GrupoConsorcioInexistente, CampoInvalido
 
     public void updateStatusGrupo(GrupoConsorcio grupoConsorcio, StatusGrupoConsorcioEnum novoStatus) {
         if (grupoConsorcio.getStatusGrupoConsorcio() != novoStatus && statusValido(novoStatus)) {
             this.repositorioGrupo.updateStatusGrupo(grupoConsorcio, novoStatus);
         }
-    }
+    } //GrupoConsorcioInexistente, CampoInvalido
 
     private boolean statusValido(StatusGrupoConsorcioEnum status) {
         switch (status) {
@@ -71,13 +71,13 @@ public class GrupoConsorcioController {
             case StatusGrupoConsorcioEnum.ENCERRADO: return true;
             default: return false;
         }
-    }
+    } //CampoInvalido
 
     public void deleteGrupoConsorcio(GrupoConsorcio grupoConsorcio) {
         if (this.repositorioGrupo.getAllGrupos().contains(grupoConsorcio)) {
             this.repositorioGrupo.deleteGrupoConsorcio(grupoConsorcio); //fornecer idGrupo
         }
-    }
+    } //GrupoConsorcioInexistente
 
     public void reajusteParcela(GrupoConsorcio grupoConsorcio) {
         IContratoRepository repositorioContratos = ContratoRepository.getInstancia();
@@ -93,7 +93,7 @@ public class GrupoConsorcioController {
             double novoValorParcela = ((grupoConsorcio.getValorTotal() + grupoConsorcio.getValorTotal() * grupoConsorcio.getTaxaAdmin()) / novoNumParticipantes);
             this.repositorioGrupo.updateValorParcela(grupoConsorcio, novoValorParcela);
         }
-    }
+    } //GrupoConsorcioInexistente
 
     public double getValorPago(String idGrupo) {
         IContratoRepository repositorioContratos = ContratoRepository.getInstancia();
@@ -103,5 +103,5 @@ public class GrupoConsorcioController {
             somaValorPago = somaValorPago + contrato.getValorPago();
         }
         return somaValorPago;
-    }
+    } //IdGrupoInvalido
 }
