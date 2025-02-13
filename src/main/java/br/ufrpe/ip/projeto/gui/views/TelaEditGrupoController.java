@@ -1,6 +1,7 @@
 package br.ufrpe.ip.projeto.gui.views;
 
 import br.ufrpe.ip.projeto.models.Cliente;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,6 +19,9 @@ public class TelaEditGrupoController {
 	
 	@FXML
 	private TextField taxaAd;
+	
+	@FXML
+	private TextField nomeAdd;
 	
 	@FXML
 	private Button add;
@@ -39,16 +43,28 @@ public class TelaEditGrupoController {
 	
 	@FXML
 	private TableColumn<Cliente, String> tableColumnNome;
+	
+	private ObservableList<Cliente> pessoas = FXCollections.observableArrayList();
 
-	/*@FXML
+	@FXML
 	public void onBtAddAction() {
 		
+		 Cliente novoCliente = new Cliente(nomeAdd.getText(), "12345", "99999", "novo@cliente.com");
+
+	     pessoas.add(novoCliente);
+
+	     nMembros.setText(String.valueOf(pessoas.size()));
 	}
 	
 	@FXML
 	public void onBtRemoveAction() {
-		
+		//por enquanto só ta removendo o último da lista
+		if (!pessoas.isEmpty()) {
+            pessoas.remove(pessoas.size() - 1); 
+            nMembros.setText(String.valueOf(pessoas.size())); 
+        }
 	}
+	/*
 	@FXML
 	public void onBtEndGAction() {
 		
@@ -56,26 +72,21 @@ public class TelaEditGrupoController {
 	
 	 @FXML
 	 public void initialize() {
-	        ObservableList<Cliente> pessoas = FXCollections.observableArrayList(
-	            new Cliente("João Ricardo", "54121", "85442", "email@jao"),
-	            new Cliente("Josué Costa", "54121", "85442", "email@josu"),
-	            new Cliente("Emanuel Tenório", "54121", "85442", "email@manoas"),
-	            new Cliente("Lucas Cavalcanti", "57121", "85442", "email@lusca"),
-	            new Cliente("Gustavo Henrique ", "54121", "85442", "email@gus")
-	        );
-
-	        tabela.setItems(pessoas);
-	        return;
+		    
+		 tabela.setItems(pessoas);
+		 
+	     tableColumnNome.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNome()));
+	     
+	     nMembros.setText(String.valueOf(pessoas.size()));
 	    }
 	 
 	 @FXML
 	 public void toggleButtonHandler() {
 	     if (statusG.isSelected()) {
-	         System.out.println("O botão está ativado.");
+	         System.out.println("O Grupo está ativo!");
 	     } else {
-	         System.out.println("O botão está desativado.");
+	         System.out.println("O grupo está desativado!");
 	     }
-	     return;
 	 }
 
 }
