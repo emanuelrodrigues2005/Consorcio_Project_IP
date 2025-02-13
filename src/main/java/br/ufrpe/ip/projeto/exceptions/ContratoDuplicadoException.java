@@ -4,7 +4,7 @@ public class ContratoDuplicadoException extends RuntimeException {
     private final String idContrato;
 
     public ContratoDuplicadoException(String idContrato) {
-        super(String.format("Já existe um usuário cadastrado com login \"%s\"", idContrato));
+        super(String.format("Já existe um contrato cadastrado com o id \"%s\"", idContrato));
         this.idContrato = idContrato;
     }
 

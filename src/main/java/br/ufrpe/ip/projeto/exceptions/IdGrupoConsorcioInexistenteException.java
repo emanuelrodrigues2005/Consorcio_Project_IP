@@ -1,9 +1,9 @@
 package br.ufrpe.ip.projeto.exceptions;
 
-public class IdGrupoConsorcioInexistente extends Exception {
+public class IdGrupoConsorcioInexistenteException extends Exception {
     private final String idGrupoConsorcio;
 
-    public IdGrupoConsorcioInexistente(String idGrupoConsorcio) {
+    public IdGrupoConsorcioInexistenteException(String idGrupoConsorcio) {
         super("O Id " + idGrupoConsorcio + " do grupo consorcio inexistente");
         this.idGrupoConsorcio = idGrupoConsorcio;
     }
