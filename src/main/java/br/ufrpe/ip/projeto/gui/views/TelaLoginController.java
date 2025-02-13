@@ -24,7 +24,7 @@ public class TelaLoginController {
     private CheckBox cbManterConectado;
 
     @FXML
-    private TextField txtEmailCpf;
+    private TextField txtCpf;
 
     @FXML
     private TextField txtSenha;
@@ -35,7 +35,7 @@ public class TelaLoginController {
 
     @FXML
     public void initialize() {
-        txtEmailCpf.setText("");
+        txtCpf.setText("");
         txtSenha.setText("");
         cbManterConectado.setSelected(false);
     }
@@ -45,28 +45,29 @@ public class TelaLoginController {
         System.out.println("Acessando tela de cadastro...");
         this.gerenciador.abrirCadastro();
         this.clearCampos();
-    } //Ajeita essa desgraça!
+    }
 
     @FXML
     private void openGerenciamentoAdmin(ActionEvent event) {
-        String emailCpf = txtEmailCpf.getText();
+        String cpf = txtCpf.getText();
         String senha = txtSenha.getText();
         boolean manterConectado = cbManterConectado.isSelected();
 
         System.out.println("Tentando login com:");
-        System.out.println("Email/CPF: " + emailCpf);
+        System.out.println("CPF: " + cpf);
         System.out.println("Senha: " + senha);
         System.out.println("Manter conectado: " + manterConectado);
 
-        if (emailCpf.equalsIgnoreCase("admin") && senha.equals("1234")) {
+        if (cpf.equalsIgnoreCase("admin") && senha.equals("1234")) {
+            this.sistema.getClienteByCpf(cpf);
             System.out.println("Login realizado com sucesso!");
         } else {
-
+            System.out.println("Login ou Senha inválidos!");
         }
     }
 
     private void clearCampos() {
-        this.txtEmailCpf.clear();
+        this.txtCpf.clear();
         this.txtSenha.clear();
     }
 }
