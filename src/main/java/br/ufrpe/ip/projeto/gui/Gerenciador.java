@@ -2,6 +2,7 @@ package br.ufrpe.ip.projeto.gui;
 
 import br.ufrpe.ip.projeto.gui.views.TelaCadastroController;
 import br.ufrpe.ip.projeto.gui.views.TelaLoginController;
+import br.ufrpe.ip.projeto.gui.views.TelaPerfilClienteController;
 import br.ufrpe.ip.projeto.gui.views.TelaVisuGrupoController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,6 +15,7 @@ public class Gerenciador {
     private Parent telaVisuGrupo;
     private Parent telaLogin;
     private Parent telaCadastro;
+    private Parent telaPerfilCliente;
 
     private Stage stagePrincipal;
     private Scene scenePrincipal;
@@ -21,6 +23,7 @@ public class Gerenciador {
     private TelaVisuGrupoController telaVisuGrupoController;
     private TelaLoginController telaLoginController;
     private TelaCadastroController telaCadastroController;
+    private TelaPerfilClienteController telaPerfilClienteController;
 
     private Gerenciador() {
         try{
@@ -38,6 +41,11 @@ public class Gerenciador {
                 telaCadastro = loaderTelaCadastro.load();
                 telaCadastroController = loaderTelaCadastro.getController();
                 telaCadastroController.setGerenciador(this);
+
+                FXMLLoader loaderTelaPerfilCliente = new FXMLLoader(getClass().getResource(TelasEnum.TELA_PERFIL_CLIENTE.getCaminho()));
+                telaPerfilCliente = loaderTelaPerfilCliente.load();
+                telaPerfilClienteController = loaderTelaPerfilCliente.getController();
+                telaPerfilClienteController.setGerenciador(this);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,7 +67,7 @@ public class Gerenciador {
     public void iniciarTelas() {
         stagePrincipal.setTitle("ConsorX");
         stagePrincipal.setResizable(false);
-        scenePrincipal = new Scene(telaLogin, 1280, 720);
+        scenePrincipal = new Scene(telaPerfilCliente, 1280, 720);
         stagePrincipal.setScene(scenePrincipal);
         stagePrincipal.show();
     }
@@ -70,5 +78,9 @@ public class Gerenciador {
 
     public void abrirCadastro() {
         scenePrincipal.setRoot(telaCadastro);
+    }
+
+    public void abrirPerfilCliente() {
+        scenePrincipal.setRoot(telaPerfilCliente);
     }
 }
