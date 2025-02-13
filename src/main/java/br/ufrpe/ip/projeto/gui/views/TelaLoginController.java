@@ -3,6 +3,7 @@ package br.ufrpe.ip.projeto.gui.views;
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
+import br.ufrpe.ip.projeto.models.Admin;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -24,7 +25,7 @@ public class TelaLoginController {
     private CheckBox cbManterConectado;
 
     @FXML
-    private TextField txtEmailCpf;
+    private TextField txtCpf;
 
     @FXML
     private TextField txtSenha;
@@ -35,7 +36,7 @@ public class TelaLoginController {
 
     @FXML
     public void initialize() {
-        txtEmailCpf.setText("");
+        txtCpf.setText("");
         txtSenha.setText("");
         cbManterConectado.setSelected(false);
     }
@@ -45,28 +46,27 @@ public class TelaLoginController {
         System.out.println("Acessando tela de cadastro...");
         this.gerenciador.abrirCadastro();
         this.clearCampos();
-    } //Ajeita essa desgraça!
+    }
 
     @FXML
     private void openGerenciamentoAdmin(ActionEvent event) {
-        String emailCpf = txtEmailCpf.getText();
-        String senha = txtSenha.getText();
-        boolean manterConectado = cbManterConectado.isSelected();
+        String cpf = this.txtCpf.getText();
+        String senha = this.txtSenha.getText();
 
-        System.out.println("Tentando login com:");
-        System.out.println("Email/CPF: " + emailCpf);
-        System.out.println("Senha: " + senha);
-        System.out.println("Manter conectado: " + manterConectado);
-
-        if (emailCpf.equalsIgnoreCase("admin") && senha.equals("1234")) {
-            System.out.println("Login realizado com sucesso!");
-        } else {
-
+        try {
+            this.sistema.efutuarLogin(cpf, senha);
+            if(this.sistema.getClienteLogado() instanceof Admin) {
+                //this.gerenciador.abrirTelaIncialAdmin
+            }
+            //this.gerenciador.abrirTelaInicialCliente
+            clearCampos();
+        } catch(Exception e) {
+            //exceptions: ClienteInexistente, ClienteSenhaIncorreta, ClienteJaLogado, Exception e
         }
     }
 
     private void clearCampos() {
-        this.txtEmailCpf.clear();
+        this.txtCpf.clear();
         this.txtSenha.clear();
     }
 }

@@ -37,13 +37,15 @@ public interface IConsorcio {
 
     Cliente getClienteByCpf(String cpf);
 
-    void createCliente(String nomeCliente, String cpfCliente, String telefoneCliente, String emailCliente);
+    void createCliente(String nomeCliente, String cpfCliente, String telefoneCliente, String emailCliente, String senhaCliente);
 
     void updateNome(String nomeCliente, String cpfCliente);
 
     void updateTelefone(String telefoneCliente, String cpfCliente);
 
     void updateEmail(String emailCliente, String cpfCliente);
+
+    void updateSenha(String senhaCliente, String cpfCliente);
 
     void deleteCliente(String cpfCliente);
 
@@ -113,4 +115,8 @@ public interface IConsorcio {
     void reajusteParcela(GrupoConsorcio grupoConsorcio);
 
     double getValorPago(String idGrupo);
+
+    void efutuarLogin(String cpf, String senha);
+
+    Cliente getClienteLogado();
 }

@@ -5,12 +5,14 @@ public class Cliente {
     private String cpf;
     private String telefone;
     private String email;
+    private String senha;
 
-    public Cliente(String nome, String cpf, String telefone, String email) {
+    public Cliente(String nome, String cpf, String telefone, String email, String senha) {
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
         this.email = email;
+        this.senha = senha;
     }
 
     public String getNome() {
@@ -43,6 +45,14 @@ public class Cliente {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public String toString() {
