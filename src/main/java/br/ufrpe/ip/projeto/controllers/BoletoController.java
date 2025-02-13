@@ -109,7 +109,7 @@ public class BoletoController {
             updateStatusBoleto(boleto, StatusBoletoEnum.ATRASADO);
             boleto.setValorBoleto(boleto.getValorBoleto() + (boleto.getValorBoleto() * ADICIONAL_MULTA));
         }
-    } 
+    }
 
     public void verificarBoletosVencidos() {
         List<Boleto> boletos = this.repositoryBoleto.getAllBoletos();
