@@ -21,8 +21,8 @@
       </Text>
       <TextField fx:id="txtCpf" promptText="CPF" layoutX="524.0" layoutY="289.0" prefHeight="20.0" prefWidth="230.0" />
       <TextField fx:id="txtSenha" promptText="Senha" layoutX="524.0" layoutY="330.0" prefHeight="20.0" prefWidth="230.0" />
-      <CheckBox fx:id="cbManterConectado" layoutX="549.0" layoutY="384.0" mnemonicParsing="false" style="-fx-text-fill: #fafafa; -fx-font-family: arial;" stylesheets="@../../../../Desktop/Leandrinho/style.css" text="Mantenha-me conectado" textFill="#fafafa" />
-      <Button fx:id="btLogin" layoutX="507.0" layoutY="473.0" mnemonicParsing="false" onAction="#openGerenciamentoAdmin" prefHeight="48.0" prefWidth="264.0" style="-fx-background-color: #fafafa; -fx-text-fill: #221F26; -fx-font-weight: Bold; -fx-font-size: 16;" text="Entrar" textFill="#221f26">
+      <CheckBox fx:id="cbManterConectado" layoutX="549.0" layoutY="384.0" mnemonicParsing="false" style="-fx-text-fill: #fafafa; -fx-font-family: arial;" stylesheets="/style.css" text="Mantenha-me conectado" textFill="#fafafa" />
+      <Button fx:id="btLogin" layoutX="507.0" layoutY="473.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="48.0" prefWidth="264.0" style="-fx-background-color: #fafafa; -fx-text-fill: #221F26; -fx-font-weight: Bold; -fx-font-size: 16;" text="Entrar" textFill="#221f26">
          <font>
             <Font name="Verdana Bold" size="16.0" />
          </font>

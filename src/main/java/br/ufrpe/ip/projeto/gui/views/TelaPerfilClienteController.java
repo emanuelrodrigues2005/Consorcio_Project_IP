@@ -82,6 +82,10 @@ public class TelaPerfilClienteController {
         this.screenManager = screenManager;
     }
 
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
     public void setInfoContrato(Contrato contrato) {
         lbNomeGrupo.setText(contrato.getGrupoAssociado() != null ? contrato.getGrupoAssociado().getNomeGrupo() : "Não informado");
         lbParcelasPagas.setText(String.valueOf(contrato.getParcelasPagas()));

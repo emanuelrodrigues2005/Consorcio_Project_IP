@@ -7,7 +7,7 @@ import br.ufrpe.ip.projeto.repositories.interfaces.IClienteRepository;
 public class LoginController {
     private static LoginController instance;
     private final IClienteRepository repositoryLogin;
-    private Cliente clienteLogado;
+    private Cliente clienteLogado = new Cliente("a", "a", "a", "a", "a");
 
     private LoginController() {
         this.repositoryLogin = ClienteRepository.getInstance();
