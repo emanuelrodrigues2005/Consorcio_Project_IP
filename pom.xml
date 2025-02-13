@@ -4,9 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>br.ufrpe.ip.projeto</groupId>
-    <artifactId>Consorcio_Project</artifactId>
+    <groupId>br.ufrpe.ip.projeto</groupId> <!-- Nome base dos pacotes -->
+    <artifactId>Consorcio</artifactId> <!-- Nome do projeto -->
     <version>1.0-SNAPSHOT</version>
+    <name>Consorcio</name> <!-- Nome opcional -->
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
@@ -16,6 +17,7 @@
     </properties>
 
     <dependencies>
+        <!-- Dependências do JavaFX -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -45,13 +47,21 @@
                 <version>0.0.8</version>
                 <executions>
                     <execution>
+                        <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>br.ufrpe.consorcio.Main</mainClass>
+                            <mainClass>Main</mainClass>
+                            <launcher>app</launcher>
+                            <jlinkZipName>app</jlinkZipName>
+                            <jlinkImageName>app</jlinkImageName>
+                            <noManPages>true</noManPages>
+                            <stripDebug>true</stripDebug>
+                            <noHeaderFiles>true</noHeaderFiles>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
+    
 </project>
