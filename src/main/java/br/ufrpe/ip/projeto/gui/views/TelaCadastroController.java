@@ -62,7 +62,7 @@ public class TelaCadastroController {
 
         System.out.println("Cadastro realizado com sucesso! CPF: " + cpf + ", Email: " + email);
 
-        this.sistema.createCliente(nome, cpf, telefone, email);
+        this.sistema.createCliente(nome, cpf, telefone, email, senha);
         this.openLogin();
     }
 
