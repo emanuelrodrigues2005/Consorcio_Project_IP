@@ -49,20 +49,16 @@ public class TelaLoginController {
     }
 
     @FXML
-    private void openGerenciamentoAdmin(ActionEvent event) {
+    private void login(MouseEvent event) {
+        System.out.println("aaaaaaa");
         String cpf = this.txtCpf.getText();
         String senha = this.txtSenha.getText();
-
-        try {
-            this.sistema.efutuarLogin(cpf, senha);
-            if(this.sistema.getClienteLogado() instanceof Admin) {
+        this.sistema.efutuarLogin(cpf, senha);
+        if (this.sistema.getClienteLogado() instanceof Admin) {
                 //this.gerenciador.abrirTelaIncialAdmin
-            }
-            this.gerenciador.abrirTelaPrincipalCliente();
-            clearCampos();
-        } catch(Exception e) {
-            //exceptions: ClienteInexistente, ClienteSenhaIncorreta, ClienteJaLogado, Exception e
         }
+        this.gerenciador.abrirTelaPrincipalCliente();
+        clearCampos();
     }
 
     private void clearCampos() {

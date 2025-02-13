@@ -1,9 +1,6 @@
 package br.ufrpe.ip.projeto.gui;
 
-import br.ufrpe.ip.projeto.gui.views.TelaCadastroController;
-import br.ufrpe.ip.projeto.gui.views.TelaLoginController;
-import br.ufrpe.ip.projeto.gui.views.TelaPerfilClienteController;
-import br.ufrpe.ip.projeto.gui.views.TelaVisuGrupoController;
+import br.ufrpe.ip.projeto.gui.views.*;
 import br.ufrpe.ip.projeto.models.Cliente;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,6 +14,7 @@ public class Gerenciador {
     private Parent telaLogin;
     private Parent telaCadastro;
     private Parent telaPerfilCliente;
+    private Parent telaPrincipalCliente;
 
     private Stage stagePrincipal;
     private Scene scenePrincipal;
@@ -25,6 +23,7 @@ public class Gerenciador {
     private TelaLoginController telaLoginController;
     private TelaCadastroController telaCadastroController;
     private TelaPerfilClienteController telaPerfilClienteController;
+    private TelaPrincipalClienteController telaPrincipalClienteController;
 
     private Gerenciador() {
         try{
@@ -47,6 +46,11 @@ public class Gerenciador {
                 telaPerfilCliente = loaderTelaPerfilCliente.load();
                 telaPerfilClienteController = loaderTelaPerfilCliente.getController();
                 telaPerfilClienteController.setGerenciador(this);
+
+                FXMLLoader loaderTelaPrincipalCliente = new FXMLLoader(getClass().getResource(TelasEnum.TELA_PRINCIPAL_CLIENTE.getCaminho()));
+                telaPrincipalCliente = loaderTelaPrincipalCliente.load();
+                telaPrincipalClienteController = loaderTelaPrincipalCliente.getController();
+                telaPrincipalClienteController.setGerenciador(this);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -82,7 +86,8 @@ public class Gerenciador {
     }
 
     public void abrirTelaPrincipalCliente() {
-        scenePrincipal.setRoot(telaPerfilCliente);
+        telaPrincipalClienteController.initialize();
+        scenePrincipal.setRoot(telaPrincipalCliente);
     }
 
     public void abrirPerfilCliente(Cliente cliente) {
