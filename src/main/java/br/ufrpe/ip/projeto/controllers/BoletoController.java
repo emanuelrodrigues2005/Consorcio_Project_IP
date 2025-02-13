@@ -8,13 +8,15 @@ import br.ufrpe.ip.projeto.repositories.interfaces.IBoletoRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BoletoController {
     private static BoletoController instance;
     private final IBoletoRepository repositoryBoleto;
+    public static final double ADICIONAL_MULTA = 0.05;
 
-    public BoletoController() {
-        repositoryBoleto = new BoletoRepository();
+    private BoletoController() {
+        this.repositoryBoleto = BoletoRepository.getInstance();
     }
 
     public static BoletoController getInstance() {
@@ -24,58 +26,113 @@ public class BoletoController {
         return instance;
     }
 
-    public ArrayList<Boleto> getAllBoletos() {
-        return this.repositoryBoleto.getAllBoletos();
-    } //exceptions: ArrayVazio
+    public List<Boleto> getAllBoletos() {
+        List<Boleto> boletos = this.repositoryBoleto.getAllBoletos();
+        if (boletos.isEmpty()) {
+            throw new ArrayVazioException("Nenhum boleto encontrado.");
+        }
+        return boletos;
+    }
 
     public int getIdBoleto(Contrato contratoBoleto, int numeroParcela) {
-        return this.repositoryBoleto.getIdBoleto(contratoBoleto, numeroParcela);
-    } //exceptions: IdBoletoInexistente, ContratoInexistente, CampoInvalido
+        if (contratoBoleto == null) {
+            throw new ContratoInexistenteException("Contrato não encontrado.");
+        }
+        if (numeroParcela <= 0) {
+            throw new CampoInvalidoException("Número de parcela deve ser maior que zero.");
+        }
+        int idBoleto = this.repositoryBoleto.getIdBoleto(contratoBoleto, numeroParcela);
+        if (idBoleto == null) {
+            throw new IDBoletoInexistenteException("Id do boleto não encontrado.");
+        }
+        return idBoleto;
+    }
 
-    public Boleto getBoletoById(int idBoleto) {
-        return this.repositoryBoleto.getBoletoById(idBoleto);
-    } //exceptions: BoletoInexistente, IdBoletoInexistente, CampoInvalido
+    public Boleto getBoletoById(String idBoleto) {
+        if (idBoleto == null) {
+            throw new IDBoletoInexistenteException("ID do boleto é inválido.");
+        }
+        Boleto boleto = this.repositoryBoleto.getBoletoById(idBoleto);
+        if (boleto == null) {
+            throw new BoletoInexistenteException("Boleto não encontrado.");
+        }
+        return boleto;
+    }
 
     public Boleto getBoletoByContrato(Contrato contrato) {
-        return this.repositoryBoleto.getBoletoByContrato(contrato);
-    } //exceptions: BoletoInexistente, ContratoInexistente, CampoInvalido
+        if (contrato == null) {
+            throw new ContratoInexistenteException("Contrato inválido.");
+        }
+        Boleto boletos = this.repositoryBoleto.getBoletoByContrato(contrato);
+        if (boletos == null) {
+            throw new ArrayVazioException("Nenhum boleto encontrado para este contrato.");
+        }
+        return boletos;
+    }
 
     public void createBoleto(Contrato contratoBoleto, LocalDate dataVencimento, int numeroParcela) {
+        if (contratoBoleto == null) {
+            throw new ContratoInexistenteException("Contrato inválido.");
+        }
+        if (dataVencimento == null || numeroParcela <= 0) {
+            throw new CampoInvalidoException("Dados inválidos para criação do boleto.");
+        }
         this.repositoryBoleto.createBoleto(contratoBoleto, dataVencimento, numeroParcela);
-    } //exceptions: ContratoInexistente, CampoInvalido
+    }
 
     public void updateDataPagamento(Boleto boleto) {
+        if (boleto == null) {
+            throw new BoletoInexistenteException("Boleto inexistente.");
+        }
         this.repositoryBoleto.updateDataPagamento(boleto);
-    } //exceptions: BoletoInexistente, CampoInvalido
+    }
 
     public void updateStatusBoleto(Boleto boleto, StatusBoletoEnum statusBoleto) {
+        if (boleto == null) {
+            throw new BoletoInexistenteException("Boleto inexistente.");
+        }
+        if (statusBoleto == null) {
+            throw new CampoInvalidoException("Status do boleto não pode ser nulo.");
+        }
         this.repositoryBoleto.updateStatusBoleto(boleto, statusBoleto);
-    } //exceptions: BoletoInexistente, CampoInvalido
+    }
 
-    public void deleteBoleto(int idBoleto) {
+    public void deleteBoleto(String idBoleto) {
+        if (idBoleto == null) {
+            throw new IDBoletoInexistenteException("ID do boleto é inválido ou não foi informado.");
+        }
         this.repositoryBoleto.deleteBoleto(idBoleto);
-    } //exceptions: BoletoInexistente, CampoInvalido
+    }
 
     public void atualizarBoletoVencido(Boleto boleto) {
-        if(boleto.getStatusBoleto() == StatusBoletoEnum.PENDENTE && LocalDate.now().isAfter(boleto.getDataVencimento())) {
-            updateStatusBoleto(boleto, StatusBoletoEnum.ATRASADO);
-
-            boleto.setValorBoleto(boleto.getValorBoleto() + (boleto.getValorBoleto() * 0.05));
+        if (boleto == null) {
+            throw new BoletoInexistenteException("Boleto inexistente.");
         }
-    } //exceptions: BoletoInexistente
+        if (boleto.getStatusBoleto() == StatusBoletoEnum.PENDENTE && LocalDate.now().isAfter(boleto.getDataVencimento())) {
+            updateStatusBoleto(boleto, StatusBoletoEnum.ATRASADO);
+            boleto.setValorBoleto(boleto.getValorBoleto() + (boleto.getValorBoleto() * ADICIONAL_MULTA));
+        }
+    }
 
     public void verificarBoletosVencidos() {
-        for (Boleto boleto : this.repositoryBoleto.getAllBoletos()) {
+        List<Boleto> boletos = this.repositoryBoleto.getAllBoletos();
+        if (boletos.isEmpty()) {
+            throw new ArrayVazioException("Nenhum boleto cadastrado.");
+        }
+        for (Boleto boleto : boletos) {
             atualizarBoletoVencido(boleto);
         }
     }
 
-    public void realizarPagamento(int idBoleto) {
-        Boleto boleto  = this.repositoryBoleto.getBoletoById(idBoleto);
-
-        if(boleto != null) {
-            this.updateDataPagamento(boleto);
-            this.updateStatusBoleto(boleto, StatusBoletoEnum.PAGO);
+    public void realizarPagamento(String idBoleto) {
+        if (idBoleto == null) {
+            throw new IDBoletoInexistenteException("ID do boleto é inválido ou não foi informado.");
         }
-    } //exceptions: BoletoInexistente
+        Boleto boleto = this.repositoryBoleto.getBoletoById(idBoleto);
+        if (boleto == null) {
+            throw new BoletoInexistenteException("Boleto não encontrado.");
+        }
+        this.updateDataPagamento(boleto);
+        this.updateStatusBoleto(boleto, StatusBoletoEnum.PAGO);
+    }
 }
