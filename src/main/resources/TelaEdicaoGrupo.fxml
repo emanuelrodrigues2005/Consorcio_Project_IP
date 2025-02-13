@@ -30,12 +30,15 @@
                <children>
                   <TableView fx:id="tabela" layoutX="257.0" layoutY="24.0" prefHeight="177.0" prefWidth="151.0">
                     <columns>
-                      <TableColumn prefWidth="150.0" text="Participantes" />
+                      <TableColumn fx:id="tableColumnNome" prefWidth="150.0" text="Participantes" />
                     </columns>
                   </TableView>
                   <Label layoutX="257.0" layoutY="6.0" text="Numero de Participantes:" />
-                  <Button fx:id="add" layoutX="257.0" layoutY="211.0" mnemonicParsing="false" text="Add" />
-                  <Button fx:id="remove" layoutX="349.0" layoutY="211.0" mnemonicParsing="false" text="Remove" />
+                  <Button fx:id="add" layoutX="237.0" layoutY="207.0" mnemonicParsing="false" text="Add">
+                     <graphic>
+                        <TextField fx:id="nomeAdd" prefHeight="25.0" prefWidth="77.0" />
+                     </graphic></Button>
+                  <Button fx:id="remove" layoutX="372.0" layoutY="211.0" mnemonicParsing="false" text="Remove" />
                   <Label fx:id="nMembros" layoutX="394.0" layoutY="6.0" />
                   <Label layoutX="73.0" layoutY="42.0" text="Status do Grupo:" />
                   <ToggleButton fx:id="statusG" layoutX="96.0" layoutY="69.0" mnemonicParsing="false" onAction="#toggleButtonHandler" selected="true" text="Ativo" />
