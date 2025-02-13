@@ -4,18 +4,18 @@ import br.ufrpe.ip.projeto.models.Contemplacao;
 import br.ufrpe.ip.projeto.models.Contrato;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.List;
 
 public interface IContemplacaoRepository {
-    ArrayList<Contemplacao> getAllContemplacoes();
+    List<Contemplacao> getAllContemplacoes();
 
     Contemplacao getContemplacaoByContrato(Contrato contrato);
 
-    Contemplacao getContemplacaoById(int idContemplacao);
+    Contemplacao getContemplacaoById(String idContemplacao);
 
     void createContemplacao(Contrato contratoContemplacao);
 
-    void updateDataContemplacao(int idContemplacao, LocalDate dataContemplacao);
+    void updateDataContemplacao(String idContemplacao, LocalDate dataContemplacao);
 
-    void deleteContemplacao(int idContemplacao);
+    void deleteContemplacao(String idContemplacao);
 }

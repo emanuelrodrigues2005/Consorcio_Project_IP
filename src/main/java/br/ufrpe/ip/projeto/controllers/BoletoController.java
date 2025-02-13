@@ -8,10 +8,12 @@ import br.ufrpe.ip.projeto.repositories.interfaces.IBoletoRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BoletoController {
     private static BoletoController instance;
     private final IBoletoRepository repositoryBoleto;
+    public static final double ADICIONAL_MULTA = 0.05;
 
     private BoletoController() {
         this.repositoryBoleto = BoletoRepository.getInstance();
@@ -24,15 +26,15 @@ public class BoletoController {
         return instance;
     }
 
-    public ArrayList<Boleto> getAllBoletos() {
+    public List<Boleto> getAllBoletos() {
         return this.repositoryBoleto.getAllBoletos();
     } //exceptions: ArrayVazio
 
-    public int getIdBoleto(Contrato contratoBoleto, int numeroParcela) {
+    public String getIdBoleto(Contrato contratoBoleto, int numeroParcela) {
         return this.repositoryBoleto.getIdBoleto(contratoBoleto, numeroParcela);
     } //exceptions: IdBoletoInexistente, ContratoInexistente, CampoInvalido
 
-    public Boleto getBoletoById(int idBoleto) {
+    public Boleto getBoletoById(String idBoleto) {
         return this.repositoryBoleto.getBoletoById(idBoleto);
     } //exceptions: BoletoInexistente, IdBoletoInexistente, CampoInvalido
 
@@ -52,7 +54,7 @@ public class BoletoController {
         this.repositoryBoleto.updateStatusBoleto(boleto, statusBoleto);
     } //exceptions: BoletoInexistente, CampoInvalido
 
-    public void deleteBoleto(int idBoleto) {
+    public void deleteBoleto(String idBoleto) {
         this.repositoryBoleto.deleteBoleto(idBoleto);
     } //exceptions: BoletoInexistente, CampoInvalido
 
@@ -60,7 +62,7 @@ public class BoletoController {
         if(boleto.getStatusBoleto() == StatusBoletoEnum.PENDENTE && LocalDate.now().isAfter(boleto.getDataVencimento())) {
             updateStatusBoleto(boleto, StatusBoletoEnum.ATRASADO);
 
-            boleto.setValorBoleto(boleto.getValorBoleto() + (boleto.getValorBoleto() * 0.05));
+            boleto.setValorBoleto(boleto.getValorBoleto() + (boleto.getValorBoleto() * ADICIONAL_MULTA));
         }
     } //exceptions: BoletoInexistente
 
@@ -70,7 +72,7 @@ public class BoletoController {
         }
     }
 
-    public void realizarPagamento(int idBoleto) {
+    public void realizarPagamento(String idBoleto) {
         Boleto boleto  = this.repositoryBoleto.getBoletoById(idBoleto);
 
         if(boleto != null) {

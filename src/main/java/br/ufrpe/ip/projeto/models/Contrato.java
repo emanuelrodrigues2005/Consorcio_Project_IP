@@ -2,14 +2,15 @@ package br.ufrpe.ip.projeto.models;
 
 import java.time.LocalDate;
 import java.util.Random;
+import java.util.UUID;
 
 import br.ufrpe.ip.projeto.enums.StatusContratoEnum;
 
 public class Contrato {
     private Cliente cliente;
     private GrupoConsorcio grupoAssociado;
-    private int idContrato;
-    private int parcelasPagas;
+    private String idContrato;
+    private int parcelasPagas; //retirar
     private double valorPago;
     private double saldoDevedor;
     private double saldoDevolucao;
@@ -20,7 +21,7 @@ public class Contrato {
     public Contrato(Cliente cliente, GrupoConsorcio grupoAssociado) {
         this.cliente = cliente;
         this.grupoAssociado = grupoAssociado;
-        this.idContrato = new Random().nextInt();
+        this.idContrato = UUID.randomUUID().toString();
         this.parcelasPagas = 0;
         this.valorPago = 0;
         this.saldoDevedor = grupoAssociado.getValorTotal() + (grupoAssociado.getValorTotal() * grupoAssociado.getTaxaAdmin());
@@ -29,14 +30,14 @@ public class Contrato {
         this.dataInicio = LocalDate.now();
     }
 
-    public int getIdContrato() {
+    public String getIdContrato() {
         return idContrato;
     }
 
     public LocalDate getDataInicio() {
         return dataInicio;
     }
-    
+
     public LocalDate getDataEncerramento() {
         return dataEncerramento;
     }
@@ -91,9 +92,10 @@ public class Contrato {
 
     public void setSaldoDevolucao(double novoSaldoDevolucao) {
         this.saldoDevolucao = novoSaldoDevolucao;
-    } 
+    }
 
+    @Override
     public String toString() {
-        return "Cliente: " + this.getCliente().getNome() + "\nCPF: " + this.getCliente().getCpf() + "\nGrupo associado: " + this.getGrupoAssociado().getNomeGrupo() + "\nStatus: " + this.getStatusContrato() + "\nParcelas pagas: " + this.getParcelasPagas() + "\nSaldo devedor: " + this.getSaldoDevedor() + "\n";
+        return idContrato;
     }
 }

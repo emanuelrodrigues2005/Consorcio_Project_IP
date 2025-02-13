@@ -1,11 +1,11 @@
 package br.ufrpe.ip.projeto.repositories;
 
 import br.ufrpe.ip.projeto.models.Cliente;
-import br.ufrpe.ip.projeto.models.Contrato;
 import br.ufrpe.ip.projeto.repositories.interfaces.IClienteRepository;
 
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class ClienteRepository implements IClienteRepository {
     private ArrayList<Cliente> clientes;
@@ -23,11 +23,8 @@ public class ClienteRepository implements IClienteRepository {
     }
 
     @Override
-    public ArrayList<Cliente> getAllClientes() {
-        if(clientes.isEmpty()) {
-            return null;
-        }
-        return clientes;
+    public List<Cliente> getAllClientes() {
+        return Collections.unmodifiableList(clientes);
     }
 
     @Override
@@ -41,8 +38,8 @@ public class ClienteRepository implements IClienteRepository {
     }
 
    @Override
-   public void createCliente(String nomeCliente, String cpfCliente, String telefoneCliente, String emailCliente) {
-        Cliente cliente = new Cliente(nomeCliente, cpfCliente, telefoneCliente, emailCliente);
+   public void createCliente(String nomeCliente, String cpfCliente, String telefoneCliente, String emailCliente, String senhaCliente) {
+        Cliente cliente = new Cliente(nomeCliente, cpfCliente, telefoneCliente, emailCliente, senhaCliente);
         this.clientes.add(cliente);
    }
 
@@ -59,6 +56,11 @@ public class ClienteRepository implements IClienteRepository {
     @Override
     public void updateEmail(Cliente cliente, String email) {
         cliente.setEmail(email);
+    }
+
+    @Override
+    public void updateSenha(Cliente cliente, String senha) {
+        cliente.setSenha(senha);
     }
 
    @Override

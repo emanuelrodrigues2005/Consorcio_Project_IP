@@ -20,7 +20,7 @@ public interface IContratoRepository {
 
     boolean existeContrato(Contrato contrato);
 
-    Contrato getContratoByIdContrato(int idContrato);
+    Contrato getContratoByIdContrato(String idContrato);
 
     void createContrato(Cliente cliente, GrupoConsorcio grupoConsorcio);
 

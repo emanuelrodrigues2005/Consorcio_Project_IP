@@ -3,19 +3,20 @@ package br.ufrpe.ip.projeto.models;
 import br.ufrpe.ip.projeto.enums.StatusGrupoConsorcioEnum;
 
 import java.util.Random;
+import java.util.UUID;
 
 public class GrupoConsorcio {
     private String nomeGrupo;
-    private int idGrupo;
-    private int numeroParticipantes;
+    private String idGrupo;
+    private int numeroParticipantes; //Adicionar número Máximo
     private double valorTotal;
     private double taxaAdmin;
-    private double valorParcela;
+    private double valorParcela; //Atributo Contrato
     private StatusGrupoConsorcioEnum statusGrupoConsorcio;
 
     public GrupoConsorcio(String nomeGrupo, int numeroParticipantes, double valorTotal, double taxaAdmin) {
         this.nomeGrupo = nomeGrupo;
-        this.idGrupo = new Random().nextInt();
+        this.idGrupo = UUID.randomUUID().toString();
         this.numeroParticipantes = numeroParticipantes;
         this.valorTotal = valorTotal;
         this.taxaAdmin = taxaAdmin;
@@ -27,7 +28,7 @@ public class GrupoConsorcio {
         return nomeGrupo;
     }
 
-    public int getIdGrupo() {
+    public String getIdGrupo() {
         return idGrupo;
     }
 
@@ -82,6 +83,7 @@ public class GrupoConsorcio {
     public String toString() {
         return "Grupo: " + getNomeGrupo() + " { "
                 + "\n  Número de Participantes: " + getNumeroParticipantes() + " | "
+                + "\n id:" + getIdGrupo() + " | "
                 + "\n  Valor total do Consórcio: " + getValorTotal() + " | "
                 + "\n  Valor de Parcela: " + getValorParcela() + " | "
                 + "\n  Taxa de Administração: " + getTaxaAdmin()
