@@ -9,6 +9,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface IConsorcio {
+    Cliente getClienteLogado();
+
     List<Boleto> getAllBoletos();
 
     String getIdBoleto(Contrato contratoBoleto, int numeroParcela);
@@ -70,6 +72,8 @@ public interface IConsorcio {
     List<Contrato> getAllContratos();
 
     List<Contrato> getContratosByIdGrupo(GrupoConsorcio grupoAssociado);
+
+    List<Contrato> getAllContratosByCPF(Cliente cliente);
 
     boolean existeContrato(Contrato contrato);
 

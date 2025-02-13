@@ -190,6 +190,11 @@ public class ConsorcioFachada implements IConsorcio{
     }
 
     @Override
+    public List<Contrato> getAllContratosByCPF(Cliente cliente) {
+        return this.contratoController.getAllContratosByCPF(cliente);
+    }
+
+    @Override
     public boolean existeContrato(Contrato contrato) {
         return this.contratoController.existeContrato(contrato);
     }

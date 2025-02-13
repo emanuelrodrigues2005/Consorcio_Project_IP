@@ -94,7 +94,8 @@ public class Contrato {
         this.saldoDevolucao = novoSaldoDevolucao;
     }
 
+    @Override
     public String toString() {
-        return "Cliente: " + this.getCliente().getNome() + "\nCPF: " + this.getCliente().getCpf() + "\nGrupo associado: " + this.getGrupoAssociado().getNomeGrupo() + "\nStatus: " + this.getStatusContrato() + "\nParcelas pagas: " + this.getParcelasPagas() + "\nSaldo devedor: " + this.getSaldoDevedor() + "\n";
+        return idContrato;
     }
 }
