@@ -1,0 +1,34 @@
+.check-box .box {
+    -fx-background-color: gray; /* Fundo transparente */
+    -fx-border-radius: 3;              /* Arredondamento opcional */
+}
+
+.check-box .box:selected {
+    -fx-background-color: white;       /* Fundo branco quando selecionado */
+    -fx-border-color: white;           /* Mantém a borda branca */
+    -fx-mark-color: white;             /* Cor do "check" (marcação) */
+}
+
+.border-pane {
+    -fx-background-color: #ffffff; /* Fundo branco ou outra cor */
+    -fx-border-color: #000000;    /* Cor da borda */
+    -fx-border-width: 2 2 0 2;    /* Apenas borda superior e laterais (sem inferior) */
+    -fx-border-radius: 10 10 0 0; /* Arredondamento superior (esquerda e direita) */
+    -fx-background-radius: 10 10 0 0; /* Fundo arredondado nas partes superiores */
+}
+
+.pane {
+    -fx-background-color: #ffffff; /* Fundo branco ou outra cor */
+    -fx-border-color: #000000;    /* Cor da borda */
+    -fx-border-width: 2 2 0 2;    /* Apenas borda superior e laterais (sem inferior) */
+    -fx-border-radius: 10 10 0 0; /* Arredondamento superior (esquerda e direita) */
+    -fx-background-radius: 10 10 0 0; /* Fundo arredondado nas partes superiores */
+}
+
+.hbox {
+    -fx-background-color: #ffffff; /* Fundo branco ou outra cor */
+    -fx-border-color: #000000;    /* Cor da borda */
+    -fx-border-width: 2 2 0 2;    /* Apenas borda superior e laterais (sem inferior) */
+    -fx-border-radius: 10 10 0 0; /* Arredondamento superior (esquerda e direita) */
+    -fx-background-radius: 10 10 0 0; /* Fundo arredondado nas partes superiores */
+}

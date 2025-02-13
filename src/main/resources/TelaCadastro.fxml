@@ -19,8 +19,8 @@
             <Font name="Verdana" size="16.0" />
          </font>
       </Text>
-      <TextField floatText="Telefone" layoutX="540.0" layoutY="328.0" prefHeight="20.0" prefWidth="230.0" />
-      <TextField floatText="Email" layoutX="540.0" layoutY="369.0" prefHeight="20.0" prefWidth="230.0" />
+      <TextField fx:id="tfTelefone" floatText="Telefone" layoutX="540.0" layoutY="328.0" prefHeight="20.0" prefWidth="230.0" />
+      <TextField fx:id="tfEmail" floatText="Email" layoutX="540.0" layoutY="369.0" prefHeight="20.0" prefWidth="230.0" />
       <Button fx:id="btCadastro" layoutX="508.0" layoutY="531.0" mnemonicParsing="false" onAction="#openLogin" prefHeight="48.0" prefWidth="264.0" style="-fx-background-color: #fafafa; -fx-text-fill: #221F26; -fx-font-weight: Bold;" text="Cadastrar" textFill="#221f26">
          <font>
             <Font name="System Bold" size="16.0" />
@@ -38,13 +38,13 @@
       </Text>
       <Icon content="HELP_OUTLINE" layoutX="509.0" layoutY="340.0" />
       <Icon content="HELP_OUTLINE" layoutX="509.0" layoutY="379.0" />
-      <TextField floatText="Senha" layoutX="541.0" layoutY="412.0" prefHeight="20.0" prefWidth="230.0" />
-      <TextField floatText="Confirmar senha" layoutX="541.0" layoutY="456.0" prefHeight="20.0" prefWidth="230.0" />
+      <TextField fx:id="tfSenha" floatText="Senha" layoutX="541.0" layoutY="412.0" prefHeight="20.0" prefWidth="230.0" />
+      <TextField fx:id="tfConfirmarSenha" floatText="Confirmar senha" layoutX="541.0" layoutY="456.0" prefHeight="20.0" prefWidth="230.0" />
       <Icon content="HELP_OUTLINE" layoutX="509.0" layoutY="422.0" />
       <Icon content="HELP_OUTLINE" layoutX="509.0" layoutY="466.0" />
-      <TextField floatText="CPF" layoutX="541.0" layoutY="281.0" prefHeight="20.0" prefWidth="230.0" />
+      <TextField fx:id="tfCPF" floatText="CPF" layoutX="541.0" layoutY="281.0" prefHeight="20.0" prefWidth="230.0" />
       <Icon content="HELP_OUTLINE" layoutX="510.0" layoutY="293.0" />
-      <TextField floatText="Nome" layoutX="541.0" layoutY="237.0" prefHeight="20.0" prefWidth="230.0" />
+      <TextField fx:id="tfNome" floatText="Nome" layoutX="541.0" layoutY="237.0" prefHeight="20.0" prefWidth="230.0" />
       <Icon content="HELP_OUTLINE" layoutX="510.0" layoutY="249.0" />
    </children>
 </AnchorPane>
