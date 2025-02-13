@@ -3,14 +3,10 @@ package br.ufrpe.ip.projeto.models;
 import br.ufrpe.ip.projeto.enums.StatusBoletoEnum;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.UUID;
 
 public class Boleto {
-    private static final Set<Integer> idsUsados = new HashSet<>();
-    private static final Random random = new Random();
-    private int idBoleto;
+    private String idBoleto;
     private Contrato contratoBoleto;
     private double valorBoleto;
     private LocalDate dataVencimento;
@@ -20,7 +16,7 @@ public class Boleto {
     private int numeroParcela;
 
     public Boleto(Contrato contratoBoleto, LocalDate dataVencimento, int numeroParcela) {
-        this.idBoleto = gerarIdUnico();
+        this.idBoleto = UUID.randomUUID().toString();
         this.contratoBoleto = contratoBoleto;
         this.numeroParcela = numeroParcela;
         this.valorBoleto = contratoBoleto.getGrupoAssociado().getValorParcela();
@@ -30,17 +26,7 @@ public class Boleto {
         this.dataPagamento = null;
     }
 
-    private int gerarIdUnico() {
-        int id;
-        do {
-            id = 10000 + random.nextInt(90000);
-        } while (idsUsados.contains(id));
-        idsUsados.add(id);
-        return id;
-    }
-
-    // Getters e Setters
-    public int getIdBoleto() { return idBoleto; }
+    public String getIdBoleto() { return idBoleto; }
 
     public Contrato getContratoBoleto() { return contratoBoleto; }
 

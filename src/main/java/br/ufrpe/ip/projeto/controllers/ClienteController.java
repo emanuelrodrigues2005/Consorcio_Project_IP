@@ -4,13 +4,13 @@ import br.ufrpe.ip.projeto.models.Cliente;
 import br.ufrpe.ip.projeto.repositories.ClienteRepository;
 import br.ufrpe.ip.projeto.repositories.interfaces.IClienteRepository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ClienteController {
     private static ClienteController instancia;
     private final IClienteRepository repositorioCliente;
 
-    public ClienteController() {
+    private ClienteController() {
         this.repositorioCliente = ClienteRepository.getInstance();
     }
 
@@ -21,7 +21,7 @@ public class ClienteController {
         return instancia;
     }
 
-    public ArrayList<Cliente> getAllClientes() {
+    public List<Cliente> getAllClientes() {
         return this.repositorioCliente.getAllClientes();
     }// exceptions: ArrayVazio
 

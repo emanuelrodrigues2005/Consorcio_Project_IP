@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.Icon?>
+<?import com.gluonhq.charm.glisten.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #221F26;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text fill="#fafafa" layoutX="453.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ConsorX">
+         <font>
+            <Font name="Verdana Bold" size="80.0" />
+         </font>
+      </Text>
+      <Text fill="#fafafa" layoutX="552.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Consórcio Automotivo">
+         <font>
+            <Font name="Verdana" size="16.0" />
+         </font>
+      </Text>
+      <TextField fx:id="tfTelefone" floatText="Telefone" layoutX="540.0" layoutY="328.0" prefHeight="20.0" prefWidth="230.0" />
+      <TextField fx:id="tfEmail" floatText="Email" layoutX="540.0" layoutY="369.0" prefHeight="20.0" prefWidth="230.0" />
+      <Button fx:id="btCadastro" layoutX="508.0" layoutY="531.0" mnemonicParsing="false" onAction="#openLogin" prefHeight="48.0" prefWidth="264.0" style="-fx-background-color: #fafafa; -fx-text-fill: #221F26; -fx-font-weight: Bold;" text="Cadastrar" textFill="#221f26">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <Text fill="#fafafa" layoutX="508.0" layoutY="598.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Já possui uma conta?">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="btConecte" fill="#fafafa" layoutX="688.0" layoutY="597.0" onMouseClicked="#openLogin" strokeType="OUTSIDE" strokeWidth="0.0" text="Conecte-se">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <Icon content="HELP_OUTLINE" layoutX="509.0" layoutY="340.0" />
+      <Icon content="HELP_OUTLINE" layoutX="509.0" layoutY="379.0" />
+      <TextField fx:id="tfSenha" floatText="Senha" layoutX="541.0" layoutY="412.0" prefHeight="20.0" prefWidth="230.0" />
+      <TextField fx:id="tfConfirmarSenha" floatText="Confirmar senha" layoutX="541.0" layoutY="456.0" prefHeight="20.0" prefWidth="230.0" />
+      <Icon content="HELP_OUTLINE" layoutX="509.0" layoutY="422.0" />
+      <Icon content="HELP_OUTLINE" layoutX="509.0" layoutY="466.0" />
+      <TextField fx:id="tfCPF" floatText="CPF" layoutX="541.0" layoutY="281.0" prefHeight="20.0" prefWidth="230.0" />
+      <Icon content="HELP_OUTLINE" layoutX="510.0" layoutY="293.0" />
+      <TextField fx:id="tfNome" floatText="Nome" layoutX="541.0" layoutY="237.0" prefHeight="20.0" prefWidth="230.0" />
+      <Icon content="HELP_OUTLINE" layoutX="510.0" layoutY="249.0" />
+   </children>
+</AnchorPane>

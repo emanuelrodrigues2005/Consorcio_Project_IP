@@ -6,12 +6,14 @@ import br.ufrpe.ip.projeto.repositories.interfaces.IContemplacaoRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class ContemplacaoRepository implements IContemplacaoRepository {
     private static ContemplacaoRepository instance;
     private ArrayList<Contemplacao> contemplacoes;
 
-    public ContemplacaoRepository() {
+    private ContemplacaoRepository() {
         this.contemplacoes = new ArrayList<>();
     }
 
@@ -23,11 +25,8 @@ public class ContemplacaoRepository implements IContemplacaoRepository {
     }
 
     @Override
-    public ArrayList<Contemplacao> getAllContemplacoes() {
-        if (contemplacoes == null) {
-            return null;
-        }
-        return contemplacoes;
+    public List<Contemplacao> getAllContemplacoes() {
+        return Collections.unmodifiableList(contemplacoes);
     }
 
     @Override
@@ -41,9 +40,9 @@ public class ContemplacaoRepository implements IContemplacaoRepository {
     }
 
     @Override
-    public Contemplacao getContemplacaoById(int idContemplacao) {
+    public Contemplacao getContemplacaoById(String idContemplacao) {
         for (Contemplacao contemplacao : contemplacoes) {
-            if(contemplacao.getIdContemplacao() == idContemplacao) {
+            if(contemplacao.getIdContemplacao().equals(idContemplacao)) {
                 return contemplacao;
             }
         }
@@ -57,13 +56,13 @@ public class ContemplacaoRepository implements IContemplacaoRepository {
     }
 
     @Override
-    public void updateDataContemplacao(int idContemplacao, LocalDate dataContemplacao) {
+    public void updateDataContemplacao(String idContemplacao, LocalDate dataContemplacao) {
         Contemplacao contemplacao = getContemplacaoById(idContemplacao);
         contemplacao.setDataContemplacao(dataContemplacao);
     }
 
     @Override
-    public void deleteContemplacao(int idContemplacao) {
+    public void deleteContemplacao(String idContemplacao) {
         contemplacoes.remove(getContemplacaoById(idContemplacao));
     }
 }

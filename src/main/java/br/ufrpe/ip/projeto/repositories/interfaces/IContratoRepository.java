@@ -20,7 +20,7 @@ public interface IContratoRepository {
 
     boolean existeContrato(Contrato contrato);
 
-    Contrato getContratoByIdContrato(int idContrato);
+    Contrato getContratoByIdContrato(String idContrato);
 
     void createContrato(Cliente cliente, GrupoConsorcio grupoConsorcio);
 
@@ -30,7 +30,7 @@ public interface IContratoRepository {
 
     void updateValorPago(Contrato contrato);
 
-    void updateSaldoDevolução(Contrato contrato);
+    void updateSaldoDevolucao(Contrato contrato);
 
     void updateStatusContrato(Contrato contrato, StatusContratoEnum status);
 

@@ -34,14 +34,14 @@ public class BoletoController {
         return boletos;
     }
 
-    public int getIdBoleto(Contrato contratoBoleto, int numeroParcela) {
+    public String getIdBoleto(Contrato contratoBoleto, int numeroParcela) {
         if (contratoBoleto == null) {
             throw new ContratoInexistenteException("Contrato não encontrado.");
         }
         if (numeroParcela <= 0) {
             throw new CampoInvalidoException("Número de parcela deve ser maior que zero.");
         }
-        int idBoleto = this.repositoryBoleto.getIdBoleto(contratoBoleto, numeroParcela);
+        String idBoleto = this.repositoryBoleto.getIdBoleto(contratoBoleto, numeroParcela);
         if (idBoleto == null) {
             throw new IDBoletoInexistenteException("Id do boleto não encontrado.");
         }
@@ -50,7 +50,7 @@ public class BoletoController {
 
     public Boleto getBoletoById(String idBoleto) {
         if (idBoleto == null) {
-            throw new IDBoletoInexistenteException("ID do boleto é inválido.");
+            throw new IDBoletoInexistenteException("ID do boleto é inválido ou não foi informado.");
         }
         Boleto boleto = this.repositoryBoleto.getBoletoById(idBoleto);
         if (boleto == null) {
@@ -59,13 +59,13 @@ public class BoletoController {
         return boleto;
     }
 
-    public Boleto getBoletoByContrato(Contrato contrato) {
+    public List<Boleto> getBoletosByContrato(Contrato contrato) {
         if (contrato == null) {
             throw new ContratoInexistenteException("Contrato inválido.");
         }
-        Boleto boletos = this.repositoryBoleto.getBoletoByContrato(contrato);
+        List<Boleto> boletos = this.repositoryBoleto.getBoletosByContrato(contrato);
         if (boletos == null) {
-            throw new ArrayVazioException("Nenhum boleto encontrado para este contrato.");
+            throw new BoletoInexistenteException("Nenhum boleto encontrado para este contrato.");
         }
         return boletos;
     }
@@ -91,9 +91,6 @@ public class BoletoController {
         if (boleto == null) {
             throw new BoletoInexistenteException("Boleto inexistente.");
         }
-        if (statusBoleto == null) {
-            throw new CampoInvalidoException("Status do boleto não pode ser nulo.");
-        }
         this.repositoryBoleto.updateStatusBoleto(boleto, statusBoleto);
     }
 
@@ -112,7 +109,7 @@ public class BoletoController {
             updateStatusBoleto(boleto, StatusBoletoEnum.ATRASADO);
             boleto.setValorBoleto(boleto.getValorBoleto() + (boleto.getValorBoleto() * ADICIONAL_MULTA));
         }
-    }
+    } 
 
     public void verificarBoletosVencidos() {
         List<Boleto> boletos = this.repositoryBoleto.getAllBoletos();

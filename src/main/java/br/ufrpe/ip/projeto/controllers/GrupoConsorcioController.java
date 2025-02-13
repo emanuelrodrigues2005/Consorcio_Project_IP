@@ -15,7 +15,7 @@ public class GrupoConsorcioController {
     private static GrupoConsorcioController instancia;
     private final IGrupoConsorcioRepository repositorioGrupo;
 
-    public GrupoConsorcioController() {
+    private GrupoConsorcioController() {
         this.repositorioGrupo = GrupoConsorcioRepository.getInstancia();
     }
 
@@ -33,7 +33,7 @@ public class GrupoConsorcioController {
         // throw campoInvalido;
     }
 
-    public GrupoConsorcio getGrupoById(int idGrupo) {
+    public GrupoConsorcio getGrupoById(String idGrupo) {
         return this.repositorioGrupo.getGrupoById(idGrupo);
     }
 
@@ -48,7 +48,7 @@ public class GrupoConsorcioController {
     }
 
     public void updateNomeGrupo(GrupoConsorcio grupoConsorcio, String novoNome) {
-        if (grupoConsorcio.getNomeGrupo() != novoNome) {
+        if (grupoConsorcio.getNomeGrupo().equals(novoNome)) {
             this.repositorioGrupo.updateNomeGrupo(grupoConsorcio, novoNome);
         }
     }
@@ -75,7 +75,7 @@ public class GrupoConsorcioController {
 
     public void deleteGrupoConsorcio(GrupoConsorcio grupoConsorcio) {
         if (this.repositorioGrupo.getAllGrupos().contains(grupoConsorcio)) {
-            this.repositorioGrupo.deleteGrupoConsorcio(grupoConsorcio);
+            this.repositorioGrupo.deleteGrupoConsorcio(grupoConsorcio); //fornecer idGrupo
         }
     }
 
@@ -83,7 +83,7 @@ public class GrupoConsorcioController {
         IContratoRepository repositorioContratos = ContratoRepository.getInstancia();
         int desistentes = 0;
         for (Contrato contrato : repositorioContratos.getAllContratos()) {
-            if (contrato.getGrupoAssociado().getIdGrupo() == grupoConsorcio.getIdGrupo() && contrato.getStatusContrato() == StatusContratoEnum.ENCERRADO) {
+            if (contrato.getGrupoAssociado().getIdGrupo().equals(grupoConsorcio.getIdGrupo()) && contrato.getStatusContrato() == StatusContratoEnum.ENCERRADO) {
                 desistentes++;
             }
         }
@@ -93,5 +93,15 @@ public class GrupoConsorcioController {
             double novoValorParcela = ((grupoConsorcio.getValorTotal() + grupoConsorcio.getValorTotal() * grupoConsorcio.getTaxaAdmin()) / novoNumParticipantes);
             this.repositorioGrupo.updateValorParcela(grupoConsorcio, novoValorParcela);
         }
+    }
+
+    public double getValorPago(String idGrupo) {
+        IContratoRepository repositorioContratos = ContratoRepository.getInstancia();
+        double somaValorPago = 0;
+
+        for(Contrato contrato : repositorioContratos.getContratosByIdGrupo(repositorioGrupo.getGrupoById(idGrupo))) {
+            somaValorPago = somaValorPago + contrato.getValorPago();
+        }
+        return somaValorPago;
     }
 }

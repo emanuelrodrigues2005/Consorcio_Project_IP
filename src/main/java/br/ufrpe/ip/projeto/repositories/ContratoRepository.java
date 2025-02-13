@@ -2,6 +2,7 @@ package br.ufrpe.ip.projeto.repositories;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import br.ufrpe.ip.projeto.models.Contrato;
@@ -15,7 +16,7 @@ public class ContratoRepository implements IContratoRepository{
     private ArrayList<Contrato> contratos;
     
 
-    public ContratoRepository() {
+    private ContratoRepository() {
         this.contratos = new ArrayList<>();
     }
     
@@ -28,7 +29,7 @@ public class ContratoRepository implements IContratoRepository{
     
     @Override
     public List<Contrato> getAllContratos() {
-        return contratos;
+        return Collections.unmodifiableList(contratos);
     } // exceptions: semContratosRegistrados
 
     @Override
@@ -39,14 +40,14 @@ public class ContratoRepository implements IContratoRepository{
                 contratosCliente.add(contrato);
             }
         }
-        return contratosCliente;
+        return Collections.unmodifiableList(contratosCliente);
     } // exceptions: clienteInvalido
 
     @Override
     public Contrato getContratoByCPFIdGrupo(Cliente cliente, GrupoConsorcio grupoAssociado) {
         for (Contrato contrato : contratos) {
             if (contrato.getCliente().getCpf().equalsIgnoreCase(cliente.getCpf()) && 
-                contrato.getGrupoAssociado().getIdGrupo() == grupoAssociado.getIdGrupo()) {
+                contrato.getGrupoAssociado().getIdGrupo().equals(grupoAssociado.getIdGrupo())) {
                 return contrato;
             }
         }
@@ -57,17 +58,17 @@ public class ContratoRepository implements IContratoRepository{
     public List<Contrato> getContratosByIdGrupo(GrupoConsorcio grupoAssociado) {
         List<Contrato> contratosGrupo = new ArrayList<>();
         for (Contrato contrato : contratos) {
-            if (contrato.getGrupoAssociado().getIdGrupo() == grupoAssociado.getIdGrupo()) {
+            if (contrato.getGrupoAssociado().getIdGrupo().equals(grupoAssociado.getIdGrupo())) {
                 contratosGrupo.add(contrato);
             }
         }
-        return contratosGrupo;
+        return Collections.unmodifiableList(contratosGrupo);
     } // exceptions: grupoInvalido
 
     @Override
     public boolean existeContrato(Contrato contrato) {
         for (Contrato contrato2 : contratos) {
-            if (contrato2.getIdContrato() == contrato.getIdContrato()) {
+            if (contrato2.getIdContrato().equals(contrato.getIdContrato())) {
                 return true;
             }
         }
@@ -75,9 +76,9 @@ public class ContratoRepository implements IContratoRepository{
     }
 
     @Override
-    public Contrato getContratoByIdContrato(int idContrato) {
+    public Contrato getContratoByIdContrato(String idContrato) {
         for (Contrato contrato : contratos) {
-            if (contrato.getIdContrato() == idContrato) {
+            if (contrato.getIdContrato().equals(idContrato)) {
                 return contrato;
             }
         }
@@ -106,7 +107,7 @@ public class ContratoRepository implements IContratoRepository{
     } // exceptions: contratoInexistente
 
     @Override
-    public void updateSaldoDevolução(Contrato contrato) {
+    public void updateSaldoDevolucao(Contrato contrato) {
         contrato.setSaldoDevolucao(calcularSaldoDevolucao(contrato));
     } // exceptions: contratoInexistente
 
@@ -125,7 +126,7 @@ public class ContratoRepository implements IContratoRepository{
 
     @Override
     public void deleteContrato(Contrato contrato) {
-        contratos.remove(contrato);
+        contratos.remove(contrato); //fornecer idContrato
     } // exceptions: contratoInexistente
 
 }
