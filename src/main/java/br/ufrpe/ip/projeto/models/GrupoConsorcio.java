@@ -83,6 +83,7 @@ public class GrupoConsorcio {
     public String toString() {
         return "Grupo: " + getNomeGrupo() + " { "
                 + "\n  Número de Participantes: " + getNumeroParticipantes() + " | "
+                + "\n id:" + getIdGrupo() + " | "
                 + "\n  Valor total do Consórcio: " + getValorTotal() + " | "
                 + "\n  Valor de Parcela: " + getValorParcela() + " | "
                 + "\n  Taxa de Administração: " + getTaxaAdmin()

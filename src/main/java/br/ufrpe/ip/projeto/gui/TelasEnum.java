@@ -1,7 +1,10 @@
 package br.ufrpe.ip.projeto.gui;
 
 public enum TelasEnum {
-    TELA_VISUALIZACAO_GRUPO("src/main/resource/TelaVisualizacaoGrupo.fxml");
+    TELA_VISUALIZACAO_GRUPO("/TelaVisualizacaoGrupo.fxml"),
+    TELA_LOGIN("/TelaLogin.fxml"),
+    TELA_CADASTRO("/TelaCadastro.fxml"),
+    TELA_PERFIL_CLIENTE("/TelaPerfilCliente.fxml");
 
     private final String caminho;
 

@@ -16,6 +16,7 @@ public class ConsorcioFachada implements IConsorcio{
     private final ContratoController contratoController;
     private final ContemplacaoController contemplacaoController;
     private final GrupoConsorcioController grupoConsorcioController;
+    private Cliente clienteLogado = new Cliente("aaa", "123", "ddsaw", "gfds");
 
     private ConsorcioFachada() {
         this.boletoController = BoletoController.getInstance();
@@ -30,6 +31,11 @@ public class ConsorcioFachada implements IConsorcio{
             instance = new ConsorcioFachada();
         }
         return instance;
+    }
+
+    @Override
+    public Cliente getClienteLogado() {
+        return clienteLogado;
     }
 
     @Override
@@ -180,6 +186,11 @@ public class ConsorcioFachada implements IConsorcio{
     @Override
     public List<Contrato> getContratosByIdGrupo(GrupoConsorcio grupoAssociado) {
         return this.contratoController.getContratosByIdGrupo(grupoAssociado);
+    }
+
+    @Override
+    public List<Contrato> getAllContratosByCPF(Cliente cliente) {
+        return this.contratoController.getAllContratosByCPF(cliente);
     }
 
     @Override
