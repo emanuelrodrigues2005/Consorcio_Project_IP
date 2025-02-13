@@ -8,10 +8,10 @@ import java.util.UUID;
 public class GrupoConsorcio {
     private String nomeGrupo;
     private String idGrupo;
-    private int numeroParticipantes;
+    private int numeroParticipantes; //Adicionar número Máximo
     private double valorTotal;
     private double taxaAdmin;
-    private double valorParcela;
+    private double valorParcela; //Atributo Contrato
     private StatusGrupoConsorcioEnum statusGrupoConsorcio;
 
     public GrupoConsorcio(String nomeGrupo, int numeroParticipantes, double valorTotal, double taxaAdmin) {
