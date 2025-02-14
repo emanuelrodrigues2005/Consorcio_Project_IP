@@ -32,3 +32,47 @@
     -fx-border-radius: 10 10 0 0; /* Arredondamento superior (esquerda e direita) */
     -fx-background-radius: 10 10 0 0; /* Fundo arredondado nas partes superiores */
 }
+
+.table-view .column-header {
+    -fx-pref-height: 50px; /* Altura do cabeçalho */
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 16px; /* Tamanho da fonte */
+    -fx-text-fill: white; /* Cor do texto */
+    -fx-font-weight: bold; /* Deixa o texto em negrito (opcional) */
+}
+
+.table-view {
+    -fx-padding: 0; /* Remove qualquer espaçamento interno */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 0, 2); /* Sombra */
+}
+
+.add-button {
+    -fx-background-color: #BA0F30; /* Cor de fundo */
+    -fx-text-fill: white; /* Cor do texto */
+    -fx-font-size: 24px; /* Tamanho da fonte do "+" */
+    -fx-font-weight: bold; /* Texto mais "pesado" */
+    -fx-background-radius: 50px; /* Torna o botão circular */
+    -fx-pref-width: 60px; /* Largura do botão */
+    -fx-pref-height: 60px; /* Altura do botão */
+    -fx-alignment: center; /* Centraliza o conteúdo */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 0, 2); /* Sombra */
+    -fx-cursor: hand; /* Muda o cursor ao passar sobre o botão */
+}
+
+.page-button {
+    -fx-cursor: hand; /* Muda o cursor ao passar sobre o botão */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 0, 2); /* Sombra */
+}
+
+.search-bar {
+    -fx-background-color: white; /* Cor de fundo */
+    -fx-border-color: #BA0F30; /* Cor da borda */
+    -fx-border-radius: 20px; /* Bordas arredondadas */
+    -fx-background-radius: 20px; /* Bordas do fundo */
+    -fx-pref-height: 40px; /* Altura máxima */
+    -fx-font-size: 14px; /* Tamanho do texto */
+    -fx-padding: 0 10 0 10; /* Espaçamento interno */
+    -fx-border-width: 2px; /* Espessura da borda */
+}
