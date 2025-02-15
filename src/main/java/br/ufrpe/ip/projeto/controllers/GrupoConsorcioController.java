@@ -26,9 +26,9 @@ public class GrupoConsorcioController {
         return instancia;
     }
 
-    public void createGrupoConsorcio(String nomeGrupo, int numeroParticipantes, double valorTotal, double taxaAdmin) {
-        if (numeroParticipantes > 0 && valorTotal > 0 && taxaAdmin > 0) {
-            this.repositorioGrupo.createGrupoConsorcio(nomeGrupo, numeroParticipantes, valorTotal, taxaAdmin);
+    public void createGrupoConsorcio(String nomeGrupo, int numeroMaximoParticipantes,double valorTotal, double taxaAdmin) {
+        if (numeroMaximoParticipantes > 0 && valorTotal > 0 && taxaAdmin > 0) {
+            this.repositorioGrupo.createGrupoConsorcio(nomeGrupo, numeroMaximoParticipantes,valorTotal, taxaAdmin);
         }
         // throw campoInvalido;
     }

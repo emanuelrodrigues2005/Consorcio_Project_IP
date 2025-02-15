@@ -94,7 +94,7 @@ public interface IConsorcio {
 
     void deleteContrato(Contrato contrato);
 
-    void createGrupoConsorcio(String nomeGrupo, int numeroParticipantes, double valorTotal, double taxaAdmin);
+    void createGrupoConsorcio(String nomeGrupo, int numeroMaximoParticipantes, double valorTotal, double taxaAdmin);
 
     GrupoConsorcio getGrupoById(String idGrupo);
 

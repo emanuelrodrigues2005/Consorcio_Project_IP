@@ -3,8 +3,7 @@ package br.ufrpe.ip.projeto.gui.views;
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
-import br.ufrpe.ip.projeto.models.Admin;
-import javafx.event.ActionEvent;
+import br.ufrpe.ip.projeto.models.Administrador;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -54,8 +53,8 @@ public class TelaLoginController {
         String cpf = this.txtCpf.getText();
         String senha = this.txtSenha.getText();
         this.sistema.efutuarLogin(cpf, senha);
-        if (this.sistema.getClienteLogado() instanceof Admin) {
-                //this.gerenciador.abrirTelaIncialAdmin
+        if (this.sistema.getClienteLogado() instanceof Administrador) {
+            this.gerenciador.abrirTelaPrincipalADM();
         }
         this.gerenciador.abrirTelaPrincipalCliente();
         clearCampos();

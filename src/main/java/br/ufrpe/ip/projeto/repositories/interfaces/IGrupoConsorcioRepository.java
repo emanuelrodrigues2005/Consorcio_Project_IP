@@ -11,7 +11,7 @@ public interface IGrupoConsorcioRepository {
 
     GrupoConsorcio getGrupoById(String idGrupo);
 
-    void createGrupoConsorcio(String nomeGrupo, int numeroParticipantes, double valorTotal, double taxaAdmin);
+    void createGrupoConsorcio(String nomeGrupo, int numeroMaximoParticipantes,double valorTotal, double taxaAdmin);
 
     void updateParticipantes(GrupoConsorcio grupoConsorcio, int novoNumParticipantes);
 

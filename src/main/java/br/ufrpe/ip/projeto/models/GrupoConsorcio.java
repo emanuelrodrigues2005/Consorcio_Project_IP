@@ -8,16 +8,18 @@ import java.util.UUID;
 public class GrupoConsorcio {
     private String nomeGrupo;
     private String idGrupo;
-    private int numeroParticipantes; //Adicionar número Máximo
+    private int numeroParticipantes;
+    private int numeroMaximoParticipantes;
     private double valorTotal;
     private double taxaAdmin;
     private double valorParcela; //Atributo Contrato
     private StatusGrupoConsorcioEnum statusGrupoConsorcio;
 
-    public GrupoConsorcio(String nomeGrupo, int numeroParticipantes, double valorTotal, double taxaAdmin) {
+    public GrupoConsorcio(String nomeGrupo, int numeroMaximoParticipantes, double valorTotal, double taxaAdmin) {
         this.nomeGrupo = nomeGrupo;
         this.idGrupo = UUID.randomUUID().toString();
-        this.numeroParticipantes = numeroParticipantes;
+        this.numeroParticipantes = 0;
+        this.numeroMaximoParticipantes = numeroMaximoParticipantes;
         this.valorTotal = valorTotal;
         this.taxaAdmin = taxaAdmin;
         this.valorParcela = ((getValorTotal() + getValorTotal() * getTaxaAdmin()) / getNumeroParticipantes());
@@ -74,6 +76,18 @@ public class GrupoConsorcio {
 
     public void setStatusGrupoConsorcio(StatusGrupoConsorcioEnum statusGrupoConsorcio) {
         this.statusGrupoConsorcio = statusGrupoConsorcio;
+    }
+
+    public String getStatusGrupoConsorcioString() {
+        return statusGrupoConsorcio.name();
+    }
+
+    public int getNumeroMaximoParticipantes() {
+        return numeroMaximoParticipantes;
+    }
+
+    public void setNumeroMaximoParticipantes(int numeroMaximoParticipantes) {
+        this.numeroMaximoParticipantes = numeroMaximoParticipantes;
     }
 
     // exibirSaldoDevedor é função da gui

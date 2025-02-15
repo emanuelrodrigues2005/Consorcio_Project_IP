@@ -16,9 +16,6 @@ public class TelaVisuGrupoController {
     private Button btHome;
 
     @FXML
-    private Button btGrupos;
-
-    @FXML
     private Button btPerfil;
 
     @FXML
@@ -52,16 +49,13 @@ public class TelaVisuGrupoController {
     @FXML
     private void openHome() {
         System.out.println("Botão Home clicado");
-    }
-
-    @FXML
-    private void openAllGrupos() {
-        System.out.println("Botão Grupos clicado");
+        screenManager.abrirTelaPrincipalADM();
     }
 
     @FXML
     private void openPerfil() {
         System.out.println("Botão Perfil clicado");
+        screenManager.abrirTelaPerfilAdmin(this.sistema.getClienteLogado());
     }
 
     private void setLbAutoConsor(String idGrupo) {
