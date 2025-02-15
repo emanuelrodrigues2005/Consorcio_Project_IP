@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.gluonhq.charm.glisten.control.Icon?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -38,14 +37,6 @@
             </Label>
          </children>
       </VBox>
-      <TableView fx:id="tbvGrupos" layoutX="225.0" layoutY="135.0" prefHeight="450.0" prefWidth="928.0" style="-fx-pref-width: 928; -fx-pref-height: 450; -fx-background-color: #FAFAFA;" stylesheets="@style.css" AnchorPane.bottomAnchor="114.0" AnchorPane.leftAnchor="256.0" AnchorPane.rightAnchor="96.0" AnchorPane.topAnchor="156.0">
-        <columns>
-          <TableColumn fx:id="tbcGruposDisponiveis" prefWidth="232.0" style="-fx-background-color: #BA0F30;" text="Grupos Disponíveis" />
-          <TableColumn fx:id="tbcParticipantes" minWidth="0.0" prefWidth="232.0" style="-fx-background-color: #BA0F30;" text="Participantes" />
-            <TableColumn fx:id="tbcValorTotal" prefWidth="232.0" style="-fx-background-color: #BA0F30;" text="Valor Total do Automóvel" />
-            <TableColumn fx:id="tbcTaxaAdmin" prefWidth="232.0" style="-fx-background-color: #BA0F30;" text="Taxa de Administração (%)" />
-        </columns>
-      </TableView>
       <HBox alignment="CENTER" layoutX="249.0" layoutY="606.0" prefHeight="40.0" prefWidth="154.0" spacing="12.0">
          <children>
             <Text fx:id="btPreviousADM" fill="#ba0f30" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="page-button" text="◀">
@@ -65,8 +56,16 @@
             </Text>
          </children>
       </HBox>
-      <Button fx:id="btAdd" layoutX="1124.0" layoutY="621.0" mnemonicParsing="false" onMouseClicked="#openTelaCriarGrupo" style="-fx-background-radius: 50;" styleClass="add-button" stylesheets="@style.css" text="+" />
-      <TextField fx:id="tfSearchADM" layoutX="256.0" layoutY="84.0" styleClass="search-bar" stylesheets="@style.css" />
-      <Icon content="HELP_OUTLINE" layoutX="271.0" layoutY="96.0" nodeOrientation="LEFT_TO_RIGHT" />
+      <Button fx:id="btAdd" layoutX="1124.0" layoutY="621.0" mnemonicParsing="false" onMouseClicked="#openTelaCriarGrupo" style="-fx-background-radius: 50;" styleClass="add-button" stylesheets="@style.css" text="+" textFill="#bcbcbc" />
+      <TextField fx:id="tfSearchADM" layoutX="256.0" layoutY="84.0" styleClass="id-search-bar" stylesheets="@style.css" />
+      <TableView fx:id="tbvGrupos" layoutX="235.0" layoutY="145.0" prefHeight="450.0" prefWidth="928.0" style="-fx-background-color: #FAFAFA;" stylesheets="@style.css" AnchorPane.leftAnchor="256.0" AnchorPane.topAnchor="156.0">
+         <columns>
+            <TableColumn fx:id="tbcGrupos" prefWidth="206.0" text="Grupos" />
+            <TableColumn fx:id="tbcParticipantes" minWidth="0.0" prefWidth="175.0" text="Participantes" />
+            <TableColumn fx:id="tbcValorTotal" prefWidth="220.0" text="Valor Total do Automóvel" />
+            <TableColumn fx:id="tbcTaxaAdmin" prefWidth="218.0" text="Taxa de Administração (%)" />
+            <TableColumn fx:id="tbcStatusGrupo" prefWidth="108.0" text="Status" />
+         </columns>
+      </TableView>
    </children>
 </AnchorPane>
