@@ -53,10 +53,11 @@ public class TelaLoginController {
         String cpf = this.txtCpf.getText();
         String senha = this.txtSenha.getText();
         this.sistema.efutuarLogin(cpf, senha);
-        if (this.sistema.getClienteLogado() instanceof Administrador) {
-            //this.gerenciador.abrirTelaPrincipalADM
-        }
-        this.gerenciador.abrirTelaPrincipalCliente();
+        /*if (this.sistema.getClienteLogado() instanceof Administrador) {
+            this.gerenciador.abrirTelaPrincipalADM();
+        }*/
+        this.gerenciador.abrirTelaPrincipalADM();
+        //this.gerenciador.abrirTelaPrincipalCliente();
         clearCampos();
     }
 

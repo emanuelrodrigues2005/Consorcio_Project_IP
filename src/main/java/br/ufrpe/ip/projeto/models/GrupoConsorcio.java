@@ -78,6 +78,10 @@ public class GrupoConsorcio {
         this.statusGrupoConsorcio = statusGrupoConsorcio;
     }
 
+    public String getStatusGrupoConsorcioString() {
+        return statusGrupoConsorcio.name();
+    }
+
     public int getNumeroMaximoParticipantes() {
         return numeroMaximoParticipantes;
     }

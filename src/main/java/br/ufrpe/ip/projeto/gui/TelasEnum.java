@@ -6,7 +6,8 @@ public enum TelasEnum {
     TELA_CADASTRO("/TelaCadastro.fxml"),
     TELA_PERFIL_CLIENTE("/TelaPerfilCliente.fxml"),
     TELA_PRINCIPAL_CLIENTE("/TelaPrincipalCliente.fxml"),
-    TELA_CRIACAO_GRUPO("/TelaCriacaoGrupo.fxml");
+    TELA_CRIACAO_GRUPO("/TelaCriacaoGrupo.fxml"),
+    TELA_PRINCIPAL_ADM("/TelaPrincipalAdm.fxml");
 
     private final String caminho;
 

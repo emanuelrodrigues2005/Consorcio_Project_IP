@@ -90,7 +90,7 @@ public class TelaCriacaoGrupoController {
             System.out.println("Nome: " + nomeGrupo);
             System.out.println("Taxa de Administração: " + taxa);
             System.out.println("Valor Total: " + valor);
-            System.out.println("Número de Participantes: " + totalParticipantes);
+            System.out.println("Número Total de Participantes: " + totalParticipantes);
 
             sistema.createGrupoConsorcio(nomeGrupo, totalParticipantes, valor, taxa);
             clearCampos();

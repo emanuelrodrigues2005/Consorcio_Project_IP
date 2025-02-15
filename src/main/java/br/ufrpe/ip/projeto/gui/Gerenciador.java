@@ -17,6 +17,7 @@ public class Gerenciador {
     private Parent telaPerfilCliente;
     private Parent telaPrincipalCliente;
     private Parent telaCriacaoGrupo;
+    private Parent telaPrincipalADM;
 
     private Stage stagePrincipal;
     private Scene scenePrincipal;
@@ -27,6 +28,7 @@ public class Gerenciador {
     private TelaPerfilClienteController telaPerfilClienteController;
     private TelaPrincipalClienteController telaPrincipalClienteController;
     private TelaCriacaoGrupoController telaCriacaoGrupoController;
+    private TelaPrincipalADMController telaPrincipalADMController;
 
     private Gerenciador() {
         try{
@@ -59,6 +61,11 @@ public class Gerenciador {
                 telaCriacaoGrupo = loaderTelaCriacaoGrupo.load();
                 telaCriacaoGrupoController = loaderTelaCriacaoGrupo.getController();
                 telaCriacaoGrupoController.setGerenciador(this);
+
+                FXMLLoader loadrerTelaPrincipalADM = new FXMLLoader(getClass().getResource(TelasEnum.TELA_PRINCIPAL_ADM.getCaminho()));
+                telaPrincipalADM = loadrerTelaPrincipalADM.load();
+                telaPrincipalADMController = loadrerTelaPrincipalADM.getController();
+                telaPrincipalADMController.setGerenciador(this);
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(-1);
@@ -115,6 +122,7 @@ public class Gerenciador {
     }
 
     public void abrirTelaPrincipalADM() {
-
+        telaPrincipalADMController.initialize();
+        scenePrincipal.setRoot(telaPrincipalADM);
     }
 }
