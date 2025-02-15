@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #221F26;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.ip.projeto.gui.views.TelaPrincipalADMController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #221F26;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.ip.projeto.gui.views.TelaPrincipalClienteController">
    <children>
       <VBox prefHeight="720.0" prefWidth="160.0" style="-fx-background-color: #FAFAFA;" AnchorPane.leftAnchor="0.0">
          <children>
@@ -37,15 +37,6 @@
             </Label>
          </children>
       </VBox>
-      <TableView fx:id="tbvGrupos" layoutX="225.0" layoutY="135.0" prefHeight="450.0" prefWidth="928.0" style="-fx-pref-width: 930; -fx-pref-height: 450; -fx-background-color: #FAFAFA;" stylesheets="@style.css" AnchorPane.bottomAnchor="114.0" AnchorPane.leftAnchor="256.0" AnchorPane.rightAnchor="96.0" AnchorPane.topAnchor="156.0">
-        <columns>
-          <TableColumn fx:id="tbcAllGrupos" prefWidth="205.5999755859375" style="-fx-background-color: #BA0F30;" text="Grupos Disponíveis" />
-          <TableColumn fx:id="tbcParticipantes" minWidth="0.0" prefWidth="175.19998168945312" style="-fx-background-color: #BA0F30;" text="Participantes" />
-            <TableColumn fx:id="tbcValorTotal" prefWidth="220.79998779296875" style="-fx-background-color: #BA0F30;" text="Valor Total do Automóvel" />
-            <TableColumn fx:id="tbcTaxaAdmin" prefWidth="218.39996337890625" style="-fx-background-color: #BA0F30;" text="Taxa de Administração (%)" />
-            <TableColumn fx:id="tbcStatusGrupo" prefWidth="116.0" style="-fx-background-color: #BA0F30;" text="Status " />
-        </columns>
-      </TableView>
       <HBox alignment="CENTER" layoutX="249.0" layoutY="606.0" prefHeight="40.0" prefWidth="154.0" spacing="12.0">
          <children>
             <Text fx:id="btPreviousADM" fill="#ba0f30" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="page-button" text="◀">
@@ -65,7 +56,16 @@
             </Text>
          </children>
       </HBox>
-      <Button fx:id="btAdd" layoutX="1124.0" layoutY="621.0" mnemonicParsing="false" onMouseClicked="#openTelaCriarGrupo" style="-fx-background-radius: 50;" styleClass="add-button" stylesheets="@style.css" text="+" />
-      <TextField fx:id="tfSearchADM" layoutX="256.0" layoutY="84.0" styleClass="search-bar" stylesheets="@style.css" />
+      <Button fx:id="btAdd" layoutX="1124.0" layoutY="621.0" mnemonicParsing="false" onMouseClicked="#openTelaCriarGrupo" style="-fx-background-radius: 50;" styleClass="add-button" stylesheets="@style.css" text="+" textFill="#bcbcbc" />
+      <TextField fx:id="tfSearchADM" layoutX="256.0" layoutY="84.0" styleClass="id-search-bar" stylesheets="@style.css" />
+      <TableView fx:id="tbvGrupos" layoutX="235.0" layoutY="145.0" prefHeight="450.0" prefWidth="928.0" style="-fx-background-color: #FAFAFA;" stylesheets="@style.css" AnchorPane.leftAnchor="256.0" AnchorPane.topAnchor="156.0">
+         <columns>
+            <TableColumn fx:id="tbcGrupos" prefWidth="206.0" text="Grupos" />
+            <TableColumn fx:id="tbcParticipantes" minWidth="0.0" prefWidth="175.0" text="Participantes" />
+            <TableColumn fx:id="tbcValorTotal" prefWidth="220.0" text="Valor Total do Automóvel" />
+            <TableColumn fx:id="tbcTaxaAdmin" prefWidth="218.0" text="Taxa de Administração (%)" />
+            <TableColumn fx:id="tbcStatusGrupo" prefWidth="108.0" text="Status" />
+         </columns>
+      </TableView>
    </children>
 </AnchorPane>
