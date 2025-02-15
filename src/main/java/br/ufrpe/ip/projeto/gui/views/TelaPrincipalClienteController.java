@@ -52,7 +52,7 @@ public class TelaPrincipalClienteController {
         tbcGruposDisponiveis.setCellValueFactory(new PropertyValueFactory<>("nomeGrupo"));
         tbcParticipantes.setCellValueFactory(new PropertyValueFactory<>("numeroParticipantes"));
         tbcValorTotal.setCellValueFactory(new PropertyValueFactory<>("valorTotal"));
-        tbcTaxaAdmin.setCellValueFactory(new PropertyValueFactory<>("taxaAdministrativa"));
+        tbcTaxaAdmin.setCellValueFactory(new PropertyValueFactory<>("taxaAdmin"));
     }
 
     private void carregarDados() {

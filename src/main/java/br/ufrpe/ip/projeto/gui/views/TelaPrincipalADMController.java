@@ -31,7 +31,7 @@ public class TelaPrincipalADMController {
     private TableView<GrupoConsorcio> tbvGrupos;
 
     @FXML
-    private TableColumn<GrupoConsorcio, String> tbcGruposDisponiveis;
+    private TableColumn<GrupoConsorcio, String> tbcAllGrupos;
 
     @FXML
     private TableColumn<GrupoConsorcio, Integer> tbcParticipantes;
@@ -62,7 +62,7 @@ public class TelaPrincipalADMController {
     }
 
     private void configurarTabela() {
-        tbcGruposDisponiveis.setCellValueFactory(new PropertyValueFactory<>("nomeGrupo"));
+        tbcAllGrupos.setCellValueFactory(new PropertyValueFactory<>("nomeGrupo"));
         tbcParticipantes.setCellValueFactory(new PropertyValueFactory<>("numeroParticipantes"));
         tbcValorTotal.setCellValueFactory(new PropertyValueFactory<>("valorTotal"));
         tbcTaxaAdmin.setCellValueFactory(new PropertyValueFactory<>("taxaAdmin"));
