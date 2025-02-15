@@ -18,6 +18,7 @@ public class Gerenciador {
     private Parent telaPrincipalCliente;
     private Parent telaCriacaoGrupo;
     private Parent telaPrincipalADM;
+    private Parent telaVisualizacaoContrato;
 
     private Stage stagePrincipal;
     private Scene scenePrincipal;
@@ -29,6 +30,7 @@ public class Gerenciador {
     private TelaPrincipalClienteController telaPrincipalClienteController;
     private TelaCriacaoGrupoController telaCriacaoGrupoController;
     private TelaPrincipalADMController telaPrincipalADMController;
+    private TelaVisualizacaoContratoController telaVisualizacaoContratoController;
 
     private Gerenciador() {
         try{
@@ -66,6 +68,11 @@ public class Gerenciador {
                 telaPrincipalADM = loadrerTelaPrincipalADM.load();
                 telaPrincipalADMController = loadrerTelaPrincipalADM.getController();
                 telaPrincipalADMController.setGerenciador(this);
+
+                FXMLLoader loaderTelaVisualizacaoContrato = new FXMLLoader(getClass().getResource(TelasEnum.TELA_VISUALIZACAO_CONTRATO.getCaminho()));
+                telaVisualizacaoContrato = loaderTelaVisualizacaoContrato.load();
+                telaVisualizacaoContratoController = loaderTelaVisualizacaoContrato.getController();
+                telaVisualizacaoContratoController.setGerenciador(this);
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(-1);
@@ -124,5 +131,10 @@ public class Gerenciador {
     public void abrirTelaPrincipalADM() {
         telaPrincipalADMController.initialize();
         scenePrincipal.setRoot(telaPrincipalADM);
+    }
+
+    public void abriTelaVisualizacaoContrato() {
+        telaVisualizacaoContratoController.initialize();
+        scenePrincipal.setRoot(telaVisualizacaoContrato);
     }
 }

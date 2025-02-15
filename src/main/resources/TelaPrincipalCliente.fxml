@@ -44,10 +44,10 @@
       </VBox>
       <TableView fx:id="tbvGrupos" layoutX="225.0" layoutY="135.0" prefHeight="450.0" prefWidth="928.0" style="-fx-background-color: #FAFAFA;" stylesheets="@style.css" AnchorPane.bottomAnchor="114.0" AnchorPane.leftAnchor="256.0" AnchorPane.rightAnchor="96.0" AnchorPane.topAnchor="156.0">
         <columns>
-          <TableColumn fx:id="tbcGruposDisponiveis" prefWidth="206.0" text="Grupos Disponíveis" />
-          <TableColumn fx:id="tbcParticipantes" minWidth="0.0" prefWidth="175.0" text="Participantes" />
+          <TableColumn fx:id="tbcGruposDisponiveis" prefWidth="200.0" text="Grupos Disponíveis" />
+          <TableColumn fx:id="tbcParticipantes" minWidth="0.0" prefWidth="176.0" text="Participantes" />
             <TableColumn fx:id="tbcValorTotal" prefWidth="220.0" text="Valor Total do Automóvel" />
-            <TableColumn fx:id="tbcTaxaAdmin" prefWidth="218.0" text="Taxa de Administração (%)" />
+            <TableColumn fx:id="tbcTaxaAdmin" prefWidth="224.0" text="Taxa de Administração (%)" />
             <TableColumn fx:id="tbcStatusGrupo" prefWidth="108.0" text="Status" />
         </columns>
       </TableView>

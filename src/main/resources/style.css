@@ -40,7 +40,16 @@
 .table-row-cell {
     -fx-background-color: #FAFAFA; /* Mesma cor do fundo */
     -fx-border-color: #BCBCBC;
-    -fx-border-width: 2px; /* Espessura da borda */
+    -fx-border-width: 1px; /* Espessura da borda */
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #BA0F30; /* Cor de fundo ao selecionar */
+    -fx-text-fill: #fafafa; /* Garante que o texto fique visível */
+}
+
+.table-row-cell:selected .text {
+    -fx-fill: #FAFAFA; /* Cor do texto ao selecionar */
 }
 
 .table-view .column-header {

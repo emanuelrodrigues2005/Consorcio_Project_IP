@@ -39,6 +39,9 @@ public class TelaPrincipalClienteController {
     private TableColumn<GrupoConsorcio, Integer> tbcTaxaAdmin;
 
     @FXML
+    private TableColumn<GrupoConsorcio, String> tbcStatusGrupo;
+
+    @FXML
     public void initialize() {
         configurarTabela();
         carregarDados();
@@ -53,6 +56,7 @@ public class TelaPrincipalClienteController {
         tbcParticipantes.setCellValueFactory(new PropertyValueFactory<>("numeroParticipantes"));
         tbcValorTotal.setCellValueFactory(new PropertyValueFactory<>("valorTotal"));
         tbcTaxaAdmin.setCellValueFactory(new PropertyValueFactory<>("taxaAdmin"));
+        tbcStatusGrupo.setCellValueFactory(new PropertyValueFactory<>("statusGrupoString"));
     }
 
     private void carregarDados() {
