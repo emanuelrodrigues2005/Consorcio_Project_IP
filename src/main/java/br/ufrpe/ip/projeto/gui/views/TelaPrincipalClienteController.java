@@ -66,6 +66,11 @@ public class TelaPrincipalClienteController {
     }
 
     @FXML
+    public void handleTelaLoginCliente() {
+        this.screenManager.abrirTelaLogin();
+    }
+
+    @FXML
     public void handleTelaGruposCliente() {
         //this.screenManeger.abrirTelaGruposCliente
     }

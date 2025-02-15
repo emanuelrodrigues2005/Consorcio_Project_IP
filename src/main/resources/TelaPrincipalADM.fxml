@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #221F26;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.ip.projeto.gui.views.TelaPrincipalClienteController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #221F26;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.ip.projeto.gui.views.TelaPrincipalADMController">
    <children>
       <VBox prefHeight="720.0" prefWidth="160.0" style="-fx-background-color: #FAFAFA;" AnchorPane.leftAnchor="0.0">
          <children>
@@ -60,7 +60,7 @@
       <TextField fx:id="tfSearchADM" layoutX="256.0" layoutY="84.0" styleClass="id-search-bar" stylesheets="@style.css" />
       <TableView fx:id="tbvGrupos" layoutX="235.0" layoutY="145.0" prefHeight="450.0" prefWidth="928.0" style="-fx-background-color: #FAFAFA;" stylesheets="@style.css" AnchorPane.leftAnchor="256.0" AnchorPane.topAnchor="156.0">
          <columns>
-            <TableColumn fx:id="tbcGrupos" prefWidth="206.0" text="Grupos" />
+            <TableColumn fx:id="tbcAllGrupos" prefWidth="206.0" text="Grupos" />
             <TableColumn fx:id="tbcParticipantes" minWidth="0.0" prefWidth="175.0" text="Participantes" />
             <TableColumn fx:id="tbcValorTotal" prefWidth="220.0" text="Valor Total do Automóvel" />
             <TableColumn fx:id="tbcTaxaAdmin" prefWidth="218.0" text="Taxa de Administração (%)" />
