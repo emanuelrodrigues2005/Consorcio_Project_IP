@@ -60,10 +60,10 @@
       <TextField fx:id="tfSearchADM" layoutX="256.0" layoutY="84.0" styleClass="id-search-bar" stylesheets="@style.css" />
       <TableView fx:id="tbvGrupos" layoutX="235.0" layoutY="145.0" prefHeight="450.0" prefWidth="928.0" style="-fx-background-color: #FAFAFA;" stylesheets="@style.css" AnchorPane.leftAnchor="256.0" AnchorPane.topAnchor="156.0">
          <columns>
-            <TableColumn fx:id="tbcGrupos" prefWidth="206.0" text="Grupos" />
-            <TableColumn fx:id="tbcParticipantes" minWidth="0.0" prefWidth="175.0" text="Participantes" />
+            <TableColumn fx:id="tbcAllGrupos" prefWidth="200.0" text="Grupos" />
+            <TableColumn fx:id="tbcParticipantes" minWidth="0.0" prefWidth="176.0" text="Participantes" />
             <TableColumn fx:id="tbcValorTotal" prefWidth="220.0" text="Valor Total do Automóvel" />
-            <TableColumn fx:id="tbcTaxaAdmin" prefWidth="218.0" text="Taxa de Administração (%)" />
+            <TableColumn fx:id="tbcTaxaAdmin" prefWidth="224.0" text="Taxa de Administração (%)" />
             <TableColumn fx:id="tbcStatusGrupo" prefWidth="108.0" text="Status" />
          </columns>
       </TableView>
