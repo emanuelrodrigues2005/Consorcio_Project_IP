@@ -245,8 +245,8 @@ public class ConsorcioFachada implements IConsorcio{
     }
 
     @Override
-    public void createGrupoConsorcio(String nomeGrupo, int numeroParticipantes, double valorTotal, double taxaAdmin) {
-        this.grupoConsorcioController.createGrupoConsorcio(nomeGrupo, numeroParticipantes, valorTotal, taxaAdmin);
+    public void createGrupoConsorcio(String nomeGrupo, int numeroMaximoParticipantes, double valorTotal, double taxaAdmin) {
+        this.grupoConsorcioController.createGrupoConsorcio(nomeGrupo, numeroMaximoParticipantes, valorTotal, taxaAdmin);
     }
 
     @Override

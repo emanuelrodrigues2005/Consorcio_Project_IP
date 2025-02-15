@@ -30,7 +30,7 @@
                   <Insets bottom="40.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="btPerfil" layoutX="10.0" layoutY="86.0" mnemonicParsing="false" onAction="#openPerfil" prefHeight="76.0" prefWidth="160.0" style="-fx-font-size: 20; -fx-background-color: #BA0F30;" text="Perfil">
+            <Button fx:id="btPerfil" layoutX="10.0" layoutY="86.0" mnemonicParsing="false" prefHeight="76.0" prefWidth="160.0" style="-fx-font-size: 20; -fx-background-color: #BA0F30;" text="Perfil">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
