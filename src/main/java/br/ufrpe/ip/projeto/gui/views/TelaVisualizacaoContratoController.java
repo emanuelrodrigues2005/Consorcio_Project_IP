@@ -23,6 +23,9 @@ public class TelaVisualizacaoContratoController {
     private Label lbNomeGrupo;
 
     @FXML
+    private Label lbNomeCliente;
+
+    @FXML
     private Label lbCpfCliente;
 
     @FXML
@@ -54,9 +57,9 @@ public class TelaVisualizacaoContratoController {
     }
 
     public void setGrupoAtual(GrupoConsorcio grupo) {
-        limparDadosContrato(); // Limpa os dados antigos antes de definir o novo grupo
+        limparDadosContrato();
         this.grupoAtual = grupo;
-        carregarDadosContrato(); // Atualiza os dados com o novo grupo
+        carregarDadosContrato();
     }
 
 
@@ -73,9 +76,11 @@ public class TelaVisualizacaoContratoController {
             lbTaxaAdmin.setText(String.format("%.2f", grupoAtual.getTaxaAdmin()));
 
             if (sistema.getClienteLogado() != null) {
+                lbNomeCliente.setText(sistema.getClienteLogado().getNome());
                 lbCpfCliente.setText(sistema.getClienteLogado().getCpf());
             } else {
-                lbCpfCliente.setText("N/A");
+                lbNomeCliente.setText("Nenhum cliente selecionado");
+                lbCpfCliente.setText("Cpf não encontrado");
                 System.out.println("Erro: Nenhum cliente logado encontrado!");
             }
 
