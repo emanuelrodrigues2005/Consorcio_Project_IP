@@ -42,6 +42,16 @@ public class TelaCadastroController {
     }
 
     @FXML
+    public void initialize() {
+        txtCpf.setText("");
+        txtEmail.setText("");
+        txtSenha.setText("");
+        txtConfirmarSenha.setText("");
+        txtNome.setText("");
+        txtTelefone.setText("");
+    }
+
+    @FXML
     private void handleCadastro() {
         String nome = txtNome.getText();
         String telefone = txtTelefone.getText();
@@ -69,7 +79,7 @@ public class TelaCadastroController {
     @FXML
     private void openLogin() {
         if (gerenciador != null) {
-            gerenciador.abrirTelaLogin();
+            gerenciador.abrirTelaEscolhaLogin();
         }
     }
 }

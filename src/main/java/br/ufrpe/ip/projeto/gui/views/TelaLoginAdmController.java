@@ -3,7 +3,6 @@ package br.ufrpe.ip.projeto.gui.views;
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
-import br.ufrpe.ip.projeto.models.Administrador;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -11,9 +10,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
-public class TelaLoginController {
+public class TelaLoginAdmController {
     private IConsorcio sistema = ConsorcioFachada.getInstance();
     private Gerenciador gerenciador;
+
     @FXML
     private Text btRegistro;
 
@@ -29,6 +29,9 @@ public class TelaLoginController {
     @FXML
     private TextField txtSenha;
 
+    @FXML
+    private TextField txtCodeAdm;
+
     public void setGerenciador(Gerenciador gerenciador) {
         this.gerenciador = gerenciador;
     }
@@ -37,26 +40,28 @@ public class TelaLoginController {
     public void initialize() {
         txtCpf.setText("");
         txtSenha.setText("");
+        txtCodeAdm.setText("");
         cbManterConectado.setSelected(false);
     }
 
     @FXML
-    private void openCadastro(MouseEvent event) {
+    private void handleTelaCadastro(MouseEvent event) {
         System.out.println("Acessando tela de cadastro...");
         this.gerenciador.abrirCadastro();
         this.clearCampos();
     }
 
     @FXML
-    private void login(MouseEvent event) {
-        System.out.println("aaaaaaa");
+    private void handleTelaPrincipalAdm(MouseEvent event) {
         String cpf = this.txtCpf.getText();
         String senha = this.txtSenha.getText();
         this.sistema.efutuarLogin(cpf, senha);
-        if (this.sistema.getClienteLogado() instanceof Administrador) {
+        if (txtCodeAdm.getText().equals("2702")) {
             this.gerenciador.abrirTelaPrincipalADM();
+            System.out.println("Login realizado com sucesso!");
+        } else if (txtCodeAdm.getText().isEmpty() || !txtCodeAdm.getText().equals("2702")) {
+            //CampoInvalido
         }
-        this.gerenciador.abrirTelaPrincipalCliente();
         clearCampos();
     }
 

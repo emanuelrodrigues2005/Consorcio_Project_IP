@@ -58,7 +58,7 @@ public class TelaCriacaoGrupoController {
     @FXML
     private void handleTelaLogin(MouseEvent event) {
         System.out.println("Redirecionando para a tela de login...");
-        gerenciador.abrirTelaLogin();
+        gerenciador.abrirTelaEscolhaLogin();
     }
 
     @FXML

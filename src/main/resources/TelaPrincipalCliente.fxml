@@ -42,7 +42,7 @@
             </Label>
          </children>
       </VBox>
-      <TableView fx:id="tbvGrupos" layoutX="225.0" layoutY="135.0" prefHeight="450.0" prefWidth="928.0" style="-fx-background-color: #FAFAFA;" stylesheets="@style.css" AnchorPane.bottomAnchor="114.0" AnchorPane.leftAnchor="256.0" AnchorPane.rightAnchor="96.0" AnchorPane.topAnchor="156.0">
+      <TableView fx:id="tbvGrupos" layoutX="225.0" layoutY="135.0" onMouseClicked="#handleGrupoSelecionado" prefHeight="450.0" prefWidth="928.0" style="-fx-background-color: #FAFAFA;" stylesheets="@style.css" AnchorPane.bottomAnchor="114.0" AnchorPane.leftAnchor="256.0" AnchorPane.rightAnchor="96.0" AnchorPane.topAnchor="156.0">
         <columns>
           <TableColumn fx:id="tbcGruposDisponiveis" prefWidth="200.0" text="Grupos Disponíveis" />
           <TableColumn fx:id="tbcParticipantes" minWidth="0.0" prefWidth="176.0" text="Participantes" />
