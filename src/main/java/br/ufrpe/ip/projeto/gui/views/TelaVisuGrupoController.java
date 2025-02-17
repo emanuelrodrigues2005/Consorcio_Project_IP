@@ -64,7 +64,7 @@
     @FXML
     private void handleTelaHomeCliente() {
         System.out.println("Botão Home clicado");
-        screenManager.abrirTelaPrincipalADM();
+        screenManager.abrirTelaPrincipalCliente();
     }
 
     @FXML

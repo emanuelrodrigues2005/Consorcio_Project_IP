@@ -141,6 +141,7 @@ public class Gerenciador {
 
     public void abrirPerfilCliente(Cliente cliente) {
         telaPerfilClienteController.setCliente(cliente);
+        telaPerfilClienteController.setLtvContratos();
         telaPerfilClienteController.initialize();
         scenePrincipal.setRoot(telaPerfilCliente);
     }
@@ -152,7 +153,7 @@ public class Gerenciador {
 
     public void abrirTelaPerfilAdmin(Cliente admin) {
         telaPerfilClienteController.setCliente(admin);
-        telaPerfilClienteController.initialize();
+        telaPerfilClienteController.initialize(); //CONSERTAR DEPOIS
         scenePrincipal.setRoot(telaPerfilCliente);
     }
 

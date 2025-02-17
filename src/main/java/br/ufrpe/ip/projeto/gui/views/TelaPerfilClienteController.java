@@ -68,7 +68,8 @@ public class TelaPerfilClienteController {
         lbCPF.setText(cliente.getCpf());
         lbTelefone.setText(cliente.getTelefone());
         lbEmail.setText(cliente.getEmail());
-        ltvContratos.getItems().setAll(sistema.getAllContratosByCPF(cliente));
+        ltvContratos.getItems().clear();
+        ltvContratos.getItems().setAll(sistema.getAllContratos());
         lbNomeGrupo.setVisible(false);
         lbParcelasPagas.setVisible(false);
         lbValorPago.setVisible(false);
@@ -88,6 +89,10 @@ public class TelaPerfilClienteController {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public void setLtvContratos() {
+        ltvContratos.getItems().setAll(sistema.getAllContratosByCPF(cliente));
     }
 
     public void setInfoContrato(Contrato contrato) {

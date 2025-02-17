@@ -5,6 +5,7 @@ import br.ufrpe.ip.projeto.controllers.GrupoConsorcioController;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
 import br.ufrpe.ip.projeto.models.Cliente;
+import br.ufrpe.ip.projeto.models.Contrato;
 import br.ufrpe.ip.projeto.models.GrupoConsorcio;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -95,6 +96,9 @@ public class TelaVisualizacaoContratoController {
         if (grupoAtual != null) {
             sistema.createContrato(clienteLogado, grupoAtual);
             System.out.println("Contrato assinado!");
+            for (Contrato contrato : sistema.getAllContratosByCPF(clienteLogado)) {
+                System.out.println(contrato.getCliente());
+            }
 
             int novoNumeroParticipantes = grupoAtual.getNumeroParticipantes() + 1;
             sistema.updateParticipantes(grupoAtual, novoNumeroParticipantes);
@@ -102,6 +106,7 @@ public class TelaVisualizacaoContratoController {
 
             btCriarContrato.setDisable(true);
             btCriarContrato.setText("Contrato Assinado");
+
 
             // Atualizar a TableView na tela principal
             if (gerenciador != null) {

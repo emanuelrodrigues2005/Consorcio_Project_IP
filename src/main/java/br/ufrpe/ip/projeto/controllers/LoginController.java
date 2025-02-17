@@ -21,13 +21,13 @@ public class LoginController {
     }
 
     public void efetuarLogin(String cpf, String senha) {
-        if(this.clienteLogado != null) {
+        if (this.clienteLogado != null) {
             // throw new ClienteJaLogado(parãmetro a definir);
         }
 
         Cliente clienteASerLogado = this.repositoryLogin.getClienteByCpf(cpf);
 
-        if(clienteASerLogado.getSenha().equals(senha)) {
+        if (clienteASerLogado.getSenha().equals(senha)) {
             this.clienteLogado = clienteASerLogado;
         } else {
             //throw new ClienteSenhaIncorreta(parâmetro a definir);
