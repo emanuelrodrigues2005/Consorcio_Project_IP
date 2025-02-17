@@ -37,14 +37,14 @@
       </VBox>
       <Pane layoutX="261.0" layoutY="159.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 40 40 30 30;" styleClass="tela-padrao" stylesheets="@style.css" AnchorPane.leftAnchor="256.0" AnchorPane.topAnchor="152.0">
          <children>
-            <ListView layoutX="622.0" layoutY="77.0" prefHeight="288.0" prefWidth="272.0" style="-fx-background-color: #fafafa; -fx-border-color: #BA0F30; -fx-border-width: 40 4 4 4;" stylesheets="@style.css" />
+            <ListView fx:id="ltvParticipantes" layoutX="622.0" layoutY="77.0" prefHeight="288.0" prefWidth="272.0" style="-fx-background-color: #fafafa; -fx-border-color: #BA0F30; -fx-border-width: 40 4 4 4;" styleClass="sombra" stylesheets="@style.css" />
             <Label alignment="CENTER" prefHeight="50.0" prefWidth="928.0" style="-fx-background-color: #BA0F30; -fx-text-fill: #FAFAFA; -fx-background-radius: 30 30 0 0;" text="Grupos Consórcios" textAlignment="CENTER" textFill="#fafafa">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Button fx:id="btEncerrarGrupo" layoutX="410.0" layoutY="379.0" mnemonicParsing="false" prefHeight="48.0" styleClass="teg-button" text="Encerrar Grupo" />
-            <Button fx:id="btRemoverParticipante" layoutX="622.0" layoutY="379.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="96.0" styleClass="teg-button" text="Remove" />
+            <Button fx:id="btEncerrarGrupo" layoutX="410.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#handleMudarStatusGrupo" prefHeight="48.0" styleClass="teg-button" text="Encerrar Grupo" />
+            <Button fx:id="btRemoverParticipante" layoutX="622.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#handleDeleteCliente" prefHeight="48.0" prefWidth="96.0" styleClass="teg-button" text="Remove" />
             <Label layoutX="94.0" layoutY="89.0" text="Automóvel" underline="true">
                <font>
                   <Font name="Verdana" size="24.0" />
@@ -117,10 +117,10 @@
                         </Label>
                      </children>
                   </HBox>
-                  <Button fx:id="btAlterarTaxa" mnemonicParsing="false" prefHeight="48.0" styleClass="teg-button" text="Alterar Taxa" />
+                  <Button fx:id="btAlterarTaxa" mnemonicParsing="false" onMouseClicked="#handleAlterarTaxaAdmin" prefHeight="48.0" styleClass="teg-button" text="Alterar Taxa" />
                </children>
             </VBox>
-            <Button fx:id="btRealizarSorteio" layoutX="760.0" layoutY="379.0" mnemonicParsing="false" prefHeight="48.0" styleClass="teg-button" text="Realizar Sorteio" />
+            <Button fx:id="btRealizarSorteio" layoutX="760.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#handleRealizarContemplacao" prefHeight="48.0" styleClass="teg-button" text="Realizar Sorteio" />
          </children>
       </Pane>
    </children>
