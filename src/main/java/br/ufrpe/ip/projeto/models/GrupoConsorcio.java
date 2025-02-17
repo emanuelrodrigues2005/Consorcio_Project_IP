@@ -22,7 +22,7 @@ public class GrupoConsorcio {
         this.numeroMaximoParticipantes = numeroMaximoParticipantes;
         this.valorTotal = valorTotal;
         this.taxaAdmin = taxaAdmin;
-        this.valorParcela = ((getValorTotal() + getValorTotal() * getTaxaAdmin()) / getNumeroParticipantes());
+        this.valorParcela = ((getValorTotal() + getValorTotal() * getTaxaAdmin()) / getNumeroMaximoParticipantes());
         this.statusGrupoConsorcio = StatusGrupoConsorcioEnum.ATIVO;
     }
 
