@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 
 public class TelaPerfilClienteController {
     private final IConsorcio sistema = ConsorcioFachada.getInstance();
@@ -17,13 +18,16 @@ public class TelaPerfilClienteController {
     private Cliente cliente = sistema.getClienteLogado();
 
     @FXML
-    private Button btHome;
+    private Label lbHomeCliente;
 
     @FXML
-    private Button btGrupos;
+    private Label lbPerfilCliente;
 
     @FXML
-    private Button btPerfil;
+    private Label lbGruposCliente;
+
+    @FXML
+    private Label lbSair;
 
     @FXML
     private Label lbNomeUser;
@@ -56,7 +60,7 @@ public class TelaPerfilClienteController {
     private Label lbDataInicio;
 
     @FXML
-    private ListView<Contrato> listaContratos;
+    private ListView<Contrato> ltvContratos;
 
     @FXML
     public void initialize() {
@@ -64,14 +68,14 @@ public class TelaPerfilClienteController {
         lbCPF.setText(cliente.getCpf());
         lbTelefone.setText(cliente.getTelefone());
         lbEmail.setText(cliente.getEmail());
-        listaContratos.getItems().setAll(sistema.getAllContratosByCPF(cliente));
-        lbNomeGrupo.setText("");
-        lbParcelasPagas.setText("");
-        lbValorPago.setText("");
-        lbSaldoDevedor.setText("");
-        lbStatusContrato.setText("");
-        lbDataInicio.setText("");
-        listaContratos.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        ltvContratos.getItems().setAll(sistema.getAllContratosByCPF(cliente));
+        lbNomeGrupo.setVisible(false);
+        lbParcelasPagas.setVisible(false);
+        lbValorPago.setVisible(false);
+        lbSaldoDevedor.setVisible(false);
+        lbStatusContrato.setVisible(false);
+        lbDataInicio.setVisible(false);
+        ltvContratos.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 setInfoContrato(newSelection);
             }
@@ -87,6 +91,13 @@ public class TelaPerfilClienteController {
     }
 
     public void setInfoContrato(Contrato contrato) {
+        lbNomeGrupo.setVisible(true);
+        lbParcelasPagas.setVisible(true);
+        lbValorPago.setVisible(true);
+        lbSaldoDevedor.setVisible(true);
+        lbStatusContrato.setVisible(true);
+        lbDataInicio.setVisible(true);
+
         lbNomeGrupo.setText(contrato.getGrupoAssociado() != null ? contrato.getGrupoAssociado().getNomeGrupo() : "Não informado");
         lbParcelasPagas.setText(String.valueOf(contrato.getParcelasPagas()));
         lbValorPago.setText(String.format("R$ %.2f", contrato.getValorPago()));
@@ -94,13 +105,22 @@ public class TelaPerfilClienteController {
         lbStatusContrato.setText(contrato.getStatusContrato() != null ? contrato.getStatusContrato().toString() : "Não informado");
         lbDataInicio.setText(contrato.getDataInicio() != null ? contrato.getDataInicio().toString() : "Não informado");
     }
+
     @FXML
-    private void openHome(ActionEvent actionEvent) {
-        System.out.println("Redicionando para a tela home...");
-        screenManager.abrirTelaPrincipalCliente();
+    public void handleTelaPrincipalCliente(MouseEvent event) {
+        System.out.println("Redirecionando tela principal do cliente...");
+        this.screenManager.abrirTelaPrincipalCliente();
     }
 
     @FXML
-    public void openAllGrupos(ActionEvent actionEvent) {
+    public void handleTelaGruposCliente(MouseEvent event) {
+        System.out.println("Redirecionando tela grupos do cliente...");
+        //this.screenManager.abriTelaGruposCliente;
+    }
+
+    @FXML
+    public void handleTelaEscolherLogin(MouseEvent event) {
+        System.out.println("Redirecionando tela escolher forma de login...");
+        this.screenManager.abrirTelaEscolhaLogin();
     }
 }

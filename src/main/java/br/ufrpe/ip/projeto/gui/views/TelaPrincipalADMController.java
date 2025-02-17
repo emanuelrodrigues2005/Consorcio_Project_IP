@@ -55,6 +55,12 @@ public class TelaPrincipalADMController {
     public void initialize() {
         configurarTabela();
         carregarDados();
+
+        tbvGrupos.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                this.gerenciador.abrirTelaEdicaoGrupo(newSelection);
+            }
+        });
     }
 
     public void setGerenciador(Gerenciador g) {

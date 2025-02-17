@@ -21,6 +21,7 @@ public class Gerenciador {
     private Parent telaCriacaoGrupo;
     private Parent telaPrincipalADM;
     private Parent telaVisualizacaoContrato;
+    private Parent telaEdicaoGrupo;
 
     private Stage stagePrincipal;
     private Scene scenePrincipal;
@@ -35,6 +36,7 @@ public class Gerenciador {
     private TelaVisualizacaoContratoController telaVisualizacaoContratoController;
     private TelaEscolhaLoginController telaEscolhaLoginController;
     private TelaLoginAdmController telaLoginAdmController;
+    private TelaEditGrupoController telaEdicaoGrupoController;
 
     private Gerenciador() {
         try{
@@ -87,6 +89,11 @@ public class Gerenciador {
                 telaLoginAdm = loaderTelaLoginAdm.load();
                 telaLoginAdmController = loaderTelaLoginAdm.getController();
                 telaLoginAdmController.setGerenciador(this);
+
+                FXMLLoader loaderTelaEdicaoGrupo = new FXMLLoader(getClass().getResource(TelasEnum.TELA_EDICAO_GRUPO.getCaminho()));
+                telaEdicaoGrupo = loaderTelaEdicaoGrupo.load();
+                telaEdicaoGrupoController = loaderTelaEdicaoGrupo.getController();
+                telaEdicaoGrupoController.setGerenciador(this);
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(-1);
@@ -170,5 +177,11 @@ public class Gerenciador {
 
     public TelaPrincipalClienteController getTelaPrincipalClienteController() {
         return telaPrincipalClienteController;
+    }
+
+    public void abrirTelaEdicaoGrupo(GrupoConsorcio grupo) {
+        telaEdicaoGrupoController.initialize();
+        telaEdicaoGrupoController.setGrupoAtual(grupo);
+        scenePrincipal.setRoot(telaEdicaoGrupo);
     }
 }
