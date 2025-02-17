@@ -107,8 +107,8 @@ public class TelaVisuGrupoController {
             int participantesAtuais = grupoAtual.getNumeroParticipantes();
             int maxParticipantes = grupoAtual.getNumeroMaximoParticipantes();
 
-            if (participantesAtuais == 0) {
-                lbValorParcela.setText(String.format("%.2f", grupoAtual.getValorTotal() / maxParticipantes));
+            if (participantesAtuais < grupoAtual.getNumeroMaximoParticipantes() / 2) {
+                lbValorParcela.setText(String.format("%.2f", (grupoAtual.getValorTotal() + grupoAtual.getValorTotal() * grupoAtual.getTaxaAdmin())/ maxParticipantes));
             } else {
                 lbValorParcela.setText(String.format("%.2f", grupoAtual.getValorParcela()));
             }

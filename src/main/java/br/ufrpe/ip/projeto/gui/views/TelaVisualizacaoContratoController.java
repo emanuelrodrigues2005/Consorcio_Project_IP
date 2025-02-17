@@ -71,7 +71,14 @@ public class TelaVisualizacaoContratoController {
             lbNomeGrupo.setText(grupoAtual.getNomeGrupo());
             lbValorParcela.setText(String.format("%.2f", grupoAtual.getValorParcela()));
             lbTaxaAdmin.setText(String.format("%.2f", grupoAtual.getTaxaAdmin()));
-            lbCpfCliente.setText(clienteLogado.getCpf());
+
+            if (sistema.getClienteLogado() != null) {
+                lbCpfCliente.setText(sistema.getClienteLogado().getCpf());
+            } else {
+                lbCpfCliente.setText("N/A");
+                System.out.println("Erro: Nenhum cliente logado encontrado!");
+            }
+
             lbDataInicio.setText(LocalDate.now().toString());
         } else {
             System.out.println("Nenhum grupo foi definido para exibição do contrato.");
