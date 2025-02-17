@@ -11,54 +11,58 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class TelaPrincipalClienteController {
+public class TelaPrincipalADMController {
     private final IConsorcio sistema = ConsorcioFachada.getInstance();
-    private Gerenciador screenManager;
+    private Gerenciador gerenciador;
 
     @FXML
-    private Label lbHomeCliente;
+    private Label lbHomeADM;
 
     @FXML
-    private Label lbPerfilCliente;
+    private Label lbPerfilADM;
+
+    @FXML
+    private Label lbSair;
 
     @FXML
     private TableView<GrupoConsorcio> tbvGrupos;
 
     @FXML
-    private TableColumn<GrupoConsorcio, String> tbcGruposDisponiveis;
+    private TableColumn<GrupoConsorcio, String> tbcAllGrupos;
 
     @FXML
     private TableColumn<GrupoConsorcio, Integer> tbcParticipantes;
 
     @FXML
-    private TableColumn<GrupoConsorcio, Integer> tbcValorTotal;
+    private TableColumn<GrupoConsorcio, Double> tbcValorTotal;
 
     @FXML
-    private TableColumn<GrupoConsorcio, Integer> tbcTaxaAdmin;
+    private TableColumn<GrupoConsorcio, Double> tbcTaxaAdmin;
 
     @FXML
     private TableColumn<GrupoConsorcio, String> tbcStatusGrupo;
 
     @FXML
+    private Button btAdd;
+
+    @FXML
+    private TextField tfSearchADM;
+
+    @FXML
     public void initialize() {
         configurarTabela();
         carregarDados();
-
-        tbvGrupos.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2) {
-                handleGrupoSelecionado();
-            }
-        });
     }
 
     public void setGerenciador(Gerenciador g) {
-        this.screenManager = g;
+        this.gerenciador = g;
     }
 
     private void configurarTabela() {
-        tbcGruposDisponiveis.setCellValueFactory(new PropertyValueFactory<>("nomeGrupo"));
+        tbcAllGrupos.setCellValueFactory(new PropertyValueFactory<>("nomeGrupo"));
         tbcParticipantes.setCellValueFactory(new PropertyValueFactory<>("numeroParticipantes"));
         tbcValorTotal.setCellValueFactory(new PropertyValueFactory<>("valorTotal"));
         tbcTaxaAdmin.setCellValueFactory(new PropertyValueFactory<>("taxaAdmin"));
@@ -71,32 +75,19 @@ public class TelaPrincipalClienteController {
     }
 
     @FXML
-    public void handleTelaPerfilCliente() {
-        this.screenManager.abrirPerfilCliente(this.sistema.getClienteLogado());
+    public void handleTelaPerfilADM() {
+        //this.screenManager.abrirPerfilADM();
     }
 
     @FXML
-    public void handleTelaLoginCliente() {
-        this.screenManager.abrirTelaEscolhaLogin();
+    public void handleTelaLogin() {
+        System.out.println("Redirecionando para a tela de login...");
+        this.gerenciador.abrirTelaEscolhaLogin();
     }
 
     @FXML
-    public void handleTelaGruposCliente() {
-        //this.screenManeger.abrirTelaGruposCliente
-    }
-
-    @FXML
-    private void handleGrupoSelecionado() {
-        GrupoConsorcio grupoSelecionado = tbvGrupos.getSelectionModel().getSelectedItem();
-
-        if (grupoSelecionado != null) {
-            screenManager.abrirTelaVisuGrupo(grupoSelecionado);
-        } else {
-            System.out.println("Nenhum grupo foi selecionado.");
-        }
-    }
-
-    public void atualizarTabela() {
-        tbvGrupos.refresh();
+    public void openTelaCriarGrupo() {
+        System.out.println("Redirecionando para a tela de criar grupo...");
+        this.gerenciador.abrirTelaCriacaoGrupo();
     }
 }

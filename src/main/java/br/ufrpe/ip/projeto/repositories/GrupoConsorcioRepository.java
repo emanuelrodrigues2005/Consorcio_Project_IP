@@ -40,8 +40,8 @@ public class GrupoConsorcioRepository implements IGrupoConsorcioRepository {
     }
 
     @Override
-    public void createGrupoConsorcio(String nomeGrupo, int numeroParticipantes, double valorTotal, double taxaAdmin) {
-        GrupoConsorcio grupoConsorcio = new GrupoConsorcio(nomeGrupo, numeroParticipantes, valorTotal, taxaAdmin);
+    public void createGrupoConsorcio(String nomeGrupo, int numeroMaximoParticipantes,double valorTotal, double taxaAdmin) {
+        GrupoConsorcio grupoConsorcio = new GrupoConsorcio(nomeGrupo, numeroMaximoParticipantes,valorTotal, taxaAdmin);
         grupos.add(grupoConsorcio);
     }
 

@@ -96,12 +96,11 @@ public class TelaPerfilClienteController {
     }
     @FXML
     private void openHome(ActionEvent actionEvent) {
+        System.out.println("Redicionando para a tela home...");
+        screenManager.abrirTelaPrincipalCliente();
     }
 
     @FXML
     public void openAllGrupos(ActionEvent actionEvent) {
-    }
-
-    public void openPerfil(ActionEvent actionEvent) {
     }
 }
