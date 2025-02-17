@@ -4,24 +4,23 @@
     -fx-background-color: #FAFAFA;
 }
 
-
 .check-box .box {
-    -fx-background-color: gray; /* Fundo transparente */
-    -fx-border-radius: 3;              /* Arredondamento opcional */
+    -fx-background-color: gray; 
+    -fx-border-radius: 3;             
 }
 
 .check-box .box:selected {
-    -fx-background-color: white;       /* Fundo branco quando selecionado */
-    -fx-border-color: white;           /* Mantém a borda branca */
-    -fx-mark-color: white;             /* Cor do "check" (marcação) */
+    -fx-background-color: white;
+    -fx-border-color: white;
+    -fx-mark-color: white;
 }
 
 .hbox {
-    -fx-background-color: #ffffff; /* Fundo branco ou outra cor */
-    -fx-border-color: #000000;    /* Cor da borda */
-    -fx-border-width: 2 2 0 2;    /* Apenas borda superior e laterais (sem inferior) */
-    -fx-border-radius: 10 10 0 0; /* Arredondamento superior (esquerda e direita) */
-    -fx-background-radius: 10 10 0 0; /* Fundo arredondado nas partes superiores */
+    -fx-background-color: #ffffff;
+    -fx-border-color: #000000;   
+    -fx-border-width: 2 2 0 2;   
+    -fx-border-radius: 10 10 0 0; 
+    -fx-background-radius: 10 10 0 0;
 }
 
 .hand {
@@ -29,121 +28,146 @@
 }
 
 .sombra {
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 0, 2); /* Sombra */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 0, 2);
 }
 
 .table-view {
-    -fx-padding: 0; /* Remove qualquer espaçamento interno */
+    -fx-padding: 0;
     -fx-background-color: #FAFAFA;
 }
 
 .table-row-cell {
-    -fx-background-color: #FAFAFA; /* Mesma cor do fundo */
+    -fx-background-color: #FAFAFA;
     -fx-border-color: #BCBCBC;
-    -fx-border-width: 1px; /* Espessura da borda */
+    -fx-border-width: 1px;
+    -fx-cursor: hand;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #E0E0E0; 
 }
 
 .table-row-cell:selected {
-    -fx-background-color: #BA0F30; /* Cor de fundo ao selecionar */
-    -fx-text-fill: #fafafa; /* Garante que o texto fique visível */
+    -fx-background-color: #BA0F30;
+    -fx-text-fill: #fafafa;
+    -fx-font-weight: bold;
 }
 
 .table-row-cell:selected .text {
-    -fx-fill: #FAFAFA; /* Cor do texto ao selecionar */
+    -fx-font-weight: bold;
+    -fx-fill: #FAFAFA;
 }
 
 .table-view .column-header {
     -fx-padding: 0;
-    -fx-pref-height: 50px; /* Altura do cabeçalho */
+    -fx-pref-height: 50px;
     -fx-background-color: #FAFAFA;
 }
 
 .table-view .column-header .label {
     -fx-background-color:  #BA0F30;
-    -fx-font-size: 16px; /* Tamanho da fonte */
-    -fx-text-fill: white; /* Cor do texto */
-    -fx-font-weight: bold; /* Deixa o texto em negrito (opcional) */
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
 }
 
 .id-search-bar {
-    -fx-background-color: white; /* Cor de fundo */
-    -fx-border-color: #BA0F30; /* Cor da borda */
-    -fx-border-radius: 20px; /* Bordas arredondadas */
-    -fx-background-radius: 20px; /* Bordas do fundo */
-    -fx-pref-height: 40px; /* Altura máxima */
-    -fx-font-size: 14px; /* Tamanho do texto */
-    -fx-padding: 0 10 0 10; /* Espaçamento interno */
-    -fx-border-width: 2px; /* Espessura da borda */
+    -fx-background-color: white;
+    -fx-border-color: #BA0F30;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-pref-height: 40px;
+    -fx-font-size: 14px;
+    -fx-padding: 0 10 0 10;
+    -fx-border-width: 2px;
 }
 
 .add-button {
-    -fx-background-color: #BA0F30; /* Cor de fundo */
-    -fx-text-fill: white; /* Cor do texto */
-    -fx-font-size: 24px; /* Tamanho da fonte do "+" */
-    -fx-font-weight: bold; /* Texto mais "pesado" */
-    -fx-background-radius: 50px; /* Torna o botão circular */
-    -fx-pref-width: 60px; /* Largura do botão */
-    -fx-pref-height: 60px; /* Altura do botão */
-    -fx-alignment: center; /* Centraliza o conteúdo */
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 0, 2); /* Sombra */
-    -fx-cursor: hand; /* Muda o cursor ao passar sobre o botão */
+    -fx-background-color: #BA0F30;
+    -fx-text-fill: white;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 50px;
+    -fx-pref-width: 60px;
+    -fx-pref-height: 60px;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 0, 2);
+    -fx-cursor: hand;
 }
 
 .page-button {
-    -fx-cursor: hand; /* Muda o cursor ao passar sobre o botão */
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 0, 2); /* Sombra */
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 0, 2);
 }
 
 .teg-button {
-    -fx-background-color: #BA0F30; /* Vermelho */
-    -fx-text-fill: white; /* Texto branco */
+    -fx-background-color: #BA0F30;
+    -fx-text-fill: white;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-background-radius: 24px; /* Borda arredondada */
+    -fx-background-radius: 24px;
     -fx-padding: 8px 15px;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 0, 2); /* Sombra */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 0, 2);
 }
 
 .teg-button:hover {
-    -fx-background-color: #9A0D28; /* Um vermelho um pouco mais escuro ao passar o mouse */
+    -fx-background-color: #9A0D28;
 }
 
 .teg-button:pressed {
-    -fx-background-color: #7A0A1F; /* Um vermelho ainda mais escuro quando pressionado */
-}
-
-.titled-pane {
-
+    -fx-background-color: #7A0A1F;
 }
 
 .titled-pane > .title {
-    -fx-background-color: #BA0F30; /* Cabeçalho vermelho */
-    -fx-text-fill: white; /* Texto branco */
-    -fx-font-size: 16px; /* Ajustar tamanho do texto */
-    -fx-font-weight: bold; /* Deixar o texto em negrito */
-    -fx-alignment: center; /* Centralizar o texto */
-    -fx-padding: 10px; /* Adicionar espaçamento */
+    -fx-background-color: #BA0F30;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-padding: 10px;
 }
 
 .titled-pane > .content {
-    -fx-background-color: #FAFAFA; /* Fundo escuro para o conteúdo */
-    -fx-padding: 15px; /* Espaçamento interno */
-    -fx-border-radius: 0 0 10px 10px; /* Arredondar apenas as partes inferiores */
-}
-
-.table-view {
-    -fx-background-color: transparent; /* Remover fundo padrão */
-    -fx-border-color: #BA0F30; /* Adicionar borda vermelha */
+    -fx-background-color: #FAFAFA;
+    -fx-padding: 15px;
+    -fx-border-radius: 0 0 10px 10px;
 }
 
 .table-view .column-header-background {
-    -fx-background-color: #BA0F30; /* Cor do cabeçalho */
-    -fx-border-radius: 10px 10px 0 0; /* Arredondar apenas o topo */
+    -fx-background-color: #BA0F30;
+    -fx-border-radius: 10px 10px 0 0;
 }
 
 .tv-participantes {
-    -fx-background-color: transparent; /* Fundo transparente */
-    -fx-text-fill: white; /* Texto branco */
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
+}
+
+.list-view {
+    -fx-background-color: transparent;
+    -fx-border-color: #BA0F30;
+}
+
+.list-cell {
+    -fx-background-color: #FAFAFA;
+    -fx-border-color: #BCBCBC;
+    -fx-border-width: 1px;
+    -fx-cursor: hand;
+}
+
+.list-cell:odd {
+    -fx-background-color: #E0E0E0;
+}
+
+.list-cell:selected {
+    -fx-background-color: #BA0F30;
+    -fx-text-fill: #FAFAFA;
+    -fx-font-weight: bold;
+}
+
+.list-cell:selected .text {
+    -fx-font-weight: bold;
+    -fx-fill: #FAFAFA;
 }
