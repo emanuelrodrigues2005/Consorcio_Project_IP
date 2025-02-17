@@ -27,9 +27,6 @@ public class TelaVisuGrupoController {
     private Label lbSair;
 
     @FXML
-    private Label lbNomeGrupos;
-
-    @FXML
     private Label lbAutoConsor;
 
     @FXML
@@ -53,6 +50,7 @@ public class TelaVisuGrupoController {
     }
 
     public void setGrupoAtual(GrupoConsorcio grupoAtual) {
+        limparDadosGrupo();
         this.grupoAtual = grupoAtual;
         if (grupoAtual != null) {
             carregarDadosGrupo(grupoAtual.getIdGrupo());
@@ -76,7 +74,7 @@ public class TelaVisuGrupoController {
     }
 
     @FXML
-    private void handleTelaLoginCliente() {
+    private void handleTelaEscolherLogin() {
         System.out.println("Saindo...");
         screenManager.abrirTelaPrincipalADM();
     }
@@ -90,25 +88,33 @@ public class TelaVisuGrupoController {
     @FXML
     private void handleTelaVisualizacaoContrato() {
         System.out.println("Redirecionado para contrato ...");
-        screenManager.abriTelaVisualizacaoContrato();
+        screenManager.abriTelaVisualizacaoContrato(grupoAtual);
     }
 
     private void carregarDadosGrupo(String idGrupo) {
-        GrupoConsorcio grupo = sistema.getGrupoById(idGrupo);
+        grupoAtual = sistema.getGrupoById(idGrupo);
 
-        if (grupo != null) {
-            lbNomeGrupos.setText(grupo.getNomeGrupo());
-            lbValorTotal.setText(String.format("%.2f", grupo.getValorTotal()));
-            lbTaxaAdmin.setText(String.format("%.2f", grupo.getTaxaAdmin()));
-
-            if (grupo.getNumeroParticipantes() == 0) {
-                lbValorParcela.setText(String.format("%.2f", grupo.getValorTotal() / grupo.getNumeroMaximoParticipantes()));
+        if (grupoAtual != null) {
+            if (lbAutoConsor != null) {
+                lbAutoConsor.setText(grupoAtual.getNomeGrupo());
             } else {
-                lbValorParcela.setText(String.format("%.2f", grupo.getValorParcela()));
+                System.out.println("lbAutoConsor está nulo!");
             }
 
-            lbTotalParticipantes.setText(String.valueOf(grupo.getNumeroParticipantes()));
-            lbAutoConsor.setText(grupo.getNomeGrupo());
+            lbValorTotal.setText(String.format("%.2f", grupoAtual.getValorTotal()));
+            lbTaxaAdmin.setText(String.format("%.2f", grupoAtual.getTaxaAdmin()));
+
+            int participantesAtuais = grupoAtual.getNumeroParticipantes();
+            int maxParticipantes = grupoAtual.getNumeroMaximoParticipantes();
+
+            if (participantesAtuais == 0) {
+                lbValorParcela.setText(String.format("%.2f", grupoAtual.getValorTotal() / maxParticipantes));
+            } else {
+                lbValorParcela.setText(String.format("%.2f", grupoAtual.getValorParcela()));
+            }
+
+            lbTotalParticipantes.setText(String.valueOf(participantesAtuais));
+            lbAutoConsor.setText(grupoAtual.getNomeGrupo());
         } else {
             System.out.println("Nenhum grupo encontrado com o ID fornecido.");
         }

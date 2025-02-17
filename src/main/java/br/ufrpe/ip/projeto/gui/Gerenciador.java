@@ -1,8 +1,8 @@
 package br.ufrpe.ip.projeto.gui;
 
 import br.ufrpe.ip.projeto.gui.views.*;
-import br.ufrpe.ip.projeto.models.Administrador;
 import br.ufrpe.ip.projeto.models.Cliente;
+import br.ufrpe.ip.projeto.models.GrupoConsorcio;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,7 +12,9 @@ public class Gerenciador {
     private static Gerenciador instance;
 
     private Parent telaVisuGrupo;
-    private Parent telaLogin;
+    private Parent telaLoginCliente;
+    private Parent telaLoginAdm;
+    private Parent telaEscolhaLogin;
     private Parent telaCadastro;
     private Parent telaPerfilCliente;
     private Parent telaPrincipalCliente;
@@ -24,13 +26,15 @@ public class Gerenciador {
     private Scene scenePrincipal;
 
     private TelaVisuGrupoController telaVisuGrupoController;
-    private TelaLoginController telaLoginController;
+    private TelaLoginClienteController telaLoginClienteController;
     private TelaCadastroController telaCadastroController;
     private TelaPerfilClienteController telaPerfilClienteController;
     private TelaPrincipalClienteController telaPrincipalClienteController;
     private TelaCriacaoGrupoController telaCriacaoGrupoController;
     private TelaPrincipalADMController telaPrincipalADMController;
     private TelaVisualizacaoContratoController telaVisualizacaoContratoController;
+    private TelaEscolhaLoginController telaEscolhaLoginController;
+    private TelaLoginAdmController telaLoginAdmController;
 
     private Gerenciador() {
         try{
@@ -39,10 +43,10 @@ public class Gerenciador {
                 telaVisuGrupoController = loaderTelaVisuGrupo.getController();
                 telaVisuGrupoController.setGerenciador(this);
 
-                FXMLLoader loaderTelaLogin = new FXMLLoader(getClass().getResource(TelasEnum.TELA_LOGIN.getCaminho()));
-                telaLogin = loaderTelaLogin.load();
-                telaLoginController = loaderTelaLogin.getController();
-                telaLoginController.setGerenciador(this);
+                FXMLLoader loaderTelaLogin = new FXMLLoader(getClass().getResource(TelasEnum.TELA_LOGIN_CLIENTE.getCaminho()));
+                telaLoginCliente = loaderTelaLogin.load();
+                telaLoginClienteController = loaderTelaLogin.getController();
+                telaLoginClienteController.setGerenciador(this);
 
                 FXMLLoader loaderTelaCadastro = new FXMLLoader(getClass().getResource(TelasEnum.TELA_CADASTRO.getCaminho()));
                 telaCadastro = loaderTelaCadastro.load();
@@ -73,6 +77,16 @@ public class Gerenciador {
                 telaVisualizacaoContrato = loaderTelaVisualizacaoContrato.load();
                 telaVisualizacaoContratoController = loaderTelaVisualizacaoContrato.getController();
                 telaVisualizacaoContratoController.setGerenciador(this);
+
+                FXMLLoader loaderTelaEscolhaLogin = new FXMLLoader(getClass().getResource(TelasEnum.TELA_ESCOLHA_LOGIN.getCaminho()));
+                telaEscolhaLogin = loaderTelaEscolhaLogin.load();
+                telaEscolhaLoginController = loaderTelaEscolhaLogin.getController();
+                telaEscolhaLoginController.setGerenciador(this);
+
+                FXMLLoader loaderTelaLoginAdm = new FXMLLoader(getClass().getResource(TelasEnum.TELA_LOGIN_ADM.getCaminho()));
+                telaLoginAdm = loaderTelaLoginAdm.load();
+                telaLoginAdmController = loaderTelaLoginAdm.getController();
+                telaLoginAdmController.setGerenciador(this);
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(-1);
@@ -93,16 +107,23 @@ public class Gerenciador {
     public void iniciarTelas() {
         stagePrincipal.setTitle("ConsorX");
         stagePrincipal.setResizable(false);
-        scenePrincipal = new Scene(telaLogin, 1280, 720);
+        scenePrincipal = new Scene(telaEscolhaLogin, 1280, 720);
         stagePrincipal.setScene(scenePrincipal);
         stagePrincipal.show();
     }
 
-    public void abrirTelaLogin() {
-        scenePrincipal.setRoot(telaLogin);
+    public void abrirTelaLoginCliente() {
+        telaLoginClienteController.initialize();
+        scenePrincipal.setRoot(telaLoginCliente);
+    }
+
+    public void abrirTelaLoginAdm() {
+        telaLoginAdmController.initialize();
+        scenePrincipal.setRoot(telaLoginAdm);
     }
 
     public void abrirCadastro() {
+        telaCadastroController.initialize();
         scenePrincipal.setRoot(telaCadastro);
     }
 
@@ -133,8 +154,21 @@ public class Gerenciador {
         scenePrincipal.setRoot(telaPrincipalADM);
     }
 
-    public void abriTelaVisualizacaoContrato() {
-        telaVisualizacaoContratoController.initialize();
+    public void abriTelaVisualizacaoContrato(GrupoConsorcio grupo) {
+        telaVisualizacaoContratoController.setGrupoAtual(grupo);
         scenePrincipal.setRoot(telaVisualizacaoContrato);
+    }
+
+    public void abrirTelaVisuGrupo(GrupoConsorcio grupo) {
+        telaVisuGrupoController.setGrupoAtual(grupo);
+        scenePrincipal.setRoot(telaVisuGrupo);
+    }
+
+    public void abrirTelaEscolhaLogin() {
+        scenePrincipal.setRoot(telaEscolhaLogin);
+    }
+
+    public TelaPrincipalClienteController getTelaPrincipalClienteController() {
+        return telaPrincipalClienteController;
     }
 }

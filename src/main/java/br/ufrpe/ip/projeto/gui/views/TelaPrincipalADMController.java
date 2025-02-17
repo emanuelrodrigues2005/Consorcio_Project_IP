@@ -82,7 +82,7 @@ public class TelaPrincipalADMController {
     @FXML
     public void handleTelaLogin() {
         System.out.println("Redirecionando para a tela de login...");
-        this.gerenciador.abrirTelaLogin();
+        this.gerenciador.abrirTelaEscolhaLogin();
     }
 
     @FXML

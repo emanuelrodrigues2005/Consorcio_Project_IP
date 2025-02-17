@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #221F26;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.ip.projeto.gui.views.TelaVisuGrupoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #221F26;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.ip.projeto.gui.views.TelaVisuGrupoController">
    <children>
       <Pane layoutX="238.0" layoutY="127.0" prefHeight="450.0" prefWidth="928.0" style="-fx-background-color: #FAFAFA; -fx-border-radius: 16;" AnchorPane.bottomAnchor="118.0" AnchorPane.leftAnchor="256.0" AnchorPane.rightAnchor="96.0" AnchorPane.topAnchor="152.0">
          <children>
@@ -68,7 +68,7 @@
             <Label fx:id="lbTotalParticipantes" layoutX="859.0" layoutY="100.0" text="X" />
             <Button fx:id="btAcessarContrato" layoutX="255.0" layoutY="376.0" mnemonicParsing="false" onMouseClicked="#handleTelaVisualizacaoContrato" prefHeight="40.0" prefWidth="175.0" style="-fx-text-fill: #FAFAFA; -fx-background-color: #BA0F30;" text="Acessar Contrato">
                <font>
-                  <Font name="Verdana Bold" size="24.0" />
+                  <Font name="Verdana Bold" size="16.0" />
                </font>
             </Button>
             <Label layoutX="102.0" layoutY="427.0" text="*Parcela sujeita a reajustes dependendo da quantidade de participantes do grupo" />
@@ -96,7 +96,7 @@
                   <Font name="Verdana Bold" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="lbSair" alignment="CENTER" onMouseClicked="#handleTelaLoginCliente" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30; -fx-background-color: FAFAFA; -fx-cursor: hand;" text="Sair">
+            <Label fx:id="lbSair" alignment="CENTER" onMouseClicked="#handleTelaEscolherLogin" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30; -fx-background-color: FAFAFA; -fx-cursor: hand;" text="Sair">
                <font>
                   <Font name="Verdana Bold" size="20.0" />
                </font>

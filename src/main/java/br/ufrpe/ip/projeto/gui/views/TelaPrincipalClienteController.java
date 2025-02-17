@@ -45,6 +45,12 @@ public class TelaPrincipalClienteController {
     public void initialize() {
         configurarTabela();
         carregarDados();
+
+        tbvGrupos.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                handleGrupoSelecionado();
+            }
+        });
     }
 
     public void setGerenciador(Gerenciador g) {
@@ -56,7 +62,7 @@ public class TelaPrincipalClienteController {
         tbcParticipantes.setCellValueFactory(new PropertyValueFactory<>("numeroParticipantes"));
         tbcValorTotal.setCellValueFactory(new PropertyValueFactory<>("valorTotal"));
         tbcTaxaAdmin.setCellValueFactory(new PropertyValueFactory<>("taxaAdmin"));
-        tbcStatusGrupo.setCellValueFactory(new PropertyValueFactory<>("statusGrupoString"));
+        tbcStatusGrupo.setCellValueFactory(new PropertyValueFactory<>("statusGrupoConsorcioString"));
     }
 
     private void carregarDados() {
@@ -71,11 +77,26 @@ public class TelaPrincipalClienteController {
 
     @FXML
     public void handleTelaLoginCliente() {
-        this.screenManager.abrirTelaLogin();
+        this.screenManager.abrirTelaEscolhaLogin();
     }
 
     @FXML
     public void handleTelaGruposCliente() {
         //this.screenManeger.abrirTelaGruposCliente
+    }
+
+    @FXML
+    private void handleGrupoSelecionado() {
+        GrupoConsorcio grupoSelecionado = tbvGrupos.getSelectionModel().getSelectedItem();
+
+        if (grupoSelecionado != null) {
+            screenManager.abrirTelaVisuGrupo(grupoSelecionado);
+        } else {
+            System.out.println("Nenhum grupo foi selecionado.");
+        }
+    }
+
+    public void atualizarTabela() {
+        tbvGrupos.refresh();
     }
 }
