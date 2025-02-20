@@ -18,7 +18,7 @@ public class TelaVisualizacaoContratoController {
     private IConsorcio sistema = ConsorcioFachada.getInstance();
     private Gerenciador gerenciador;
     private GrupoConsorcio grupoAtual;
-    private Cliente clienteLogado = sistema.getClienteLogado();
+    private Cliente clienteLogado;
 
     @FXML
     private Label lbNomeGrupo;
@@ -61,6 +61,10 @@ public class TelaVisualizacaoContratoController {
         limparDadosContrato();
         this.grupoAtual = grupo;
         carregarDadosContrato();
+    }
+
+    public void setClienteLogado(Cliente clienteLogado) {
+        this.clienteLogado = clienteLogado;
     }
 
 

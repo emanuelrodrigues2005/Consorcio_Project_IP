@@ -15,7 +15,7 @@ import javafx.scene.input.MouseEvent;
 public class TelaPerfilClienteController {
     private final IConsorcio sistema = ConsorcioFachada.getInstance();
     private Gerenciador screenManager;
-    private Cliente cliente = sistema.getClienteLogado();
+    private Cliente cliente;
 
     @FXML
     private Label lbHomeCliente;
@@ -64,23 +64,25 @@ public class TelaPerfilClienteController {
 
     @FXML
     public void initialize() {
-        lbNomeUser.setText(cliente.getNome());
-        lbCPF.setText(cliente.getCpf());
-        lbTelefone.setText(cliente.getTelefone());
-        lbEmail.setText(cliente.getEmail());
-        ltvContratos.getItems().clear();
-        ltvContratos.getItems().setAll(sistema.getAllContratos());
-        lbNomeGrupo.setVisible(false);
-        lbParcelasPagas.setVisible(false);
-        lbValorPago.setVisible(false);
-        lbSaldoDevedor.setVisible(false);
-        lbStatusContrato.setVisible(false);
-        lbDataInicio.setVisible(false);
-        ltvContratos.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
-                setInfoContrato(newSelection);
-            }
-        });
+        if (cliente != null) {
+            lbNomeUser.setText(cliente.getNome());
+            lbCPF.setText(cliente.getCpf());
+            lbTelefone.setText(cliente.getTelefone());
+            lbEmail.setText(cliente.getEmail());
+            ltvContratos.getItems().clear();
+            ltvContratos.getItems().setAll(sistema.getAllContratosByCPF(cliente));
+            lbNomeGrupo.setVisible(false);
+            lbParcelasPagas.setVisible(false);
+            lbValorPago.setVisible(false);
+            lbSaldoDevedor.setVisible(false);
+            lbStatusContrato.setVisible(false);
+            lbDataInicio.setVisible(false);
+            ltvContratos.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+                if (newSelection != null) {
+                    setInfoContrato(newSelection);
+                }
+            });
+        }
     }
 
     public void setGerenciador(Gerenciador screenManager) {

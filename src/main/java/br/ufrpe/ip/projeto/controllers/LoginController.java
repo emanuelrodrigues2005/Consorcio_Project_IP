@@ -7,7 +7,7 @@ import br.ufrpe.ip.projeto.repositories.interfaces.IClienteRepository;
 public class LoginController {
     private static LoginController instance;
     private final IClienteRepository repositoryLogin;
-    private Cliente clienteLogado = new Cliente("a", "a", "a", "a", "a");
+    private Cliente clienteLogado;
 
     private LoginController() {
         this.repositoryLogin = ClienteRepository.getInstance();
@@ -21,7 +21,7 @@ public class LoginController {
     }
 
     public void efetuarLogin(String cpf, String senha) {
-        if (this.clienteLogado != null) {
+        if (clienteLogado != null) {
             // throw new ClienteJaLogado(parãmetro a definir);
         }
 
