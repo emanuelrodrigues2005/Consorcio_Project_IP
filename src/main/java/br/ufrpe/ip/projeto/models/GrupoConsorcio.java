@@ -21,8 +21,8 @@ public class GrupoConsorcio {
         this.numeroParticipantes = 0;
         this.numeroMaximoParticipantes = numeroMaximoParticipantes;
         this.valorTotal = valorTotal;
-        this.taxaAdmin = taxaAdmin;
-        this.valorParcela = ((getValorTotal() + getValorTotal() * getTaxaAdmin()) / getNumeroParticipantes());
+        this.taxaAdmin = taxaAdmin/100;
+        this.valorParcela = ((getValorTotal() + (getValorTotal() * getTaxaAdmin())) / getNumeroMaximoParticipantes());
         this.statusGrupoConsorcio = StatusGrupoConsorcioEnum.ATIVO;
     }
 
@@ -59,7 +59,7 @@ public class GrupoConsorcio {
     }
 
     public void setTaxaAdmin(double taxaAdmin) {
-        this.taxaAdmin = taxaAdmin;
+        this.taxaAdmin = taxaAdmin/100;
     }
 
     public double getValorParcela() {

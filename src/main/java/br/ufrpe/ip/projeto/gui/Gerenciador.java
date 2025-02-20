@@ -1,5 +1,7 @@
 package br.ufrpe.ip.projeto.gui;
 
+import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
+import br.ufrpe.ip.projeto.controllers.IConsorcio;
 import br.ufrpe.ip.projeto.gui.views.*;
 import br.ufrpe.ip.projeto.models.Cliente;
 import br.ufrpe.ip.projeto.models.GrupoConsorcio;
@@ -10,6 +12,7 @@ import javafx.stage.Stage;
 
 public class Gerenciador {
     private static Gerenciador instance;
+    private static IConsorcio sistema = ConsorcioFachada.getInstance();
 
     private Parent telaVisuGrupo;
     private Parent telaLoginCliente;
@@ -152,7 +155,7 @@ public class Gerenciador {
 
     public void abrirTelaPerfilAdmin(Cliente admin) {
         telaPerfilClienteController.setCliente(admin);
-        telaPerfilClienteController.initialize();
+        telaPerfilClienteController.initialize(); //CONSERTAR DEPOIS
         scenePrincipal.setRoot(telaPerfilCliente);
     }
 
@@ -162,6 +165,7 @@ public class Gerenciador {
     }
 
     public void abriTelaVisualizacaoContrato(GrupoConsorcio grupo) {
+        telaVisualizacaoContratoController.setClienteLogado(sistema.getClienteLogado());
         telaVisualizacaoContratoController.setGrupoAtual(grupo);
         scenePrincipal.setRoot(telaVisualizacaoContrato);
     }

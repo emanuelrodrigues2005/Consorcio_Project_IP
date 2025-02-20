@@ -1,15 +1,15 @@
-package br.ufrpe.ip.projeto.gui.views;
+    package br.ufrpe.ip.projeto.gui.views;
 
-import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
-import br.ufrpe.ip.projeto.controllers.IConsorcio;
-import br.ufrpe.ip.projeto.gui.Gerenciador;
-import br.ufrpe.ip.projeto.models.GrupoConsorcio;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+    import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
+    import br.ufrpe.ip.projeto.controllers.IConsorcio;
+    import br.ufrpe.ip.projeto.gui.Gerenciador;
+    import br.ufrpe.ip.projeto.models.GrupoConsorcio;
+    import javafx.fxml.FXML;
+    import javafx.scene.control.Button;
+    import javafx.scene.control.Label;
+    import javafx.scene.control.TextField;
 
-public class TelaVisuGrupoController {
+    public class TelaVisuGrupoController {
     private final IConsorcio sistema = ConsorcioFachada.getInstance();
     private Gerenciador screenManager;
     private GrupoConsorcio grupoAtual;
@@ -64,7 +64,7 @@ public class TelaVisuGrupoController {
     @FXML
     private void handleTelaHomeCliente() {
         System.out.println("Botão Home clicado");
-        screenManager.abrirTelaPrincipalADM();
+        screenManager.abrirTelaPrincipalCliente();
     }
 
     @FXML
@@ -103,17 +103,8 @@ public class TelaVisuGrupoController {
 
             lbValorTotal.setText(String.format("%.2f", grupoAtual.getValorTotal()));
             lbTaxaAdmin.setText(String.format("%.2f", grupoAtual.getTaxaAdmin()));
-
-            int participantesAtuais = grupoAtual.getNumeroParticipantes();
-            int maxParticipantes = grupoAtual.getNumeroMaximoParticipantes();
-
-            if (participantesAtuais < grupoAtual.getNumeroMaximoParticipantes() / 2) {
-                lbValorParcela.setText(String.format("%.2f", (grupoAtual.getValorTotal() + grupoAtual.getValorTotal() * grupoAtual.getTaxaAdmin())/ maxParticipantes));
-            } else {
-                lbValorParcela.setText(String.format("%.2f", grupoAtual.getValorParcela()));
-            }
-
-            lbTotalParticipantes.setText(String.valueOf(participantesAtuais));
+            lbValorParcela.setText(String.format("%.2f", (grupoAtual.getValorParcela())));
+            lbTotalParticipantes.setText(String.valueOf(grupoAtual.getNumeroParticipantes()));
             lbAutoConsor.setText(grupoAtual.getNomeGrupo());
         } else {
             System.out.println("Nenhum grupo encontrado com o ID fornecido.");
@@ -127,4 +118,4 @@ public class TelaVisuGrupoController {
         lbValorParcela.setText("-");
         lbTotalParticipantes.setText("0");
     }
-}
+    }
