@@ -5,12 +5,13 @@ import br.ufrpe.ip.projeto.models.Contrato;
 import br.ufrpe.ip.projeto.enums.StatusBoletoEnum;
 import br.ufrpe.ip.projeto.repositories.interfaces.IBoletoRepository;
 
+import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class BoletoRepository implements IBoletoRepository {
+public class BoletoRepository implements IBoletoRepository, Serializable {
     private static BoletoRepository instance;
     private ArrayList<Boleto> boletos;
 
@@ -20,14 +21,67 @@ public class BoletoRepository implements IBoletoRepository {
 
     public static BoletoRepository getInstance() {
         if (instance == null) {
-            instance = new BoletoRepository();
+            BoletoRepository.instance = BoletoRepository.lerArquivo();
         }
-        return instance;
+        return BoletoRepository.instance;
     }
 
     @Override
     public List<Boleto> getAllBoletos() {
         return Collections.unmodifiableList(boletos);
+    }
+
+    private static BoletoRepository lerArquivo() {
+        BoletoRepository instanceLocal;
+
+        File in = new File("boletos.dat");
+        FileInputStream fis;
+        ObjectInputStream ois = null;
+
+        try {
+            fis = new FileInputStream(in);
+            ois = new ObjectInputStream(fis);
+            Object o = ois.readObject();
+            instanceLocal = (BoletoRepository) o;
+        } catch (Exception e) {
+            instanceLocal = new BoletoRepository();
+        } finally {
+            if (ois != null) {
+                try {
+                    ois.close();
+                } catch (IOException e) {
+                    //ver oq colocar aqui
+                }
+            }
+        }
+        return instanceLocal;
+    }
+
+    @Override
+    public void salvarArquivo() {
+        if(BoletoRepository.getInstance() == null) {
+            return;
+        }
+
+        File out = new File("boletos.dat");
+        FileOutputStream fos;
+        ObjectOutputStream oos = null;
+
+        try {
+            fos = new FileOutputStream(out);
+            oos = new ObjectOutputStream(fos);
+            oos.writeObject(BoletoRepository.getInstance());
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if(oos != null) {
+                try {
+                    oos.close();
+                } catch (IOException e) {
+                    //Ver oq colocar aqui
+                }
+            }
+        }
     }
 
     @Override

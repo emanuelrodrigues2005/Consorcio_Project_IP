@@ -2,10 +2,11 @@ package br.ufrpe.ip.projeto.models;
 
 import br.ufrpe.ip.projeto.enums.StatusGrupoConsorcioEnum;
 
+import java.io.Serializable;
 import java.util.Random;
 import java.util.UUID;
 
-public class GrupoConsorcio {
+public class GrupoConsorcio implements Serializable {
     private String nomeGrupo;
     private String idGrupo;
     private int numeroParticipantes;

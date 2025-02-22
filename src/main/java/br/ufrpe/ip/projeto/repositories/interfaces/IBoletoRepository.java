@@ -11,6 +11,8 @@ import java.util.List;
 public interface IBoletoRepository {
     List<Boleto> getAllBoletos();
 
+    void salvarArquivo();
+
     String getIdBoleto(Contrato contrato, int numeroParcela);
 
     Boleto getBoletoById(String idBoleto);
