@@ -29,6 +29,7 @@ public class GrupoConsorcioController {
     public void createGrupoConsorcio(String nomeGrupo, int numeroMaximoParticipantes,double valorTotal, double taxaAdmin) {
         if (numeroMaximoParticipantes > 0 && valorTotal > 0 && taxaAdmin > 0) {
             this.repositorioGrupo.createGrupoConsorcio(nomeGrupo, numeroMaximoParticipantes,valorTotal, taxaAdmin);
+            this.repositorioGrupo.salvarArquivo();
         }
         // throw campoInvalido;
     }
@@ -50,18 +51,21 @@ public class GrupoConsorcioController {
     public void updateNomeGrupo(GrupoConsorcio grupoConsorcio, String novoNome) {
         if (grupoConsorcio.getNomeGrupo().equals(novoNome)) {
             this.repositorioGrupo.updateNomeGrupo(grupoConsorcio, novoNome);
+            this.repositorioGrupo.salvarArquivo();
         }
     } //GrupoConsorcioInexistente, CampoInvalido
 
     public void updateTaxaAdmin(GrupoConsorcio grupoConsorcio, double novaTaxa) {
         if (grupoConsorcio.getTaxaAdmin() != novaTaxa && novaTaxa > 0) {
             this.repositorioGrupo.updateTaxaAdmin(grupoConsorcio, novaTaxa);
+            this.repositorioGrupo.salvarArquivo();
         }
     } //GrupoConsorcioInexistente, CampoInvalido
 
     public void updateStatusGrupo(GrupoConsorcio grupoConsorcio, StatusGrupoConsorcioEnum novoStatus) {
         if (grupoConsorcio.getStatusGrupoConsorcio() != novoStatus && statusValido(novoStatus)) {
             this.repositorioGrupo.updateStatusGrupo(grupoConsorcio, novoStatus);
+            this.repositorioGrupo.salvarArquivo();
         }
     } //GrupoConsorcioInexistente, CampoInvalido
 
@@ -76,6 +80,7 @@ public class GrupoConsorcioController {
     public void deleteGrupoConsorcio(GrupoConsorcio grupoConsorcio) {
         if (this.repositorioGrupo.getAllGrupos().contains(grupoConsorcio)) {
             this.repositorioGrupo.deleteGrupoConsorcio(grupoConsorcio); //fornecer idGrupo
+            this.repositorioGrupo.salvarArquivo();
         }
     } //GrupoConsorcioInexistente
 
@@ -92,6 +97,7 @@ public class GrupoConsorcioController {
             this.repositorioGrupo.updateParticipantes(grupoConsorcio, novoNumParticipantes);
             double novoValorParcela = ((grupoConsorcio.getValorTotal() + grupoConsorcio.getValorTotal() * grupoConsorcio.getTaxaAdmin()) / novoNumParticipantes);
             this.repositorioGrupo.updateValorParcela(grupoConsorcio, novoValorParcela);
+            this.repositorioGrupo.salvarArquivo();
         }
     } //GrupoConsorcioInexistente
 
