@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -18,63 +16,63 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="198.0" layoutY="73.0" style="-fx-text-fill: #BA0F30;" text="Dados pessoais" textFill="#221f26" underline="true">
+            <Label layoutX="345.0" layoutY="65.0" prefHeight="76.0" prefWidth="238.0" style="-fx-text-fill: #BA0F30;" text="Dados pessoais (Administrador)" textFill="#221f26" wrapText="true">
                <font>
-                  <Font name="Verdana Bold" size="32.0" />
+                  <Font name="Verdana Bold" size="24.0" />
                </font>
             </Label>
             <HBox alignment="CENTER" layoutX="266.0" layoutY="81.0" style="-fx-padding: 0;" />
             <HBox alignment="CENTER" layoutX="255.0" layoutY="141.0" style="-fx-padding: 0;" />
-            <VBox alignment="CENTER" layoutX="382.0" layoutY="170.0" prefHeight="55.0" prefWidth="187.0">
+            <VBox alignment="CENTER" layoutX="555.0" layoutY="150.0" prefHeight="55.0" prefWidth="187.0">
                <children>
                   <Label text="CPF:" underline="true">
                      <font>
-                        <Font name="Verdana Bold" size="20.0" />
+                        <Font name="Verdana Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lbCPF" style="-fx-text-fill: #221F26; -fx-padding: 0;" text="15001154410">
+                  <Label fx:id="lbCPFADM" style="-fx-text-fill: #221F26; -fx-padding: 0;" text="15001154410">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER" layoutX="55.0" layoutY="170.0" prefHeight="55.0" prefWidth="272.0">
+            <VBox alignment="CENTER" layoutX="152.0" layoutY="160.0" prefHeight="55.0" prefWidth="272.0">
                <children>
                   <Label text="Nome:" underline="true">
                      <font>
-                        <Font name="Verdana Bold" size="20.0" />
+                        <Font name="Verdana Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lbNomeUser" style="-fx-text-fill: #221F26;" text="Gustavo Henrique">
+                  <Label fx:id="lbNomeADM" style="-fx-text-fill: #221F26;" text="Gustavo Henrique">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER" layoutX="317.0" layoutY="274.0" prefHeight="60.0" prefWidth="317.0">
+            <VBox alignment="CENTER" layoutX="490.0" layoutY="271.0" prefHeight="60.0" prefWidth="317.0">
                <children>
                   <Label text="Telefone:" underline="true">
                      <font>
-                        <Font name="Verdana Bold" size="20.0" />
+                        <Font name="Verdana Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lbTelefone" style="-fx-text-fill: #221F26;" text="(81)981629531">
+                  <Label fx:id="lbTelefoneADM" style="-fx-text-fill: #221F26;" text="(81)981629531">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER" layoutX="-9.0" layoutY="274.0" prefHeight="60.0" prefWidth="401.0">
+            <VBox alignment="CENTER" layoutX="103.0" layoutY="271.0" prefHeight="60.0" prefWidth="401.0">
                <children>
                   <Label text="E-mail:" underline="true">
                      <font>
-                        <Font name="Verdana Bold" size="20.0" />
+                        <Font name="Verdana Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lbEmail" style="-fx-text-fill: #221F26;" text="sample@example.com">
+                  <Label fx:id="lbEmailADM" style="-fx-text-fill: #221F26;" text="sample@example.com">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -86,17 +84,20 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <TableView fx:id="tbvContratos" layoutX="628.0" layoutY="112.0" prefHeight="288.0" prefWidth="272.0" style="-fx-border-width: 4; -fx-background-color: #fafafa; -fx-border-color: #BA0F30;" styleClass="sombra" stylesheets="@style.css">
-               <columns>
-                  <TableColumn fx:id="tbvcolumnAutomovel" prefWidth="148.0" text="Automóvel" />
-                  <TableColumn fx:id="tbvcolumnStatus" prefWidth="116.0" text="Status" />
-               </columns>
-            </TableView>
-            <Label layoutX="693.0" layoutY="76.0" text="Contratos:" underline="true">
-               <font>
-                  <Font name="Verdana Bold" size="24.0" />
-               </font>
-            </Label>
+            <VBox alignment="CENTER" layoutX="399.0" layoutY="353.0" prefHeight="60.0" prefWidth="131.0">
+               <children>
+                  <Label text="Código ADM:" underline="true">
+                     <font>
+                        <Font name="Verdana Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbCodigoADM" style="-fx-text-fill: #221F26;" text="2702">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
          </children>
       </Pane>
       <VBox prefHeight="720.0" prefWidth="160.0" style="-fx-background-color: #FAFAFA;">
@@ -106,17 +107,12 @@
                   <Font name="Verdana Bold Italic" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="lbHomeCliente" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="76.0" prefWidth="160.0" text="Home" textFill="#ba0f30">
+            <Label fx:id="lbHomeADM" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="76.0" prefWidth="160.0" text="Home" textFill="#ba0f30">
                <font>
                   <Font name="Verdana Bold" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="lbPerfilCliente" alignment="CENTER" layoutX="10.0" layoutY="112.0" onMouseClicked="#handleTelaPerfilCliente" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #FAFAFA; -fx-background-color: #BA0F30; -fx-cursor: hand;" text="Perfil" underline="true">
-               <font>
-                  <Font name="Verdana Bold" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="lbGruposCliente" alignment="CENTER" onMouseClicked="#handleTelaGruposCliente" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30; -fx-background-color: FAFAFA; -fx-cursor: hand;" text="Grupos">
+            <Label fx:id="lbPerfilADM" alignment="CENTER" layoutX="10.0" layoutY="112.0" onMouseClicked="#handleTelaPerfilCliente" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #FAFAFA; -fx-background-color: #BA0F30; -fx-cursor: hand;" text="Perfil" underline="true">
                <font>
                   <Font name="Verdana Bold" size="20.0" />
                </font>
