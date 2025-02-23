@@ -172,3 +172,7 @@
     -fx-font-weight: bold;
     -fx-fill: #FAFAFA;
 }
+
+.hand {
+    -fx-cursor: hand;
+}
