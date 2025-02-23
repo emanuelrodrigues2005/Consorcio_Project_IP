@@ -44,18 +44,22 @@ public class BoletoController {
 
     public void createBoleto(Contrato contratoBoleto, LocalDate dataVencimento, int numeroParcela) {
         this.repositoryBoleto.createBoleto(contratoBoleto, dataVencimento, numeroParcela);
+        this.repositoryBoleto.salvarArquivo();
     } //exceptions: ContratoInexistente, CampoInvalido
 
     public void updateDataPagamento(Boleto boleto) {
         this.repositoryBoleto.updateDataPagamento(boleto);
+        this.repositoryBoleto.salvarArquivo();
     } //exceptions: BoletoInexistente, CampoInvalido
 
     public void updateStatusBoleto(Boleto boleto, StatusBoletoEnum statusBoleto) {
         this.repositoryBoleto.updateStatusBoleto(boleto, statusBoleto);
+        this.repositoryBoleto.salvarArquivo();
     } //exceptions: BoletoInexistente, CampoInvalido
 
     public void deleteBoleto(String idBoleto) {
         this.repositoryBoleto.deleteBoleto(idBoleto);
+        this.repositoryBoleto.salvarArquivo();
     } //exceptions: BoletoInexistente, CampoInvalido
 
     public void atualizarBoletoVencido(Boleto boleto) {
@@ -63,6 +67,7 @@ public class BoletoController {
             updateStatusBoleto(boleto, StatusBoletoEnum.ATRASADO);
 
             boleto.setValorBoleto(boleto.getValorBoleto() + (boleto.getValorBoleto() * ADICIONAL_MULTA));
+            this.repositoryBoleto.salvarArquivo();
         }
     } //exceptions: BoletoInexistente
 
@@ -78,6 +83,7 @@ public class BoletoController {
         if(boleto != null) {
             this.updateDataPagamento(boleto);
             this.updateStatusBoleto(boleto, StatusBoletoEnum.PAGO);
+            this.repositoryBoleto.salvarArquivo();
         }
     } //exceptions: BoletoInexistente
 }

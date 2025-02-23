@@ -5,6 +5,7 @@ import br.ufrpe.ip.projeto.controllers.GrupoConsorcioController;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
 import br.ufrpe.ip.projeto.models.Cliente;
+import br.ufrpe.ip.projeto.models.Contrato;
 import br.ufrpe.ip.projeto.models.GrupoConsorcio;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,10 +18,13 @@ public class TelaVisualizacaoContratoController {
     private IConsorcio sistema = ConsorcioFachada.getInstance();
     private Gerenciador gerenciador;
     private GrupoConsorcio grupoAtual;
-    private Cliente clienteLogado = sistema.getClienteLogado();
+    private Cliente clienteLogado;
 
     @FXML
     private Label lbNomeGrupo;
+
+    @FXML
+    private Label lbNomeCliente;
 
     @FXML
     private Label lbCpfCliente;
@@ -54,9 +58,13 @@ public class TelaVisualizacaoContratoController {
     }
 
     public void setGrupoAtual(GrupoConsorcio grupo) {
-        limparDadosContrato(); // Limpa os dados antigos antes de definir o novo grupo
+        limparDadosContrato();
         this.grupoAtual = grupo;
-        carregarDadosContrato(); // Atualiza os dados com o novo grupo
+        carregarDadosContrato();
+    }
+
+    public void setClienteLogado(Cliente clienteLogado) {
+        this.clienteLogado = clienteLogado;
     }
 
 
@@ -71,7 +79,16 @@ public class TelaVisualizacaoContratoController {
             lbNomeGrupo.setText(grupoAtual.getNomeGrupo());
             lbValorParcela.setText(String.format("%.2f", grupoAtual.getValorParcela()));
             lbTaxaAdmin.setText(String.format("%.2f", grupoAtual.getTaxaAdmin()));
-            lbCpfCliente.setText(clienteLogado.getCpf());
+
+            if (sistema.getClienteLogado() != null) {
+                lbNomeCliente.setText(sistema.getClienteLogado().getNome());
+                lbCpfCliente.setText(sistema.getClienteLogado().getCpf());
+            } else {
+                lbNomeCliente.setText("Nenhum cliente selecionado");
+                lbCpfCliente.setText("Cpf não encontrado");
+                System.out.println("Erro: Nenhum cliente logado encontrado!");
+            }
+
             lbDataInicio.setText(LocalDate.now().toString());
         } else {
             System.out.println("Nenhum grupo foi definido para exibição do contrato.");
@@ -83,6 +100,9 @@ public class TelaVisualizacaoContratoController {
         if (grupoAtual != null) {
             sistema.createContrato(clienteLogado, grupoAtual);
             System.out.println("Contrato assinado!");
+            for (Contrato contrato : sistema.getAllContratosByCPF(clienteLogado)) {
+                System.out.println(contrato.getCliente());
+            }
 
             int novoNumeroParticipantes = grupoAtual.getNumeroParticipantes() + 1;
             sistema.updateParticipantes(grupoAtual, novoNumeroParticipantes);
@@ -90,6 +110,7 @@ public class TelaVisualizacaoContratoController {
 
             btCriarContrato.setDisable(true);
             btCriarContrato.setText("Contrato Assinado");
+
 
             // Atualizar a TableView na tela principal
             if (gerenciador != null) {

@@ -7,6 +7,8 @@ import java.util.List;
 public interface IClienteRepository {
     List<Cliente> getAllClientes();
 
+    void salvarArquivo();
+
     Cliente getClienteByCpf(String cpf);
 
     void createCliente(String nomeCliente, String cpfCliente, String telefoneCliente, String emailCliente, String senhaCliente);

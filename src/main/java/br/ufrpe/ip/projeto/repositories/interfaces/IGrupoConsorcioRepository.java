@@ -6,6 +6,7 @@ import br.ufrpe.ip.projeto.enums.StatusGrupoConsorcioEnum;
 import br.ufrpe.ip.projeto.models.GrupoConsorcio;
 
 public interface IGrupoConsorcioRepository {
+    void salvarArquivo();
 
     List<GrupoConsorcio> getAllGrupos();
 

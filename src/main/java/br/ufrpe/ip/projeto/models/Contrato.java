@@ -1,12 +1,13 @@
 package br.ufrpe.ip.projeto.models;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Random;
 import java.util.UUID;
 
 import br.ufrpe.ip.projeto.enums.StatusContratoEnum;
 
-public class Contrato {
+public class Contrato implements Serializable {
     private Cliente cliente;
     private GrupoConsorcio grupoAssociado;
     private String idContrato;

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #221F26;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.ip.projeto.gui.views.TelaVisualizacaoContratoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #221F26;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.ip.projeto.gui.views.TelaVisualizacaoContratoController">
    <children>
       <VBox prefHeight="720.0" prefWidth="160.0" style="-fx-background-color: #FAFAFA;" AnchorPane.leftAnchor="0.0">
          <children>
@@ -72,7 +72,7 @@
                   <Label text="Pelo presente instrumento particular, de um lado, " />
                   <Label fx:id="lbNomeGrupo" text="Label" />
                   <Label text=", doravante denominado &quot;GRUPO&quot;, e, de outro lado, " />
-                  <Label text="Label" />
+                  <Label fx:id="lbNomeCliente" text="Label" />
                   <Label text=", inscrito no CPF sob o número " />
                   <Label fx:id="lbCpfCliente" text="Label" />
                   <Label text="," />
@@ -88,7 +88,7 @@
             <HBox layoutX="77.0" layoutY="206.0">
                <children>
                   <Label fx:id="lbTaxaAdmin" text="Label" />
-                  <Label text="\%" />
+                  <Label text="\%. É de sumo destaque que o valor da parcela está sujeita a alteações mediante ingresso de participantes no grupo." />
                </children>
             </HBox>
             <HBox layoutX="52.0" layoutY="262.0">

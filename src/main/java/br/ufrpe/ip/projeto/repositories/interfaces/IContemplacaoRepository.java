@@ -9,6 +9,8 @@ import java.util.List;
 public interface IContemplacaoRepository {
     List<Contemplacao> getAllContemplacoes();
 
+    void salvarArquivo();
+
     Contemplacao getContemplacaoByContrato(Contrato contrato);
 
     Contemplacao getContemplacaoById(String idContemplacao);
