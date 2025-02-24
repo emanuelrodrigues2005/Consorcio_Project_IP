@@ -70,8 +70,10 @@ public class TelaVisualizacaoContratoController {
 
     @FXML
     public void initialize() {
-        System.out.println("Tela de visualização de contrato inicializada.");
-        carregarDadosContrato();
+        if (clienteLogado != null) {
+            System.out.println("Tela de visualização de contrato inicializada.");
+            carregarDadosContrato();
+        }
     }
 
     private void carregarDadosContrato() {

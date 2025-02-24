@@ -58,14 +58,15 @@ public class TelaPerfilClienteController {
             lbTelefone.setText(cliente.getTelefone());
             lbEmail.setText(cliente.getEmail());
             tbvContratos.getItems().clear();
-            carregarDados();
-            configurarTabela();
-
-            tbvContratos.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2) {
-                    handleContratoSelecionado();
-                }
-            });
+            if (!(sistema.getAllContratosByCPF(cliente).isEmpty())) {
+                configurarTabela();
+                carregarDados();
+                tbvContratos.setOnMouseClicked(event -> {
+                    if (event.getClickCount() == 2) {
+                        handleContratoSelecionado();
+                    }
+                });
+            }
         }
     }
 

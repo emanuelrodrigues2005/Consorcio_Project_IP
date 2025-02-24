@@ -90,7 +90,7 @@ public class ContratoRepository implements IContratoRepository, Serializable{
     public List<Contrato> getAllContratosByCPF(Cliente cliente) {
         List<Contrato> contratosCliente = new ArrayList<>();
         for (Contrato contrato : contratos) {
-            if (contrato.getCliente().getCpf().equalsIgnoreCase(cliente.getCpf())) {
+            if (contrato.getCliente() != null && contrato.getCliente().getCpf().equalsIgnoreCase(cliente.getCpf())) {
                 contratosCliente.add(contrato);
             }
         }
@@ -100,7 +100,7 @@ public class ContratoRepository implements IContratoRepository, Serializable{
     @Override
     public Contrato getContratoByCPFIdGrupo(Cliente cliente, GrupoConsorcio grupoAssociado) {
         for (Contrato contrato : contratos) {
-            if (contrato.getCliente().getCpf().equalsIgnoreCase(cliente.getCpf()) && 
+            if (contrato.getCliente() != null && contrato.getCliente().getCpf().equalsIgnoreCase(cliente.getCpf()) &&
                 contrato.getGrupoAssociado().getIdGrupo().equals(grupoAssociado.getIdGrupo())) {
                 return contrato;
             }
