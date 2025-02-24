@@ -117,8 +117,8 @@ public class BoletoRepository implements IBoletoRepository, Serializable {
     }
 
     @Override
-    public Boleto createBoleto(Contrato contrato, LocalDate dataVencimento, int numeroParcela) {
-        Boleto boleto = new Boleto(contrato, dataVencimento, numeroParcela);
+    public Boleto createBoleto(Contrato contrato) {
+        Boleto boleto = new Boleto(contrato);
         boletos.add(boleto);
         return boleto;
     }

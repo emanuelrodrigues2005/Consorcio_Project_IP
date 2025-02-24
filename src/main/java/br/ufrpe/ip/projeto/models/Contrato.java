@@ -99,6 +99,10 @@ public class Contrato implements Serializable {
         this.saldoDevolucao = novoSaldoDevolucao;
     }
 
+    public String getNomeGrupoConsorcio() {
+        return this.grupoAssociado.getNomeGrupo();
+    }
+
     @Override
     public String toString() {
         return idContrato;
