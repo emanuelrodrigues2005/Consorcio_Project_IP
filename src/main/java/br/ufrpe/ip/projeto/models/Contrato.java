@@ -87,6 +87,10 @@ public class Contrato implements Serializable {
         this.statusContrato = status;
     }
 
+    public String getStatusContratoString() {
+        return statusContrato.name();
+    }
+
     public double getSaldoDevolucao() {
         return saldoDevolucao;
     }

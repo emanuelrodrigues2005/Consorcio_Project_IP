@@ -7,16 +7,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="287.0" prefWidth="531.0" style="-fx-background-color: #FAFAFA; -fx-background-radius: 50 50 40 40;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane prefHeight="287.0" prefWidth="531.0" style="-fx-background-color: #FAFAFA; -fx-background-radius: 50 50 40 40;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.ip.projeto.gui.views.PopUpPagamentoController">
    <children>
       <Label alignment="CENTER" prefHeight="50.0" prefWidth="531.0" style="-fx-background-color: #BA0F30; -fx-text-fill: #FAFAFA;" text="Selecione o Método de Pagamento" textAlignment="CENTER" textFill="#fafafa">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="btCartaoDebito" layoutX="47.0" layoutY="206.0" mnemonicParsing="false" onMouseClicked="#handleMudarStatusGrupo" prefHeight="48.0" prefWidth="156.0" styleClass="teg-button" text="Cartão de Débito" />
-      <Button fx:id="btPix" layoutX="45.0" layoutY="72.0" mnemonicParsing="false" onMouseClicked="#handleMudarStatusGrupo" prefHeight="48.0" prefWidth="156.0" styleClass="teg-button" text="Pix" />
-      <Button fx:id="btCartaoCredito" layoutX="45.0" layoutY="139.0" maxWidth="156.0" mnemonicParsing="false" onMouseClicked="#handleMudarStatusGrupo" prefHeight="48.0" prefWidth="156.0" styleClass="teg-button" text="Cartão de Crédito" />
+      <Button fx:id="btCartaoDebito" layoutX="47.0" layoutY="206.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="156.0" styleClass="teg-button" text="Cartão de Débito" />
+      <Button fx:id="btPix" layoutX="45.0" layoutY="72.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="156.0" styleClass="teg-button" text="Pix" />
+      <Button fx:id="btCartaoCredito" layoutX="45.0" layoutY="139.0" maxWidth="156.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="156.0" styleClass="teg-button" text="Cartão de Crédito" />
       <Label layoutX="312.0" layoutY="75.0" text="Valor Parcela:" underline="true">
          <font>
             <Font name="Verdana" size="20.0" />

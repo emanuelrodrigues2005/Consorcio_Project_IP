@@ -29,6 +29,11 @@ public class ContratoController {
 
     public void createContrato(Cliente cliente, GrupoConsorcio grupoConsorcio) {
         if (!this.repositorioContrato.existeContrato(this.repositorioContrato.getContratoByCPFIdGrupo(cliente, grupoConsorcio))) {
+            if(cliente == null) {
+                return;
+            } else if (grupoConsorcio == null) {
+                return;
+            }
             this.repositorioContrato.createContrato(cliente, grupoConsorcio);
             this.repositorioContrato.salvarArquivo();
         }

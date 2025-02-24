@@ -45,6 +45,10 @@ public class Boleto implements Serializable {
 
     public StatusBoletoEnum getStatusBoleto() { return statusBoleto; }
 
+    public String getStatusBoletoString() {
+        return statusBoleto.name();
+    }
+
     public int getNumeroParcela() { return numeroParcela; }
 
     public void setDataVencimento(LocalDate dataVencimento) { this.dataVencimento = dataVencimento; }

@@ -3,11 +3,15 @@ package br.ufrpe.ip.projeto.gui;
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
 import br.ufrpe.ip.projeto.gui.views.*;
+import br.ufrpe.ip.projeto.models.Boleto;
 import br.ufrpe.ip.projeto.models.Cliente;
+import br.ufrpe.ip.projeto.models.Contrato;
 import br.ufrpe.ip.projeto.models.GrupoConsorcio;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class Gerenciador {
@@ -25,6 +29,7 @@ public class Gerenciador {
     private Parent telaPrincipalADM;
     private Parent telaVisualizacaoContrato;
     private Parent telaEdicaoGrupo;
+    private Parent telaDadosContrato;
 
     private Stage stagePrincipal;
     private Scene scenePrincipal;
@@ -40,6 +45,7 @@ public class Gerenciador {
     private TelaEscolhaLoginController telaEscolhaLoginController;
     private TelaLoginAdmController telaLoginAdmController;
     private TelaEditGrupoController telaEdicaoGrupoController;
+    private TelaDadosContratoController telaDadosContratoController;
 
     private Gerenciador() {
         try{
@@ -97,6 +103,11 @@ public class Gerenciador {
                 telaEdicaoGrupo = loaderTelaEdicaoGrupo.load();
                 telaEdicaoGrupoController = loaderTelaEdicaoGrupo.getController();
                 telaEdicaoGrupoController.setGerenciador(this);
+
+                FXMLLoader loaderTelaDadosContrato = new FXMLLoader(getClass().getResource(TelasEnum.TELA_DADOS_CONTRATO.getCaminho()));
+                telaDadosContrato = loaderTelaDadosContrato.load();
+                telaDadosContratoController = loaderTelaDadosContrato.getController();
+                telaDadosContratoController.setGerenciador(this);
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(-1);
@@ -187,5 +198,33 @@ public class Gerenciador {
         telaEdicaoGrupoController.initialize();
         telaEdicaoGrupoController.setGrupoAtual(grupo);
         scenePrincipal.setRoot(telaEdicaoGrupo);
+    }
+
+    public void abrirTelaDadosContrato(Contrato contrato) {
+        telaDadosContratoController.initialize();
+        telaDadosContratoController.setContratoAtual(contrato);
+        scenePrincipal.setRoot(telaDadosContrato);
+    }
+
+    public void abrirPopUpPagamento(Boleto boleto) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(TelasEnum.POP_UP_PAGAMENTO.getCaminho()));
+            Pane popupRoot = loader.load();
+
+            PopUpPagamentoController controller = loader.getController();
+            controller.setBoletoAtual(boleto);
+
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.setTitle("Pagamento do Boleto");
+            popupStage.setScene(new Scene(popupRoot));
+            popupStage.setResizable(false);
+
+            controller.setPopupStage(popupStage); // Para permitir fechar a janela no controller
+
+            popupStage.showAndWait(); // Bloqueia interação com a tela principal até fechar o popup
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

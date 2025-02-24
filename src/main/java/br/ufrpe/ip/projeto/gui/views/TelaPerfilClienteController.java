@@ -5,11 +5,11 @@ import br.ufrpe.ip.projeto.controllers.IConsorcio;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
 import br.ufrpe.ip.projeto.models.Cliente;
 import br.ufrpe.ip.projeto.models.Contrato;
-import javafx.event.ActionEvent;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 public class TelaPerfilClienteController {
@@ -42,25 +42,13 @@ public class TelaPerfilClienteController {
     private Label lbEmail;
 
     @FXML
-    private Label lbNomeGrupo;
+    private TableView<Contrato> tbvContratos;
 
     @FXML
-    private Label lbParcelasPagas;
+    private TableColumn<Contrato, String> tbvcolumnAutomovel;
 
     @FXML
-    private Label lbValorPago;
-
-    @FXML
-    private Label lbSaldoDevedor;
-
-    @FXML
-    private Label lbStatusContrato;
-
-    @FXML
-    private Label lbDataInicio;
-
-    @FXML
-    private ListView<Contrato> ltvContratos;
+    private TableColumn<Contrato, String> tbvcolumnStatus;
 
     @FXML
     public void initialize() {
@@ -69,20 +57,26 @@ public class TelaPerfilClienteController {
             lbCPF.setText(cliente.getCpf());
             lbTelefone.setText(cliente.getTelefone());
             lbEmail.setText(cliente.getEmail());
-            ltvContratos.getItems().clear();
-            ltvContratos.getItems().setAll(sistema.getAllContratosByCPF(cliente));
-            lbNomeGrupo.setVisible(false);
-            lbParcelasPagas.setVisible(false);
-            lbValorPago.setVisible(false);
-            lbSaldoDevedor.setVisible(false);
-            lbStatusContrato.setVisible(false);
-            lbDataInicio.setVisible(false);
-            ltvContratos.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-                if (newSelection != null) {
-                    setInfoContrato(newSelection);
+            tbvContratos.getItems().clear();
+            carregarDados();
+            configurarTabela();
+
+            tbvContratos.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2) {
+                    handleContratoSelecionado();
                 }
             });
         }
+    }
+
+    private void carregarDados() {
+        ObservableList<Contrato> contratos = FXCollections.observableArrayList(sistema.getAllContratosByCPF(cliente));
+        tbvContratos.setItems(contratos);
+    }
+
+    private void configurarTabela() {
+        tbvcolumnAutomovel.setCellValueFactory(new PropertyValueFactory<>("nomeGrupo"));
+        tbvcolumnStatus.setCellValueFactory(new PropertyValueFactory<>("statusContratoString"));
     }
 
     public void setGerenciador(Gerenciador screenManager) {
@@ -91,26 +85,6 @@ public class TelaPerfilClienteController {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-    }
-
-    public void setLtvContratos() {
-        ltvContratos.getItems().setAll(sistema.getAllContratosByCPF(cliente));
-    }
-
-    public void setInfoContrato(Contrato contrato) {
-        lbNomeGrupo.setVisible(true);
-        lbParcelasPagas.setVisible(true);
-        lbValorPago.setVisible(true);
-        lbSaldoDevedor.setVisible(true);
-        lbStatusContrato.setVisible(true);
-        lbDataInicio.setVisible(true);
-
-        lbNomeGrupo.setText(contrato.getGrupoAssociado() != null ? contrato.getGrupoAssociado().getNomeGrupo() : "Não informado");
-        lbParcelasPagas.setText(String.valueOf(contrato.getParcelasPagas()));
-        lbValorPago.setText(String.format("R$ %.2f", contrato.getValorPago()));
-        lbSaldoDevedor.setText(String.format("R$ %.2f", contrato.getSaldoDevedor()));
-        lbStatusContrato.setText(contrato.getStatusContrato() != null ? contrato.getStatusContrato().toString() : "Não informado");
-        lbDataInicio.setText(contrato.getDataInicio() != null ? contrato.getDataInicio().toString() : "Não informado");
     }
 
     @FXML
@@ -129,5 +103,17 @@ public class TelaPerfilClienteController {
     public void handleTelaEscolherLogin(MouseEvent event) {
         System.out.println("Redirecionando tela escolher forma de login...");
         this.screenManager.abrirTelaEscolhaLogin();
+    }
+
+    @FXML
+    public void handleContratoSelecionado() {
+        Contrato contratoSelecionado = tbvContratos.getSelectionModel().getSelectedItem();
+
+        if (contratoSelecionado != null) {
+            screenManager.abrirTelaDadosContrato(contratoSelecionado);
+            System.out.println("Redirecionando contrato selecionado...");
+        } else {
+            System.out.println("Nenhum grupo foi selecionado.");
+        }
     }
 }
