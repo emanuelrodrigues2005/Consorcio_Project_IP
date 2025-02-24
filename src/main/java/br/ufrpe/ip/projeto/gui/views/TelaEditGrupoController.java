@@ -12,7 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
-
 public class TelaEditGrupoController {
 	private IConsorcio sistema = ConsorcioFachada.getInstance();
 	private Gerenciador gerenciador;
@@ -113,7 +112,7 @@ public class TelaEditGrupoController {
 		if (grupoAtual != null) {
 			this.sistema.updateStatusGrupo(grupoAtual, StatusGrupoConsorcioEnum.ENCERRADO);
 			System.out.println("Grupo Encerrado com sucesso!");
-			carregarDadosGrupo(grupoAtual.getIdGrupo()); // Atualiza a interface
+			carregarDadosGrupo(grupoAtual.getIdGrupo());
 			btEncerrarGrupo.setText("Grupo Encerrado");
 			btEncerrarGrupo.setDisable(true);
 		}

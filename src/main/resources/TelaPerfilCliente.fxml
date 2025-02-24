@@ -86,7 +86,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <TableView fx:id="tbvContratos" layoutX="628.0" layoutY="112.0" prefHeight="288.0" prefWidth="272.0" style="-fx-border-width: 4; -fx-background-color: #fafafa; -fx-border-color: #BA0F30;" styleClass="sombra" stylesheets="@style.css">
+            <TableView fx:id="tbvContratos" layoutX="628.0" layoutY="112.0" onMouseClicked="#handleContratoSelecionado" prefHeight="288.0" prefWidth="272.0" style="-fx-border-width: 4; -fx-background-color: #fafafa; -fx-border-color: #BA0F30;" styleClass="sombra" stylesheets="@style.css">
                <columns>
                   <TableColumn fx:id="tbvcolumnAutomovel" prefWidth="148.0" text="Automóvel" />
                   <TableColumn fx:id="tbvcolumnStatus" prefWidth="116.0" text="Status" />

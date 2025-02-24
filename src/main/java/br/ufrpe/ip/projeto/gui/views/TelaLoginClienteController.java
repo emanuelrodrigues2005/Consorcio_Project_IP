@@ -7,6 +7,7 @@ import br.ufrpe.ip.projeto.models.Administrador;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
@@ -28,7 +29,7 @@ public class TelaLoginClienteController {
     private TextField txtCpf;
 
     @FXML
-    private TextField txtSenha;
+    private PasswordField pswSenha;
 
     public void setGerenciador(Gerenciador gerenciador) {
         this.gerenciador = gerenciador;
@@ -37,7 +38,7 @@ public class TelaLoginClienteController {
     @FXML
     public void initialize() {
         txtCpf.setText("");
-        txtSenha.setText("");
+        pswSenha.setText("");
         cbManterConectado.setSelected(false);
     }
 
@@ -52,7 +53,7 @@ public class TelaLoginClienteController {
     private void handleTelaPrincipalCliente(MouseEvent event) {
         System.out.println("Login realizado com sucesso!");
         String cpf = this.txtCpf.getText();
-        String senha = this.txtSenha.getText();
+        String senha = this.pswSenha.getText();
         this.sistema.efutuarLogin(cpf, senha);
         this.gerenciador.abrirTelaPrincipalCliente();
         clearCampos();
@@ -60,6 +61,6 @@ public class TelaLoginClienteController {
 
     private void clearCampos() {
         this.txtCpf.clear();
-        this.txtSenha.clear();
+        this.pswSenha.clear();
     }
 }

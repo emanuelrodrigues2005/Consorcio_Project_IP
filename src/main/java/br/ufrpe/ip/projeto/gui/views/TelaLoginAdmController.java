@@ -6,6 +6,7 @@ import br.ufrpe.ip.projeto.gui.Gerenciador;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
@@ -27,10 +28,10 @@ public class TelaLoginAdmController {
     private TextField txtCpf;
 
     @FXML
-    private TextField txtSenha;
+    private PasswordField pswSenha;
 
     @FXML
-    private TextField txtCodeAdm;
+    private PasswordField pswCodeAdm;
 
     public void setGerenciador(Gerenciador gerenciador) {
         this.gerenciador = gerenciador;
@@ -39,8 +40,8 @@ public class TelaLoginAdmController {
     @FXML
     public void initialize() {
         txtCpf.setText("");
-        txtSenha.setText("");
-        txtCodeAdm.setText("");
+        pswSenha.setText("");
+        pswCodeAdm.setText("");
         cbManterConectado.setSelected(false);
     }
 
@@ -54,12 +55,12 @@ public class TelaLoginAdmController {
     @FXML
     private void handleTelaPrincipalAdm(MouseEvent event) {
         String cpf = this.txtCpf.getText();
-        String senha = this.txtSenha.getText();
+        String senha = this.pswSenha.getText();
         this.sistema.efutuarLogin(cpf, senha);
-        if (txtCodeAdm.getText().equals("2702")) {
+        if (pswCodeAdm.getText().equals("2702")) {
             this.gerenciador.abrirTelaPrincipalADM();
             System.out.println("Login realizado com sucesso!");
-        } else if (txtCodeAdm.getText().isEmpty() || !txtCodeAdm.getText().equals("2702")) {
+        } else if (pswSenha.getText().isEmpty() || !pswCodeAdm.getText().equals("2702")) {
             //CampoInvalido
         }
         clearCampos();
@@ -67,6 +68,7 @@ public class TelaLoginAdmController {
 
     private void clearCampos() {
         this.txtCpf.clear();
-        this.txtSenha.clear();
+        this.pswSenha.clear();
+        this.pswCodeAdm.clear();
     }
 }
