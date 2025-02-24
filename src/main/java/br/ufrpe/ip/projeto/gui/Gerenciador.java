@@ -178,6 +178,7 @@ public class Gerenciador {
     public void abriTelaVisualizacaoContrato(GrupoConsorcio grupo) {
         telaVisualizacaoContratoController.setClienteLogado(sistema.getClienteLogado());
         telaVisualizacaoContratoController.setGrupoAtual(grupo);
+        telaVisualizacaoContratoController.initialize();
         scenePrincipal.setRoot(telaVisualizacaoContrato);
     }
 
