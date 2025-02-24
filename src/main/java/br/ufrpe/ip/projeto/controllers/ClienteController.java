@@ -29,29 +29,39 @@ public class ClienteController {
         return this.repositorioCliente.getClienteByCpf(cpf);
     } //exceptions: ClienteInexistente
 
-    public void createCliente(String nomeCliente, String cpfCliente, String telefoneCliente, String emailCliente) {
+    public void createCliente(String nomeCliente, String cpfCliente, String telefoneCliente, String emailCliente, String senhaCliente) {
         if(validarCpf(cpfCliente)) {
             if(repositorioCliente.getClienteByCpf(cpfCliente) == null) {
-                repositorioCliente.createCliente(nomeCliente, cpfCliente, telefoneCliente, emailCliente);
+                repositorioCliente.createCliente(nomeCliente, cpfCliente, telefoneCliente, emailCliente, senhaCliente);
+                this.repositorioCliente.salvarArquivo();
             }
         }
     } //exceptions: ClienteDuplicado, CampoInvalido
 
     public void updateNome(String nomeCliente, String cpfCliente) {
         this.repositorioCliente.updateNome(getClienteByCpf(cpfCliente), nomeCliente);
+        this.repositorioCliente.salvarArquivo();
     } //exceptions: CampoInvalido, ClienteInexistente
 
     public void updateTelefone(String telefoneCliente, String cpfCliente) {
         this.repositorioCliente.updateTelefone(getClienteByCpf(cpfCliente), telefoneCliente);
+        this.repositorioCliente.salvarArquivo();
     } //exceptions: CampoInvalido, ClienteInexistente
 
     public void updateEmail(String emailCliente, String cpfCliente) {
         this.repositorioCliente.updateEmail(getClienteByCpf(cpfCliente), emailCliente);
+        this.repositorioCliente.salvarArquivo();
     } //exceptions: CampoInvalido, ClienteInexistente
+
+    public void updateSenha(String senhaCliente, String cpfCliente) {
+        this.repositorioCliente.updateSenha(getClienteByCpf(cpfCliente), senhaCliente);
+        this.repositorioCliente.salvarArquivo();
+    }
 
     public void deleteCliente(String cpfCliente) {
         if(repositorioCliente.getClienteByCpf(cpfCliente) != null) {
             repositorioCliente.deleteCliente(cpfCliente);
+            this.repositorioCliente.salvarArquivo();
         }
     } //exceptions: ClienteInexistente
 

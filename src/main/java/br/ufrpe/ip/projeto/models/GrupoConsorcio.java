@@ -2,25 +2,28 @@ package br.ufrpe.ip.projeto.models;
 
 import br.ufrpe.ip.projeto.enums.StatusGrupoConsorcioEnum;
 
+import java.io.Serializable;
 import java.util.Random;
 import java.util.UUID;
 
-public class GrupoConsorcio {
+public class GrupoConsorcio implements Serializable {
     private String nomeGrupo;
     private String idGrupo;
-    private int numeroParticipantes; //Adicionar número Máximo
+    private int numeroParticipantes;
+    private int numeroMaximoParticipantes;
     private double valorTotal;
     private double taxaAdmin;
     private double valorParcela; //Atributo Contrato
     private StatusGrupoConsorcioEnum statusGrupoConsorcio;
 
-    public GrupoConsorcio(String nomeGrupo, int numeroParticipantes, double valorTotal, double taxaAdmin) {
+    public GrupoConsorcio(String nomeGrupo, int numeroMaximoParticipantes, double valorTotal, double taxaAdmin) {
         this.nomeGrupo = nomeGrupo;
         this.idGrupo = UUID.randomUUID().toString();
-        this.numeroParticipantes = numeroParticipantes;
+        this.numeroParticipantes = 0;
+        this.numeroMaximoParticipantes = numeroMaximoParticipantes;
         this.valorTotal = valorTotal;
-        this.taxaAdmin = taxaAdmin;
-        this.valorParcela = ((getValorTotal() + getValorTotal() * getTaxaAdmin()) / getNumeroParticipantes());
+        this.taxaAdmin = taxaAdmin/100;
+        this.valorParcela = ((getValorTotal() + (getValorTotal() * getTaxaAdmin())) / getNumeroMaximoParticipantes());
         this.statusGrupoConsorcio = StatusGrupoConsorcioEnum.ATIVO;
     }
 
@@ -57,7 +60,7 @@ public class GrupoConsorcio {
     }
 
     public void setTaxaAdmin(double taxaAdmin) {
-        this.taxaAdmin = taxaAdmin;
+        this.taxaAdmin = taxaAdmin/100;
     }
 
     public double getValorParcela() {
@@ -76,6 +79,18 @@ public class GrupoConsorcio {
         this.statusGrupoConsorcio = statusGrupoConsorcio;
     }
 
+    public String getStatusGrupoConsorcioString() {
+        return statusGrupoConsorcio.name();
+    }
+
+    public int getNumeroMaximoParticipantes() {
+        return numeroMaximoParticipantes;
+    }
+
+    public void setNumeroMaximoParticipantes(int numeroMaximoParticipantes) {
+        this.numeroMaximoParticipantes = numeroMaximoParticipantes;
+    }
+
     // exibirSaldoDevedor é função da gui
 
     // exibirFinanças é função da gui
@@ -83,6 +98,7 @@ public class GrupoConsorcio {
     public String toString() {
         return "Grupo: " + getNomeGrupo() + " { "
                 + "\n  Número de Participantes: " + getNumeroParticipantes() + " | "
+                + "\n id:" + getIdGrupo() + " | "
                 + "\n  Valor total do Consórcio: " + getValorTotal() + " | "
                 + "\n  Valor de Parcela: " + getValorParcela() + " | "
                 + "\n  Taxa de Administração: " + getTaxaAdmin()

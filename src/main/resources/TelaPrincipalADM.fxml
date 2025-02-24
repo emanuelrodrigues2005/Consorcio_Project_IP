@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #221F26;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.ip.projeto.gui.views.TelaPrincipalADMController">
+   <children>
+      <VBox prefHeight="720.0" prefWidth="160.0" style="-fx-background-color: #FAFAFA;" AnchorPane.leftAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="76.0" prefWidth="160.0" text="ConsorX" textFill="#ba0f30">
+               <font>
+                  <Font name="Verdana Bold Italic" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbHomeADM" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="76.0" prefWidth="160.0" style="-fx-background-color: #BA0F30;" text="Home" textFill="#fafafa" underline="true">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbPerfilADM" alignment="CENTER" layoutX="10.0" layoutY="112.0" onMouseClicked="#handleTelaPerfilADM" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30; -fx-background-color: FAFAFA;" text="Perfil">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbSair" alignment="CENTER" onMouseClicked="#handleTelaLogin" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30; -fx-background-color: FAFAFA;" text="Sair">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" layoutX="249.0" layoutY="606.0" prefHeight="40.0" prefWidth="154.0" spacing="12.0">
+         <children>
+            <Text fx:id="btPreviousADM" fill="#ba0f30" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="page-button" text="◀">
+               <font>
+                  <Font size="56.0" />
+               </font>
+            </Text>
+            <Label text="1/5" textFill="#fafafa">
+               <font>
+                  <Font name="Verdana Bold" size="24.0" />
+               </font>
+            </Label>
+            <Text fx:id="btNextADM" fill="#ba0f30" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="page-button" text="▶">
+               <font>
+                  <Font size="56.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
+      <Button fx:id="btAdd" layoutX="1124.0" layoutY="621.0" mnemonicParsing="false" onMouseClicked="#openTelaCriarGrupo" style="-fx-background-radius: 50;" styleClass="add-button" stylesheets="@style.css" text="+" textFill="#bcbcbc" />
+      <TextField fx:id="tfSearchADM" layoutX="256.0" layoutY="84.0" styleClass="id-search-bar" stylesheets="@style.css" />
+      <TableView fx:id="tbvGrupos" layoutX="235.0" layoutY="145.0" prefHeight="450.0" prefWidth="928.0" style="-fx-background-color: #FAFAFA;" stylesheets="@style.css" AnchorPane.leftAnchor="256.0" AnchorPane.topAnchor="156.0">
+         <columns>
+            <TableColumn fx:id="tbcAllGrupos" prefWidth="200.0" text="Grupos" />
+            <TableColumn fx:id="tbcParticipantes" minWidth="0.0" prefWidth="176.0" text="Participantes" />
+            <TableColumn fx:id="tbcValorTotal" prefWidth="220.0" text="Valor Total do Automóvel" />
+            <TableColumn fx:id="tbcTaxaAdmin" prefWidth="224.0" text="Taxa de Administração (%)" />
+            <TableColumn fx:id="tbcStatusGrupo" prefWidth="108.0" text="Status" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

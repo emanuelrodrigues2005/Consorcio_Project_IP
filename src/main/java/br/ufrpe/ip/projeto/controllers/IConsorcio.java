@@ -35,13 +35,15 @@ public interface IConsorcio {
 
     Cliente getClienteByCpf(String cpf);
 
-    void createCliente(String nomeCliente, String cpfCliente, String telefoneCliente, String emailCliente);
+    void createCliente(String nomeCliente, String cpfCliente, String telefoneCliente, String emailCliente, String senhaCliente);
 
     void updateNome(String nomeCliente, String cpfCliente);
 
     void updateTelefone(String telefoneCliente, String cpfCliente);
 
     void updateEmail(String emailCliente, String cpfCliente);
+
+    void updateSenha(String senhaCliente, String cpfCliente);
 
     void deleteCliente(String cpfCliente);
 
@@ -69,6 +71,8 @@ public interface IConsorcio {
 
     List<Contrato> getContratosByIdGrupo(GrupoConsorcio grupoAssociado);
 
+    List<Contrato> getAllContratosByCPF(Cliente cliente);
+
     boolean existeContrato(Contrato contrato);
 
     Contrato getContratoByIdContrato(String idContrato);
@@ -90,7 +94,7 @@ public interface IConsorcio {
 
     void deleteContrato(Contrato contrato);
 
-    void createGrupoConsorcio(String nomeGrupo, int numeroParticipantes, double valorTotal, double taxaAdmin);
+    void createGrupoConsorcio(String nomeGrupo, int numeroMaximoParticipantes, double valorTotal, double taxaAdmin);
 
     GrupoConsorcio getGrupoById(String idGrupo);
 
@@ -109,4 +113,8 @@ public interface IConsorcio {
     void reajusteParcela(GrupoConsorcio grupoConsorcio);
 
     double getValorPago(String idGrupo);
+
+    void efutuarLogin(String cpf, String senha);
+
+    Cliente getClienteLogado();
 }

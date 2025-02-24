@@ -1,5 +1,6 @@
 package br.ufrpe.ip.projeto.repositories;
 
+import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,7 +12,7 @@ import br.ufrpe.ip.projeto.repositories.interfaces.IContratoRepository;
 import br.ufrpe.ip.projeto.enums.StatusContratoEnum;
 import br.ufrpe.ip.projeto.models.Cliente;
 
-public class ContratoRepository implements IContratoRepository{
+public class ContratoRepository implements IContratoRepository, Serializable{
     private static ContratoRepository instancia;
     private ArrayList<Contrato> contratos;
     
@@ -22,9 +23,62 @@ public class ContratoRepository implements IContratoRepository{
     
     public static ContratoRepository getInstancia() {
         if (instancia == null) {
-            instancia = new ContratoRepository();
+            ContratoRepository.instancia = ContratoRepository.lerArquivo();
         }
-        return instancia;
+        return ContratoRepository.instancia;
+    }
+
+    private static ContratoRepository lerArquivo() {
+        ContratoRepository instanceLocal;
+
+        File in = new File("contratos.dat");
+        FileInputStream fis;
+        ObjectInputStream ois = null;
+
+        try {
+            fis = new FileInputStream(in);
+            ois = new ObjectInputStream(fis);
+            Object o = ois.readObject();
+            instanceLocal = (ContratoRepository) o;
+        } catch (Exception e) {
+            instanceLocal = new ContratoRepository();
+        } finally {
+            if (ois != null) {
+                try {
+                    ois.close();
+                } catch (IOException e) {
+                    //ver oq colocar aqui
+                }
+            }
+        }
+        return instanceLocal;
+    }
+
+    @Override
+    public void salvarArquivo() {
+        if(ContratoRepository.getInstancia() == null) {
+            return;
+        }
+
+        File out = new File("contratos.dat");
+        FileOutputStream fos;
+        ObjectOutputStream oos = null;
+
+        try {
+            fos = new FileOutputStream(out);
+            oos = new ObjectOutputStream(fos);
+            oos.writeObject(ContratoRepository.getInstancia());
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if(oos != null) {
+                try {
+                    oos.close();
+                } catch (IOException e) {
+                    //Ver oq colocar aqui
+                }
+            }
+        }
     }
     
     @Override
@@ -36,7 +90,7 @@ public class ContratoRepository implements IContratoRepository{
     public List<Contrato> getAllContratosByCPF(Cliente cliente) {
         List<Contrato> contratosCliente = new ArrayList<>();
         for (Contrato contrato : contratos) {
-            if (contrato.getCliente().getCpf().equalsIgnoreCase(cliente.getCpf())) {
+            if (contrato.getCliente() != null && contrato.getCliente().getCpf().equalsIgnoreCase(cliente.getCpf())) {
                 contratosCliente.add(contrato);
             }
         }
@@ -46,7 +100,7 @@ public class ContratoRepository implements IContratoRepository{
     @Override
     public Contrato getContratoByCPFIdGrupo(Cliente cliente, GrupoConsorcio grupoAssociado) {
         for (Contrato contrato : contratos) {
-            if (contrato.getCliente().getCpf().equalsIgnoreCase(cliente.getCpf()) && 
+            if (contrato.getCliente() != null && contrato.getCliente().getCpf().equalsIgnoreCase(cliente.getCpf()) &&
                 contrato.getGrupoAssociado().getIdGrupo().equals(grupoAssociado.getIdGrupo())) {
                 return contrato;
             }
@@ -68,7 +122,7 @@ public class ContratoRepository implements IContratoRepository{
     @Override
     public boolean existeContrato(Contrato contrato) {
         for (Contrato contrato2 : contratos) {
-            if (contrato2.getIdContrato().equals(contrato.getIdContrato())) {
+            if (contrato != null && contrato2.getIdContrato().equals(contrato.getIdContrato())) {
                 return true;
             }
         }

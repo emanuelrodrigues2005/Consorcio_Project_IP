@@ -1,9 +1,10 @@
 package br.ufrpe.ip.projeto.models;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class Contemplacao {
+public class Contemplacao implements Serializable {
 	private String idContemplacao;
 	private Contrato contratoContemplacao;
 	private LocalDate dataContemplacao;

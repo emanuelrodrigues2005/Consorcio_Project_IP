@@ -1,98 +1,149 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #221F26;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #221F26;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.ip.projeto.gui.views.TelaVisuGrupoController">
    <children>
-      <VBox prefHeight="720.0" prefWidth="160.0" style="-fx-background-color: #FAFAFA;" AnchorPane.leftAnchor="0.0">
+      <Pane layoutX="261.0" layoutY="159.0" prefHeight="450.0" prefWidth="928.0" style="-fx-background-color: #FAFAFA; -fx-border-radius: 16; -fx-background-radius: 50  50 40 40;" AnchorPane.bottomAnchor="118.0" AnchorPane.leftAnchor="256.0" AnchorPane.rightAnchor="96.0" AnchorPane.topAnchor="152.0">
          <children>
-            <Button fx:id="btHome" mnemonicParsing="false" onAction="#openHome" prefHeight="76.0" prefWidth="160.0" style="-fx-font-size: 20; -fx-background-color: #BA0F30;" text="Home">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="40.0" top="160.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="btGrupos" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#openAllGrupos" prefHeight="76.0" prefWidth="160.0" style="-fx-font-size: 20; -fx-background-color: #BA0F30;" text="Grupos">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="40.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="btPerfil" layoutX="10.0" layoutY="86.0" mnemonicParsing="false" onAction="#openPerfil" prefHeight="76.0" prefWidth="160.0" style="-fx-font-size: 20; -fx-background-color: #BA0F30;" text="Perfil">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-            </Button>
-         </children></VBox>
-      <Pane layoutX="238.0" layoutY="127.0" prefHeight="450.0" prefWidth="928.0" style="-fx-background-color: #FAFAFA; -fx-border-radius: 16;" AnchorPane.bottomAnchor="118.0" AnchorPane.leftAnchor="256.0" AnchorPane.rightAnchor="96.0" AnchorPane.topAnchor="152.0">
-         <children>
-            <Label alignment="CENTER" prefHeight="50.0" prefWidth="928.0" style="-fx-background-color: #BA0F30; -fx-text-fill: #FAFAFA;" text="Grupos Consórcios" textAlignment="CENTER" textFill="#fafafa">
+            <Label alignment="CENTER" prefHeight="50.0" prefWidth="928.0" style="-fx-background-color: #BA0F30; -fx-text-fill: #FAFAFA; -fx-background-radius: 40 40 0 0;" text="Grupos Consórcios" textAlignment="CENTER" textFill="#fafafa">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="418.0" layoutY="137.0" style="-fx-text-fill: #221F26;" text="Valor Total:" underline="true">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="99.0" layoutY="137.0" style="-fx-text-fill: #221F26;" text="Automóvel Consorciado:" underline="true">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label fx:id="lbAutoConsor" layoutX="164.0" layoutY="164.0" style="-fx-text-fill: #221F26;" text="Label">
-               <font>
-                  <Font size="28.0" />
-               </font>
-            </Label>
-            <Label fx:id="lbValorTotal" layoutX="431.0" layoutY="164.0" style="-fx-text-fill: #221F26;" text="Label">
-               <font>
-                  <Font size="28.0" />
-               </font>
-            </Label>
-            <Label layoutX="676.0" layoutY="94.0" style="-fx-text-fill: #221F26;" text="Total de Participantes:" underline="true">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <TextField fx:id="txtTotalParticipantes" layoutX="860.0" layoutY="97.0" prefHeight="20.0" prefWidth="20.0" />
             <Line endX="217.699951171875" layoutX="339.0" layoutY="244.0" startX="-257.4999694824219" />
-            <Label layoutX="111.0" layoutY="285.0" style="-fx-text-fill: #221F26;" text="Taxa de Administração:" underline="true">
+            <Button fx:id="btAcessarContrato" layoutX="654.0" layoutY="377.0" mnemonicParsing="false" onMouseClicked="#handleTelaVisualizacaoContrato" prefHeight="50.0" prefWidth="219.0" style="-fx-text-fill: #FAFAFA; -fx-background-color: #BA0F30; -fx-background-radius: 50;" styleClass="sombra" stylesheets="@style.css" text="Acessar Contrato">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Verdana Bold" size="16.0" />
+               </font>
+            </Button>
+            <Label layoutX="102.0" layoutY="427.0" text="*Parcela sujeita a reajustes dependendo da quantidade de participantes do grupo" />
+            <HBox alignment="CENTER" layoutX="324.0" layoutY="125.0" prefHeight="60.0" prefWidth="281.0">
+               <children>
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="19.0" prefWidth="30.0">
+                     <children>
+                        <Label style="-fx-padding: 0 0 8 0;" text="R$" textFill="#221f26">
+                           <font>
+                              <Font name="Arial Black" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Label fx:id="lbValorTotal" text="0" textFill="#221f26">
+                     <font>
+                        <Font name="Verdana" size="40.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Label fx:id="lbAutoConsor" alignment="TOP_CENTER" layoutX="40.0" layoutY="125.0" prefHeight="85.0" prefWidth="248.0" text="-------------" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Verdana Bold" size="16.0" />
                </font>
             </Label>
-            <Label fx:id="lbTaxaAdmin" layoutX="164.0" layoutY="312.0" style="-fx-text-fill: #221F26;" text="Label">
+            <Label layoutX="99.0" layoutY="89.0" text="Automóvel" underline="true">
                <font>
-                  <Font size="28.0" />
+                  <Font name="Verdana" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="419.0" layoutY="285.0" style="-fx-text-fill: #221F26;" text="Valor Pago:" underline="true">
+            <Label layoutX="410.0" layoutY="89.0" text="Valor Total" textFill="#221f26" underline="true">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Verdana" size="24.0" />
                </font>
             </Label>
-            <Label fx:id="lbValorPago" layoutX="430.0" layoutY="312.0" style="-fx-text-fill: #221F26;" text="Label">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="62.0" layoutY="247.0" prefHeight="85.0" prefWidth="204.0" text="Taxa de Administração (%):" textAlignment="CENTER" underline="true" wrapText="true">
                <font>
-                  <Font size="28.0" />
+                  <Font name="Verdana" size="20.0" />
                </font>
             </Label>
-            <ListView layoutX="628.0" layoutY="128.0" prefHeight="288.0" prefWidth="272.0" />
+            <HBox alignment="CENTER" layoutX="99.0" layoutY="316.0" prefHeight="60.0" prefWidth="130.0">
+               <children>
+                  <Label fx:id="lbTaxaAdmin" text="--">
+                     <font>
+                        <Font name="Verdana" size="40.0" />
+                     </font>
+                  </Label>
+                  <Label text="\%">
+                     <font>
+                        <Font name="Verdana" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Label layoutX="411.0" layoutY="277.0" text="Valor Parcela:" underline="true">
+               <font>
+                  <Font name="Verdana" size="20.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" layoutX="335.0" layoutY="308.0" prefHeight="60.0" prefWidth="281.0">
+               <children>
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="19.0" prefWidth="30.0">
+                     <children>
+                        <Label style="-fx-padding: 0 0 8 0;" text="R$">
+                           <font>
+                              <Font name="Arial Black" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Label fx:id="lbValorParcela" text="0">
+                     <font>
+                        <Font name="Verdana" size="40.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <VBox alignment="TOP_CENTER" layoutX="650.0" layoutY="135.0" spacing="16.0">
+               <children>
+                  <Label style="-fx-text-fill: black;" text="Total de participantes:" underline="true">
+                     <font>
+                        <Font name="Verdana" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbTotalParticipantes" style="-fx-text-fill: fafafa; -fx-background-color: #BA0F30; -fx-padding: 0 24 0 24; -fx-background-radius: 80;" styleClass="sombra" stylesheets="@style.css" text="0" textFill="#fafafa">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
          </children>
       </Pane>
+      <VBox prefHeight="720.0" prefWidth="160.0" style="-fx-background-color: #FAFAFA;">
+         <children>
+            <Label alignment="CENTER" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30;" text="ConsorX" textFill="#ba0f30">
+               <font>
+                  <Font name="Verdana Bold Italic" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbHomeCliente" alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#handleTelaHomeCliente" prefHeight="76.0" prefWidth="160.0" style="-fx-background-color: #FAFAFA; -fx-text-fill: #BA0F30;" text="Home" textFill="#fafafa">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbPerfilCliente" alignment="CENTER" layoutX="10.0" layoutY="112.0" onMouseClicked="#handleTelaPerfilCliente" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30; -fx-background-color: FAFAFA; -fx-cursor: hand;" text="Perfil">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbGruposCliente" alignment="CENTER" onMouseClicked="#handleTelaGruposCliente" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30; -fx-background-color: FAFAFA; -fx-cursor: hand;" text="Grupos">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbSair" alignment="CENTER" onMouseClicked="#handleTelaEscolherLogin" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30; -fx-background-color: FAFAFA; -fx-cursor: hand;" text="Sair">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

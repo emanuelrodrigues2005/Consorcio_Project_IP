@@ -2,10 +2,11 @@ package br.ufrpe.ip.projeto.models;
 
 import br.ufrpe.ip.projeto.enums.StatusBoletoEnum;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class Boleto {
+public class Boleto implements Serializable {
     private String idBoleto;
     private Contrato contratoBoleto;
     private double valorBoleto;
@@ -43,6 +44,10 @@ public class Boleto {
     public LocalDate getDataEmissao() { return dataEmissao; }
 
     public StatusBoletoEnum getStatusBoleto() { return statusBoleto; }
+
+    public String getStatusBoletoString() {
+        return statusBoleto.name();
+    }
 
     public int getNumeroParcela() { return numeroParcela; }
 

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #221F26;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.ip.projeto.gui.views.TelaVisualizacaoContratoController">
+   <children>
+      <VBox prefHeight="720.0" prefWidth="160.0" style="-fx-background-color: #FAFAFA;" AnchorPane.leftAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="76.0" prefWidth="160.0" text="ConsorX" textFill="#ba0f30">
+               <font>
+                  <Font name="Verdana Bold Italic" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbHomeCliente" alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#handleTelaHome" prefHeight="76.0" prefWidth="160.0" style="-fx-background-color: #FAFAFA; -fx-text-fill: #BA0F30;" text="Home" textFill="#fafafa">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbPerfilCliente" alignment="CENTER" layoutX="10.0" layoutY="112.0" onMouseClicked="#handleTelaPerfilCliente" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30; -fx-background-color: FAFAFA; -fx-cursor: hand;" text="Perfil">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbGruposCliente" alignment="CENTER" onMouseClicked="#handleTelaGruposCliente" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30; -fx-background-color: FAFAFA; -fx-cursor: hand;" text="Grupos">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbSair" alignment="CENTER" onMouseClicked="#handleTelaLoginCliente" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30; -fx-background-color: FAFAFA; -fx-cursor: hand;" text="Sair">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <Pane layoutX="278.0" layoutY="78.0" prefHeight="620.0" prefWidth="928.0" style="-fx-background-color: FAFAFA;" AnchorPane.bottomAnchor="81.0" AnchorPane.leftAnchor="256.0" AnchorPane.rightAnchor="96.0" AnchorPane.topAnchor="78.0">
+         <children>
+            <Label layoutX="187.0" layoutY="14.0" style="-fx-text-fill: #BA0F30;" text="Termo de Adesão ao Consórcio">
+               <font>
+                  <Font name="Verdana Bold" size="32.0" />
+               </font>
+            </Label>
+            <Label layoutX="33.0" layoutY="83.0" text="doravante denominado &quot;PARTICIPANTE&quot;, resolvem firmar o presente Termo de Adesão ao Consórcio, conforme as seguintes cláusulas e condições:" />
+            <Label layoutX="33.0" layoutY="112.0" text="CLÁUSULA 1 - OBJETO DO CONTRATO" />
+            <Label layoutX="52.0" layoutY="132.0" text="1.1. O presente contrato tem por objeto a adesão do PARTICIPANTE ao GRUPO,visando a aquisição de bem ou serviço conforme previsto no regulamento " />
+            <Label layoutX="75.0" layoutY="149.0" text="do consórcio." />
+            <Label layoutX="33.0" layoutY="169.0" text="CLÁUSULA 2 - CONDIÇÕES GERAIS" />
+            <Label layoutX="52.0" layoutY="230.0" text="2.2. O saldo devedor do PARTICIPANTE será atualizado de acordo com os pagamentos efetuados e eventuais reajustes definidos pelo GRUPO." />
+            <Label layoutX="33.0" layoutY="292.0" text="CLÁUSULA 3 - DIREITOS E DEVERES DAS PARTES" />
+            <Label layoutX="49.0" layoutY="313.0" text="3.1. O PARTICIPANTE tem o direito de participar das assembleias do GRUPO e concorrer à contemplação." />
+            <Label layoutX="49.0" layoutY="334.0" text="3.2. O PARTICIPANTE se compromete a manter os pagamentos em dia e a seguir as normas do regulamento do consórcio." />
+            <Label layoutX="49.0" layoutY="355.0" text="3.3. O GRUPO se compromete a gerir o consórcio de forma transparente, garantindo a distribuição dos bens conforme as regras estipuladas." />
+            <Label layoutX="34.0" layoutY="383.0" text="CLÁUSULA 4 - RESCISÃO E PENALIDADES" />
+            <Label layoutX="50.0" layoutY="404.0" text="4.1 O presente contrato poderá ser rescindido em caso de inadimplência superior a 5 meses, sujeitando o PARTICIPANTE à perda de eventuais valores pagos." />
+            <Label layoutX="50.0" layoutY="471.0" text="5.1. O presente contrato entra em vigor na data de sua assinatura eletrônica." />
+            <Label layoutX="34.0" layoutY="450.0" text="CLÁUSULA 5 - DISPOSIÇÕES FINAIS" />
+            <Label layoutX="52.0" layoutY="425.0" text="4.2. Em caso de desistência, o PARTICIPANTE poderá ter direito à devolução de valores conforme previsto no regulamento do consórcio." />
+            <Label layoutX="34.0" layoutY="508.0" text="Por estarem de acordo, as partes firmam o presente Termo de Adesão ao Consórcio." />
+            <Button fx:id="btCriarContrato" layoutX="684.0" layoutY="497.0" mnemonicParsing="false" onMouseClicked="#handleCriarContrato" style="-fx-background-color: #BA0F30; -fx-text-fill: FAFAFA; -fx-background-radius: 30;" styleClass="sombra" stylesheets="@style.css" text="Assinar Contrato">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Button>
+            <HBox layoutX="49.0" layoutY="66.0" prefHeight="17.0" prefWidth="797.0">
+               <children>
+                  <Label text="Pelo presente instrumento particular, de um lado, " />
+                  <Label fx:id="lbNomeGrupo" text="Label" />
+                  <Label text=", doravante denominado &quot;GRUPO&quot;, e, de outro lado, " />
+                  <Label fx:id="lbNomeCliente" text="Label" />
+                  <Label text=", inscrito no CPF sob o número " />
+                  <Label fx:id="lbCpfCliente" text="Label" />
+                  <Label text="," />
+               </children>
+            </HBox>
+            <HBox layoutX="52.0" layoutY="190.0">
+               <children>
+                  <Label text="2.1. O PARTICIPANTE contribuirá mensalmente com parcelas no valor de R$" />
+                  <Label fx:id="lbValorParcela" text="Label" />
+                  <Label prefHeight="17.0" prefWidth="389.0" text=", correspondentes à soma do valor do bem e da taxa de administração de" />
+               </children>
+            </HBox>
+            <HBox layoutX="77.0" layoutY="206.0">
+               <children>
+                  <Label fx:id="lbTaxaAdmin" text="Label" />
+                  <Label text="\%. É de sumo destaque que o valor da parcela está sujeita a alteações mediante ingresso de participantes no grupo." />
+               </children>
+            </HBox>
+            <HBox layoutX="52.0" layoutY="262.0">
+               <children>
+                  <Label text="2.3. O contrato terá início na data de" />
+                  <Label text="e será encerrado quando todas as obrigações forem cumpridas ou por decisão do GRUPO." />
+                  <Label fx:id="lbDataInicio" text="Label" />
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

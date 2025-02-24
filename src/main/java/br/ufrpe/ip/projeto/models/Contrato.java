@@ -1,12 +1,13 @@
 package br.ufrpe.ip.projeto.models;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Random;
 import java.util.UUID;
 
 import br.ufrpe.ip.projeto.enums.StatusContratoEnum;
 
-public class Contrato {
+public class Contrato implements Serializable {
     private Cliente cliente;
     private GrupoConsorcio grupoAssociado;
     private String idContrato;
@@ -86,6 +87,10 @@ public class Contrato {
         this.statusContrato = status;
     }
 
+    public String getStatusContratoString() {
+        return statusContrato.name();
+    }
+
     public double getSaldoDevolucao() {
         return saldoDevolucao;
     }
@@ -94,7 +99,8 @@ public class Contrato {
         this.saldoDevolucao = novoSaldoDevolucao;
     }
 
+    @Override
     public String toString() {
-        return "Cliente: " + this.getCliente().getNome() + "\nCPF: " + this.getCliente().getCpf() + "\nGrupo associado: " + this.getGrupoAssociado().getNomeGrupo() + "\nStatus: " + this.getStatusContrato() + "\nParcelas pagas: " + this.getParcelasPagas() + "\nSaldo devedor: " + this.getSaldoDevedor() + "\n";
+        return idContrato;
     }
 }

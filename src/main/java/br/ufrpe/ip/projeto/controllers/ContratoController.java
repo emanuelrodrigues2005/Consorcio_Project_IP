@@ -29,7 +29,13 @@ public class ContratoController {
 
     public void createContrato(Cliente cliente, GrupoConsorcio grupoConsorcio) {
         if (!this.repositorioContrato.existeContrato(this.repositorioContrato.getContratoByCPFIdGrupo(cliente, grupoConsorcio))) {
+            if(cliente == null) {
+                return;
+            } else if (grupoConsorcio == null) {
+                return;
+            }
             this.repositorioContrato.createContrato(cliente, grupoConsorcio);
+            this.repositorioContrato.salvarArquivo();
         }
     } // exceptions: contratoDuplicado, clienteInvalido, grupoInvalido, contratoInvalido
 
@@ -39,6 +45,7 @@ public class ContratoController {
             this.repositorioContrato.updateParcelasPagas(contrato);
             this.repositorioContrato.updateSaldoDevedor(contrato);
             this.repositorioContrato.updateValorPago(contrato);
+            this.repositorioContrato.salvarArquivo();
             return;
         }
         // throw boletoPendente/Atrasado 

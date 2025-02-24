@@ -5,15 +5,14 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class App extends Application {
-    private static final Gerenciador gerenciador = Gerenciador.getInstance();
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
     @Override
     public void start(Stage stage) {
+        Gerenciador gerenciador = Gerenciador.getInstance();
         gerenciador.setStagePrincipal(stage);
+        gerenciador.iniciarTelas();
+    }
+
+    public static void main(String[] args) {
+        launch();
     }
 }
-

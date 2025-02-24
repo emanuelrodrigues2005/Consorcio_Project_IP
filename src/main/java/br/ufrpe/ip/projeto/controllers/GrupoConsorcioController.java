@@ -26,44 +26,48 @@ public class GrupoConsorcioController {
         return instancia;
     }
 
-    public void createGrupoConsorcio(String nomeGrupo, int numeroParticipantes, double valorTotal, double taxaAdmin) {
-        if (numeroParticipantes > 0 && valorTotal > 0 && taxaAdmin > 0) {
-            this.repositorioGrupo.createGrupoConsorcio(nomeGrupo, numeroParticipantes, valorTotal, taxaAdmin);
+    public void createGrupoConsorcio(String nomeGrupo, int numeroMaximoParticipantes,double valorTotal, double taxaAdmin) {
+        if (numeroMaximoParticipantes > 0 && valorTotal > 0 && taxaAdmin > 0) {
+            this.repositorioGrupo.createGrupoConsorcio(nomeGrupo, numeroMaximoParticipantes,valorTotal, taxaAdmin);
+            this.repositorioGrupo.salvarArquivo();
         }
         // throw campoInvalido;
     }
 
     public GrupoConsorcio getGrupoById(String idGrupo) {
         return this.repositorioGrupo.getGrupoById(idGrupo);
-    }
+    } //IdGrupoConsorcioInexistente
 
     public List<GrupoConsorcio> getAllGrupos() {
         return this.repositorioGrupo.getAllGrupos();
-    }
+    } //ArrayVazio
 
     public void updateParticipantes(GrupoConsorcio grupoConsorcio, int novoNumParticipantes) {
         if (grupoConsorcio.getNumeroParticipantes() != novoNumParticipantes) {
             this.repositorioGrupo.updateParticipantes(grupoConsorcio, novoNumParticipantes);   
         }
-    }
+    } //GrupoConsorcioInexistente, CampoInvalido
 
     public void updateNomeGrupo(GrupoConsorcio grupoConsorcio, String novoNome) {
         if (grupoConsorcio.getNomeGrupo().equals(novoNome)) {
             this.repositorioGrupo.updateNomeGrupo(grupoConsorcio, novoNome);
+            this.repositorioGrupo.salvarArquivo();
         }
-    }
+    } //GrupoConsorcioInexistente, CampoInvalido
 
     public void updateTaxaAdmin(GrupoConsorcio grupoConsorcio, double novaTaxa) {
         if (grupoConsorcio.getTaxaAdmin() != novaTaxa && novaTaxa > 0) {
             this.repositorioGrupo.updateTaxaAdmin(grupoConsorcio, novaTaxa);
+            this.repositorioGrupo.salvarArquivo();
         }
-    }
+    } //GrupoConsorcioInexistente, CampoInvalido
 
     public void updateStatusGrupo(GrupoConsorcio grupoConsorcio, StatusGrupoConsorcioEnum novoStatus) {
         if (grupoConsorcio.getStatusGrupoConsorcio() != novoStatus && statusValido(novoStatus)) {
             this.repositorioGrupo.updateStatusGrupo(grupoConsorcio, novoStatus);
+            this.repositorioGrupo.salvarArquivo();
         }
-    }
+    } //GrupoConsorcioInexistente, CampoInvalido
 
     private boolean statusValido(StatusGrupoConsorcioEnum status) {
         switch (status) {
@@ -71,13 +75,14 @@ public class GrupoConsorcioController {
             case StatusGrupoConsorcioEnum.ENCERRADO: return true;
             default: return false;
         }
-    }
+    } //CampoInvalido
 
     public void deleteGrupoConsorcio(GrupoConsorcio grupoConsorcio) {
         if (this.repositorioGrupo.getAllGrupos().contains(grupoConsorcio)) {
             this.repositorioGrupo.deleteGrupoConsorcio(grupoConsorcio); //fornecer idGrupo
+            this.repositorioGrupo.salvarArquivo();
         }
-    }
+    } //GrupoConsorcioInexistente
 
     public void reajusteParcela(GrupoConsorcio grupoConsorcio) {
         IContratoRepository repositorioContratos = ContratoRepository.getInstancia();
@@ -92,8 +97,9 @@ public class GrupoConsorcioController {
             this.repositorioGrupo.updateParticipantes(grupoConsorcio, novoNumParticipantes);
             double novoValorParcela = ((grupoConsorcio.getValorTotal() + grupoConsorcio.getValorTotal() * grupoConsorcio.getTaxaAdmin()) / novoNumParticipantes);
             this.repositorioGrupo.updateValorParcela(grupoConsorcio, novoValorParcela);
+            this.repositorioGrupo.salvarArquivo();
         }
-    }
+    } //GrupoConsorcioInexistente
 
     public double getValorPago(String idGrupo) {
         IContratoRepository repositorioContratos = ContratoRepository.getInstancia();
@@ -103,5 +109,5 @@ public class GrupoConsorcioController {
             somaValorPago = somaValorPago + contrato.getValorPago();
         }
         return somaValorPago;
-    }
+    } //IdGrupoInvalido
 }
