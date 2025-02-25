@@ -87,7 +87,7 @@ public class TelaEditGrupoController {
 
 	@FXML
 	public void handleTelaPerfilAdmin() {
-		//this.gerenciador.abrirTelaPerfilAdmin();
+		this.gerenciador.abrirTelaPerfilAdmin(this.sistema.getClienteLogado());
 	}
 
 	@FXML

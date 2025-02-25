@@ -27,6 +27,7 @@ public class Gerenciador {
     private Parent telaVisualizacaoContrato;
     private Parent telaEdicaoGrupo;
     private Parent telaDadosContrato;
+    private Parent telaPerfilADM;
 
     private Stage stagePrincipal;
     private Scene scenePrincipal;
@@ -43,6 +44,7 @@ public class Gerenciador {
     private TelaLoginAdmController telaLoginAdmController;
     private TelaEditGrupoController telaEdicaoGrupoController;
     private TelaDadosContratoController telaDadosContratoController;
+    private TelaPerfilADMController telaPerfilADMController;
 
     private Gerenciador() {
         try{
@@ -105,6 +107,11 @@ public class Gerenciador {
                 telaDadosContrato = loaderTelaDadosContrato.load();
                 telaDadosContratoController = loaderTelaDadosContrato.getController();
                 telaDadosContratoController.setGerenciador(this);
+
+                FXMLLoader loaderTelaPerfilADM = new FXMLLoader(getClass().getResource(TelasEnum.TELA_PERFIL_ADM.getCaminho()));
+                telaPerfilADM = loaderTelaPerfilADM.load();
+                telaPerfilADMController = loaderTelaPerfilADM.getController();
+                telaPerfilADMController.setGerenciador(this);
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(-1);
@@ -162,9 +169,9 @@ public class Gerenciador {
     }
 
     public void abrirTelaPerfilAdmin(Cliente admin) {
-        telaPerfilClienteController.setCliente(admin);
-        telaPerfilClienteController.initialize(); //CONSERTAR DEPOIS
-        scenePrincipal.setRoot(telaPerfilCliente);
+        telaPerfilADMController.setCliente(admin);
+        telaPerfilADMController.initialize();
+        scenePrincipal.setRoot(telaPerfilADM);
     }
 
     public void abrirTelaPrincipalADM() {

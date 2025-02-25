@@ -14,7 +14,8 @@ public enum TelasEnum {
     TELA_EDICAO_GRUPO("/TelaEdicaoGrupo.fxml"),
     TELA_DADOS_CONTRATO("/TelaDadosContrato.fxml"),
     POP_UP_PAGAMENTO("/PopupPagamento.fxml"),
-    POP_UP_SORTEIO("/PopupSorteio.fxml"),;
+    POP_UP_SORTEIO("/PopupSorteio.fxml"),
+    TELA_PERFIL_ADM("/TelaPerfilADM.fxml"),;
 
     private final String caminho;
 

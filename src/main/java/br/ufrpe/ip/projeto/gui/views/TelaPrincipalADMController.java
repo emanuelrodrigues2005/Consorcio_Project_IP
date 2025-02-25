@@ -82,7 +82,8 @@ public class TelaPrincipalADMController {
 
     @FXML
     public void handleTelaPerfilADM() {
-        //this.screenManager.abrirPerfilADM();
+        System.out.println("Redirecionando para tela de perfil do Administrador...");
+        this.gerenciador.abrirTelaPerfilAdmin(this.sistema.getClienteLogado());
     }
 
     @FXML
