@@ -76,7 +76,7 @@ public class TelaPerfilClienteController {
     }
 
     private void configurarTabela() {
-        tbvcolumnAutomovel.setCellValueFactory(new PropertyValueFactory<>("nomeGrupo"));
+        tbvcolumnAutomovel.setCellValueFactory(new PropertyValueFactory<>("nomeGrupoConsorcio"));
         tbvcolumnStatus.setCellValueFactory(new PropertyValueFactory<>("statusContratoString"));
     }
 

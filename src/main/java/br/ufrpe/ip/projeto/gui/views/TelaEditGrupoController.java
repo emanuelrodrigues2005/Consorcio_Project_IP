@@ -104,7 +104,7 @@ public class TelaEditGrupoController {
 	@FXML
 	public void handleRealizarContemplacao() {
 		this.sistema.sorteioContemplacao();
-		//this.gerenciador.abrirTelaContratoContemplado();
+		//this.gerenciador.abrirPopUpSorteio();
 	}
 
 	@FXML

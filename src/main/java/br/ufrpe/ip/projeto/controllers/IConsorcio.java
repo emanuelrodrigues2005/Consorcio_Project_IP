@@ -17,7 +17,7 @@ public interface IConsorcio {
 
     Boleto getBoletoByContrato(Contrato contratoBoleto);
 
-    void createBoleto(Contrato contratoBoleto, LocalDate dataVencimento, int numeroParcela);
+    void createBoleto(Contrato contratoBoleto);
 
     void updateDataPagamento(Boleto boleto);
 
