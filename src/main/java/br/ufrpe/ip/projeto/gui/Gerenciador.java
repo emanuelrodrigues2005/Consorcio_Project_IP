@@ -221,9 +221,9 @@ public class Gerenciador {
             popupStage.setScene(new Scene(popupRoot));
             popupStage.setResizable(false);
 
-            controller.setPopupStage(popupStage); // Para permitir fechar a janela no controller
+            controller.setPopupStage(popupStage);
 
-            popupStage.showAndWait(); // Bloqueia interação com a tela principal até fechar o popup
+            popupStage.showAndWait();
         } catch (Exception e) {
             e.printStackTrace();
         }

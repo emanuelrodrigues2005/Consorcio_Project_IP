@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="287.0" prefWidth="531.0" style="-fx-background-color: #FAFAFA; -fx-background-radius: 50 50 40 40;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<Pane prefHeight="287.0" prefWidth="531.0" style="-fx-background-color: #FAFAFA; -fx-background-radius: 50 50 40 40;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.ip.projeto.gui.views.PopUpSorteioController">
    <children>
       <Label alignment="CENTER" prefHeight="50.0" prefWidth="531.0" style="-fx-background-color: #BA0F30; -fx-text-fill: #FAFAFA;" text="Contrato Sorteado!" textAlignment="CENTER" textFill="#fafafa">
          <font>
@@ -69,7 +69,7 @@
             </Label>
          </children>
       </VBox>
-      <Button fx:id="btEnviarMensagem" layoutX="303.0" layoutY="206.0" mnemonicParsing="false" onMouseClicked="#handleMudarStatusGrupo" prefHeight="48.0" styleClass="teg-button" stylesheets="@style.css" text="Enviar Mensagem" />
+      <Button fx:id="btEnviarMensagem" layoutX="303.0" layoutY="206.0" mnemonicParsing="false" prefHeight="48.0" styleClass="teg-button" stylesheets="@style.css" text="Enviar Mensagem" />
       <Label layoutX="298.0" layoutY="136.0" text="Data de Contemplação:" underline="true">
          <font>
             <Font name="Verdana Bold" size="12.0" />
