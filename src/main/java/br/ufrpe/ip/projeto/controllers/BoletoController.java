@@ -42,8 +42,8 @@ public class BoletoController {
         return this.repositoryBoleto.getBoletoByContrato(contrato);
     } //exceptions: BoletoInexistente, ContratoInexistente, CampoInvalido
 
-    public void createBoleto(Contrato contratoBoleto, LocalDate dataVencimento, int numeroParcela) {
-        this.repositoryBoleto.createBoleto(contratoBoleto, dataVencimento, numeroParcela);
+    public void createBoleto(Contrato contratoBoleto) {
+        this.repositoryBoleto.createBoleto(contratoBoleto);
         this.repositoryBoleto.salvarArquivo();
     } //exceptions: ContratoInexistente, CampoInvalido
 

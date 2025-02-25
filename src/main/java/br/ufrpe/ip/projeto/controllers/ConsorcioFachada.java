@@ -55,8 +55,8 @@ public class ConsorcioFachada implements IConsorcio{
     }
 
     @Override
-    public void createBoleto(Contrato contratoBoleto, LocalDate dataVencimento, int numeroParcela) {
-        this.boletoController.createBoleto(contratoBoleto, dataVencimento, numeroParcela);
+    public void createBoleto(Contrato contratoBoleto) {
+        this.boletoController.createBoleto(contratoBoleto);
     }
 
     @Override

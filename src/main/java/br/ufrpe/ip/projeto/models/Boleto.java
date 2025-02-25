@@ -16,13 +16,13 @@ public class Boleto implements Serializable {
     private StatusBoletoEnum statusBoleto;
     private int numeroParcela;
 
-    public Boleto(Contrato contratoBoleto, LocalDate dataVencimento, int numeroParcela) {
+    public Boleto(Contrato contratoBoleto) {
         this.idBoleto = UUID.randomUUID().toString();
         this.contratoBoleto = contratoBoleto;
-        this.numeroParcela = numeroParcela;
+        this.numeroParcela = contratoBoleto.getGrupoAssociado().getNumeroMaximoParticipantes();
         this.valorBoleto = contratoBoleto.getGrupoAssociado().getValorParcela();
         this.dataEmissao = LocalDate.now();
-        this.dataVencimento = dataVencimento;
+        this.dataVencimento = dataEmissao.plusMonths(1);
         this.statusBoleto = StatusBoletoEnum.PENDENTE;
         this.dataPagamento = null;
     }

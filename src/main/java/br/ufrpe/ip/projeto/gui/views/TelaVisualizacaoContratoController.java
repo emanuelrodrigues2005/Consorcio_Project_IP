@@ -113,8 +113,6 @@ public class TelaVisualizacaoContratoController {
             btCriarContrato.setDisable(true);
             btCriarContrato.setText("Contrato Assinado");
 
-
-            // Atualizar a TableView na tela principal
             if (gerenciador != null) {
                 TelaPrincipalClienteController telaPrincipal = gerenciador.getTelaPrincipalClienteController();
                 if (telaPrincipal != null) {
@@ -128,21 +126,25 @@ public class TelaVisualizacaoContratoController {
 
     @FXML
     private void handleTelaHome(MouseEvent event) {
+        this.resetarBtCriarContrato();
         this.gerenciador.abrirTelaPrincipalCliente();
     }
 
     @FXML
     private void handleTelaPerfilCliente(MouseEvent event) {
+        this.resetarBtCriarContrato();
         this.gerenciador.abrirPerfilCliente(clienteLogado);
     }
 
     @FXML
     private void handleTelaLoginCliente(MouseEvent event) {
+        this.resetarBtCriarContrato();
         this.gerenciador.abrirTelaEscolhaLogin();
     }
 
     @FXML
     private void handleTelaGruposCliente(MouseEvent event) {
+        this.resetarBtCriarContrato();
         //this.gerenciador.abrirTelaGruposCliente;
     }
 
@@ -152,5 +154,10 @@ public class TelaVisualizacaoContratoController {
         lbTaxaAdmin.setText("");
         lbCpfCliente.setText("");
         lbDataInicio.setText("");
+    }
+
+    private void resetarBtCriarContrato() {
+        btCriarContrato.setDisable(false);
+        btCriarContrato.setText("Criar contrato");
     }
 }

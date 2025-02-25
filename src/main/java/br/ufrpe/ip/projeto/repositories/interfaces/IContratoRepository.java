@@ -10,7 +10,6 @@ import br.ufrpe.ip.projeto.models.GrupoConsorcio;
 
 public interface IContratoRepository {
     void salvarArquivo();
-
     List<Contrato> getAllContratos();
     
     List<Contrato> getAllContratosByCPF(Cliente cliente);

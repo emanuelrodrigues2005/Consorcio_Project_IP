@@ -19,7 +19,7 @@ public interface IBoletoRepository {
 
     Boleto getBoletoByContrato(Contrato contrato);
 
-    Boleto createBoleto(Contrato contrato, LocalDate dataVencimento, int numeroParcela);
+    Boleto createBoleto(Contrato contrato);
 
     void updateDataPagamento(Boleto boleto);
 
