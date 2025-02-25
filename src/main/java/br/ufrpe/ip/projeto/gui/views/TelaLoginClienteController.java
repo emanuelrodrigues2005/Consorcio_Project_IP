@@ -23,6 +23,9 @@ public class TelaLoginClienteController {
     private Button btLogin;
 
     @FXML
+    private Button btVoltarEscolhaLogin;
+
+    @FXML
     private CheckBox cbManterConectado;
 
     @FXML
@@ -57,6 +60,12 @@ public class TelaLoginClienteController {
         this.sistema.efutuarLogin(cpf, senha);
         this.gerenciador.abrirTelaPrincipalCliente();
         clearCampos();
+    }
+
+    @FXML
+    private void handleVoltarEscolhaLogin(MouseEvent event) {
+        System.out.println("Voltando para tela de escolha de login...");
+        this.gerenciador.abrirTelaEscolhaLogin();
     }
 
     private void clearCampos() {

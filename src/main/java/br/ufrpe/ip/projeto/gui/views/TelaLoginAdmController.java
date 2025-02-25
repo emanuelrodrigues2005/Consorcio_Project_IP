@@ -22,6 +22,9 @@ public class TelaLoginAdmController {
     private Button btLogin;
 
     @FXML
+    private Button btVoltarEscolhaLogin;
+
+    @FXML
     private CheckBox cbManterConectado;
 
     @FXML
@@ -64,6 +67,12 @@ public class TelaLoginAdmController {
             //CampoInvalido
         }
         clearCampos();
+    }
+
+    @FXML
+    private void handleVoltarEscolhaLogin(MouseEvent event) {
+        System.out.println("Voltando tela de escolha de login...");
+        this.gerenciador.abrirTelaEscolhaLogin();
     }
 
     private void clearCampos() {

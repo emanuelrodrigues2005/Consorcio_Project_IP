@@ -38,5 +38,6 @@
          </font>
       </Text>
       <PasswordField fx:id="pswSenha" layoutX="524.0" layoutY="329.0" prefWidth="230.0" promptText="Senha" />
+      <Button fx:id="btVoltarEscolhaLogin" layoutX="24.0" layoutY="24.0" mnemonicParsing="false" onMouseClicked="#handleVoltarEscolhaLogin" prefHeight="48.0" prefWidth="144.0" styleClass="teg-button" stylesheets="@style.css" text="Voltar" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="32.0" />
    </children>
 </AnchorPane>
