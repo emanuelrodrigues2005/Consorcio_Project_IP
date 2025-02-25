@@ -3,6 +3,8 @@ package br.ufrpe.ip.projeto.controllers;
 import br.ufrpe.ip.projeto.enums.StatusBoletoEnum;
 import br.ufrpe.ip.projeto.enums.StatusContratoEnum;
 import br.ufrpe.ip.projeto.enums.StatusGrupoConsorcioEnum;
+import br.ufrpe.ip.projeto.exceptions.ClienteDuplicadoException;
+import br.ufrpe.ip.projeto.exceptions.ClienteInexistenteException;
 import br.ufrpe.ip.projeto.models.*;
 
 import java.time.LocalDate;
@@ -295,8 +297,8 @@ public class ConsorcioFachada implements IConsorcio{
     }
 
     @Override
-    public void efutuarLogin(String cpf, String senha) {
-        this.loginController.efetuarLogin(cpf, senha);
+    public void efutuarLogin(String cpf, String senha) throws ClienteDuplicadoException, ClienteInexistenteException {
+            this.loginController.efetuarLogin(cpf, senha);
     }
 
     @Override

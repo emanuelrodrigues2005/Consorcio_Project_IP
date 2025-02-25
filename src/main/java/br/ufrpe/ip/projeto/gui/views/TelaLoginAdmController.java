@@ -2,12 +2,11 @@ package br.ufrpe.ip.projeto.gui.views;
 
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
+import br.ufrpe.ip.projeto.exceptions.ClienteDuplicadoException;
+import br.ufrpe.ip.projeto.exceptions.ClienteInexistenteException;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
@@ -54,6 +53,10 @@ public class TelaLoginAdmController {
 
     @FXML
     private void handleTelaPrincipalAdm(MouseEvent event) {
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+
+        try {
         String cpf = this.txtCpf.getText();
         String senha = this.pswSenha.getText();
         this.sistema.efutuarLogin(cpf, senha);
@@ -63,6 +66,20 @@ public class TelaLoginAdmController {
         } else if (pswSenha.getText().isEmpty() || !pswCodeAdm.getText().equals("2702")) {
             //CampoInvalido
         }
+        }
+        catch (ClienteDuplicadoException e) {
+            alert.setTitle(null);
+            alert.setHeaderText("Usuário Duplicado!");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+            }
+        catch (ClienteInexistenteException e){
+            alert.setTitle(null);
+            alert.setHeaderText("Usuário Não Encontrado!");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+            }
+
         clearCampos();
     }
 

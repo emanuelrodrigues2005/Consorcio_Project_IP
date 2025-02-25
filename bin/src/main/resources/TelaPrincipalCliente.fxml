@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #221F26;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.ip.projeto.gui.views.TelaPrincipalClienteController">
+   <children>
+      <VBox prefHeight="720.0" prefWidth="160.0" style="-fx-background-color: #FAFAFA;" AnchorPane.leftAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="101.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30; -fx-background-color: #FAFAFA;" text="ConsorX">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbHomeCliente" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="101.0" prefWidth="160.0" style="-fx-text-fill: #FAFAFA; -fx-background-color: #BA0F30;" text="Home">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbPerfilCliente" alignment="CENTER" layoutX="10.0" layoutY="112.0" onMouseClicked="#handleTelaPerfilCliente" prefHeight="101.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30; -fx-background-color: FAFAFA;" text="Perfil">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <TableView fx:id="tbvGrupos" layoutX="225.0" layoutY="135.0" prefHeight="200.0" prefWidth="200.0" style="-fx-pref-width: 928; -fx-pref-height: 450; -fx-background-color: #FAFAFA;" AnchorPane.bottomAnchor="114.0" AnchorPane.leftAnchor="256.0" AnchorPane.rightAnchor="96.0" AnchorPane.topAnchor="156.0">
+        <columns>
+          <TableColumn fx:id="tbcGruposDisponiveis" editable="false" prefWidth="232.0" text="Grupos Disponíveis" />
+          <TableColumn fx:id="tbcParticipantes" minWidth="0.0" prefWidth="232.0" text="Participantes" />
+            <TableColumn fx:id="tbcValorTotal" prefWidth="232.0" text="Valor Total do Automóvel" />
+            <TableColumn fx:id="tbcTaxaAdmin" prefWidth="232.0" text="Taxa de Administração (%)" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

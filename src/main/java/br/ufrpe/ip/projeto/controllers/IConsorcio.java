@@ -3,6 +3,8 @@ package br.ufrpe.ip.projeto.controllers;
 import br.ufrpe.ip.projeto.enums.StatusBoletoEnum;
 import br.ufrpe.ip.projeto.enums.StatusContratoEnum;
 import br.ufrpe.ip.projeto.enums.StatusGrupoConsorcioEnum;
+import br.ufrpe.ip.projeto.exceptions.ClienteDuplicadoException;
+import br.ufrpe.ip.projeto.exceptions.ClienteInexistenteException;
 import br.ufrpe.ip.projeto.models.*;
 
 import java.time.LocalDate;
@@ -114,7 +116,7 @@ public interface IConsorcio {
 
     double getValorPago(String idGrupo);
 
-    void efutuarLogin(String cpf, String senha);
+    void efutuarLogin(String cpf, String senha) throws ClienteDuplicadoException, ClienteInexistenteException;
 
     Cliente getClienteLogado();
 }

@@ -2,13 +2,12 @@ package br.ufrpe.ip.projeto.gui.views;
 
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
+import br.ufrpe.ip.projeto.exceptions.ClienteDuplicadoException;
+import br.ufrpe.ip.projeto.exceptions.ClienteInexistenteException;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
 import br.ufrpe.ip.projeto.models.Administrador;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
@@ -51,14 +50,33 @@ public class TelaLoginClienteController {
 
     @FXML
     private void handleTelaPrincipalCliente(MouseEvent event) {
-        System.out.println("Login realizado com sucesso!");
-        String cpf = this.txtCpf.getText();
-        String senha = this.pswSenha.getText();
-        this.sistema.efutuarLogin(cpf, senha);
-        this.gerenciador.abrirTelaPrincipalCliente();
-        clearCampos();
+        try {
+            System.out.println("Login realizado com sucesso!");
+            String cpf = this.txtCpf.getText();
+            String senha = this.pswSenha.getText();
+            this.sistema.efutuarLogin(cpf, senha);
+            this.gerenciador.abrirTelaPrincipalCliente();
+            clearCampos();
+        }
+        catch (ClienteDuplicadoException | ClienteInexistenteException e) {
+            excepAlerts(e);
+        }
     }
 
+    private void excepAlerts(Exception e){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        if (e instanceof ClienteDuplicadoException) {
+            alert.setTitle(null);
+            alert.setHeaderText("Cliente Duplicado!");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        } else if (e instanceof ClienteInexistenteException) {
+            alert.setTitle(null);
+            alert.setHeaderText("Cliente Não Encontrado!");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
+    }
     private void clearCampos() {
         this.txtCpf.clear();
         this.pswSenha.clear();
