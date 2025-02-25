@@ -63,6 +63,10 @@ public class Contrato implements Serializable {
         return grupoAssociado;
     }
 
+    public String getNomeGrupo() {
+        return grupoAssociado.getNomeGrupo();
+    }
+
     public int getParcelasPagas() {
         return parcelasPagas;
     }
