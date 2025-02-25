@@ -4,6 +4,7 @@ import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
 import br.ufrpe.ip.projeto.models.Boleto;
+import br.ufrpe.ip.projeto.models.Contemplacao;
 import br.ufrpe.ip.projeto.models.Contrato;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,7 +14,7 @@ import javafx.stage.Stage;
 public class PopUpSorteioController {
     private final IConsorcio sistema = ConsorcioFachada.getInstance();
     private Gerenciador gerenciador;
-    private Contrato contratoSorteado;
+    private Contemplacao contemplacao;
     private Stage popupStage;
 
     @FXML
@@ -44,19 +45,32 @@ public class PopUpSorteioController {
 
     @FXML
     public void initialize() {
-        limparDadosGrupo();
-
+        limparDadosContemplacao();
+        this.setContemplacaoAtual(contemplacao);
     }
 
-    public void setContratoSorteado(String idContrato) {
-        this.contratoSorteado = this.sistema.getContratoByIdContrato(idContrato);
+    public void setContemplacaoAtual(Contemplacao contemplacao) {
+        limparDadosContemplacao();
+        this.contemplacao = contemplacao;
+
+        if(contemplacao != null) {
+            carregarDadosContemplacao(contemplacao.getIdContemplacao());
+        }
     }
 
-    private void carregarDadosContemplacao() {
+    private void carregarDadosContemplacao(String idContemplacao) {
+        this.contemplacao = this.sistema.getContemplacaoById(idContemplacao);
 
+        if (contemplacao != null) {
+            lbCPFContemplado.setText(contemplacao.getContratoContemplacao().getCliente().getCpf());
+            lbTelefoneContemplado.setText(contemplacao.getContratoContemplacao().getCliente().getTelefone());
+            lbNomeUserContemplado.setText(contemplacao.getContratoContemplacao().getCliente().getNome());
+            lbNomeGrupoContemplado.setText(contemplacao.getContratoContemplacao().getNomeGrupoConsorcio());
+            lbDataContemplacao.setText(contemplacao.getDataContemplacao().toString());
+        }
     }
 
-    private void limparDadosGrupo() {
+    private void limparDadosContemplacao() {
         lbNomeUserContemplado.setText("");
         lbCPFContemplado.setText("");
         lbTelefoneContemplado.setText("");

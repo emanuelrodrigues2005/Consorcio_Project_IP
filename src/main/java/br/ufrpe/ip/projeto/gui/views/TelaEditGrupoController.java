@@ -5,6 +5,7 @@ import br.ufrpe.ip.projeto.controllers.IConsorcio;
 import br.ufrpe.ip.projeto.enums.StatusGrupoConsorcioEnum;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
 import br.ufrpe.ip.projeto.models.Cliente;
+import br.ufrpe.ip.projeto.models.Contemplacao;
 import br.ufrpe.ip.projeto.models.GrupoConsorcio;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -86,7 +87,7 @@ public class TelaEditGrupoController {
 
 	@FXML
 	public void handleTelaPerfilAdmin() {
-		//this.gerenciador.abrirTelaPerfilAdmin();
+		this.gerenciador.abrirTelaPerfilAdmin(this.sistema.getClienteLogado());
 	}
 
 	@FXML
@@ -103,8 +104,8 @@ public class TelaEditGrupoController {
 
 	@FXML
 	public void handleRealizarContemplacao() {
-		this.sistema.sorteioContemplacao();
-		//this.gerenciador.abrirPopUpSorteio();
+		String idContemplacao = this.sistema.sorteioContemplacao();
+		this.gerenciador.abrirPopUpSorteio(this.sistema.getContemplacaoById(idContemplacao));
 	}
 
 	@FXML

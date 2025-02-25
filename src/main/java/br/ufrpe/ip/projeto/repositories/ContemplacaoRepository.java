@@ -104,9 +104,10 @@ public class ContemplacaoRepository implements IContemplacaoRepository, Serializ
     }
 
     @Override
-    public void createContemplacao(Contrato contratoContemplcao) {
+    public Contemplacao createContemplacao(Contrato contratoContemplcao) {
         Contemplacao contemplacao = new Contemplacao(contratoContemplcao);
         this.contemplacoes.add(contemplacao);
+        return contemplacao;
     }
 
     @Override

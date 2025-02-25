@@ -44,6 +44,7 @@ public class PopUpPagamentoController {
         limparDadosGrupo();
         this.setBoletoAtual(boletoAtual);
     }
+
     public void setBoletoAtual(Boleto boletoAtual) {
         limparDadosGrupo();
         this.boletoAtual = boletoAtual;
