@@ -145,8 +145,8 @@ public class ConsorcioFachada implements IConsorcio{
     }
 
     @Override
-    public void createContemplacao(Contrato contrato) {
-        this.contemplacaoController.createContemplacao(contrato);
+    public Contemplacao createContemplacao(Contrato contrato) {
+        return this.contemplacaoController.createContemplacao(contrato);
     }
 
     @Override

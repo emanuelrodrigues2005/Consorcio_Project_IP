@@ -3,10 +3,7 @@ package br.ufrpe.ip.projeto.gui;
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
 import br.ufrpe.ip.projeto.gui.views.*;
-import br.ufrpe.ip.projeto.models.Boleto;
-import br.ufrpe.ip.projeto.models.Cliente;
-import br.ufrpe.ip.projeto.models.Contrato;
-import br.ufrpe.ip.projeto.models.GrupoConsorcio;
+import br.ufrpe.ip.projeto.models.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -218,6 +215,28 @@ public class Gerenciador {
             Stage popupStage = new Stage();
             popupStage.initModality(Modality.APPLICATION_MODAL);
             popupStage.setTitle("Pagamento do Boleto");
+            popupStage.setScene(new Scene(popupRoot));
+            popupStage.setResizable(false);
+
+            controller.setPopupStage(popupStage);
+
+            popupStage.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void abrirPopUpSorteio(Contemplacao contemplacao) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(TelasEnum.POP_UP_SORTEIO.getCaminho()));
+            Pane popupRoot = loader.load();
+
+            PopUpSorteioController controller = loader.getController();
+            controller.setContemplacaoAtual(contemplacao);
+
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.setTitle("Contemplaçao de Contrato");
             popupStage.setScene(new Scene(popupRoot));
             popupStage.setResizable(false);
 

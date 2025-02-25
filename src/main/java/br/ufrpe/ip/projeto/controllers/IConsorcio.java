@@ -53,7 +53,7 @@ public interface IConsorcio {
 
     Contemplacao getContemplacaoById(String idContemplacao);
 
-    void createContemplacao(Contrato contrato);
+    Contemplacao createContemplacao(Contrato contrato);
 
     void updateDataContemplacao(String idContemplacao, LocalDate dataContemplacao);
 

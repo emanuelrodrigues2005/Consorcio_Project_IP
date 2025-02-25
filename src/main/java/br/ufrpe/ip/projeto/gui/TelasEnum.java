@@ -13,7 +13,8 @@ public enum TelasEnum {
     TELA_LOGIN_ADM("/TelaLoginAdm.fxml"),
     TELA_EDICAO_GRUPO("/TelaEdicaoGrupo.fxml"),
     TELA_DADOS_CONTRATO("/TelaDadosContrato.fxml"),
-    POP_UP_PAGAMENTO("/PopupPagamento.fxml"),;
+    POP_UP_PAGAMENTO("/PopupPagamento.fxml"),
+    POP_UP_SORTEIO("/PopupSorteio.fxml"),;
 
     private final String caminho;
 

@@ -15,7 +15,7 @@ public interface IContemplacaoRepository {
 
     Contemplacao getContemplacaoById(String idContemplacao);
 
-    void createContemplacao(Contrato contratoContemplacao);
+    Contemplacao createContemplacao(Contrato contratoContemplacao);
 
     void updateDataContemplacao(String idContemplacao, LocalDate dataContemplacao);
 

@@ -34,9 +34,10 @@ public class ContemplacaoController {
         return this.repositoryContemplacao.getContemplacaoById(idContemplacao);
     } //exceptions: ContemplacaoInexistente
 
-    public void createContemplacao(Contrato contratoContemplacao) {
-        this.repositoryContemplacao.createContemplacao(contratoContemplacao);
+    public Contemplacao createContemplacao(Contrato contratoContemplacao) {
+        Contemplacao contemplacao = this.repositoryContemplacao.createContemplacao(contratoContemplacao);
         this.repositoryContemplacao.salvarArquivo();
+        return contemplacao;
     } //exceptions: CampoInvalido, ContemplacaoExistente
 
     public void updateDataContemplacao(String idContemplacao, LocalDate dataContemplacao) {
@@ -65,10 +66,10 @@ public class ContemplacaoController {
 
         Random random = new Random();
         Contrato contratoSorteado = contratosAtivos.get(random.nextInt(contratosAtivos.size()));
-        this.createContemplacao(contratoSorteado);
+        Contemplacao contemplacao = this.createContemplacao(contratoSorteado);
         contratoController.updateStatusContrato(contratoSorteado, StatusContratoEnum.CONTEMPLADO);
         this.repositoryContemplacao.salvarArquivo();
 
-        return contratoSorteado.getIdContrato();
+        return contemplacao.getIdContemplacao();
     } //exceptions: ContratoInexistente, ArrayVazio
 }
