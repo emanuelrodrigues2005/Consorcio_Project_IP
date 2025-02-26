@@ -1,5 +1,7 @@
 package br.ufrpe.ip.projeto.controllers;
 
+import br.ufrpe.ip.projeto.exceptions.ClienteDuplicadoException;
+import br.ufrpe.ip.projeto.exceptions.ClienteInexistenteException;
 import br.ufrpe.ip.projeto.models.Cliente;
 import br.ufrpe.ip.projeto.repositories.ClienteRepository;
 import br.ufrpe.ip.projeto.repositories.interfaces.IClienteRepository;
@@ -20,19 +22,21 @@ public class LoginController {
         return instance;
     }
 
-    public void efetuarLogin(String cpf, String senha) {
+    public void efetuarLogin(String cpf, String senha) throws ClienteDuplicadoException, ClienteInexistenteException {
         if (clienteLogado != null) {
-            // throw new ClienteJaLogado(parãmetro a definir);
+          if (clienteLogado.getCpf().equals(cpf)) {
+              throw new ClienteDuplicadoException(clienteLogado.getCpf());
+          }
         }
 
         Cliente clienteASerLogado = this.repositoryLogin.getClienteByCpf(cpf);
 
-        if (clienteASerLogado.getSenha().equals(senha)) {
-            this.clienteLogado = clienteASerLogado;
+        if (clienteASerLogado == null || clienteASerLogado.getSenha() == null || !clienteASerLogado.getSenha().equals(senha)) {
+            throw new ClienteInexistenteException(cpf);
         } else {
-            //throw new ClienteSenhaIncorreta(parâmetro a definir);
+            this.clienteLogado = clienteASerLogado;
         }
-    } //exceptions: ClienteInexistente, ClienteJaLogado, ClienteSenhaIncorreta
+    }
 
     public Cliente getClienteLogado() {
         return this.clienteLogado;
