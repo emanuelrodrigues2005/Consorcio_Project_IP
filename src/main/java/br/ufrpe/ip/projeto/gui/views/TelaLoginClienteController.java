@@ -54,10 +54,10 @@ public class TelaLoginClienteController {
     @FXML
     private void handleTelaPrincipalCliente(MouseEvent event) {
         try {
-            System.out.println("Login realizado com sucesso!");
             String cpf = this.txtCpf.getText();
             String senha = this.pswSenha.getText();
             this.sistema.efutuarLogin(cpf, senha);
+            System.out.println("Login realizado com sucesso!");
             this.gerenciador.abrirTelaPrincipalCliente();
         }
         catch (ClienteDuplicadoException | ClienteInexistenteException e){
