@@ -6,7 +6,6 @@ import br.ufrpe.ip.projeto.exceptions.BoletoInexistenteException;
 import br.ufrpe.ip.projeto.exceptions.CampoInvalidoException;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
 import br.ufrpe.ip.projeto.models.Boleto;
-import br.ufrpe.ip.projeto.models.Contrato;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
