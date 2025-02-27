@@ -67,16 +67,20 @@ public class PopUpPagamentoController {
 
     @FXML
     private void pagarBoletoPix(MouseEvent event) {
-        sistema.updateDataPagamento(boletoAtual);
-        sistema.updateParcelasPagas(boletoAtual.getContratoBoleto());
-        sistema.updateSaldoDevedor(boletoAtual.getContratoBoleto());
-        sistema.updateStatusBoleto(boletoAtual, StatusBoletoEnum.PAGO);
-        if (sistema.getAllBoletosByContrato(boletoAtual.getContratoBoleto().getIdContrato()).size() <
-        boletoAtual.getContratoBoleto().getGrupoAssociado().getNumeroMaximoParticipantes()) {
-            sistema.createBoleto(boletoAtual.getContratoBoleto());
+        if (boletoAtual.getContratoBoleto().getParcelasPagas() <
+                boletoAtual.getContratoBoleto().getGrupoAssociado().getNumeroMaximoParticipantes()) {
+            sistema.updateDataPagamento(boletoAtual);
+            sistema.updateParcelasPagas(boletoAtual.getContratoBoleto());
+            sistema.updateSaldoDevedor(boletoAtual.getContratoBoleto());
+            sistema.updateValorPago(boletoAtual.getContratoBoleto());
+            sistema.updateStatusBoleto(boletoAtual, StatusBoletoEnum.PAGO);
+            if (sistema.getAllBoletosByContrato(boletoAtual.getContratoBoleto().getIdContrato()).size() <
+                    boletoAtual.getContratoBoleto().getGrupoAssociado().getNumeroMaximoParticipantes()) {
+                sistema.createBoleto(boletoAtual.getContratoBoleto());
+            }
+            popupStage.close();
+            gerenciador.abrirPerfilCliente(boletoAtual.getContratoBoleto().getCliente());
         }
-        gerenciador.abrirTelaDadosContrato(boletoAtual.getContratoBoleto());
-        popupStage.close();
     }
 
     private void limparDadosGrupo() {

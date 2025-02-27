@@ -70,6 +70,7 @@ public class TelaDadosContratoController {
     @FXML
     public void initialize() {
         if (contratoAtual != null) {
+
             carregarDados();
             configurarTabela();
         }
@@ -88,10 +89,6 @@ public class TelaDadosContratoController {
     }
 
     private void carregarDados() {
-        for (Boleto boleto : sistema.getAllBoletos()) {
-            System.out.println(boleto.getContratoBoleto().getNomeGrupoConsorcio());
-        }
-        System.out.println(contratoAtual.getNomeGrupoConsorcio());
         ObservableList<Boleto> boletos = FXCollections.observableArrayList(sistema.getAllBoletosByContrato(contratoAtual.getIdContrato()));
         tbvBoletos.setItems(boletos);
     }

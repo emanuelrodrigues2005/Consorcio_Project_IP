@@ -43,6 +43,9 @@ public class TelaPrincipalClienteController {
 
     @FXML
     public void initialize() {
+        for (GrupoConsorcio grupo : sistema.getAllGrupos()) {
+            grupo.setNumeroParticipantes(sistema.getAllClientesByGrupo(grupo).size());
+        }
         configurarTabela();
         carregarDados();
 
