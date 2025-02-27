@@ -2,8 +2,10 @@ package br.ufrpe.ip.projeto.gui.views;
 
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
+import br.ufrpe.ip.projeto.exceptions.CampoInvalidoException;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -52,7 +54,7 @@ public class TelaCadastroController {
     }
 
     @FXML
-    private void handleCadastro() {
+    private void handleCadastro() throws CampoInvalidoException {
         String nome = txtNome.getText();
         String telefone = txtTelefone.getText();
         String cpf = txtCpf.getText();
@@ -60,20 +62,28 @@ public class TelaCadastroController {
         String senha = txtSenha.getText();
         String confirmarSenha = txtConfirmarSenha.getText();
 
-        if (cpf.isEmpty() || email.isEmpty() || senha.isEmpty() || confirmarSenha.isEmpty() || nome.isEmpty() || telefone.isEmpty()) {
-            System.out.println("Todos os campos devem ser preenchidos.");
-            return;
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+        try {
+            if (cpf.isEmpty() || email.isEmpty() || senha.isEmpty() || confirmarSenha.isEmpty() || nome.isEmpty() || telefone.isEmpty()) {
+                alert.setHeaderText("Todos os Campos Devem Ser Preenchidos");
+                throw new CampoInvalidoException("Campos Vazios!");
+            }
+
+            if (!senha.equals(confirmarSenha)) {
+                alert.setHeaderText("As Senhas Não Coincidem!");
+                throw new CampoInvalidoException(senha);
+            }
+
+            this.sistema.createCliente(nome, cpf, telefone, email, senha);
+            System.out.println("Cadastro realizado com sucesso! CPF: " + cpf + ", Email: " + email);
+            this.openLogin();
         }
-
-        if (!senha.equals(confirmarSenha)) {
-            System.out.println("As senhas não coincidem.");
-            return;
+        catch (CampoInvalidoException e) {
+            alert.setTitle("Campo Invalido!");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
         }
-
-        System.out.println("Cadastro realizado com sucesso! CPF: " + cpf + ", Email: " + email);
-
-        this.sistema.createCliente(nome, cpf, telefone, email, senha);
-        this.openLogin();
     }
 
     @FXML

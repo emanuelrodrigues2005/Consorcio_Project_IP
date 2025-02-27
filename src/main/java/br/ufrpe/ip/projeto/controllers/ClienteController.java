@@ -1,5 +1,9 @@
 package br.ufrpe.ip.projeto.controllers;
 
+import br.ufrpe.ip.projeto.exceptions.ArrayVazioException;
+import br.ufrpe.ip.projeto.exceptions.CampoInvalidoException;
+import br.ufrpe.ip.projeto.exceptions.ClienteDuplicadoException;
+import br.ufrpe.ip.projeto.exceptions.ClienteInexistenteException;
 import br.ufrpe.ip.projeto.models.Cliente;
 import br.ufrpe.ip.projeto.repositories.ClienteRepository;
 import br.ufrpe.ip.projeto.repositories.interfaces.IClienteRepository;
@@ -21,49 +25,87 @@ public class ClienteController {
         return instancia;
     }
 
-    public List<Cliente> getAllClientes() {
+    public List<Cliente> getAllClientes() throws ArrayVazioException{
+        if (repositorioCliente.getAllClientes().isEmpty()){
+            throw new ArrayVazioException("Não Há Clientes Registrados!");
+        }
         return this.repositorioCliente.getAllClientes();
     }// exceptions: ArrayVazio
 
-    public Cliente getClienteByCpf(String cpf) {
+    public Cliente getClienteByCpf(String cpf) throws ClienteInexistenteException{
+        if(repositorioCliente.getClienteByCpf(cpf) == null) {  throw new ClienteInexistenteException(cpf); }
         return this.repositorioCliente.getClienteByCpf(cpf);
-    } //exceptions: ClienteInexistente
+    }
 
-    public void createCliente(String nomeCliente, String cpfCliente, String telefoneCliente, String emailCliente, String senhaCliente) {
-        if(validarCpf(cpfCliente)) {
-            if(repositorioCliente.getClienteByCpf(cpfCliente) == null) {
-                repositorioCliente.createCliente(nomeCliente, cpfCliente, telefoneCliente, emailCliente, senhaCliente);
-                this.repositorioCliente.salvarArquivo();
-            }
+    public void createCliente(String nomeCliente, String cpfCliente, String telefoneCliente, String emailCliente, String senhaCliente) throws CampoInvalidoException, ClienteDuplicadoException {
+        if(!validarCpf(cpfCliente)) {
+            throw new CampoInvalidoException(cpfCliente);
         }
-    } //exceptions: ClienteDuplicado, CampoInvalido
-
-    public void updateNome(String nomeCliente, String cpfCliente) {
-        this.repositorioCliente.updateNome(getClienteByCpf(cpfCliente), nomeCliente);
-        this.repositorioCliente.salvarArquivo();
-    } //exceptions: CampoInvalido, ClienteInexistente
-
-    public void updateTelefone(String telefoneCliente, String cpfCliente) {
-        this.repositorioCliente.updateTelefone(getClienteByCpf(cpfCliente), telefoneCliente);
-        this.repositorioCliente.salvarArquivo();
-    } //exceptions: CampoInvalido, ClienteInexistente
-
-    public void updateEmail(String emailCliente, String cpfCliente) {
-        this.repositorioCliente.updateEmail(getClienteByCpf(cpfCliente), emailCliente);
-        this.repositorioCliente.salvarArquivo();
-    } //exceptions: CampoInvalido, ClienteInexistente
-
-    public void updateSenha(String senhaCliente, String cpfCliente) {
-        this.repositorioCliente.updateSenha(getClienteByCpf(cpfCliente), senhaCliente);
+        if(repositorioCliente.getClienteByCpf(cpfCliente) != null) {
+            throw new ClienteDuplicadoException(cpfCliente);
+        }
+        repositorioCliente.createCliente(nomeCliente, cpfCliente, telefoneCliente, emailCliente, senhaCliente);
         this.repositorioCliente.salvarArquivo();
     }
 
-    public void deleteCliente(String cpfCliente) {
-        if(repositorioCliente.getClienteByCpf(cpfCliente) != null) {
-            repositorioCliente.deleteCliente(cpfCliente);
+    public void updateNome(String nomeCliente, String cpfCliente) throws CampoInvalidoException, ClienteInexistenteException{
+        if (nomeCliente.isEmpty() || cpfCliente.isEmpty()) {
+            throw new CampoInvalidoException("Campos Vazios!");
+        }else if (getClienteByCpf(cpfCliente) == null) {
+            throw new ClienteInexistenteException(cpfCliente);
+        }
+        else {
+            this.repositorioCliente.updateNome(getClienteByCpf(cpfCliente), nomeCliente);
             this.repositorioCliente.salvarArquivo();
         }
-    } //exceptions: ClienteInexistente
+    }
+
+    public void updateTelefone(String telefoneCliente, String cpfCliente) throws CampoInvalidoException, ClienteInexistenteException {
+        if (telefoneCliente.isEmpty() || cpfCliente.isEmpty()) {
+            throw new CampoInvalidoException("Campos Vazios!");
+        }
+        else if (getClienteByCpf(cpfCliente) == null) {
+            throw new ClienteInexistenteException(cpfCliente);
+        }
+        else {
+            this.repositorioCliente.updateTelefone(getClienteByCpf(cpfCliente), telefoneCliente);
+            this.repositorioCliente.salvarArquivo();
+        }
+    }
+
+    public void updateEmail(String emailCliente, String cpfCliente) throws CampoInvalidoException, ClienteInexistenteException {
+        if (emailCliente.isEmpty() || cpfCliente.isEmpty()) {
+            throw new CampoInvalidoException("Campos Vazios!");
+        }
+        else if (getClienteByCpf(cpfCliente) == null) {
+            throw new ClienteInexistenteException(cpfCliente);
+        }
+        else {
+            this.repositorioCliente.updateEmail(getClienteByCpf(cpfCliente), emailCliente);
+            this.repositorioCliente.salvarArquivo();
+        }
+    }
+
+    public void updateSenha(String senhaCliente, String cpfCliente) throws CampoInvalidoException, ClienteInexistenteException{
+        if (senhaCliente.isEmpty() || cpfCliente.isEmpty()) {
+            throw new CampoInvalidoException("Campos Vazios!");
+        }
+        else if (getClienteByCpf(cpfCliente) == null) {
+            throw new ClienteInexistenteException(cpfCliente);
+        }
+        else {
+            this.repositorioCliente.updateSenha(getClienteByCpf(cpfCliente), senhaCliente);
+            this.repositorioCliente.salvarArquivo();
+        }
+    }
+
+    public void deleteCliente(String cpfCliente) throws ClienteInexistenteException {
+        if(repositorioCliente.getClienteByCpf(cpfCliente) == null) {
+           throw new ClienteInexistenteException(cpfCliente);
+        }
+        repositorioCliente.deleteCliente(cpfCliente);
+        this.repositorioCliente.salvarArquivo();
+    }
 
     private boolean verificarDigito(String cpf, int posicao) {
         int soma = 0;

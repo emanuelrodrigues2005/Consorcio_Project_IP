@@ -3,6 +3,10 @@ package br.ufrpe.ip.projeto.controllers;
 import br.ufrpe.ip.projeto.enums.StatusBoletoEnum;
 import br.ufrpe.ip.projeto.enums.StatusContratoEnum;
 import br.ufrpe.ip.projeto.enums.StatusGrupoConsorcioEnum;
+import br.ufrpe.ip.projeto.exceptions.ArrayVazioException;
+import br.ufrpe.ip.projeto.exceptions.CampoInvalidoException;
+import br.ufrpe.ip.projeto.exceptions.ClienteDuplicadoException;
+import br.ufrpe.ip.projeto.exceptions.ClienteInexistenteException;
 import br.ufrpe.ip.projeto.models.*;
 
 import java.time.LocalDate;
@@ -33,21 +37,22 @@ public interface IConsorcio {
 
     void realizarPagamento(String idBoleto);
 
-    List<Cliente> getAllClientes();
+    List<Cliente> getAllClientes() throws ArrayVazioException;
 
-    Cliente getClienteByCpf(String cpf);
+    Cliente getClienteByCpf(String cpf) throws ClienteInexistenteException;
 
-    void createCliente(String nomeCliente, String cpfCliente, String telefoneCliente, String emailCliente, String senhaCliente);
+    void createCliente(String nomeCliente, String cpfCliente, String telefoneCliente, String emailCliente, String senhaCliente)
+            throws CampoInvalidoException, ClienteDuplicadoException ;
 
-    void updateNome(String nomeCliente, String cpfCliente);
+    void updateNome(String nomeCliente, String cpfCliente) throws CampoInvalidoException, ClienteInexistenteException;
 
-    void updateTelefone(String telefoneCliente, String cpfCliente);
+    void updateTelefone(String telefoneCliente, String cpfCliente) throws CampoInvalidoException, ClienteInexistenteException;
 
-    void updateEmail(String emailCliente, String cpfCliente);
+    void updateEmail(String emailCliente, String cpfCliente) throws ClienteInexistenteException, CampoInvalidoException;
 
-    void updateSenha(String senhaCliente, String cpfCliente);
+    void updateSenha(String senhaCliente, String cpfCliente) throws CampoInvalidoException, ClienteInexistenteException;
 
-    void deleteCliente(String cpfCliente);
+    void deleteCliente(String cpfCliente) throws ClienteInexistenteException;
 
     boolean validarCpf(String cpfCliente);
 
@@ -118,7 +123,7 @@ public interface IConsorcio {
 
     double getValorPago(String idGrupo);
 
-    void efutuarLogin(String cpf, String senha);
+    void efutuarLogin(String cpf, String senha) throws ClienteDuplicadoException, ClienteInexistenteException;
 
     Cliente getClienteLogado();
 }
