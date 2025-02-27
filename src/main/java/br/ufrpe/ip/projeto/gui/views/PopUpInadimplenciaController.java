@@ -50,8 +50,9 @@ public class PopUpInadimplenciaController {
     }
 
     @FXML
-    public void initialize() {
+    public void initialize(GrupoConsorcio grupo) {
         try {
+            setGrupoAtual(grupo);
             limparCampos();
             lbInadimplentes.setText(String.valueOf(sistema.calcularInadimplencia(grupoAtual)));
             configurarTabela();

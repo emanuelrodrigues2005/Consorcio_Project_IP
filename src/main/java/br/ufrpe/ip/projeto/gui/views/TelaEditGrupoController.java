@@ -83,7 +83,7 @@ public class TelaEditGrupoController {
 			lbAutomovel.setText(String.valueOf(grupoAtual.getNomeGrupo()));
 			lbValorTotal.setText(String.valueOf(grupoAtual.getValorTotal()));
 			lbStatus.setText(String.valueOf(grupoAtual.getStatusGrupoConsorcio()));
-			lbTaxa.setText(String.valueOf(grupoAtual.getTaxaAdmin() * 100));
+			lbTaxa.setText(String.valueOf(grupoAtual.getTaxaAdmin()));
 			this.configurarTabela();
 			this.carregarDadosDaTabela();
 		}

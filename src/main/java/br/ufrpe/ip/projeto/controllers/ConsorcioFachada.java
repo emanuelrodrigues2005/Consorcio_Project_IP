@@ -319,18 +319,16 @@ public class ConsorcioFachada implements IConsorcio{
 
     @Override
     public double calcularInadimplencia(GrupoConsorcio grupoConsorcio) throws ArrayVazioException {
-        if (grupoConsorcio != null) {
-            List<Contrato> contratosInadimplentes = new ArrayList<>();
-            for (Boleto boleto : this.getAllBoletos()) {
-                if (getContratosByIdGrupo(grupoConsorcio).contains(boleto.getContratoBoleto())) {
-                    if (boleto.getStatusBoleto() == StatusBoletoEnum.ATRASADO && !(contratosInadimplentes.contains(boleto.getContratoBoleto()))) {
-                        contratosInadimplentes.add(boleto.getContratoBoleto());
-                    }
+        List<Contrato> contratosInadimplentes = new ArrayList<>();
+        for (Boleto boleto : this.getAllBoletos()) {
+            if (getContratosByIdGrupo(grupoConsorcio).contains(boleto.getContratoBoleto())) {
+                if (boleto.getStatusBoleto() == StatusBoletoEnum.ATRASADO && !(contratosInadimplentes.contains(boleto.getContratoBoleto()))) {
+                    contratosInadimplentes.add(boleto.getContratoBoleto());
                 }
             }
-            System.out.println((double)contratosInadimplentes.size()/grupoConsorcio.getNumeroParticipantes() * 100); //debugging
-            return grupoConsorcio.getNumeroParticipantes() != 0 ? (double)contratosInadimplentes.size()/grupoConsorcio.getNumeroParticipantes() * 100 : 0;
         }
-        return 0;
-    }
+        System.out.println((double)contratosInadimplentes.size()/grupoConsorcio.getNumeroParticipantes() * 100); //debugging
+        return grupoConsorcio.getNumeroParticipantes() != 0 ? (double)contratosInadimplentes.size()/grupoConsorcio.getNumeroParticipantes() * 100 : 0;
+}
+
 }
