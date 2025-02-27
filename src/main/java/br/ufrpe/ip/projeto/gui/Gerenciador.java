@@ -200,8 +200,8 @@ public class Gerenciador {
     }
 
     public void abrirTelaEdicaoGrupo(GrupoConsorcio grupo) {
-        telaEdicaoGrupoController.initialize();
         telaEdicaoGrupoController.setGrupoAtual(grupo);
+        telaEdicaoGrupoController.initialize();
         scenePrincipal.setRoot(telaEdicaoGrupo);
     }
 

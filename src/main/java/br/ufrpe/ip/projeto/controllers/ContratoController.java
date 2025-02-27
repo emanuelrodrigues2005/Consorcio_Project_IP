@@ -59,6 +59,10 @@ public class ContratoController {
         return this.repositorioContrato.getAllContratos();
     }
 
+    public List<Cliente> getAllClientesByGrupo(GrupoConsorcio grupoConsorcio) {
+        return this.repositorioContrato.getAllClientesByGrupo(grupoConsorcio);
+    }
+
     public List<Contrato> getAllContratosByCPF(Cliente cliente) {
         return this.repositorioContrato.getAllContratosByCPF(cliente);   
     }

@@ -187,6 +187,11 @@ public class ConsorcioFachada implements IConsorcio{
     }
 
     @Override
+    public List<Cliente> getAllClientesByGrupo(GrupoConsorcio grupoConsorcio) {
+        return this.contratoController.getAllClientesByGrupo(grupoConsorcio);
+    }
+
+    @Override
     public List<Contrato> getContratosByIdGrupo(GrupoConsorcio grupoAssociado) {
         return this.contratoController.getContratosByIdGrupo(grupoAssociado);
     }
