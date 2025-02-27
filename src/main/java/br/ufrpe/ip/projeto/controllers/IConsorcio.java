@@ -3,33 +3,34 @@ package br.ufrpe.ip.projeto.controllers;
 import br.ufrpe.ip.projeto.enums.StatusBoletoEnum;
 import br.ufrpe.ip.projeto.enums.StatusContratoEnum;
 import br.ufrpe.ip.projeto.enums.StatusGrupoConsorcioEnum;
+import br.ufrpe.ip.projeto.exceptions.*;
 import br.ufrpe.ip.projeto.models.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public interface IConsorcio {
-    List<Boleto> getAllBoletos();
+    List<Boleto> getAllBoletos() throws ArrayVazioException;
 
-    String getIdBoleto(Contrato contratoBoleto, int numeroParcela);
+    String getIdBoleto(Contrato contratoBoleto, int numeroParcela) throws BoletoInexistenteException, CampoInvalidoException, IdBoletoInexistenteException;
 
-    Boleto getBoletoById(String idBoleto);
+    Boleto getBoletoById(String idBoleto) throws BoletoInexistenteException, CampoInvalidoException;
 
-    Boleto getBoletoByContrato(Contrato contratoBoleto);
+    Boleto getBoletoByContrato(Contrato contratoBoleto) throws BoletoInexistenteException, CampoInvalidoException, ContratoInvalidoException;
 
-    void createBoleto(Contrato contratoBoleto);
+    void createBoleto(Contrato contratoBoleto) throws CampoInvalidoException;
 
-    void updateDataPagamento(Boleto boleto);
+    void updateDataPagamento(Boleto boleto) throws BoletoInexistenteException, CampoInvalidoException;
 
-    void updateStatusBoleto(Boleto boleto, StatusBoletoEnum statusBoleto);
+    void updateStatusBoleto(Boleto boleto, StatusBoletoEnum statusBoleto) throws BoletoInexistenteException, CampoInvalidoException;
 
-    void deleteBoleto(String idBoleto);
+    void deleteBoleto(String idBoleto) throws BoletoInexistenteException, CampoInvalidoException;
 
-    void atualizarBoletoVencidos(Boleto boleto);
+    void atualizarBoletoVencidos(Boleto boleto) throws BoletoInexistenteException, CampoInvalidoException;
 
-    void verificarBoletoVencidos();
+    void verificarBoletoVencidos() throws BoletoInexistenteException, CampoInvalidoException;
 
-    void realizarPagamento(String idBoleto);
+    void realizarPagamento(String idBoleto) throws BoletoInexistenteException, CampoInvalidoException;
 
     List<Cliente> getAllClientes();
 
@@ -49,19 +50,19 @@ public interface IConsorcio {
 
     boolean validarCpf(String cpfCliente);
 
-    List<Contemplacao> getAllContemplacao();
+    List<Contemplacao> getAllContemplacao() throws ArrayVazioException;
 
-    Contemplacao getContemplacaoById(String idContemplacao);
+    Contemplacao getContemplacaoById(String idContemplacao) throws ContemplacaoInexistenteException;
 
-    void createContemplacao(Contrato contrato);
+    Contemplacao createContemplacao(Contrato contrato) throws ContemplacaoInexistenteException, CampoInvalidoException;
 
-    void updateDataContemplacao(String idContemplacao, LocalDate dataContemplacao);
+    void updateDataContemplacao(String idContemplacao, LocalDate dataContemplacao) throws ContemplacaoInexistenteException, DataContemplacaoInvalidaException;
 
-    void deleteContemplacao(String idContemplacao);
+    void deleteContemplacao(String idContemplacao) throws ContemplacaoInexistenteException;
 
-    String sorteioContemplacao();
+    String sorteioContemplacao() throws ContratoInvalidoException, ContemplacaoInexistenteException, ArrayVazioException, CampoInvalidoException;
 
-    void createContrato(Cliente cliente, GrupoConsorcio grupoConsorcio);
+    void createContrato(Cliente cliente, GrupoConsorcio grupoConsorcio) throws CampoInvalidoException;
 
     void registrarPagamento(Cliente cliente, GrupoConsorcio grupoConsorcio, Boleto boleto);
 
@@ -77,42 +78,42 @@ public interface IConsorcio {
 
     Contrato getContratoByIdContrato(String idContrato);
 
-    boolean cancelarContrato(Cliente cliente, GrupoConsorcio grupoAssociado);
+    boolean cancelarContrato(Cliente cliente, GrupoConsorcio grupoAssociado) throws ContratoInvalidoException, CampoInvalidoException;
 
-    void updateStatusContrato(Contrato contrato, StatusContratoEnum statusContrato);
+    void updateStatusContrato(Contrato contrato, StatusContratoEnum statusContrato) throws ContratoInvalidoException, CampoInvalidoException;
 
-    void updateParcelasPagas(Contrato contrato);
+    void updateParcelasPagas(Contrato contrato) throws ContratoInvalidoException;
 
-    void updateSaldoDevedor(Contrato contrato);
+    void updateSaldoDevedor(Contrato contrato) throws ContratoInvalidoException;
 
 
-    void updateValorPago(Contrato contrato);
+    void updateValorPago(Contrato contrato) throws ContratoInvalidoException;
 
-    void updateSaldoDevolucao(Contrato contrato);
+    void updateSaldoDevolucao(Contrato contrato) throws ContratoInvalidoException;
 
-    void updateDataEncerramento(Contrato contrato, LocalDate dataEncerramento);
+    void updateDataEncerramento(Contrato contrato, LocalDate dataEncerramento) throws ContratoInvalidoException;
 
-    void deleteContrato(Contrato contrato);
+    void deleteContrato(Contrato contrato) throws ContratoInvalidoException;
 
-    void createGrupoConsorcio(String nomeGrupo, int numeroMaximoParticipantes, double valorTotal, double taxaAdmin);
+    void createGrupoConsorcio(String nomeGrupo, int numeroMaximoParticipantes, double valorTotal, double taxaAdmin) throws CampoInvalidoException;
 
-    GrupoConsorcio getGrupoById(String idGrupo);
+    GrupoConsorcio getGrupoById(String idGrupo) throws IdGrupoConsorcioInexistenteException;
 
-    List<GrupoConsorcio> getAllGrupos();
+    List<GrupoConsorcio> getAllGrupos() throws ArrayVazioException;
 
-    void updateParticipantes(GrupoConsorcio grupoConsorcio, int novoNumParticipantes);
+    void updateParticipantes(GrupoConsorcio grupoConsorcio, int novoNumParticipantes) throws GrupoConsorcioInexistenteException, CampoInvalidoException;
 
-    void updateNomeGrupo(GrupoConsorcio grupoConsorcio, String novoNome);
+    void updateNomeGrupo(GrupoConsorcio grupoConsorcio, String novoNome) throws GrupoConsorcioInexistenteException, CampoInvalidoException;
 
-    void updateTaxaAdmin(GrupoConsorcio grupoConsorcio, double novaTaxa);
+    void updateTaxaAdmin(GrupoConsorcio grupoConsorcio, double novaTaxa) throws GrupoConsorcioInexistenteException, CampoInvalidoException;
 
     void updateStatusGrupo(GrupoConsorcio grupoConsorcio, StatusGrupoConsorcioEnum novoStatus);
 
-    void deleteGrupoConsorcio(GrupoConsorcio grupoConsorcio);
+    void deleteGrupoConsorcio(GrupoConsorcio grupoConsorcio) throws GrupoConsorcioInexistenteException;
 
     void reajusteParcela(GrupoConsorcio grupoConsorcio);
 
-    double getValorPago(String idGrupo);
+    double getValorPago(String idGrupo) throws IdGrupoConsorcioInexistenteException;
 
     void efutuarLogin(String cpf, String senha);
 

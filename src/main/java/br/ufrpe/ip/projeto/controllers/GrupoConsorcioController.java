@@ -1,9 +1,14 @@
 package br.ufrpe.ip.projeto.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.ufrpe.ip.projeto.enums.StatusContratoEnum;
 import br.ufrpe.ip.projeto.enums.StatusGrupoConsorcioEnum;
+import br.ufrpe.ip.projeto.exceptions.ArrayVazioException;
+import br.ufrpe.ip.projeto.exceptions.CampoInvalidoException;
+import br.ufrpe.ip.projeto.exceptions.GrupoConsorcioInexistenteException;
+import br.ufrpe.ip.projeto.exceptions.IdGrupoConsorcioInexistenteException;
 import br.ufrpe.ip.projeto.models.Contrato;
 import br.ufrpe.ip.projeto.models.GrupoConsorcio;
 import br.ufrpe.ip.projeto.repositories.ContratoRepository;
@@ -26,40 +31,66 @@ public class GrupoConsorcioController {
         return instancia;
     }
 
-    public void createGrupoConsorcio(String nomeGrupo, int numeroMaximoParticipantes,double valorTotal, double taxaAdmin) {
-        if (numeroMaximoParticipantes > 0 && valorTotal > 0 && taxaAdmin > 0) {
-            this.repositorioGrupo.createGrupoConsorcio(nomeGrupo, numeroMaximoParticipantes,valorTotal, taxaAdmin);
-            this.repositorioGrupo.salvarArquivo();
+    public void createGrupoConsorcio(String nomeGrupo, int numeroMaximoParticipantes, double valorTotal, double taxaAdmin) throws CampoInvalidoException {
+        List<String> camposInvalidos = new ArrayList<>();
+        if (numeroMaximoParticipantes <= 0) camposInvalidos.add("Número máximo de participantes");
+        if (valorTotal <= 0) camposInvalidos.add("Valor total");
+        if (taxaAdmin <= 0) camposInvalidos.add("Taxa administrativa");
+
+        if (!camposInvalidos.isEmpty()) {
+            throw new CampoInvalidoException(camposInvalidos);
         }
-        // throw campoInvalido;
+        this.repositorioGrupo.createGrupoConsorcio(nomeGrupo, numeroMaximoParticipantes, valorTotal, taxaAdmin);
+        this.repositorioGrupo.salvarArquivo();
     }
 
-    public GrupoConsorcio getGrupoById(String idGrupo) {
-        return this.repositorioGrupo.getGrupoById(idGrupo);
+
+    public GrupoConsorcio getGrupoById(String idGrupo) throws IdGrupoConsorcioInexistenteException {
+        GrupoConsorcio grupo = this.repositorioGrupo.getGrupoById(idGrupo);
+        if (grupo == null) {
+            throw new IdGrupoConsorcioInexistenteException(idGrupo);
+        }
+        return grupo;
     } //IdGrupoConsorcioInexistente
 
-    public List<GrupoConsorcio> getAllGrupos() {
-        return this.repositorioGrupo.getAllGrupos();
+    public List<GrupoConsorcio> getAllGrupos() throws ArrayVazioException {
+        List<GrupoConsorcio> grupos = this.repositorioGrupo.getAllGrupos();
+        if (grupos.isEmpty()) {
+            throw new ArrayVazioException("Não há grupos de consórcio cadastrados.");
+        }
+        return grupos;
     } //ArrayVazio
 
-    public void updateParticipantes(GrupoConsorcio grupoConsorcio, int novoNumParticipantes) {
-        if (grupoConsorcio.getNumeroParticipantes() != novoNumParticipantes) {
-            this.repositorioGrupo.updateParticipantes(grupoConsorcio, novoNumParticipantes);   
+    public void updateParticipantes(GrupoConsorcio grupoConsorcio, int novoNumParticipantes) throws GrupoConsorcioInexistenteException, CampoInvalidoException {
+        if (grupoConsorcio == null) {
+            throw new GrupoConsorcioInexistenteException("Grupo não encontrado");
         }
+        if (novoNumParticipantes <= 0) {
+            throw new CampoInvalidoException("Número de participantes");
+        }
+        this.repositorioGrupo.updateParticipantes(grupoConsorcio, novoNumParticipantes);
     } //GrupoConsorcioInexistente, CampoInvalido
 
-    public void updateNomeGrupo(GrupoConsorcio grupoConsorcio, String novoNome) {
-        if (grupoConsorcio.getNomeGrupo().equals(novoNome)) {
-            this.repositorioGrupo.updateNomeGrupo(grupoConsorcio, novoNome);
-            this.repositorioGrupo.salvarArquivo();
+    public void updateNomeGrupo(GrupoConsorcio grupoConsorcio, String novoNome) throws GrupoConsorcioInexistenteException, CampoInvalidoException {
+        if (grupoConsorcio == null) {
+            throw new GrupoConsorcioInexistenteException("Grupo não encontrado");
         }
+        if (novoNome == null || novoNome.isEmpty()) {
+            throw new CampoInvalidoException("Nome do grupo inválido");
+        }
+        this.repositorioGrupo.updateNomeGrupo(grupoConsorcio, novoNome);
+        this.repositorioGrupo.salvarArquivo();
     } //GrupoConsorcioInexistente, CampoInvalido
 
-    public void updateTaxaAdmin(GrupoConsorcio grupoConsorcio, double novaTaxa) {
-        if (grupoConsorcio.getTaxaAdmin() != novaTaxa && novaTaxa > 0) {
-            this.repositorioGrupo.updateTaxaAdmin(grupoConsorcio, novaTaxa);
-            this.repositorioGrupo.salvarArquivo();
+    public void updateTaxaAdmin(GrupoConsorcio grupoConsorcio, double novaTaxa) throws GrupoConsorcioInexistenteException, CampoInvalidoException {
+        if (grupoConsorcio == null) {
+            throw new GrupoConsorcioInexistenteException("Grupo não encontrado");
         }
+        if (novaTaxa <= 0) {
+            throw new CampoInvalidoException("Taxa administrativa inválida");
+        }
+        this.repositorioGrupo.updateTaxaAdmin(grupoConsorcio, novaTaxa);
+        this.repositorioGrupo.salvarArquivo();
     } //GrupoConsorcioInexistente, CampoInvalido
 
     public void updateStatusGrupo(GrupoConsorcio grupoConsorcio, StatusGrupoConsorcioEnum novoStatus) {
@@ -77,11 +108,12 @@ public class GrupoConsorcioController {
         }
     } //CampoInvalido
 
-    public void deleteGrupoConsorcio(GrupoConsorcio grupoConsorcio) {
-        if (this.repositorioGrupo.getAllGrupos().contains(grupoConsorcio)) {
-            this.repositorioGrupo.deleteGrupoConsorcio(grupoConsorcio); //fornecer idGrupo
-            this.repositorioGrupo.salvarArquivo();
+    public void deleteGrupoConsorcio(GrupoConsorcio grupoConsorcio) throws GrupoConsorcioInexistenteException {
+        if (grupoConsorcio == null || !this.repositorioGrupo.getAllGrupos().contains(grupoConsorcio)) {
+            throw new GrupoConsorcioInexistenteException("Grupo não encontrado para exclusão");
         }
+        this.repositorioGrupo.deleteGrupoConsorcio(grupoConsorcio);
+        this.repositorioGrupo.salvarArquivo();
     } //GrupoConsorcioInexistente
 
     public void reajusteParcela(GrupoConsorcio grupoConsorcio) {
@@ -101,12 +133,16 @@ public class GrupoConsorcioController {
         }
     } //GrupoConsorcioInexistente
 
-    public double getValorPago(String idGrupo) {
+    public double getValorPago(String idGrupo) throws IdGrupoConsorcioInexistenteException {
+        GrupoConsorcio grupo = this.repositorioGrupo.getGrupoById(idGrupo);
+        if (grupo == null) {
+            throw new IdGrupoConsorcioInexistenteException(idGrupo);
+        }
+
         IContratoRepository repositorioContratos = ContratoRepository.getInstancia();
         double somaValorPago = 0;
-
-        for(Contrato contrato : repositorioContratos.getContratosByIdGrupo(repositorioGrupo.getGrupoById(idGrupo))) {
-            somaValorPago = somaValorPago + contrato.getValorPago();
+        for (Contrato contrato : repositorioContratos.getContratosByIdGrupo(grupo)) {
+            somaValorPago += contrato.getValorPago();
         }
         return somaValorPago;
     } //IdGrupoInvalido

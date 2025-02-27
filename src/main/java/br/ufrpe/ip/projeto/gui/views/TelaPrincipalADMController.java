@@ -2,16 +2,13 @@ package br.ufrpe.ip.projeto.gui.views;
 
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
+import br.ufrpe.ip.projeto.exceptions.ArrayVazioException;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
 import br.ufrpe.ip.projeto.models.GrupoConsorcio;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class TelaPrincipalADMController {
@@ -76,13 +73,27 @@ public class TelaPrincipalADMController {
     }
 
     private void carregarDados() {
-        ObservableList<GrupoConsorcio> grupos = FXCollections.observableArrayList(sistema.getAllGrupos());
-        tbvGrupos.setItems(grupos);
+        try {
+            ObservableList<GrupoConsorcio> grupos = FXCollections.observableArrayList(sistema.getAllGrupos());
+            tbvGrupos.setItems(grupos);
+        } catch (ArrayVazioException e) {
+            exibirAlertaErro("Nenhum grupo encontrado", "Não há grupos de consórcio cadastrados.");
+            tbvGrupos.setItems(FXCollections.observableArrayList());
+        }
+    }
+
+    private void exibirAlertaErro(String titulo, String mensagem) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erro");
+        alert.setHeaderText(titulo);
+        alert.setContentText(mensagem);
+        alert.showAndWait();
     }
 
     @FXML
     public void handleTelaPerfilADM() {
-        //this.screenManager.abrirPerfilADM();
+        System.out.println("Redirecionando para tela de perfil do Administrador...");
+        this.gerenciador.abrirTelaPerfilAdmin(this.sistema.getClienteLogado());
     }
 
     @FXML

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -18,17 +19,17 @@
                   <Font name="Verdana Bold Italic" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="lbHomeADM" alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#handleTelaPrincipalADM" prefHeight="76.0" prefWidth="160.0" style="-fx-background-color: #BA0F30;" text="Home" textFill="#fafafa" underline="true">
+            <Label fx:id="lbHomeADM" alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#handleTelaPrincipalADM" prefHeight="76.0" prefWidth="160.0" style="-fx-background-color: #BA0F30;" styleClass="hand" stylesheets="@style.css" text="Home" textFill="#fafafa" underline="true">
                <font>
                   <Font name="Verdana Bold" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="lbPerfilADM" alignment="CENTER" layoutX="10.0" layoutY="112.0" onMouseClicked="#handleTelaPerfilAdmin" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30; -fx-background-color: FAFAFA; -fx-cursor: hand;" text="Perfil">
+            <Label fx:id="lbPerfilADM" alignment="CENTER" layoutX="10.0" layoutY="112.0" onMouseClicked="#handleTelaPerfilAdmin" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30; -fx-background-color: FAFAFA; -fx-cursor: hand;" styleClass="hand" stylesheets="@style.css" text="Perfil">
                <font>
                   <Font name="Verdana Bold" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="lbSair" alignment="CENTER" onMouseClicked="#handleTelaEscolherLogin" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30; -fx-background-color: FAFAFA; -fx-cursor: hand;" text="Sair">
+            <Label fx:id="lbSair" alignment="CENTER" onMouseClicked="#handleTelaEscolherLogin" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30; -fx-background-color: FAFAFA; -fx-cursor: hand;" styleClass="hand" stylesheets="@style.css" text="Sair">
                <font>
                   <Font name="Verdana Bold" size="20.0" />
                </font>
@@ -43,8 +44,16 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Button fx:id="btEncerrarGrupo" layoutX="410.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#handleMudarStatusGrupo" prefHeight="48.0" styleClass="teg-button" text="Encerrar Grupo" />
-            <Button fx:id="btRemoverParticipante" layoutX="622.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#handleDeleteCliente" prefHeight="48.0" prefWidth="96.0" styleClass="teg-button" text="Remove" />
+            <Button fx:id="btEncerrarGrupo" layoutX="410.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#handleMudarStatusGrupo" prefHeight="48.0" stylesheets="@style.css" text="Encerrar Grupo">
+               <styleClass>
+                  <String fx:value="teg-button" />
+                  <String fx:value="hand" />
+               </styleClass></Button>
+            <Button fx:id="btRemoverParticipante" layoutX="622.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#handleDeleteCliente" prefHeight="48.0" prefWidth="96.0" stylesheets="@style.css" text="Remove">
+               <styleClass>
+                  <String fx:value="teg-button" />
+                  <String fx:value="hand" />
+               </styleClass></Button>
             <Label layoutX="94.0" layoutY="89.0" text="Automóvel" underline="true">
                <font>
                   <Font name="Verdana" size="24.0" />
@@ -96,7 +105,7 @@
                   </Label>
                </children>
             </HBox>
-            <Label fx:id="lbStatus" alignment="CENTER" layoutX="410.0" layoutY="250.0" prefHeight="50.0" prefWidth="130.0" text="ATIVO">
+            <Label fx:id="lbStatus" alignment="CENTER" layoutX="289.0" layoutY="250.0" prefHeight="50.0" prefWidth="372.0" text="ATIVO">
                <font>
                   <Font name="Arial Black" size="32.0" />
                </font>
@@ -117,10 +126,18 @@
                         </Label>
                      </children>
                   </HBox>
-                  <Button fx:id="btAlterarTaxa" mnemonicParsing="false" onMouseClicked="#handleAlterarTaxaAdmin" prefHeight="48.0" styleClass="teg-button" text="Alterar Taxa" />
+                  <Button fx:id="btAlterarTaxa" mnemonicParsing="false" onMouseClicked="#handleAlterarTaxaAdmin" prefHeight="48.0" stylesheets="@style.css" text="Alterar Taxa">
+                     <styleClass>
+                        <String fx:value="teg-button" />
+                        <String fx:value="hand" />
+                     </styleClass></Button>
                </children>
             </VBox>
-            <Button fx:id="btRealizarSorteio" layoutX="760.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#handleRealizarContemplacao" prefHeight="48.0" styleClass="teg-button" text="Realizar Sorteio" />
+            <Button fx:id="btRealizarSorteio" layoutX="760.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#handleRealizarContemplacao" prefHeight="48.0" stylesheets="@style.css" text="Realizar Sorteio">
+               <styleClass>
+                  <String fx:value="teg-button" />
+                  <String fx:value="hand" />
+               </styleClass></Button>
          </children>
       </Pane>
    </children>

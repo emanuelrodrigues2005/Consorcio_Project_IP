@@ -3,10 +3,7 @@ package br.ufrpe.ip.projeto.gui;
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
 import br.ufrpe.ip.projeto.gui.views.*;
-import br.ufrpe.ip.projeto.models.Boleto;
-import br.ufrpe.ip.projeto.models.Cliente;
-import br.ufrpe.ip.projeto.models.Contrato;
-import br.ufrpe.ip.projeto.models.GrupoConsorcio;
+import br.ufrpe.ip.projeto.models.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -30,6 +27,7 @@ public class Gerenciador {
     private Parent telaVisualizacaoContrato;
     private Parent telaEdicaoGrupo;
     private Parent telaDadosContrato;
+    private Parent telaPerfilADM;
 
     private Stage stagePrincipal;
     private Scene scenePrincipal;
@@ -46,6 +44,7 @@ public class Gerenciador {
     private TelaLoginAdmController telaLoginAdmController;
     private TelaEditGrupoController telaEdicaoGrupoController;
     private TelaDadosContratoController telaDadosContratoController;
+    private TelaPerfilADMController telaPerfilADMController;
 
     private Gerenciador() {
         try{
@@ -108,6 +107,11 @@ public class Gerenciador {
                 telaDadosContrato = loaderTelaDadosContrato.load();
                 telaDadosContratoController = loaderTelaDadosContrato.getController();
                 telaDadosContratoController.setGerenciador(this);
+
+                FXMLLoader loaderTelaPerfilADM = new FXMLLoader(getClass().getResource(TelasEnum.TELA_PERFIL_ADM.getCaminho()));
+                telaPerfilADM = loaderTelaPerfilADM.load();
+                telaPerfilADMController = loaderTelaPerfilADM.getController();
+                telaPerfilADMController.setGerenciador(this);
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(-1);
@@ -165,9 +169,9 @@ public class Gerenciador {
     }
 
     public void abrirTelaPerfilAdmin(Cliente admin) {
-        telaPerfilClienteController.setCliente(admin);
-        telaPerfilClienteController.initialize(); //CONSERTAR DEPOIS
-        scenePrincipal.setRoot(telaPerfilCliente);
+        telaPerfilADMController.setCliente(admin);
+        telaPerfilADMController.initialize();
+        scenePrincipal.setRoot(telaPerfilADM);
     }
 
     public void abrirTelaPrincipalADM() {
@@ -218,6 +222,28 @@ public class Gerenciador {
             Stage popupStage = new Stage();
             popupStage.initModality(Modality.APPLICATION_MODAL);
             popupStage.setTitle("Pagamento do Boleto");
+            popupStage.setScene(new Scene(popupRoot));
+            popupStage.setResizable(false);
+
+            controller.setPopupStage(popupStage);
+
+            popupStage.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void abrirPopUpSorteio(Contemplacao contemplacao) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(TelasEnum.POP_UP_SORTEIO.getCaminho()));
+            Pane popupRoot = loader.load();
+
+            PopUpSorteioController controller = loader.getController();
+            controller.setContemplacaoAtual(contemplacao);
+
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.setTitle("Contemplaçao de Contrato");
             popupStage.setScene(new Scene(popupRoot));
             popupStage.setResizable(false);
 

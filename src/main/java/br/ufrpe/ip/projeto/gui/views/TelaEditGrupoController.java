@@ -3,8 +3,10 @@ package br.ufrpe.ip.projeto.gui.views;
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
 import br.ufrpe.ip.projeto.enums.StatusGrupoConsorcioEnum;
+import br.ufrpe.ip.projeto.exceptions.*;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
 import br.ufrpe.ip.projeto.models.Cliente;
+import br.ufrpe.ip.projeto.models.Contemplacao;
 import br.ufrpe.ip.projeto.models.GrupoConsorcio;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -86,7 +88,7 @@ public class TelaEditGrupoController {
 
 	@FXML
 	public void handleTelaPerfilAdmin() {
-		//this.gerenciador.abrirTelaPerfilAdmin();
+		this.gerenciador.abrirTelaPerfilAdmin(this.sistema.getClienteLogado());
 	}
 
 	@FXML
@@ -103,8 +105,19 @@ public class TelaEditGrupoController {
 
 	@FXML
 	public void handleRealizarContemplacao() {
-		this.sistema.sorteioContemplacao();
-		//this.gerenciador.abrirPopUpSorteio();
+		try {
+			String idContemplacao = this.sistema.sorteioContemplacao();
+			Contemplacao contemplacao = this.sistema.getContemplacaoById(idContemplacao);
+			this.gerenciador.abrirPopUpSorteio(contemplacao);
+		} catch (ArrayVazioException e) {
+			exibirAlertaErro("Erro no sorteio", "Não há contratos ativos para contemplação.");
+		} catch (ContratoInvalidoException e) {
+			exibirAlertaErro("Contrato inválido", e.getMessage());
+		} catch (ContemplacaoInexistenteException e) {
+			exibirAlertaErro("Contemplação não encontrada", "A contemplação sorteada não existe.");
+		} catch (CampoInvalidoException e) {
+			exibirAlertaErro("Campo inválido", e.getMessage());
+		}
 	}
 
 	@FXML
@@ -140,23 +153,33 @@ public class TelaEditGrupoController {
 	}
 
 	private void carregarDadosGrupo(String idGrupo) {
-		grupoAtual = sistema.getGrupoById(idGrupo);
-		if (grupoAtual != null) {
-			if (lbAutomovel != null) {
-				lbAutomovel.setText(grupoAtual.getNomeGrupo());
-			} else {
-				System.out.println("lbAutoConsor está nulo!");
+		try {
+			grupoAtual = sistema.getGrupoById(idGrupo);
+			if (grupoAtual != null) {
+				if (lbAutomovel != null) {
+					lbAutomovel.setText(grupoAtual.getNomeGrupo());
+				} else {
+					System.out.println("lbAutoConsor está nulo!");
+				}
+
+				lbValorTotal.setText(String.format("%.2f", grupoAtual.getValorTotal()));
+				lbTaxa.setText(String.format("%.2f", grupoAtual.getTaxaAdmin()));
+
+				int participantesAtuais = grupoAtual.getNumeroParticipantes();
+				lbQntdParticipantes.setText(String.valueOf(participantesAtuais));
+				lbStatus.setText(grupoAtual.getStatusGrupoConsorcioString());
 			}
-
-			lbValorTotal.setText(String.format("%.2f", grupoAtual.getValorTotal()));
-			lbTaxa.setText(String.format("%.2f", grupoAtual.getTaxaAdmin()));
-
-			int participantesAtuais = grupoAtual.getNumeroParticipantes();
-			lbQntdParticipantes.setText(String.valueOf(participantesAtuais));
-			lbStatus.setText(grupoAtual.getStatusGrupoConsorcioString());
-		} else {
-			System.out.println("Nenhum grupo encontrado com o ID fornecido.");
+		} catch (IdGrupoConsorcioInexistenteException e) {
+			exibirAlertaErro("Grupo não encontrado", "Nenhum grupo foi encontrado com o ID fornecido.");
 		}
+	}
+
+	private void exibirAlertaErro(String titulo, String mensagem) {
+		Alert alert = new Alert(Alert.AlertType.ERROR);
+		alert.setTitle("Erro");
+		alert.setHeaderText(titulo);
+		alert.setContentText(mensagem);
+		alert.showAndWait();
 	}
 
 	private void limparDadosGrupo() {

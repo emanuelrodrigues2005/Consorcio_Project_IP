@@ -3,16 +3,16 @@ package br.ufrpe.ip.projeto.gui.views;
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
 import br.ufrpe.ip.projeto.enums.StatusContratoEnum;
+import br.ufrpe.ip.projeto.exceptions.BoletoInexistenteException;
+import br.ufrpe.ip.projeto.exceptions.CampoInvalidoException;
+import br.ufrpe.ip.projeto.exceptions.ContratoInvalidoException;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
 import br.ufrpe.ip.projeto.models.Boleto;
 import br.ufrpe.ip.projeto.models.Contrato;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
@@ -86,8 +86,18 @@ public class TelaDadosContratoController {
     }
 
     private void carregarDados() {
-        ObservableList<Boleto> boletos = FXCollections.observableArrayList(sistema.getBoletoByContrato(contratoAtual));
-        tbvBoletos.setItems(boletos);
+        try {
+            ObservableList<Boleto> boletos = FXCollections.observableArrayList(
+                    sistema.getBoletoByContrato(contratoAtual)
+            );
+            tbvBoletos.setItems(boletos);
+        } catch (BoletoInexistenteException e) {
+            exibirAlertaErro("Boleto não encontrado", "Nenhum boleto foi encontrado para este contrato.");
+        } catch (ContratoInvalidoException e) {
+            exibirAlertaErro("Contrato inválido", e.getMessage());
+        } catch (CampoInvalidoException e) {
+            exibirAlertaErro("Campo inválido", e.getMessage());
+        }
     }
 
     private void configurarTabela() {
@@ -122,12 +132,29 @@ public class TelaDadosContratoController {
     @FXML
     private void handleMudarStatusContrato(MouseEvent event) {
         if (contratoAtual != null) {
-            this.sistema.updateStatusContrato(contratoAtual, StatusContratoEnum.ENCERRADO);
-            System.out.println("Grupo Encerrado com sucesso!");
-            carregarDadosContrato(contratoAtual.getIdContrato());
-            btEncerrarContrato.setText("Contrato Encerrado");
-            btEncerrarContrato.setDisable(true);
+            try {
+                this.sistema.updateStatusContrato(contratoAtual, StatusContratoEnum.ENCERRADO);
+                System.out.println("Grupo Encerrado com sucesso!");
+
+                carregarDadosContrato(contratoAtual.getIdContrato());
+                btEncerrarContrato.setText("Contrato Encerrado");
+                btEncerrarContrato.setDisable(true);
+            } catch (CampoInvalidoException e) {
+                exibirAlertaErro("Erro no campo", e.getMessage());
+            } catch (ContratoInvalidoException e) {
+                exibirAlertaErro("Contrato inválido", e.getMessage());
+            }
+        } else {
+            exibirAlertaErro("Erro", "Nenhum contrato foi selecionado.");
         }
+    }
+
+    private void exibirAlertaErro(String titulo, String mensagem) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erro");
+        alert.setHeaderText(titulo);
+        alert.setContentText(mensagem);
+        alert.showAndWait();
     }
 
     @FXML

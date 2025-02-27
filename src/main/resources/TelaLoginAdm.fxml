@@ -39,5 +39,6 @@
       </Text>
       <PasswordField fx:id="pswSenha" layoutX="524.0" layoutY="329.0" prefWidth="230.0" promptText="Senha" />
       <PasswordField fx:id="pswCodeAdm" layoutX="523.0" layoutY="369.0" prefWidth="230.0" promptText="Insira o código de Administrador" />
+      <Button fx:id="btVoltarEscolhaLogin" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#handleVoltarEscolhaLogin" prefHeight="48.0" prefWidth="144.0" styleClass="teg-button" stylesheets="@style.css" text="Voltar" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="32.0" />
    </children>
 </AnchorPane>
