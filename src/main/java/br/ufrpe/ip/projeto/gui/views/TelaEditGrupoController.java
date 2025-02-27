@@ -66,17 +66,20 @@ public class TelaEditGrupoController {
 		this.grupoAtual = grupoAtual;
 		if (grupoAtual != null) {
 			carregarDadosGrupo(grupoAtual.getIdGrupo());
+			grupoAtual.setNumeroParticipantes(sistema.getAllClientesByGrupo(grupoAtual).size());
 		}
 	}
 
 	@FXML
 	public void initialize() {
-		lbAutomovel.setText("");
-		lbQntdParticipantes.setText("0");
-		lbValorTotal.setText("");
-		lbStatus.setText("");
-		lbTaxa.setText("");
-		ltvParticipantes.getItems().setAll(sistema.getAllClientesByGrupo(grupoAtual)); //ajustar pra pegar somente os cliente do grupo selecionado
+		if (grupoAtual != null) {
+			lbAutomovel.setText(String.valueOf(grupoAtual.getNomeGrupo()));
+			lbQntdParticipantes.setText(String.valueOf(grupoAtual.getNumeroParticipantes()));
+			lbValorTotal.setText(String.valueOf(grupoAtual.getValorTotal()));
+			lbStatus.setText(String.valueOf(grupoAtual.getStatusGrupoConsorcio()));
+			lbTaxa.setText(String.valueOf(grupoAtual.getTaxaAdmin()));
+			ltvParticipantes.getItems().setAll(sistema.getAllClientesByGrupo(grupoAtual));//ajustar pra pegar somente os cliente do grupo selecionado
+		}
 	}
 
 	@FXML
