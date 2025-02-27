@@ -2,17 +2,16 @@ package br.ufrpe.ip.projeto.gui.views;
 
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
+import br.ufrpe.ip.projeto.exceptions.ArrayVazioException;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
 import br.ufrpe.ip.projeto.models.GrupoConsorcio;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.util.List;
 
 public class TelaPrincipalADMController {
     private final IConsorcio sistema = ConsorcioFachada.getInstance();
@@ -53,9 +52,15 @@ public class TelaPrincipalADMController {
 
     @FXML
     public void initialize() {
-        for (GrupoConsorcio grupo : sistema.getAllGrupos()) {
-            grupo.setNumeroParticipantes(sistema.getAllClientesByGrupo(grupo).size());
+        try {
+            List<GrupoConsorcio> grupos = sistema.getAllGrupos();
+            for (GrupoConsorcio grupo : grupos) {
+                grupo.setNumeroParticipantes(sistema.getAllClientesByGrupo(grupo).size());
+            }
+        } catch (ArrayVazioException e) {
+            exibirAlertaErro("Nenhum Grupo Encontrado", "Não há grupos de consórcio cadastrados.");
         }
+
         configurarTabela();
         carregarDados();
 
@@ -79,8 +84,21 @@ public class TelaPrincipalADMController {
     }
 
     private void carregarDados() {
-        ObservableList<GrupoConsorcio> grupos = FXCollections.observableArrayList(sistema.getAllGrupos());
-        tbvGrupos.setItems(grupos);
+        try {
+            ObservableList<GrupoConsorcio> grupos = FXCollections.observableArrayList(sistema.getAllGrupos());
+            tbvGrupos.setItems(grupos);
+        } catch (ArrayVazioException e) {
+            exibirAlertaErro("Nenhum grupo encontrado", "Não há grupos de consórcio cadastrados.");
+            tbvGrupos.setItems(FXCollections.observableArrayList());
+        }
+    }
+
+    private void exibirAlertaErro(String titulo, String mensagem) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erro");
+        alert.setHeaderText(titulo);
+        alert.setContentText(mensagem);
+        alert.showAndWait();
     }
 
     @FXML
