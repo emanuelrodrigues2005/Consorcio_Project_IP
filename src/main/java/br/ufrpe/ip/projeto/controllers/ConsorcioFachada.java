@@ -3,6 +3,8 @@ package br.ufrpe.ip.projeto.controllers;
 import br.ufrpe.ip.projeto.enums.StatusBoletoEnum;
 import br.ufrpe.ip.projeto.enums.StatusContratoEnum;
 import br.ufrpe.ip.projeto.enums.StatusGrupoConsorcioEnum;
+import br.ufrpe.ip.projeto.exceptions.ArrayVazioException;
+import br.ufrpe.ip.projeto.exceptions.CampoInvalidoException;
 import br.ufrpe.ip.projeto.exceptions.ClienteDuplicadoException;
 import br.ufrpe.ip.projeto.exceptions.ClienteInexistenteException;
 import br.ufrpe.ip.projeto.models.*;
@@ -92,42 +94,43 @@ public class ConsorcioFachada implements IConsorcio{
     }
 
     @Override
-    public List<Cliente> getAllClientes() {
+    public List<Cliente> getAllClientes() throws ArrayVazioException {
         return this.clienteController.getAllClientes();
     }
 
     @Override
-    public Cliente getClienteByCpf(String cpf) {
+    public Cliente getClienteByCpf(String cpf) throws ClienteInexistenteException {
         return this.clienteController.getClienteByCpf(cpf);
     }
 
     @Override
-    public void createCliente(String nomeCliente, String cpfCliente, String telefoneCliente, String emailCliente, String senhaCliente) {
+    public void createCliente(String nomeCliente, String cpfCliente, String telefoneCliente, String emailCliente, String senhaCliente)
+            throws CampoInvalidoException, ClienteDuplicadoException {
         this.clienteController.createCliente(nomeCliente, cpfCliente, telefoneCliente, emailCliente, senhaCliente);
     }
 
     @Override
-    public void updateNome(String nomeCliente, String cpfCliente) {
+    public void updateNome(String nomeCliente, String cpfCliente) throws CampoInvalidoException, ClienteInexistenteException{
         this.clienteController.updateNome(nomeCliente, cpfCliente);
     }
 
     @Override
-    public void updateTelefone(String telefoneCliente, String cpfCliente) {
+    public void updateTelefone(String telefoneCliente, String cpfCliente) throws CampoInvalidoException, ClienteInexistenteException{
         this.clienteController.updateTelefone(telefoneCliente, cpfCliente);
     }
 
     @Override
-    public void updateEmail(String emailCliente, String cpfCliente) {
+    public void updateEmail(String emailCliente, String cpfCliente) throws CampoInvalidoException, ClienteInexistenteException {
         this.clienteController.updateEmail(emailCliente, cpfCliente);
     }
 
     @Override
-    public void updateSenha(String senhaCliente, String cpfCliente) {
+    public void updateSenha(String senhaCliente, String cpfCliente) throws CampoInvalidoException, ClienteInexistenteException{
         this.clienteController.updateSenha(senhaCliente, cpfCliente);
     }
 
     @Override
-    public void deleteCliente(String cpfCliente) {
+    public void deleteCliente(String cpfCliente) throws ClienteInexistenteException{
         this.clienteController.deleteCliente(cpfCliente);
     }
 

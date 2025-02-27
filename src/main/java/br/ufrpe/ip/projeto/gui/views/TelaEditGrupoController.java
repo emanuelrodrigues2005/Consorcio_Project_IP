@@ -3,6 +3,8 @@ package br.ufrpe.ip.projeto.gui.views;
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
 import br.ufrpe.ip.projeto.enums.StatusGrupoConsorcioEnum;
+import br.ufrpe.ip.projeto.exceptions.ClienteInexistenteException;
+import br.ufrpe.ip.projeto.exceptions.GrupoConsorcioDuplicadoException;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
 import br.ufrpe.ip.projeto.models.Cliente;
 import br.ufrpe.ip.projeto.models.Contemplacao;
@@ -110,14 +112,18 @@ public class TelaEditGrupoController {
 		this.gerenciador.abrirPopUpSorteio(this.sistema.getContemplacaoById(idContemplacao));
 	}
 
+	Alert alert = new Alert(Alert.AlertType.ERROR);
+
 	@FXML
 	public void handleMudarStatusGrupo() {
-		if (grupoAtual != null) {
+		if(grupoAtual != null) {
 			this.sistema.updateStatusGrupo(grupoAtual, StatusGrupoConsorcioEnum.ENCERRADO);
 			System.out.println("Grupo Encerrado com sucesso!");
 			carregarDadosGrupo(grupoAtual.getIdGrupo());
 			btEncerrarGrupo.setText("Grupo Encerrado");
 			btEncerrarGrupo.setDisable(true);
+		} else {
+			mostrarAlerta("Grupo Inexistente!", "Este Grupo Não Foi Encontrado!" );
 		}
 	}
 
@@ -125,12 +131,16 @@ public class TelaEditGrupoController {
 	private void handleDeleteCliente() {
 		Cliente clienteSelecionado = ltvParticipantes.getSelectionModel().getSelectedItem();
 
-		if(clienteSelecionado != null) {
+		try {
 			this.sistema.deleteCliente(clienteSelecionado.getCpf());
 			ltvParticipantes.getItems().remove(clienteSelecionado);
-			mostrarAlerta("Cliente deletado", "Cliente " + clienteSelecionado.getCpf());
-		} else {
-			mostrarAlerta("Not found!", "Nenhum cliente encontrado!");
+			mostrarAlerta("Cliente deletado", "Cliente: " + clienteSelecionado.getCpf());
+		}
+		catch (ClienteInexistenteException e){
+			alert.setTitle(null);
+			alert.setHeaderText("Cliente Inexistente!");
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
 		}
 	}
 

@@ -7,10 +7,7 @@ import br.ufrpe.ip.projeto.models.GrupoConsorcio;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class TelaPrincipalClienteController {
@@ -92,7 +89,11 @@ public class TelaPrincipalClienteController {
         if (grupoSelecionado != null) {
             screenManager.abrirTelaVisuGrupo(grupoSelecionado);
         } else {
-            System.out.println("Nenhum grupo foi selecionado.");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle(null);
+            alert.setHeaderText("Nenhum Grupo Selecionado!");
+            alert.setContentText("Selecione um Grupo!");
+            alert.showAndWait();
         }
     }
 
