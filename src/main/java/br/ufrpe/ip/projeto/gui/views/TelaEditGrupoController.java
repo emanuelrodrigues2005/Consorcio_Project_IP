@@ -166,6 +166,8 @@ public class TelaEditGrupoController {
 		this.gerenciador.abrirPopUpInadimplencia(grupoAtual);
 	}
 
+
+
 	private void carregarDadosGrupo(String idGrupo) {
 		try {
 			grupoAtual = sistema.getGrupoById(idGrupo);

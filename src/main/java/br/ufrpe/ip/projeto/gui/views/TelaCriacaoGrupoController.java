@@ -2,9 +2,11 @@ package br.ufrpe.ip.projeto.gui.views;
 
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
+import br.ufrpe.ip.projeto.exceptions.CampoInvalidoException;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
 import br.ufrpe.ip.projeto.models.Administrador;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -69,6 +71,18 @@ public class TelaCriacaoGrupoController {
         txtNumeroTotalGrupo.setText("");
     }
 
+    private void exibirAlertaErro(Exception e) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erro");
+
+        if (e instanceof CampoInvalidoException) {
+            alert.setHeaderText("Campo Inválido!");
+        }
+
+        alert.setContentText(e.getMessage());
+        alert.showAndWait();
+    }
+
     @FXML
     private void criarGrupo(MouseEvent event) {
         String nomeGrupo = txtNomeGrupo.getText();
@@ -94,8 +108,10 @@ public class TelaCriacaoGrupoController {
 
             sistema.createGrupoConsorcio(nomeGrupo, totalParticipantes, valor, taxa);
             clearCampos();
-        } catch (Exception e) {
-            System.out.println("Erro: Certifique-se de inserir valores numéricos válidos para taxa, valor total e número de participantes.");
+        } catch (NumberFormatException a) {
+            exibirAlertaErro(a);
+        } catch (CampoInvalidoException e) {
+            throw new RuntimeException(e);
         }
     }
 
