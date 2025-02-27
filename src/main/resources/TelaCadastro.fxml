@@ -30,7 +30,7 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <Text fx:id="btConecte" fill="#fafafa" layoutX="688.0" layoutY="614.0" onMouseClicked="#openLogin" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-cursor: hand;" text="Conecte-se">
+      <Text fx:id="btConecte" fill="#fafafa" layoutX="688.0" layoutY="614.0" onMouseClicked="#openLogin" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-cursor: underline; -fx-cursor: hand;" text="Conecte-se">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

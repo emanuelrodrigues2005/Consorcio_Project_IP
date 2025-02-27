@@ -176,3 +176,7 @@
 .hand {
     -fx-cursor: hand;
 }
+
+.underline {
+    -fx-cursor: underline;
+}
