@@ -68,16 +68,17 @@ public class TelaDadosContratoController {
 
     @FXML
     public void initialize() {
-        limparDadosGrupo();
-        carregarDados();
-        configurarTabela();
+        if (contratoAtual != null) {
+            carregarDados();
+            configurarTabela();
+        }
     }
 
     public void setContratoAtual(Contrato contratoAtual) {
         limparDadosGrupo();
         this.contratoAtual = contratoAtual;
         if (contratoAtual != null) {
-            carregarDadosContrato(contratoAtual.getIdContrato());
+            carregarDadosContrato();
         }
     }
 
@@ -86,7 +87,7 @@ public class TelaDadosContratoController {
     }
 
     private void carregarDados() {
-        ObservableList<Boleto> boletos = FXCollections.observableArrayList(sistema.getBoletoByContrato(contratoAtual));
+        ObservableList<Boleto> boletos = FXCollections.observableArrayList(sistema.getAllBoletosByContrato(contratoAtual.getIdContrato()));
         tbvBoletos.setItems(boletos);
     }
 
@@ -124,7 +125,7 @@ public class TelaDadosContratoController {
         if (contratoAtual != null) {
             this.sistema.updateStatusContrato(contratoAtual, StatusContratoEnum.ENCERRADO);
             System.out.println("Grupo Encerrado com sucesso!");
-            carregarDadosContrato(contratoAtual.getIdContrato());
+            carregarDadosContrato();
             btEncerrarContrato.setText("Contrato Encerrado");
             btEncerrarContrato.setDisable(true);
         }
@@ -141,23 +142,15 @@ public class TelaDadosContratoController {
         }
     }
 
-    private void carregarDadosContrato(String idContrato) {
-        contratoAtual = sistema.getContratoByIdContrato(idContrato);
-
+    private void carregarDadosContrato() {
         if (contratoAtual != null) {
-            if (lbNomeGrupo != null) {
-                lbNomeGrupo.setText(contratoAtual.getGrupoAssociado().getNomeGrupo());
-            } else {
-                System.out.println("lbAutoConsor está nulo!");
-            }
 
+            lbNomeGrupo.setText(contratoAtual.getGrupoAssociado().getNomeGrupo());
             lbParcelasPagas.setText(String.valueOf(contratoAtual.getParcelasPagas()));
             lbValorPago.setText(String.format("R$ %.2f", contratoAtual.getValorPago()));
             lbSaldoDevedor.setText(String.format("R$ %.2f", contratoAtual.getSaldoDevedor()));
             lbStatusContrato.setText(contratoAtual.getStatusContrato() != null ? contratoAtual.getStatusContrato().toString() : "Não informado");
             lbDataInicio.setText(contratoAtual.getDataInicio() != null ? contratoAtual.getDataInicio().toString() : "Não informado");
-        } else {
-            System.out.println("Nenhum grupo encontrado com o ID fornecido.");
         }
     }
 

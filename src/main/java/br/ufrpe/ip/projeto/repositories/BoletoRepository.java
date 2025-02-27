@@ -31,6 +31,17 @@ public class BoletoRepository implements IBoletoRepository, Serializable {
         return Collections.unmodifiableList(boletos);
     }
 
+    @Override
+    public List<Boleto> getAllBoletosByContrato(String idContrato) {
+        List<Boleto> boletos = new ArrayList<>();
+        for (Boleto boleto : boletos) {
+            if (boleto.getContratoBoleto().getIdContrato().equalsIgnoreCase(idContrato))  {
+                boletos.add(boleto);
+            }
+        }
+        return boletos;
+    }
+
     private static BoletoRepository lerArquivo() {
         BoletoRepository instanceLocal;
 
@@ -109,7 +120,8 @@ public class BoletoRepository implements IBoletoRepository, Serializable {
     @Override
     public Boleto getBoletoByContrato(Contrato contrato) {
         for (Boleto boleto : boletos) {
-            if(boleto.getContratoBoleto().getIdContrato().equals(contrato.getIdContrato())) {
+            if(boleto.getContratoBoleto() != null && contrato != null &&
+                    boleto.getContratoBoleto().getIdContrato().equals(contrato.getIdContrato())) {
                 return boleto;
             }
         }
