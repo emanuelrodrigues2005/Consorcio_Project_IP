@@ -15,7 +15,7 @@
          </font>
       </Label>
       <Button fx:id="btCartaoDebito" layoutX="47.0" layoutY="206.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="156.0" styleClass="teg-button" text="Cartão de Débito" />
-      <Button fx:id="btPix" layoutX="45.0" layoutY="72.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="156.0" styleClass="teg-button" text="Pix" />
+      <Button fx:id="btPix" onMouseClicked="#pagarBoletoPix" layoutX="45.0" layoutY="72.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="156.0" styleClass="teg-button" text="Pix" />
       <Button fx:id="btCartaoCredito" layoutX="45.0" layoutY="139.0" maxWidth="156.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="156.0" styleClass="teg-button" text="Cartão de Crédito" />
       <Label layoutX="312.0" layoutY="75.0" text="Valor Parcela:" underline="true">
          <font>

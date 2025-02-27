@@ -68,6 +68,7 @@ public class TelaDadosContratoController {
     @FXML
     public void initialize() {
         if (contratoAtual != null) {
+
             carregarDados();
             configurarTabela();
         }

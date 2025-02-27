@@ -77,6 +77,10 @@ public class TelaVisualizacaoContratoController {
         if (clienteLogado != null) {
             System.out.println("Tela de visualização de contrato inicializada.");
             carregarDadosContrato();
+            if (sistema.getContratoByCPFNomeGrupo(clienteLogado, grupoAtual) != null) {
+                btCriarContrato.setDisable(true);
+                btCriarContrato.setText("Contrato Assinado");
+            }
         }
     }
 
@@ -127,7 +131,6 @@ public class TelaVisualizacaoContratoController {
                 System.out.printf("Boleto emitido %d\n", i);
                 Thread.sleep(100);
             }
-
         } catch (ContratoDuplicadoException e) {
             exibirAlertaErro("Contrato Duplicado", "Você já possui um contrato neste grupo.");
         } catch (CampoInvalidoException e) {

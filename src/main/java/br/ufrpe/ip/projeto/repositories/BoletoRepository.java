@@ -33,13 +33,13 @@ public class BoletoRepository implements IBoletoRepository, Serializable {
 
     @Override
     public List<Boleto> getAllBoletosByContrato(String idContrato) {
-        List<Boleto> boletos = new ArrayList<>();
+        List<Boleto> newboletos = new ArrayList<>();
         for (Boleto boleto : boletos) {
             if (boleto.getContratoBoleto().getIdContrato().equalsIgnoreCase(idContrato))  {
-                boletos.add(boleto);
+                newboletos.add(boleto);
             }
         }
-        return boletos;
+        return newboletos;
     }
 
     private static BoletoRepository lerArquivo() {

@@ -2,14 +2,14 @@ package br.ufrpe.ip.projeto.gui.views;
 
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
-import br.ufrpe.ip.projeto.exceptions.BoletoInexistenteException;
-import br.ufrpe.ip.projeto.exceptions.CampoInvalidoException;
+import br.ufrpe.ip.projeto.enums.StatusBoletoEnum;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
 import br.ufrpe.ip.projeto.models.Boleto;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class PopUpPagamentoController {
@@ -68,21 +68,24 @@ public class PopUpPagamentoController {
         }
     }
 
-    private void exibirAlertaErro(Exception e) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Erro");
-
-        if (e instanceof BoletoInexistenteException) {
-            alert.setHeaderText("Boleto Não Encontrado!");
-        } else if (e instanceof CampoInvalidoException) {
-            alert.setHeaderText("Campo Inválido!");
+    @FXML
+    private void pagarBoletoPix(MouseEvent event) {
+        if (boletoAtual.getContratoBoleto().getParcelasPagas() <
+                boletoAtual.getContratoBoleto().getGrupoAssociado().getNumeroMaximoParticipantes()) {
+            sistema.updateDataPagamento(boletoAtual);
+            sistema.updateParcelasPagas(boletoAtual.getContratoBoleto());
+            sistema.updateSaldoDevedor(boletoAtual.getContratoBoleto());
+            sistema.updateValorPago(boletoAtual.getContratoBoleto());
+            sistema.updateStatusBoleto(boletoAtual, StatusBoletoEnum.PAGO);
+            if (sistema.getAllBoletosByContrato(boletoAtual.getContratoBoleto().getIdContrato()).size() <
+                    boletoAtual.getContratoBoleto().getGrupoAssociado().getNumeroMaximoParticipantes()) {
+                sistema.createBoleto(boletoAtual.getContratoBoleto());
+            }
+            popupStage.close();
+            gerenciador.abrirPerfilCliente(boletoAtual.getContratoBoleto().getCliente());
         }
-
-        alert.setContentText(e.getMessage());
-        alert.showAndWait();
     }
-
-
+  
     private void limparDadosGrupo() {
         lbValorParcela.setText("0");
         lbSaldoDevedor.setText("0");
