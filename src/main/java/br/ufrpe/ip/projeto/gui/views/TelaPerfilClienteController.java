@@ -95,12 +95,6 @@ public class TelaPerfilClienteController {
     }
 
     @FXML
-    public void handleTelaGruposCliente(MouseEvent event) {
-        System.out.println("Redirecionando tela grupos do cliente...");
-        //this.screenManager.abriTelaGruposCliente;
-    }
-
-    @FXML
     public void handleTelaEscolherLogin(MouseEvent event) {
         System.out.println("Redirecionando tela escolher forma de login...");
         this.screenManager.abrirTelaEscolhaLogin();
