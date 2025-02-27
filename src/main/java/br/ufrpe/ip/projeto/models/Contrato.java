@@ -11,7 +11,7 @@ public class Contrato implements Serializable {
     private Cliente cliente;
     private GrupoConsorcio grupoAssociado;
     private String idContrato;
-    private int parcelasPagas; //retirar
+    private int parcelasPagas;
     private double valorPago;
     private double saldoDevedor;
     private double saldoDevolucao;
