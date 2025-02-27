@@ -80,7 +80,7 @@ public class TelaVisualizacaoContratoController {
         if (grupoAtual != null) {
             lbNomeGrupo.setText(grupoAtual.getNomeGrupo());
             lbValorParcela.setText(String.format("%.2f", grupoAtual.getValorParcela()));
-            lbTaxaAdmin.setText(String.format("%.2f", grupoAtual.getTaxaAdmin()));
+            lbTaxaAdmin.setText(String.format("%.2f", grupoAtual.getTaxaAdmin() * 100));
 
             if (sistema.getClienteLogado() != null) {
                 lbNomeCliente.setText(sistema.getClienteLogado().getNome());

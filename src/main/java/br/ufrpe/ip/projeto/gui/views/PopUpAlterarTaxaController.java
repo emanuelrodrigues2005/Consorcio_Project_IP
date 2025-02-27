@@ -30,7 +30,7 @@ public class PopUpAlterarTaxaController {
         this.popupStage = popupStage;
     }
 
-    public void setContemplacaoAtual(GrupoConsorcio grupoAtual) {
+    public void setGrupoAtual(GrupoConsorcio grupoAtual) {
         this.grupoAtual = grupoAtual;
     }
 
