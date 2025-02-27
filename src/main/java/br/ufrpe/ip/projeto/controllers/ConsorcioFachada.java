@@ -6,6 +6,7 @@ import br.ufrpe.ip.projeto.enums.StatusGrupoConsorcioEnum;
 import br.ufrpe.ip.projeto.models.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ConsorcioFachada implements IConsorcio{
@@ -312,5 +313,19 @@ public class ConsorcioFachada implements IConsorcio{
     @Override
     public Cliente getClienteLogado() {
         return this.loginController.getClienteLogado();
+    }
+
+    @Override
+    public double calcularInadimplencia(GrupoConsorcio grupoConsorcio) {
+        List<Contrato> contratosInadimplentes = new ArrayList<>();
+        for (Boleto boleto : this.getAllBoletos()) {
+            if (getContratosByIdGrupo(grupoConsorcio).contains(boleto.getContratoBoleto())) {
+                if (boleto.getStatusBoleto() == StatusBoletoEnum.ATRASADO && !(contratosInadimplentes.contains(boleto.getContratoBoleto()))) {
+                    contratosInadimplentes.add(boleto.getContratoBoleto());
+                }
+            }
+        }
+        System.out.println((double)contratosInadimplentes.size()/grupoConsorcio.getNumeroParticipantes() * 100); //debugging
+        return grupoConsorcio.getNumeroParticipantes() != 0 ? (double)contratosInadimplentes.size()/grupoConsorcio.getNumeroParticipantes() * 100 : 0;
     }
 }

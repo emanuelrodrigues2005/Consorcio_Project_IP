@@ -3,6 +3,7 @@ package br.ufrpe.ip.projeto.controllers;
 import br.ufrpe.ip.projeto.enums.StatusBoletoEnum;
 import br.ufrpe.ip.projeto.models.Boleto;
 import br.ufrpe.ip.projeto.models.Contrato;
+import br.ufrpe.ip.projeto.models.GrupoConsorcio;
 import br.ufrpe.ip.projeto.repositories.BoletoRepository;
 import br.ufrpe.ip.projeto.repositories.interfaces.IBoletoRepository;
 

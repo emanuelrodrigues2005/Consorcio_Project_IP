@@ -15,6 +15,8 @@ public interface IConsorcio {
 
     List<Boleto> getAllBoletosByContrato(String idContrato);
 
+    double calcularInadimplencia(GrupoConsorcio grupoConsorcio);
+
     Boleto getBoletoById(String idBoleto);
 
     Boleto getBoletoByContrato(Contrato contratoBoleto);

@@ -148,6 +148,10 @@ public class TelaEditGrupoController {
 		alert.setContentText(mensagem);
 		alert.showAndWait();
 	}
+	@FXML
+	private void handleInadimplencia() {
+		System.out.println(sistema.calcularInadimplencia(grupoAtual) + "% dos membros são inadimplentes");
+	}
 
 	private void carregarDadosGrupo(String idGrupo) {
 		grupoAtual = sistema.getGrupoById(idGrupo);

@@ -11,45 +11,45 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #221F26;" stylesheets="@../../../../Desktop/Leandrinho/safe%20backup/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.ip.projeto.gui.views.TelaEditGrupoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #221F26;" stylesheets="@/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.ip.projeto.gui.views.TelaEditGrupoController">
    <children>
-      <VBox prefHeight="720.0" prefWidth="160.0" style="-fx-background-color: #FAFAFA;" stylesheets="@../../../../Desktop/Leandrinho/safe%20backup/style.css">
+      <VBox prefHeight="720.0" prefWidth="160.0" style="-fx-background-color: #FAFAFA;" stylesheets="@style.css">
          <children>
             <Label alignment="CENTER" prefHeight="76.0" prefWidth="160.0" text="ConsorX" textFill="#ba0f30">
                <font>
                   <Font name="Verdana Bold Italic" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="lbHomeADM" alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#handleTelaPrincipalADM" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30; -fx-cursor: hand; -fx-background-color: #FAFAFA;" styleClass="hand" stylesheets="@../../../../Desktop/Leandrinho/safe%20backup/style.css" text="Home" textFill="#fafafa">
+            <Label fx:id="lbHomeADM" alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#handleTelaPrincipalADM" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30; -fx-cursor: hand; -fx-background-color: #FAFAFA;" styleClass="hand" stylesheets="@style.css" text="Home" textFill="#fafafa">
                <font>
                   <Font name="Verdana Bold" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="lbPerfilADM" alignment="CENTER" layoutX="10.0" layoutY="112.0" onMouseClicked="#handleTelaPerfilAdmin" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30; -fx-background-color: FAFAFA; -fx-cursor: hand;" styleClass="hand" stylesheets="@../../../../Desktop/Leandrinho/safe%20backup/style.css" text="Perfil">
+            <Label fx:id="lbPerfilADM" alignment="CENTER" layoutX="10.0" layoutY="112.0" onMouseClicked="#handleTelaPerfilAdmin" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30; -fx-background-color: FAFAFA; -fx-cursor: hand;" styleClass="hand" stylesheets="@style.css" text="Perfil">
                <font>
                   <Font name="Verdana Bold" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="lbSair" alignment="CENTER" onMouseClicked="#handleTelaEscolherLogin" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30; -fx-background-color: FAFAFA; -fx-cursor: hand;" styleClass="hand" stylesheets="@../../../../Desktop/Leandrinho/safe%20backup/style.css" text="Sair">
+            <Label fx:id="lbSair" alignment="CENTER" onMouseClicked="#handleTelaEscolherLogin" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30; -fx-background-color: FAFAFA; -fx-cursor: hand;" styleClass="hand" stylesheets="@style.css" text="Sair">
                <font>
                   <Font name="Verdana Bold" size="20.0" />
                </font>
             </Label>
          </children>
       </VBox>
-      <Pane layoutX="261.0" layoutY="159.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 40 40 30 30;" styleClass="tela-padrao" stylesheets="@../../../../Desktop/Leandrinho/safe%20backup/style.css" AnchorPane.leftAnchor="256.0" AnchorPane.topAnchor="152.0">
+      <Pane layoutX="261.0" layoutY="159.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 40 40 30 30;" styleClass="tela-padrao" stylesheets="@style.css" AnchorPane.leftAnchor="256.0" AnchorPane.topAnchor="152.0">
          <children>
             <Label alignment="CENTER" prefHeight="50.0" prefWidth="928.0" style="-fx-background-color: #BA0F30; -fx-text-fill: #FAFAFA; -fx-background-radius: 30 30 0 0;" text="Grupos Consórcios" textAlignment="CENTER" textFill="#fafafa">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Button fx:id="btEncerrarGrupo" layoutX="452.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#handleMudarStatusGrupo" prefHeight="48.0" stylesheets="@../../../../Desktop/Leandrinho/safe%20backup/style.css" text="Encerrar Grupo">
+            <Button fx:id="btEncerrarGrupo" layoutX="452.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#handleMudarStatusGrupo" prefHeight="48.0" stylesheets="@style.css" text="Encerrar Grupo">
                <styleClass>
                   <String fx:value="teg-button" />
                   <String fx:value="hand" />
                </styleClass></Button>
-            <Button fx:id="btRemoverParticipante" layoutX="639.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#handleDeleteCliente" prefHeight="48.0" prefWidth="96.0" stylesheets="@../../../../Desktop/Leandrinho/safe%20backup/style.css" text="Remove">
+            <Button fx:id="btRemoverParticipante" layoutX="639.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#handleDeleteCliente" prefHeight="48.0" prefWidth="96.0" stylesheets="@style.css" text="Remove">
                <styleClass>
                   <String fx:value="teg-button" />
                   <String fx:value="hand" />
@@ -121,7 +121,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <Button fx:id="btAlterarTaxa" mnemonicParsing="false" onMouseClicked="#handleAlterarTaxaAdmin" prefHeight="48.0" stylesheets="@../../../../Desktop/Leandrinho/safe%20backup/style.css" text="Alterar Taxa">
+                  <Button fx:id="btAlterarTaxa" mnemonicParsing="false" onMouseClicked="#handleAlterarTaxaAdmin" prefHeight="48.0" stylesheets="@style.css" text="Alterar Taxa">
                      <styleClass>
                         <String fx:value="teg-button" />
                         <String fx:value="hand" />
@@ -129,23 +129,19 @@
                   </Button>
                </children>
             </VBox>
-            <Button fx:id="btRealizarSorteio" layoutX="780.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#handleRealizarContemplacao" prefHeight="48.0" stylesheets="@../../../../Desktop/Leandrinho/safe%20backup/style.css" text="Realizar Sorteio">
+            <Button fx:id="btRealizarSorteio" layoutX="780.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#handleRealizarContemplacao" prefHeight="48.0" stylesheets="@style.css" text="Realizar Sorteio">
                <styleClass>
                   <String fx:value="teg-button" />
                   <String fx:value="hand" />
                </styleClass></Button>
-<<<<<<< HEAD
-            <TableView fx:id="tbvParticipantes" layoutX="444.0" layoutY="73.0" onMouseClicked="#handle" prefHeight="288.0" prefWidth="469.0" style="-fx-border-width: 4; -fx-background-color: #fafafa; -fx-border-color: #BA0F30;" styleClass="sombra" stylesheets="@../../../../Desktop/Leandrinho/safe%20backup/style.css">
-=======
             <TableView fx:id="tbvParticipantes" layoutX="444.0" layoutY="73.0" prefHeight="288.0" prefWidth="469.0" style="-fx-border-width: 4; -fx-background-color: #fafafa; -fx-border-color: #BA0F30;" styleClass="sombra" stylesheets="@style.css">
->>>>>>> 2a69b763b35e9113d09f0ba76d90ae20008c860a
                <columns>
                   <TableColumn fx:id="tbvcolumnNome" prefWidth="148.0" text="Nome" />
                   <TableColumn fx:id="tbvcolumnStatus" prefWidth="156.0" text="Status" />
                   <TableColumn fx:id="tbvcolumnSaldo" prefWidth="153.0" text="Saldo" />
                </columns>
             </TableView>
-            <Button fx:id="btMostrarPagamentos" layoutX="161.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#handleInadimplencia" prefHeight="48.0" stylesheets="@../../../../Desktop/Leandrinho/safe%20backup/style.css" text="Relatório de Pagamentos">
+            <Button fx:id="btMostrarPagamentos" layoutX="161.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#handleInadimplencia" prefHeight="48.0" stylesheets="@style.css" text="Relatório de Pagamentos">
                <styleClass>
                   <String fx:value="teg-button" />
                   <String fx:value="hand" />
