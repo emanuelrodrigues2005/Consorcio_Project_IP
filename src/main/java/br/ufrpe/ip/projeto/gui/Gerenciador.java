@@ -2,6 +2,7 @@ package br.ufrpe.ip.projeto.gui;
 
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
+import br.ufrpe.ip.projeto.exceptions.ArrayVazioException;
 import br.ufrpe.ip.projeto.gui.views.*;
 import br.ufrpe.ip.projeto.models.*;
 import javafx.fxml.FXMLLoader;
@@ -152,7 +153,7 @@ public class Gerenciador {
         scenePrincipal.setRoot(telaCadastro);
     }
 
-    public void abrirTelaPrincipalCliente() {
+    public void abrirTelaPrincipalCliente() throws ArrayVazioException {
         telaPrincipalClienteController.initialize();
         scenePrincipal.setRoot(telaPrincipalCliente);
     }

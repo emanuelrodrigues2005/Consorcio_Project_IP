@@ -3,6 +3,9 @@ package br.ufrpe.ip.projeto.gui.views;
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
 import br.ufrpe.ip.projeto.enums.StatusBoletoEnum;
+import br.ufrpe.ip.projeto.exceptions.BoletoInexistenteException;
+import br.ufrpe.ip.projeto.exceptions.CampoInvalidoException;
+import br.ufrpe.ip.projeto.exceptions.ContratoInvalidoException;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
 import br.ufrpe.ip.projeto.models.Boleto;
 import javafx.fxml.FXML;
@@ -68,8 +71,11 @@ public class PopUpPagamentoController {
         }
     }
 
+    private void exibirAlertaErro(Exception e) {
+    }
+
     @FXML
-    private void pagarBoletoPix(MouseEvent event) {
+    private void pagarBoletoPix(MouseEvent event) throws BoletoInexistenteException, CampoInvalidoException, ContratoInvalidoException {
         if (boletoAtual.getContratoBoleto().getParcelasPagas() <
                 boletoAtual.getContratoBoleto().getGrupoAssociado().getNumeroMaximoParticipantes()) {
             sistema.updateDataPagamento(boletoAtual);

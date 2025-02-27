@@ -2,6 +2,7 @@ package br.ufrpe.ip.projeto.gui.views;
 
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
+import br.ufrpe.ip.projeto.exceptions.ArrayVazioException;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
 import br.ufrpe.ip.projeto.models.Administrador;
 import javafx.fxml.FXML;
@@ -53,7 +54,7 @@ public class TelaLoginClienteController {
     }
 
     @FXML
-    private void handleTelaPrincipalCliente(MouseEvent event) {
+    private void handleTelaPrincipalCliente(MouseEvent event) throws ArrayVazioException {
         System.out.println("Login realizado com sucesso!");
         String cpf = this.txtCpf.getText();
         String senha = this.pswSenha.getText();
