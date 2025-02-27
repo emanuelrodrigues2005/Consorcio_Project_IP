@@ -1,9 +1,9 @@
 package br.ufrpe.ip.projeto.models;
 
-public class Admin extends Cliente{
+public class Administrador extends Cliente{
     private boolean acessoEspecial;
 
-    public Admin(String nome, String cpf, String telefone, String email, String senha) {
+    public Administrador(String nome, String cpf, String telefone, String email, String senha) {
         super(nome, cpf, telefone, email, senha);
         this.acessoEspecial = true;
     }

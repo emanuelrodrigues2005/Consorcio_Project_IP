@@ -2,8 +2,12 @@ package br.ufrpe.ip.projeto.gui.views;
 
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
+import br.ufrpe.ip.projeto.exceptions.ArrayVazioException;
+import br.ufrpe.ip.projeto.exceptions.IdGrupoConsorcioInexistenteException;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
+import br.ufrpe.ip.projeto.models.GrupoConsorcio;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -11,15 +15,19 @@ import javafx.scene.control.TextField;
 public class TelaVisuGrupoController {
     private final IConsorcio sistema = ConsorcioFachada.getInstance();
     private Gerenciador screenManager;
+    private GrupoConsorcio grupoAtual;
 
     @FXML
-    private Button btHome;
+    private Label lbHomeCliente;
 
     @FXML
-    private Button btGrupos;
+    private Label lbPerfilCliente;
 
     @FXML
-    private Button btPerfil;
+    private Label lbGruposCliente;
+
+    @FXML
+    private Label lbSair;
 
     @FXML
     private Label lbAutoConsor;
@@ -28,21 +36,28 @@ public class TelaVisuGrupoController {
     private Label lbValorTotal;
 
     @FXML
-    private TextField txtTotalParticipantes;
-
-    @FXML
     private Label lbTaxaAdmin;
 
     @FXML
-    private Label lbValorPago;
+    private Label lbValorParcela;
+
+    @FXML
+    private Label lbTotalParticipantes;
+
+    @FXML
+    private Button btAcessarContrato;
 
     @FXML
     public void initialize() {
-        lbAutoConsor.setText("-");
-        lbValorTotal.setText("-");
-        lbTaxaAdmin.setText("-");
-        lbValorPago.setText("-");
-        txtTotalParticipantes.setText("");
+        limparDadosGrupo();
+    }
+
+    public void setGrupoAtual(GrupoConsorcio grupoAtual) {
+        limparDadosGrupo();
+        this.grupoAtual = grupoAtual;
+        if (grupoAtual != null) {
+            carregarDadosGrupo(grupoAtual.getIdGrupo());
+        }
     }
 
     public void setGerenciador(Gerenciador screenManager) {
@@ -50,33 +65,63 @@ public class TelaVisuGrupoController {
     }
 
     @FXML
-    private void openHome() {
+    private void handleTelaHomeCliente() throws ArrayVazioException {
         System.out.println("Botão Home clicado");
+        screenManager.abrirTelaPrincipalCliente();
     }
 
     @FXML
-    private void openAllGrupos() {
-        System.out.println("Botão Grupos clicado");
-    }
-
-    @FXML
-    private void openPerfil() {
+    private void handleTelaPerfilCliente() {
         System.out.println("Botão Perfil clicado");
+        screenManager.abrirPerfilCliente(this.sistema.getClienteLogado());
     }
 
-    private void setLbAutoConsor(String idGrupo) {
-        lbAutoConsor.setText(sistema.getGrupoById(idGrupo).getNomeGrupo());
+    @FXML
+    private void handleTelaEscolherLogin() {
+        System.out.println("Saindo...");
+        screenManager.abrirTelaEscolhaLogin();
     }
 
-    private void setLbValorTotal(String idGrupo) {
-        lbValorTotal.setText(String.valueOf(sistema.getGrupoById(idGrupo).getValorTotal()));
+    @FXML
+    private void handleTelaVisualizacaoContrato() {
+        System.out.println("Redirecionado para contrato ...");
+        screenManager.abriTelaVisualizacaoContrato(grupoAtual);
     }
 
-    private void setLbTaxaAdmin(String idGrupo) {
-        lbTaxaAdmin.setText(String.valueOf(sistema.getGrupoById(idGrupo).getTaxaAdmin()));
+    private void carregarDadosGrupo(String idGrupo) {
+        try {
+            grupoAtual = sistema.getGrupoById(idGrupo);
+
+            if (lbAutoConsor != null) {
+                lbAutoConsor.setText(grupoAtual.getNomeGrupo());
+            } else {
+                System.out.println("lbAutoConsor está nulo!");
+            }
+
+            lbValorTotal.setText(String.format("%.2f", grupoAtual.getValorTotal()));
+            lbTaxaAdmin.setText(String.format("%.2f", grupoAtual.getTaxaAdmin()));
+            lbValorParcela.setText(String.format("%.2f", grupoAtual.getValorParcela()));
+            lbTotalParticipantes.setText(String.valueOf(grupoAtual.getNumeroParticipantes()));
+
+        } catch (IdGrupoConsorcioInexistenteException e) {
+            exibirAlertaErro("Grupo não encontrado", "Nenhum grupo foi encontrado com o ID fornecido: " + idGrupo);
+            limparDadosGrupo();
+        }
     }
 
-    private void setLbValorPago(String idGrupo) {
-        lbValorPago.setText(String.valueOf(sistema.getValorPago(idGrupo)));
+    private void exibirAlertaErro(String titulo, String mensagem) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erro");
+        alert.setHeaderText(titulo);
+        alert.setContentText(mensagem);
+        alert.showAndWait();
+    }
+
+    private void limparDadosGrupo() {
+        lbAutoConsor.setText("-");
+        lbValorTotal.setText("-");
+        lbTaxaAdmin.setText("-");
+        lbValorParcela.setText("-");
+        lbTotalParticipantes.setText("0");
     }
 }

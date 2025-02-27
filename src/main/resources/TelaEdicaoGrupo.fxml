@@ -1,56 +1,153 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.ip.projetos.gui.views">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #221F26;" stylesheets="@/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.ip.projeto.gui.views.TelaEditGrupoController">
    <children>
-      <VBox layoutY="-1.0" prefHeight="400.0" prefWidth="129.0">
+      <VBox prefHeight="720.0" prefWidth="160.0" style="-fx-background-color: #FAFAFA;" stylesheets="@style.css">
          <children>
-            <MenuButton mnemonicParsing="false" prefHeight="36.0" prefWidth="133.0" text="MENU">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Home" />
-                <MenuItem mnemonicParsing="false" text="Home" />
-              </items>
-            </MenuButton>
+            <Label alignment="CENTER" prefHeight="76.0" prefWidth="160.0" text="ConsorX" textFill="#ba0f30">
+               <font>
+                  <Font name="Verdana Bold Italic" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbHomeADM" alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#handleTelaPrincipalADM" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30; -fx-cursor: hand; -fx-background-color: #FAFAFA;" styleClass="hand" stylesheets="@style.css" text="Home" textFill="#fafafa">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbPerfilADM" alignment="CENTER" layoutX="10.0" layoutY="112.0" onMouseClicked="#handleTelaPerfilAdmin" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30; -fx-background-color: FAFAFA; -fx-cursor: hand;" styleClass="hand" stylesheets="@style.css" text="Perfil">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbSair" alignment="CENTER" onMouseClicked="#handleTelaEscolherLogin" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30; -fx-background-color: FAFAFA; -fx-cursor: hand;" styleClass="hand" stylesheets="@style.css" text="Sair">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
          </children>
       </VBox>
-      <TitledPane layoutX="142.0" layoutY="55.0" prefHeight="282.0" prefWidth="447.0" textFill="#111111">
-         <content>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+      <Pane layoutX="261.0" layoutY="159.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 40 40 30 30;" styleClass="tela-padrao" stylesheets="@style.css" AnchorPane.leftAnchor="256.0" AnchorPane.topAnchor="152.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="50.0" prefWidth="928.0" style="-fx-background-color: #BA0F30; -fx-text-fill: #FAFAFA; -fx-background-radius: 30 30 0 0;" text="Grupos Consórcios" textAlignment="CENTER" textFill="#fafafa">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Button fx:id="btEncerrarGrupo" layoutX="452.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#handleMudarStatusGrupo" prefHeight="48.0" stylesheets="@style.css" text="Encerrar Grupo">
+               <styleClass>
+                  <String fx:value="teg-button" />
+                  <String fx:value="hand" />
+               </styleClass></Button>
+            <Button fx:id="btRemoverParticipante" layoutX="639.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#handleDeleteCliente" prefHeight="48.0" prefWidth="96.0" stylesheets="@style.css" text="Remove">
+               <styleClass>
+                  <String fx:value="teg-button" />
+                  <String fx:value="hand" />
+               </styleClass></Button>
+            <Label layoutX="93.0" layoutY="80.0" text="Automóvel" underline="true">
+               <font>
+                  <Font name="Verdana" size="24.0" />
+               </font></Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="299.0" layoutY="75.0" prefHeight="48.0" prefWidth="129.0" text="Taxa de Administração:" textAlignment="CENTER" underline="true" wrapText="true">
+               <font>
+                  <Font name="Verdana" size="16.0" />
+               </font></Label>
+            <Label layoutX="635.0" layoutY="84.0" style="-fx-text-fill: fafafa;" text="Total de participantes:" textFill="#fafafa" underline="true">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="71.0" layoutY="172.0" text="Status do Grupo:">
+               <font>
+                  <Font name="Verdana" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbAutomovel" alignment="TOP_CENTER" layoutX="34.0" layoutY="116.0" prefHeight="40.0" prefWidth="248.0" text="Honda Civic" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Verdana Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="194.0" layoutY="266.0" text="Valor Total" underline="true">
+               <font>
+                  <Font name="Verdana" size="24.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" layoutX="135.0" layoutY="301.0" prefHeight="60.0" prefWidth="248.0">
                <children>
-                  <TableView fx:id="tabela" layoutX="257.0" layoutY="24.0" prefHeight="177.0" prefWidth="151.0">
-                    <columns>
-                      <TableColumn fx:id="tableColumnNome" prefWidth="150.0" text="Participantes" />
-                    </columns>
-                  </TableView>
-                  <Label layoutX="257.0" layoutY="6.0" text="Numero de Participantes:" />
-                  <Button fx:id="add" layoutX="237.0" layoutY="207.0" mnemonicParsing="false" text="Add">
-                     <graphic>
-                        <TextField fx:id="nomeAdd" prefHeight="25.0" prefWidth="77.0" />
-                     </graphic></Button>
-                  <Button fx:id="remove" layoutX="372.0" layoutY="211.0" mnemonicParsing="false" text="Remove" />
-                  <Label fx:id="nMembros" layoutX="394.0" layoutY="6.0" />
-                  <Label layoutX="73.0" layoutY="42.0" text="Status do Grupo:" />
-                  <ToggleButton fx:id="statusG" layoutX="96.0" layoutY="69.0" mnemonicParsing="false" onAction="#toggleButtonHandler" selected="true" text="Ativo" />
-                  <Label layoutX="58.0" layoutY="104.0" text="Taxa de Administração:" />
-                  <TextField fx:id="taxaAd" layoutX="45.0" layoutY="128.0" />
-                  <Button fx:id="endG" layoutX="71.0" layoutY="189.0" mnemonicParsing="false" text="Encerrar Grupo" />
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="19.0" prefWidth="30.0">
+                     <children>
+                        <Label style="-fx-padding: 0 0 8 0;" text="R$">
+                           <font>
+                              <Font name="Arial Black" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Label fx:id="lbValorTotal" text="120000,00">
+                     <font>
+                        <Font name="Verdana" size="32.0" />
+                     </font>
+                  </Label>
                </children>
-            </AnchorPane>
-         </content>
-         <graphic>
-            <TextField fx:id="nGupo" promptText="Consorcio'X" />
-         </graphic>
-      </TitledPane>
+            </HBox>
+            <Label fx:id="lbStatus" alignment="CENTER" layoutX="-28.0" layoutY="191.0" prefHeight="50.0" prefWidth="372.0" text="ATIVO">
+               <font>
+                  <Font name="Arial Black" size="32.0" />
+               </font>
+            </Label>
+            <VBox alignment="CENTER" layoutX="298.0" layoutY="112.0" prefHeight="121.0" prefWidth="130.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="130.0">
+                     <children>
+                        <Label fx:id="lbTaxa" text="50">
+                           <font>
+                              <Font name="Verdana" size="40.0" />
+                           </font>
+                        </Label>
+                        <Label text="\%">
+                           <font>
+                              <Font name="Verdana" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Button fx:id="btAlterarTaxa" mnemonicParsing="false" onMouseClicked="#handleAlterarTaxaAdmin" prefHeight="48.0" stylesheets="@style.css" text="Alterar Taxa">
+                     <styleClass>
+                        <String fx:value="teg-button" />
+                        <String fx:value="hand" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </VBox>
+            <Button fx:id="btRealizarSorteio" layoutX="780.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#handleRealizarContemplacao" prefHeight="48.0" stylesheets="@style.css" text="Realizar Sorteio">
+               <styleClass>
+                  <String fx:value="teg-button" />
+                  <String fx:value="hand" />
+               </styleClass></Button>
+            <TableView fx:id="tbvParticipantes" layoutX="444.0" layoutY="73.0" prefHeight="288.0" prefWidth="469.0" style="-fx-border-width: 4; -fx-background-color: #fafafa; -fx-border-color: #BA0F30;" styleClass="sombra" stylesheets="@style.css">
+               <columns>
+                  <TableColumn fx:id="tbvcolumnNome" prefWidth="148.0" text="Nome" />
+                  <TableColumn fx:id="tbvcolumnStatus" prefWidth="156.0" text="Status" />
+                  <TableColumn fx:id="tbvcolumnSaldo" prefWidth="153.0" text="Saldo" />
+               </columns>
+            </TableView>
+            <Button fx:id="btMostrarPagamentos" layoutX="161.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#handleInadimplencia" prefHeight="48.0" stylesheets="@style.css" text="Relatório de Pagamentos">
+               <styleClass>
+                  <String fx:value="teg-button" />
+                  <String fx:value="hand" />
+               </styleClass>
+            </Button>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

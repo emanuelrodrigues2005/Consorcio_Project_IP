@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane prefHeight="287.0" prefWidth="531.0" style="-fx-background-color: #FAFAFA; -fx-background-radius: 50 50 40 40;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.ip.projeto.gui.views.PopUpPagoController">
+   <children>
+      <Label alignment="CENTER" prefHeight="50.0" prefWidth="531.0" style="-fx-background-color: #BA0F30; -fx-text-fill: #FAFAFA;" text="Boleto Mensal Pago!" textAlignment="CENTER" textFill="#fafafa">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="78.0" layoutY="161.0" text="Valor Parcela:" underline="true">
+         <font>
+            <Font name="Verdana" size="20.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" layoutX="2.0" layoutY="192.0" prefHeight="60.0" prefWidth="281.0">
+         <children>
+            <HBox alignment="BOTTOM_LEFT" prefHeight="19.0" prefWidth="30.0">
+               <children>
+                  <Label style="-fx-padding: 0 0 8 0;" text="R$">
+                     <font>
+                        <Font name="Arial Black" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Label fx:id="lbValorParcela" text="0">
+               <font>
+                  <Font name="Verdana" size="40.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <VBox alignment="CENTER" layoutX="242.0" layoutY="187.0" />
+      <Label layoutX="165.0" layoutY="82.0" text="Data de Pagamento Efetuado:" underline="true">
+         <font>
+            <Font name="Verdana Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbDataPagamento" layoutX="180.0" layoutY="97.0" style="-fx-text-fill: #221F26;" text="27/02/2025">
+         <font>
+            <Font name="Verdana Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="310.0" layoutY="161.0" text="Saldo Devedor:" underline="true">
+         <font>
+            <Font name="Verdana" size="20.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" layoutX="248.0" layoutY="197.0" prefHeight="0.0" prefWidth="281.0">
+         <children>
+            <HBox alignment="BOTTOM_LEFT" prefHeight="0.0" prefWidth="30.0">
+               <children>
+                  <Label style="-fx-padding: 0 0 8 0;" text="R$" textFill="#221f26">
+                     <font>
+                        <Font name="Arial Black" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Label fx:id="lbSaldoDevedor" text="12000" textFill="#221f26">
+               <font>
+                  <Font name="Verdana" size="40.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </children>
+</Pane>

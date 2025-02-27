@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane prefHeight="287.0" prefWidth="531.0" style="-fx-background-color: #FAFAFA; -fx-background-radius: 50 50 40 40;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.ip.projeto.gui.views.PopUpSorteioController">
+   <children>
+      <Label alignment="CENTER" prefHeight="50.0" prefWidth="531.0" style="-fx-background-color: #BA0F30; -fx-text-fill: #FAFAFA;" text="Contrato Sorteado!" textAlignment="CENTER" textFill="#fafafa">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <VBox alignment="CENTER" layoutX="-18.0" layoutY="62.0" prefHeight="55.0" prefWidth="272.0">
+         <children>
+            <Label text="Nome:" underline="true">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbNomeUserContemplado" style="-fx-text-fill: #221F26;" text="Gustavo Henrique">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="24.0" layoutY="132.0" prefHeight="55.0" prefWidth="187.0">
+         <children>
+            <Label text="CPF:" underline="true">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbCPFContemplado" style="-fx-text-fill: #221F26; -fx-padding: 0;" text="15001154410">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="-41.0" layoutY="200.0" prefHeight="60.0" prefWidth="317.0">
+         <children>
+            <Label text="Telefone:" underline="true">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbTelefoneContemplado" style="-fx-text-fill: #221F26;" text="(81)981629531">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="236.0" layoutY="62.0" prefHeight="65.0" prefWidth="281.0">
+         <children>
+            <Label text="Automóvel:" underline="true">
+               <font>
+                  <Font name="Verdana Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbNomeGrupoContemplado" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="289.0" style="-fx-text-fill: #221F26;" text="Honda Civic 2018" textAlignment="CENTER">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <Button fx:id="btEnviarMensagem" layoutX="303.0" layoutY="206.0" mnemonicParsing="false" prefHeight="48.0" styleClass="teg-button" stylesheets="@style.css" text="Enviar Mensagem" />
+      <Label layoutX="298.0" layoutY="136.0" text="Data de Contemplação:" underline="true">
+         <font>
+            <Font name="Verdana Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbDataContemplacao" layoutX="292.0" layoutY="152.0" style="-fx-text-fill: #221F26;" text="27/02/2025">
+         <font>
+            <Font name="Verdana Bold" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #221F26;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.ip.projeto.gui.views.TelaCriacaoGrupoController">
+   <children>
+      <VBox prefHeight="720.0" prefWidth="160.0" style="-fx-background-color: #FAFAFA;" AnchorPane.leftAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="76.0" prefWidth="160.0" text="ConsorX" textFill="#ba0f30">
+               <font>
+                  <Font name="Verdana Bold Italic" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbHomeAdm" alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#handleTelaPrincipalADM" prefHeight="76.0" prefWidth="160.0" style="-fx-background-color: FAFAFA; -fx-text-fill: BA0F30;" styleClass="hand" stylesheets="@style.css" text="Home" textFill="#fafafa">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbPerfilAdm" alignment="CENTER" layoutX="10.0" layoutY="112.0" onMouseClicked="#handleTelaPerfilAdmin" prefHeight="76.0" prefWidth="160.0" style="-fx-text-fill: #BA0F30; -fx-background-color: FAFAFA;" styleClass="hand" stylesheets="@style.css" text="Perfil">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbSair" alignment="CENTER" layoutX="10.0" layoutY="86.0" onMouseClicked="#handleTelaLogin" prefHeight="76.0" prefWidth="160.0" style="-fx-background-color: FAFAFA; -fx-text-fill: BA0F30;" styleClass="hand" stylesheets="@style.css" text="Sair" textFill="#fafafa">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <Pane layoutX="260.0" layoutY="135.0" prefHeight="453.0" prefWidth="928.0" style="-fx-background-color: fafafa; -fx-background-radius: 50 50 30 30;" styleClass="tela-padrao" stylesheets="@style.css" AnchorPane.bottomAnchor="135.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="92.0" AnchorPane.topAnchor="135.0">
+         <children>
+            <Label layoutX="102.0" layoutY="84.0" style="-fx-background-color: fafafa; -fx-text-fill: #221F26;" text="Para criar um grupo é necessário inserir os dados abaixo corretamente!" underline="true">
+               <font>
+                  <Font name="Verdana" size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtNomeGrupo" layoutX="79.0" layoutY="224.0" prefHeight="40.0" prefWidth="274.0" promptText="Insira o nome do automóvel" />
+            <TextField fx:id="txtTaxaAdmin" layoutX="78.0" layoutY="363.0" prefHeight="40.0" prefWidth="274.0" promptText="Insira a taxa de administração do automóvel" />
+            <Label layoutX="557.0" layoutY="182.0" style="-fx-text-fill: #221F26;" text="Valor Total do Automóvel">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtValorTotalGrupo" layoutX="562.0" layoutY="224.0" prefHeight="40.0" prefWidth="274.0" promptText="Insira o valor total do automóvel" />
+            <TextField fx:id="txtNumeroTotalGrupo" layoutX="561.0" layoutY="363.0" prefHeight="40.0" prefWidth="274.0" promptText="Insira o n° máximo de participantes" />
+            <Button fx:id="btCriarGrupo" layoutX="385.0" layoutY="397.0" mnemonicParsing="false" onMouseClicked="#criarGrupo" style="-fx-background-color: #BA0F30; -fx-text-fill: #FAFAFA; -fx-background-radius: 40;" stylesheets="@style.css" text="Criar Grupo">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="sombra" />
+                  <String fx:value="hand" />
+               </styleClass>
+            </Button>
+            <Pane layoutY="-1.0" prefHeight="50.0" prefWidth="928.0" style="-fx-background-color: #BA0F30; -fx-background-radius: 40 40 0 0;" stylesheets="@style.css">
+               <children>
+                  <Label layoutX="295.0" layoutY="10.0" style="-fx-text-fill: fafafa;" text="Criar Grupo do Consórcio">
+                     <font>
+                        <Font name="Verdana Bold" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Label layoutX="556.0" layoutY="282.0" prefHeight="76.0" prefWidth="285.0" style="-fx-text-fill: #221F26;" text="Número máximo de participantes do Grupo" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="73.0" layoutY="144.0" prefHeight="76.0" prefWidth="285.0" style="-fx-text-fill: #221F26;" text="Nome do automóvel a ser consorciado" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="73.0" layoutY="282.0" prefHeight="76.0" prefWidth="285.0" style="-fx-text-fill: #221F26;" text="Taxa de Adminstração desse automóvel (%)" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

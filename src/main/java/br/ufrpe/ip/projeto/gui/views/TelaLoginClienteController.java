@@ -2,24 +2,29 @@ package br.ufrpe.ip.projeto.gui.views;
 
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
+import br.ufrpe.ip.projeto.exceptions.ArrayVazioException;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
-import br.ufrpe.ip.projeto.models.Admin;
-import javafx.event.ActionEvent;
+import br.ufrpe.ip.projeto.models.Administrador;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
-public class TelaLoginController {
+public class TelaLoginClienteController {
     private IConsorcio sistema = ConsorcioFachada.getInstance();
     private Gerenciador gerenciador;
+
     @FXML
     private Text btRegistro;
 
     @FXML
     private Button btLogin;
+
+    @FXML
+    private Button btVoltarEscolhaLogin;
 
     @FXML
     private CheckBox cbManterConectado;
@@ -28,7 +33,7 @@ public class TelaLoginController {
     private TextField txtCpf;
 
     @FXML
-    private TextField txtSenha;
+    private PasswordField pswSenha;
 
     public void setGerenciador(Gerenciador gerenciador) {
         this.gerenciador = gerenciador;
@@ -37,32 +42,35 @@ public class TelaLoginController {
     @FXML
     public void initialize() {
         txtCpf.setText("");
-        txtSenha.setText("");
+        pswSenha.setText("");
         cbManterConectado.setSelected(false);
     }
 
     @FXML
-    private void openCadastro(MouseEvent event) {
+    private void handleTelaCadastro(MouseEvent event) {
         System.out.println("Acessando tela de cadastro...");
         this.gerenciador.abrirCadastro();
         this.clearCampos();
     }
 
     @FXML
-    private void login(MouseEvent event) {
-        System.out.println("aaaaaaa");
+    private void handleTelaPrincipalCliente(MouseEvent event) throws ArrayVazioException {
+        System.out.println("Login realizado com sucesso!");
         String cpf = this.txtCpf.getText();
-        String senha = this.txtSenha.getText();
+        String senha = this.pswSenha.getText();
         this.sistema.efutuarLogin(cpf, senha);
-        if (this.sistema.getClienteLogado() instanceof Admin) {
-                //this.gerenciador.abrirTelaIncialAdmin
-        }
         this.gerenciador.abrirTelaPrincipalCliente();
         clearCampos();
     }
 
+    @FXML
+    private void handleVoltarEscolhaLogin(MouseEvent event) {
+        System.out.println("Voltando para tela de escolha de login...");
+        this.gerenciador.abrirTelaEscolhaLogin();
+    }
+
     private void clearCampos() {
         this.txtCpf.clear();
-        this.txtSenha.clear();
+        this.pswSenha.clear();
     }
 }

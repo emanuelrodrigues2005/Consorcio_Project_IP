@@ -2,10 +2,11 @@ package br.ufrpe.ip.projeto.models;
 
 import br.ufrpe.ip.projeto.enums.StatusBoletoEnum;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class Boleto {
+public class Boleto implements Serializable {
     private String idBoleto;
     private Contrato contratoBoleto;
     private double valorBoleto;
@@ -15,13 +16,13 @@ public class Boleto {
     private StatusBoletoEnum statusBoleto;
     private int numeroParcela;
 
-    public Boleto(Contrato contratoBoleto, LocalDate dataVencimento, int numeroParcela) {
+    public Boleto(Contrato contratoBoleto) {
         this.idBoleto = UUID.randomUUID().toString();
         this.contratoBoleto = contratoBoleto;
-        this.numeroParcela = numeroParcela;
+        this.numeroParcela = contratoBoleto.getGrupoAssociado().getNumeroMaximoParticipantes();
         this.valorBoleto = contratoBoleto.getGrupoAssociado().getValorParcela();
         this.dataEmissao = LocalDate.now();
-        this.dataVencimento = dataVencimento;
+        this.dataVencimento = dataEmissao.plusMonths(1);
         this.statusBoleto = StatusBoletoEnum.PENDENTE;
         this.dataPagamento = null;
     }
@@ -44,6 +45,10 @@ public class Boleto {
 
     public StatusBoletoEnum getStatusBoleto() { return statusBoleto; }
 
+    public String getStatusBoletoString() {
+        return statusBoleto.name();
+    }
+
     public int getNumeroParcela() { return numeroParcela; }
 
     public void setDataVencimento(LocalDate dataVencimento) { this.dataVencimento = dataVencimento; }
@@ -53,4 +58,8 @@ public class Boleto {
     public void setDataEmissao(LocalDate dataEmsissao) { this.dataEmissao = dataEmsissao; }
 
     public void setStatusBoleto(StatusBoletoEnum statusBoleto) { this.statusBoleto = statusBoleto; }
+
+    public String getCpfCliente() {
+        return contratoBoleto.getCliente().getCpf();
+    }
 }

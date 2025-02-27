@@ -1,29 +1,51 @@
 package br.ufrpe.ip.projeto.gui;
 
+import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
+import br.ufrpe.ip.projeto.controllers.IConsorcio;
+import br.ufrpe.ip.projeto.exceptions.ArrayVazioException;
 import br.ufrpe.ip.projeto.gui.views.*;
-import br.ufrpe.ip.projeto.models.Cliente;
+import br.ufrpe.ip.projeto.models.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class Gerenciador {
     private static Gerenciador instance;
+    private static IConsorcio sistema = ConsorcioFachada.getInstance();
 
     private Parent telaVisuGrupo;
-    private Parent telaLogin;
+    private Parent telaLoginCliente;
+    private Parent telaLoginAdm;
+    private Parent telaEscolhaLogin;
     private Parent telaCadastro;
     private Parent telaPerfilCliente;
     private Parent telaPrincipalCliente;
+    private Parent telaCriacaoGrupo;
+    private Parent telaPrincipalADM;
+    private Parent telaVisualizacaoContrato;
+    private Parent telaEdicaoGrupo;
+    private Parent telaDadosContrato;
+    private Parent telaPerfilADM;
 
     private Stage stagePrincipal;
     private Scene scenePrincipal;
 
     private TelaVisuGrupoController telaVisuGrupoController;
-    private TelaLoginController telaLoginController;
+    private TelaLoginClienteController telaLoginClienteController;
     private TelaCadastroController telaCadastroController;
     private TelaPerfilClienteController telaPerfilClienteController;
     private TelaPrincipalClienteController telaPrincipalClienteController;
+    private TelaCriacaoGrupoController telaCriacaoGrupoController;
+    private TelaPrincipalADMController telaPrincipalADMController;
+    private TelaVisualizacaoContratoController telaVisualizacaoContratoController;
+    private TelaEscolhaLoginController telaEscolhaLoginController;
+    private TelaLoginAdmController telaLoginAdmController;
+    private TelaEditGrupoController telaEdicaoGrupoController;
+    private TelaDadosContratoController telaDadosContratoController;
+    private TelaPerfilADMController telaPerfilADMController;
 
     private Gerenciador() {
         try{
@@ -32,10 +54,10 @@ public class Gerenciador {
                 telaVisuGrupoController = loaderTelaVisuGrupo.getController();
                 telaVisuGrupoController.setGerenciador(this);
 
-                FXMLLoader loaderTelaLogin = new FXMLLoader(getClass().getResource(TelasEnum.TELA_LOGIN.getCaminho()));
-                telaLogin = loaderTelaLogin.load();
-                telaLoginController = loaderTelaLogin.getController();
-                telaLoginController.setGerenciador(this);
+                FXMLLoader loaderTelaLogin = new FXMLLoader(getClass().getResource(TelasEnum.TELA_LOGIN_CLIENTE.getCaminho()));
+                telaLoginCliente = loaderTelaLogin.load();
+                telaLoginClienteController = loaderTelaLogin.getController();
+                telaLoginClienteController.setGerenciador(this);
 
                 FXMLLoader loaderTelaCadastro = new FXMLLoader(getClass().getResource(TelasEnum.TELA_CADASTRO.getCaminho()));
                 telaCadastro = loaderTelaCadastro.load();
@@ -52,6 +74,45 @@ public class Gerenciador {
                 telaPrincipalClienteController = loaderTelaPrincipalCliente.getController();
                 telaPrincipalClienteController.setGerenciador(this);
 
+                FXMLLoader loaderTelaCriacaoGrupo = new FXMLLoader(getClass().getResource(TelasEnum.TELA_CRIACAO_GRUPO.getCaminho()));
+                telaCriacaoGrupo = loaderTelaCriacaoGrupo.load();
+                telaCriacaoGrupoController = loaderTelaCriacaoGrupo.getController();
+                telaCriacaoGrupoController.setGerenciador(this);
+
+                FXMLLoader loadrerTelaPrincipalADM = new FXMLLoader(getClass().getResource(TelasEnum.TELA_PRINCIPAL_ADM.getCaminho()));
+                telaPrincipalADM = loadrerTelaPrincipalADM.load();
+                telaPrincipalADMController = loadrerTelaPrincipalADM.getController();
+                telaPrincipalADMController.setGerenciador(this);
+
+                FXMLLoader loaderTelaVisualizacaoContrato = new FXMLLoader(getClass().getResource(TelasEnum.TELA_VISUALIZACAO_CONTRATO.getCaminho()));
+                telaVisualizacaoContrato = loaderTelaVisualizacaoContrato.load();
+                telaVisualizacaoContratoController = loaderTelaVisualizacaoContrato.getController();
+                telaVisualizacaoContratoController.setGerenciador(this);
+
+                FXMLLoader loaderTelaEscolhaLogin = new FXMLLoader(getClass().getResource(TelasEnum.TELA_ESCOLHA_LOGIN.getCaminho()));
+                telaEscolhaLogin = loaderTelaEscolhaLogin.load();
+                telaEscolhaLoginController = loaderTelaEscolhaLogin.getController();
+                telaEscolhaLoginController.setGerenciador(this);
+
+                FXMLLoader loaderTelaLoginAdm = new FXMLLoader(getClass().getResource(TelasEnum.TELA_LOGIN_ADM.getCaminho()));
+                telaLoginAdm = loaderTelaLoginAdm.load();
+                telaLoginAdmController = loaderTelaLoginAdm.getController();
+                telaLoginAdmController.setGerenciador(this);
+
+                FXMLLoader loaderTelaEdicaoGrupo = new FXMLLoader(getClass().getResource(TelasEnum.TELA_EDICAO_GRUPO.getCaminho()));
+                telaEdicaoGrupo = loaderTelaEdicaoGrupo.load();
+                telaEdicaoGrupoController = loaderTelaEdicaoGrupo.getController();
+                telaEdicaoGrupoController.setGerenciador(this);
+
+                FXMLLoader loaderTelaDadosContrato = new FXMLLoader(getClass().getResource(TelasEnum.TELA_DADOS_CONTRATO.getCaminho()));
+                telaDadosContrato = loaderTelaDadosContrato.load();
+                telaDadosContratoController = loaderTelaDadosContrato.getController();
+                telaDadosContratoController.setGerenciador(this);
+
+                FXMLLoader loaderTelaPerfilADM = new FXMLLoader(getClass().getResource(TelasEnum.TELA_PERFIL_ADM.getCaminho()));
+                telaPerfilADM = loaderTelaPerfilADM.load();
+                telaPerfilADMController = loaderTelaPerfilADM.getController();
+                telaPerfilADMController.setGerenciador(this);
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(-1);
@@ -72,20 +133,27 @@ public class Gerenciador {
     public void iniciarTelas() {
         stagePrincipal.setTitle("ConsorX");
         stagePrincipal.setResizable(false);
-        scenePrincipal = new Scene(telaLogin, 1280, 720);
+        scenePrincipal = new Scene(telaEscolhaLogin, 1280, 720);
         stagePrincipal.setScene(scenePrincipal);
         stagePrincipal.show();
     }
 
-    public void abrirTelaLogin() {
-        scenePrincipal.setRoot(telaLogin);
+    public void abrirTelaLoginCliente() {
+        telaLoginClienteController.initialize();
+        scenePrincipal.setRoot(telaLoginCliente);
+    }
+
+    public void abrirTelaLoginAdm() {
+        telaLoginAdmController.initialize();
+        scenePrincipal.setRoot(telaLoginAdm);
     }
 
     public void abrirCadastro() {
+        telaCadastroController.initialize();
         scenePrincipal.setRoot(telaCadastro);
     }
 
-    public void abrirTelaPrincipalCliente() {
+    public void abrirTelaPrincipalCliente() throws ArrayVazioException {
         telaPrincipalClienteController.initialize();
         scenePrincipal.setRoot(telaPrincipalCliente);
     }
@@ -94,5 +162,191 @@ public class Gerenciador {
         telaPerfilClienteController.setCliente(cliente);
         telaPerfilClienteController.initialize();
         scenePrincipal.setRoot(telaPerfilCliente);
+    }
+
+    public void abrirTelaCriacaoGrupo() {
+        telaCriacaoGrupoController.initialize();
+        scenePrincipal.setRoot(telaCriacaoGrupo);
+    }
+
+    public void abrirTelaPerfilAdmin(Cliente admin) {
+        telaPerfilADMController.setCliente(admin);
+        telaPerfilADMController.initialize();
+        scenePrincipal.setRoot(telaPerfilADM);
+    }
+
+    public void abrirTelaPrincipalADM() {
+        telaPrincipalADMController.initialize();
+        scenePrincipal.setRoot(telaPrincipalADM);
+    }
+
+    public void abriTelaVisualizacaoContrato(GrupoConsorcio grupo) {
+        telaVisualizacaoContratoController.setClienteLogado(sistema.getClienteLogado());
+        telaVisualizacaoContratoController.setGrupoAtual(grupo);
+        telaVisualizacaoContratoController.initialize();
+        scenePrincipal.setRoot(telaVisualizacaoContrato);
+    }
+
+    public void abrirTelaVisuGrupo(GrupoConsorcio grupo) {
+        telaVisuGrupoController.setGrupoAtual(grupo);
+        scenePrincipal.setRoot(telaVisuGrupo);
+    }
+
+    public void abrirTelaEscolhaLogin() {
+        scenePrincipal.setRoot(telaEscolhaLogin);
+    }
+
+    public TelaPrincipalClienteController getTelaPrincipalClienteController() {
+        return telaPrincipalClienteController;
+    }
+
+    public void abrirTelaEdicaoGrupo(GrupoConsorcio grupo) {
+        telaEdicaoGrupoController.setGrupoAtual(grupo);
+        telaEdicaoGrupoController.initialize();
+        scenePrincipal.setRoot(telaEdicaoGrupo);
+    }
+
+    public void abrirTelaDadosContrato(Contrato contrato) {
+        telaDadosContratoController.setContratoAtual(contrato);
+        telaDadosContratoController.initialize();
+        scenePrincipal.setRoot(telaDadosContrato);
+    }
+
+    public void abrirPopUpPagamento(Boleto boleto) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(TelasEnum.POP_UP_PAGAMENTO.getCaminho()));
+            Pane popupRoot = loader.load();
+
+            PopUpPagamentoController controller = loader.getController();
+            controller.setGerenciador(this);
+            controller.setBoletoAtual(boleto);
+
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.setTitle("Pagamento do Boleto");
+            popupStage.setScene(new Scene(popupRoot));
+            popupStage.setResizable(false);
+
+            controller.setPopupStage(popupStage);
+
+            popupStage.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void abrirPopUpSorteio(Contemplacao contemplacao) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(TelasEnum.POP_UP_SORTEIO.getCaminho()));
+            Pane popupRoot = loader.load();
+
+            PopUpSorteioController controller = loader.getController();
+            controller.setGerenciador(this);
+            controller.setContemplacaoAtual(contemplacao);
+
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.setTitle("Contemplaçao de Contrato");
+            popupStage.setScene(new Scene(popupRoot));
+            popupStage.setResizable(false);
+
+            controller.setPopupStage(popupStage);
+
+            popupStage.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void abrirPopUpAtualizarTaxa(GrupoConsorcio grupoAtual) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(TelasEnum.POP_UP_TAXA.getCaminho()));
+            Pane popupRoot = loader.load();
+
+            PopUpAlterarTaxaController controller = loader.getController();
+            controller.setGerenciador(this);
+            controller.setGrupoAtual(grupoAtual);
+
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.setTitle("Atualizar Taxa");
+            popupStage.setScene(new Scene(popupRoot));
+            popupStage.setResizable(false);
+
+            controller.setPopupStage(popupStage);
+
+            popupStage.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void abrirPopUpPago(Boleto boleto) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(TelasEnum.POP_UP_PAGO.getCaminho()));
+            Pane popupRoot = loader.load();
+
+            PopUpPagoController controller = loader.getController();
+            controller.setGerenciador(this);
+            controller.setBoletoAtual(boleto);
+
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.setTitle("Dados Boleto Pago");
+            popupStage.setScene(new Scene(popupRoot));
+            popupStage.setResizable(false);
+
+            controller.setPopupStage(popupStage);
+
+            popupStage.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void abrirPopUpEncerrarContrato(Contrato contrato) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(TelasEnum.POP_UP_ENCERRAR_CONTRATO.getCaminho()));
+            Pane popupRoot = loader.load();
+
+            PopUpEncerrarContratoController controller = loader.getController();
+            controller.setGerenciador(this);
+            controller.setContratoAtual(contrato);
+
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.setTitle("Dados Boleto Pago");
+            popupStage.setScene(new Scene(popupRoot));
+            popupStage.setResizable(false);
+
+            controller.setPopupStage(popupStage);
+
+            popupStage.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void abrirPopUpInadimplencia(GrupoConsorcio grupoAtual) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(TelasEnum.POP_UP_INADIMPLENCIA.getCaminho()));
+            Pane popupRoot = loader.load();
+
+            PopUpInadimplenciaController controller = loader.getController();
+            controller.setGerenciador(this);
+            controller.setGrupoAtual(grupoAtual);
+
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.setTitle("Dados Clientes Inadimplentes");
+            popupStage.setScene(new Scene(popupRoot));
+            popupStage.setResizable(false);
+
+            controller.setPopupStage(popupStage);
+
+            popupStage.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

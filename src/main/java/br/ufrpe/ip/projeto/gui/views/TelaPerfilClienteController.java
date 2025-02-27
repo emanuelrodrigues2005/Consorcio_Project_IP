@@ -2,28 +2,33 @@ package br.ufrpe.ip.projeto.gui.views;
 
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
+import br.ufrpe.ip.projeto.exceptions.ArrayVazioException;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
 import br.ufrpe.ip.projeto.models.Cliente;
 import br.ufrpe.ip.projeto.models.Contrato;
-import javafx.event.ActionEvent;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 public class TelaPerfilClienteController {
     private final IConsorcio sistema = ConsorcioFachada.getInstance();
     private Gerenciador screenManager;
-    private Cliente cliente = sistema.getClienteLogado();
+    private Cliente cliente;
 
     @FXML
-    private Button btHome;
+    private Label lbHomeCliente;
 
     @FXML
-    private Button btGrupos;
+    private Label lbPerfilCliente;
 
     @FXML
-    private Button btPerfil;
+    private Label lbGruposCliente;
+
+    @FXML
+    private Label lbSair;
 
     @FXML
     private Label lbNomeUser;
@@ -38,44 +43,42 @@ public class TelaPerfilClienteController {
     private Label lbEmail;
 
     @FXML
-    private Label lbNomeGrupo;
+    private TableView<Contrato> tbvContratos;
 
     @FXML
-    private Label lbParcelasPagas;
+    private TableColumn<Contrato, String> tbvcolumnAutomovel;
 
     @FXML
-    private Label lbValorPago;
-
-    @FXML
-    private Label lbSaldoDevedor;
-
-    @FXML
-    private Label lbStatusContrato;
-
-    @FXML
-    private Label lbDataInicio;
-
-    @FXML
-    private ListView<Contrato> listaContratos;
+    private TableColumn<Contrato, String> tbvcolumnStatus;
 
     @FXML
     public void initialize() {
-        lbNomeUser.setText(cliente.getNome());
-        lbCPF.setText(cliente.getCpf());
-        lbTelefone.setText(cliente.getTelefone());
-        lbEmail.setText(cliente.getEmail());
-        listaContratos.getItems().setAll(sistema.getAllContratosByCPF(cliente));
-        lbNomeGrupo.setText("");
-        lbParcelasPagas.setText("");
-        lbValorPago.setText("");
-        lbSaldoDevedor.setText("");
-        lbStatusContrato.setText("");
-        lbDataInicio.setText("");
-        listaContratos.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
-                setInfoContrato(newSelection);
+        if (cliente != null) {
+            lbNomeUser.setText(cliente.getNome());
+            lbCPF.setText(cliente.getCpf());
+            lbTelefone.setText(cliente.getTelefone());
+            lbEmail.setText(cliente.getEmail());
+            tbvContratos.getItems().clear();
+            if (!(sistema.getAllContratosByCPF(cliente).isEmpty())) {
+                configurarTabela();
+                carregarDados();
+                tbvContratos.setOnMouseClicked(event -> {
+                    if (event.getClickCount() == 2) {
+                        handleContratoSelecionado();
+                    }
+                });
             }
-        });
+        }
+    }
+
+    private void carregarDados() {
+        ObservableList<Contrato> contratos = FXCollections.observableArrayList(sistema.getAllContratosByCPF(cliente));
+        tbvContratos.setItems(contratos);
+    }
+
+    private void configurarTabela() {
+        tbvcolumnAutomovel.setCellValueFactory(new PropertyValueFactory<>("nomeGrupoConsorcio"));
+        tbvcolumnStatus.setCellValueFactory(new PropertyValueFactory<>("statusContratoString"));
     }
 
     public void setGerenciador(Gerenciador screenManager) {
@@ -86,22 +89,27 @@ public class TelaPerfilClienteController {
         this.cliente = cliente;
     }
 
-    public void setInfoContrato(Contrato contrato) {
-        lbNomeGrupo.setText(contrato.getGrupoAssociado() != null ? contrato.getGrupoAssociado().getNomeGrupo() : "Não informado");
-        lbParcelasPagas.setText(String.valueOf(contrato.getParcelasPagas()));
-        lbValorPago.setText(String.format("R$ %.2f", contrato.getValorPago()));
-        lbSaldoDevedor.setText(String.format("R$ %.2f", contrato.getSaldoDevedor()));
-        lbStatusContrato.setText(contrato.getStatusContrato() != null ? contrato.getStatusContrato().toString() : "Não informado");
-        lbDataInicio.setText(contrato.getDataInicio() != null ? contrato.getDataInicio().toString() : "Não informado");
-    }
     @FXML
-    private void openHome(ActionEvent actionEvent) {
+    public void handleTelaPrincipalCliente(MouseEvent event) throws ArrayVazioException {
+        System.out.println("Redirecionando tela principal do cliente...");
+        this.screenManager.abrirTelaPrincipalCliente();
     }
 
     @FXML
-    public void openAllGrupos(ActionEvent actionEvent) {
+    public void handleTelaEscolherLogin(MouseEvent event) {
+        System.out.println("Redirecionando tela escolher forma de login...");
+        this.screenManager.abrirTelaEscolhaLogin();
     }
 
-    public void openPerfil(ActionEvent actionEvent) {
+    @FXML
+    public void handleContratoSelecionado() {
+        Contrato contratoSelecionado = tbvContratos.getSelectionModel().getSelectedItem();
+
+        if (contratoSelecionado != null) {
+            screenManager.abrirTelaDadosContrato(contratoSelecionado);
+            System.out.println("Redirecionando contrato selecionado...");
+        } else {
+            System.out.println("Nenhum grupo foi selecionado.");
+        }
     }
 }

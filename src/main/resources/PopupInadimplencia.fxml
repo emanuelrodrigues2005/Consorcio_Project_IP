@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane prefHeight="364.0" prefWidth="664.0" style="-fx-background-color: #FAFAFA;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.ip.projeto.gui.views.PopUpInadimplenciaController">
+   <children>
+      <Label alignment="CENTER" prefHeight="50.0" prefWidth="664.0" style="-fx-background-color: #BA0F30; -fx-text-fill: #FAFAFA;" text="Pagamentos do Grupo" textAlignment="CENTER" textFill="#fafafa">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="btNotificarParticipantes" layoutX="72.0" layoutY="226.0" mnemonicParsing="false" onMouseClicked="#handleNotificarParticipantes" prefHeight="48.0" stylesheets="@style.css" text="Notificar Participantes">
+         <styleClass>
+            <String fx:value="teg-button" />
+            <String fx:value="hand" />
+         </styleClass></Button>
+      <Label layoutX="30.0" layoutY="149.0" text="Participantes Inadimplentes:" underline="true">
+         <font>
+            <Font name="Verdana Bold" size="16.0" />
+         </font>
+      </Label>
+      <HBox alignment="BOTTOM_CENTER" layoutX="78.0" layoutY="179.0" prefHeight="35.0" prefWidth="165.0">
+         <children>
+            <Label fx:id="lbInadimplentes" text="50">
+               <font>
+                  <Font name="Verdana Bold" size="28.0" />
+               </font>
+            </Label>
+            <Label text="\%">
+               <font>
+                  <Font name="Verdana Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <TableView fx:id="tbvInadimplencia" layoutX="315.0" layoutY="61.0" prefHeight="288.0" prefWidth="340.0" style="-fx-border-width: 4; -fx-background-color: #fafafa; -fx-border-color: #BA0F30;" styleClass="sombra" stylesheets="@style.css">
+         <columns>
+            <TableColumn fx:id="tbvcolumnCPFInadimplencia" prefWidth="200.0" text="CPF" />
+            <TableColumn fx:id="tbvcolumnStatusInadimplencia" prefWidth="132.0" text="Status" />
+         </columns>
+      </TableView>
+   </children>
+</Pane>

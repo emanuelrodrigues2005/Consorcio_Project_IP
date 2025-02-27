@@ -9,11 +9,13 @@ import java.util.List;
 public interface IContemplacaoRepository {
     List<Contemplacao> getAllContemplacoes();
 
+    void salvarArquivo();
+
     Contemplacao getContemplacaoByContrato(Contrato contrato);
 
     Contemplacao getContemplacaoById(String idContemplacao);
 
-    void createContemplacao(Contrato contratoContemplacao);
+    Contemplacao createContemplacao(Contrato contratoContemplacao);
 
     void updateDataContemplacao(String idContemplacao, LocalDate dataContemplacao);
 

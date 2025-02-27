@@ -11,13 +11,17 @@ import java.util.List;
 public interface IBoletoRepository {
     List<Boleto> getAllBoletos();
 
+    void salvarArquivo();
+
+    List<Boleto> getAllBoletosByContrato(String idContrato);
+
     String getIdBoleto(Contrato contrato, int numeroParcela);
 
     Boleto getBoletoById(String idBoleto);
 
     Boleto getBoletoByContrato(Contrato contrato);
 
-    Boleto createBoleto(Contrato contrato, LocalDate dataVencimento, int numeroParcela);
+    Boleto createBoleto(Contrato contrato);
 
     void updateDataPagamento(Boleto boleto);
 
