@@ -53,11 +53,17 @@ public class PopUpInadimplenciaController {
     public void initialize() {
         try {
             limparCampos();
+            lbInadimplentes.setText(String.valueOf(sistema.calcularInadimplencia(grupoAtual)));
             configurarTabela();
             carregarDados();
         } catch (ArrayVazioException e) {
             e.getMessage();
         }
+    }
+
+    @FXML
+    private void handleNotificarParticipantes() {
+        this.exibirAlertaInformacao("Participantes Notificados", "Todos os participantes foram notificador pelos meios de comuniçação cadastrados");
     }
 
     private void carregarDados() throws ArrayVazioException {
@@ -78,6 +84,14 @@ public class PopUpInadimplenciaController {
             }
         }
         return boletosGrupo;
+    }
+
+    private void exibirAlertaInformacao(String titulo, String mensagem) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Informação");
+        alert.setHeaderText(titulo);
+        alert.setContentText(mensagem);
+        alert.showAndWait();
     }
 
     private void limparCampos() {

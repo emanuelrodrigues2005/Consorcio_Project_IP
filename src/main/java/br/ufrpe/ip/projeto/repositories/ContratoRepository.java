@@ -124,7 +124,8 @@ public class ContratoRepository implements IContratoRepository, Serializable{
     public List<Contrato> getContratosByIdGrupo(GrupoConsorcio grupoAssociado) {
         List<Contrato> contratosGrupo = new ArrayList<>();
         for (Contrato contrato : contratos) {
-            if (contrato.getGrupoAssociado().getIdGrupo().equals(grupoAssociado.getIdGrupo())) {
+            if (contrato.getGrupoAssociado() != null && grupoAssociado != null &&
+                    contrato.getGrupoAssociado().getIdGrupo().equals(grupoAssociado.getIdGrupo())) {
                 contratosGrupo.add(contrato);
             }
         }
