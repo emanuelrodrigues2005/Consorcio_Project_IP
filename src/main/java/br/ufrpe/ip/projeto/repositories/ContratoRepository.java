@@ -90,7 +90,8 @@ public class ContratoRepository implements IContratoRepository, Serializable{
     public List<Cliente> getAllClientesByGrupo(GrupoConsorcio grupoConsorcio) {
         List<Cliente> clientesByGrupo = new ArrayList<>();
         for (Contrato contrato : contratos) {
-            if (contrato.getCliente() != null && contrato.getGrupoAssociado().getIdGrupo().equals(grupoConsorcio.getIdGrupo())) {
+            if (contrato.getCliente() != null && contrato.getGrupoAssociado() != null && grupoConsorcio != null &&
+                    contrato.getGrupoAssociado().getIdGrupo().equals(grupoConsorcio.getIdGrupo())) {
                 clientesByGrupo.add(contrato.getCliente());
             }
         }
