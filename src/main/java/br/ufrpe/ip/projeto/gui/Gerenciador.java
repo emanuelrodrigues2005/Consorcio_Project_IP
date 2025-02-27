@@ -326,4 +326,27 @@ public class Gerenciador {
             e.printStackTrace();
         }
     }
+
+    public void abrirPopUpInadimplencia(GrupoConsorcio grupoAtual) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(TelasEnum.POP_UP_INADIMPLENCIA.getCaminho()));
+            Pane popupRoot = loader.load();
+
+            PopUpInadimplenciaController controller = loader.getController();
+            controller.setGerenciador(this);
+            controller.setGrupoAtual(grupoAtual);
+
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.setTitle("Dados Clientes Inadimplentes");
+            popupStage.setScene(new Scene(popupRoot));
+            popupStage.setResizable(false);
+
+            controller.setPopupStage(popupStage);
+
+            popupStage.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -163,6 +163,7 @@ public class TelaEditGrupoController {
 	@FXML
 	private void handleInadimplencia() throws ArrayVazioException {
 		System.out.println(sistema.calcularInadimplencia(grupoAtual) + "% dos membros são inadimplentes");
+		this.gerenciador.abrirPopUpInadimplencia(grupoAtual);
 	}
 
 	private void carregarDadosGrupo(String idGrupo) {

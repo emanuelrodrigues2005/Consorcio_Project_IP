@@ -58,4 +58,8 @@ public class Boleto implements Serializable {
     public void setDataEmissao(LocalDate dataEmsissao) { this.dataEmissao = dataEmsissao; }
 
     public void setStatusBoleto(StatusBoletoEnum statusBoleto) { this.statusBoleto = statusBoleto; }
+
+    public String getCpfCliente() {
+        return contratoBoleto.getCliente().getCpf();
+    }
 }

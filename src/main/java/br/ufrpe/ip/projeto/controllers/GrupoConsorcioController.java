@@ -30,9 +30,17 @@ public class GrupoConsorcioController {
 
     public void createGrupoConsorcio(String nomeGrupo, int numeroMaximoParticipantes, double valorTotal, double taxaAdmin) throws CampoInvalidoException {
         List<String> camposInvalidos = new ArrayList<>();
-        if (numeroMaximoParticipantes <= 0) camposInvalidos.add("Número máximo de participantes");
-        if (valorTotal <= 0) camposInvalidos.add("Valor total");
-        if (taxaAdmin <= 0) camposInvalidos.add("Taxa administrativa");
+        if (numeroMaximoParticipantes <= 0) {
+            camposInvalidos.add("Número máximo de participantes");
+        }
+
+        if (valorTotal <= 0) {
+            camposInvalidos.add("Valor total");
+        }
+
+        if (taxaAdmin <= 0){
+            camposInvalidos.add("Taxa administrativa");
+        }
 
         if (!camposInvalidos.isEmpty()) {
             throw new CampoInvalidoException(camposInvalidos);
