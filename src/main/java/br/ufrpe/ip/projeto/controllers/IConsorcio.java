@@ -17,6 +17,8 @@ public interface IConsorcio {
 
     String getIdBoleto(Contrato contratoBoleto, int numeroParcela);
 
+    List<Boleto> getAllBoletosByContrato(String idContrato);
+
     Boleto getBoletoById(String idBoleto);
 
     Boleto getBoletoByContrato(Contrato contratoBoleto);

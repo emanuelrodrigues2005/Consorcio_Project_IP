@@ -13,6 +13,8 @@ public interface IBoletoRepository {
 
     void salvarArquivo();
 
+    List<Boleto> getAllBoletosByContrato(String idContrato);
+
     String getIdBoleto(Contrato contrato, int numeroParcela);
 
     Boleto getBoletoById(String idBoleto);

@@ -98,17 +98,11 @@ public class TelaVisualizacaoContratoController {
     }
 
     @FXML
-    private void handleCriarContrato(MouseEvent event) {
+    private void handleCriarContrato(MouseEvent event) throws InterruptedException {
         if (grupoAtual != null) {
             sistema.createContrato(clienteLogado, grupoAtual);
+            Contrato contratoAtual = sistema.getContratoByCPFNomeGrupo(clienteLogado, grupoAtual);
             System.out.println("Contrato assinado!");
-            for (Contrato contrato : sistema.getAllContratosByCPF(clienteLogado)) {
-                System.out.println(contrato.getCliente());
-            }
-
-            int novoNumeroParticipantes = grupoAtual.getNumeroParticipantes() + 1;
-            sistema.updateParticipantes(grupoAtual, novoNumeroParticipantes);
-            grupoAtual.setNumeroParticipantes(novoNumeroParticipantes);
 
             btCriarContrato.setDisable(true);
             btCriarContrato.setText("Contrato Assinado");
@@ -118,6 +112,11 @@ public class TelaVisualizacaoContratoController {
                 if (telaPrincipal != null) {
                     telaPrincipal.atualizarTabela();
                 }
+            }
+            for (int i = 0; i < 3; i++) {
+                sistema.createBoleto(contratoAtual);
+                System.out.printf("boleto emitido %d\n", i);
+                Thread.sleep(100);
             }
         } else {
             System.out.println("Erro: Nenhum grupo selecionado para criar contrato.");

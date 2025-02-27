@@ -30,6 +30,10 @@ public class BoletoController {
         return this.repositoryBoleto.getAllBoletos();
     } //exceptions: ArrayVazio
 
+    public List<Boleto> getAllBoletosByContrato(String idContrato) {
+        return this.repositoryBoleto.getAllBoletosByContrato(idContrato);
+    }
+
     public String getIdBoleto(Contrato contratoBoleto, int numeroParcela) {
         return this.repositoryBoleto.getIdBoleto(contratoBoleto, numeroParcela);
     } //exceptions: IdBoletoInexistente, ContratoInexistente, CampoInvalido
