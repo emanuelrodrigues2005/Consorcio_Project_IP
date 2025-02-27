@@ -76,7 +76,7 @@ public class TelaEditGrupoController {
 			lbQntdParticipantes.setText(String.valueOf(grupoAtual.getNumeroParticipantes()));
 			lbValorTotal.setText(String.valueOf(grupoAtual.getValorTotal()));
 			lbStatus.setText(String.valueOf(grupoAtual.getStatusGrupoConsorcio()));
-			lbTaxa.setText(String.valueOf(grupoAtual.getTaxaAdmin()));
+			lbTaxa.setText(String.valueOf(grupoAtual.getTaxaAdmin() * 100));
 			ltvParticipantes.getItems().setAll(sistema.getAllClientesByGrupo(grupoAtual));//ajustar pra pegar somente os cliente do grupo selecionado
 		}
 	}
@@ -101,7 +101,7 @@ public class TelaEditGrupoController {
 	@FXML
 	public void handleAlterarTaxaAdmin() {
 		System.out.println("Redirecionando para a tela de escolha da taxa");
-		//this.gerenciador.abrirTelaAlterarTaxaAdmin();
+		this.gerenciador.abrirPopUpAtualizarTaxa(grupoAtual);
 	}
 
 	@FXML

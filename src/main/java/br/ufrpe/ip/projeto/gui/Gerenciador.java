@@ -217,6 +217,7 @@ public class Gerenciador {
             Pane popupRoot = loader.load();
 
             PopUpPagamentoController controller = loader.getController();
+            controller.setGerenciador(this);
             controller.setBoletoAtual(boleto);
 
             Stage popupStage = new Stage();
@@ -239,11 +240,35 @@ public class Gerenciador {
             Pane popupRoot = loader.load();
 
             PopUpSorteioController controller = loader.getController();
+            controller.setGerenciador(this);
             controller.setContemplacaoAtual(contemplacao);
 
             Stage popupStage = new Stage();
             popupStage.initModality(Modality.APPLICATION_MODAL);
             popupStage.setTitle("Contemplaçao de Contrato");
+            popupStage.setScene(new Scene(popupRoot));
+            popupStage.setResizable(false);
+
+            controller.setPopupStage(popupStage);
+
+            popupStage.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void abrirPopUpAtualizarTaxa(GrupoConsorcio grupoAtual) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(TelasEnum.POP_UP_TAXA.getCaminho()));
+            Pane popupRoot = loader.load();
+
+            PopUpAlterarTaxaController controller = loader.getController();
+            controller.setGerenciador(this);
+            controller.setContemplacaoAtual(grupoAtual);
+
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.setTitle("Atualizar Taxa");
             popupStage.setScene(new Scene(popupRoot));
             popupStage.setResizable(false);
 

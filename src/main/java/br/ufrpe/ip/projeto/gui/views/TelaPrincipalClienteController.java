@@ -81,11 +81,6 @@ public class TelaPrincipalClienteController {
     }
 
     @FXML
-    public void handleTelaGruposCliente() {
-        //this.screenManeger.abrirTelaGruposCliente
-    }
-
-    @FXML
     private void handleGrupoSelecionado() {
         GrupoConsorcio grupoSelecionado = tbvGrupos.getSelectionModel().getSelectedItem();
 

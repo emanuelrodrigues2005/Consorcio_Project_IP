@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="287.0" prefWidth="531.0" style="-fx-background-color: #FAFAFA; -fx-background-radius: 50 50 40 40;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane prefHeight="287.0" prefWidth="531.0" style="-fx-background-color: #FAFAFA; -fx-background-radius: 50 50 40 40;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.ip.projeto.gui.views.PopUpAlterarTaxaController">
    <children>
       <Label alignment="CENTER" prefHeight="50.0" prefWidth="531.0" style="-fx-background-color: #BA0F30; -fx-text-fill: #FAFAFA;" text="Atualizar Taxa de Administração" textAlignment="CENTER" textFill="#fafafa">
          <font>
