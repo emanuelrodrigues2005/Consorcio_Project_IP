@@ -88,7 +88,7 @@ public class PopUpPagamentoController {
                 sistema.createBoleto(boletoAtual.getContratoBoleto());
             }
             popupStage.close();
-            gerenciador.abrirPerfilCliente(boletoAtual.getContratoBoleto().getCliente());
+            gerenciador.abrirPerfilCliente(sistema.getClienteLogado());
         }
     }
   

@@ -87,18 +87,10 @@ public class TelaDadosContratoController {
     }
 
     private void carregarDados() {
-        try {
-            ObservableList<Boleto> boletos = FXCollections.observableArrayList(
-                    sistema.getBoletoByContrato(contratoAtual)
-            );
-            tbvBoletos.setItems(boletos);
-        } catch (BoletoInexistenteException e) {
-            exibirAlertaErro("Boleto não encontrado", "Nenhum boleto foi encontrado para este contrato.");
-        } catch (ContratoInvalidoException e) {
-            exibirAlertaErro("Contrato inválido", e.getMessage());
-        } catch (CampoInvalidoException e) {
-            exibirAlertaErro("Campo inválido", e.getMessage());
-        }
+        ObservableList<Boleto> boletos = FXCollections.observableArrayList(
+                sistema.getAllBoletosByContrato(contratoAtual.getIdContrato())
+        );
+        tbvBoletos.setItems(boletos);
     }
 
     private void configurarTabela() {
