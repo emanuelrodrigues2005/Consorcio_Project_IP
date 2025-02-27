@@ -67,9 +67,9 @@
                   <String fx:value="hand" />
                </styleClass>
             </Button>
-            <HBox layoutX="49.0" layoutY="66.0" prefHeight="17.0" prefWidth="797.0">
+            <HBox layoutX="33.0" layoutY="66.0" prefHeight="17.0" prefWidth="888.0">
                <children>
-                  <Label text="Pelo presente instrumento particular, de um lado, " />
+                  <Label text="      Pelo presente instrumento particular, de um lado, " />
                   <Label fx:id="lbNomeGrupo" text="Label" />
                   <Label text=", doravante denominado &quot;GRUPO&quot;, e, de outro lado, " />
                   <Label fx:id="lbNomeCliente" text="Label" />
