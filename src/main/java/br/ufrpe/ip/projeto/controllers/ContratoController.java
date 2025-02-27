@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.ufrpe.ip.projeto.enums.StatusBoletoEnum;
 import br.ufrpe.ip.projeto.enums.StatusContratoEnum;
+import br.ufrpe.ip.projeto.exceptions.*;
 import br.ufrpe.ip.projeto.models.Boleto;
 import br.ufrpe.ip.projeto.models.Cliente;
 import br.ufrpe.ip.projeto.models.Contrato;
@@ -27,19 +28,24 @@ public class ContratoController {
         return instancia;
     }
 
-    public void createContrato(Cliente cliente, GrupoConsorcio grupoConsorcio) {
-        if (!this.repositorioContrato.existeContrato(this.repositorioContrato.getContratoByCPFIdGrupo(cliente, grupoConsorcio))) {
-            if(cliente == null) {
-                return;
-            } else if (grupoConsorcio == null) {
-                return;
-            }
-            this.repositorioContrato.createContrato(cliente, grupoConsorcio);
-            this.repositorioContrato.salvarArquivo();
+    public void createContrato(Cliente cliente, GrupoConsorcio grupoConsorcio) throws ContratoDuplicadoException, CampoInvalidoException {
+        if (cliente == null) {
+            throw new CampoInvalidoException("Cliente");
         }
-    } // exceptions: contratoDuplicado, clienteInvalido, grupoInvalido, contratoInvalido
+        if (grupoConsorcio == null) {
+            throw new CampoInvalidoException("Grupo");
+        }
+        Contrato contrato = new Contrato(cliente, grupoConsorcio);
+        if (this.repositorioContrato.existeContrato(contrato)) {
+            throw new ContratoDuplicadoException(contrato.getIdContrato());
+        }
 
-    public void registrarPagamento(Cliente cliente, GrupoConsorcio grupoConsorcio, Boleto boleto) {
+        this.repositorioContrato.createContrato(cliente, grupoConsorcio);
+        this.repositorioContrato.salvarArquivo();
+    }
+    // exceptions: contratoDuplicado, clienteInvalido, grupoInvalido, contratoInvalido
+
+    public void registrarPagamento(Cliente cliente, GrupoConsorcio grupoConsorcio, Boleto boleto) throws CampoInvalidoException {
         Contrato contrato = this.repositorioContrato.getContratoByCPFIdGrupo(cliente, grupoConsorcio);
         if (boleto.getStatusBoleto() == StatusBoletoEnum.PAGO) {
             this.repositorioContrato.updateParcelasPagas(contrato);
@@ -47,9 +53,10 @@ public class ContratoController {
             this.repositorioContrato.updateValorPago(contrato);
             this.repositorioContrato.salvarArquivo();
             return;
+        } else if (boleto.getStatusBoleto() != StatusBoletoEnum.PAGO) {
+            throw new CampoInvalidoException("StatusBoleto");
         }
-        // throw boletoPendente/Atrasado 
-    }
+    }// throw boletoPendente/Atrasado
 
     public Contrato getContratoByCPFNomeGrupo(Cliente cliente, GrupoConsorcio grupoAssociado) {
         return this.repositorioContrato.getContratoByCPFIdGrupo(cliente, grupoAssociado);
@@ -79,7 +86,7 @@ public class ContratoController {
         return this.repositorioContrato.getContratoByIdContrato(idContrato);
     }
 
-    public boolean cancelarContrato(Cliente cliente, GrupoConsorcio grupoAssociado) {
+    public boolean cancelarContrato(Cliente cliente, GrupoConsorcio grupoAssociado) throws ContratoInvalidoException, CampoInvalidoException {
         Contrato contrato = this.repositorioContrato.getContratoByCPFIdGrupo(cliente, grupoAssociado);
         if (contrato != null) {
             this.updateStatusContrato(contrato, StatusContratoEnum.ENCERRADO);
@@ -90,33 +97,55 @@ public class ContratoController {
         return false;
     }
 
-    public void updateStatusContrato(Contrato contrato, StatusContratoEnum statusContrato) {
-        this.repositorioContrato.updateStatusContrato(contrato, statusContrato);
+    public void updateStatusContrato(Contrato contrato, StatusContratoEnum statusContrato) throws CampoInvalidoException, ContratoInvalidoException {
+        if (statusContrato == null) {
+            throw new CampoInvalidoException("Status");
+        }
+        if (contrato == null) {
+            throw new ContratoInvalidoException("Contrato inválido.");
+        }
+        repositorioContrato.updateStatusContrato(contrato, statusContrato);
     } //exceptions: CampoInvalido, ContratoInvalido
 
-    public void updateParcelasPagas(Contrato contrato) {
+    public void updateParcelasPagas(Contrato contrato) throws ContratoInvalidoException {
+        if (contrato == null) {
+            throw new ContratoInvalidoException("Contrato inválido.");
+        }
         this.repositorioContrato.updateParcelasPagas(contrato);
     } //exceptions: CampoInvalido, ContratoInvalido
 
-    public void updateSaldoDevedor(Contrato contrato) {
+    public void updateSaldoDevedor(Contrato contrato) throws ContratoInvalidoException {
+        if (contrato == null) {
+            throw new ContratoInvalidoException("Contrato inválido.");
+        }
         this.repositorioContrato.updateSaldoDevedor(contrato);
     } //exceptions: CampoInvalido, ContratoInvalido
 
-    public void updateValorPago(Contrato contrato) {
+    public void updateValorPago(Contrato contrato) throws ContratoInvalidoException {
+        if (contrato == null) {
+            throw new ContratoInvalidoException("Contrato inválido.");
+        }
         this.repositorioContrato.updateValorPago(contrato);
     } //exceptions: CampoInvalido, ContratoInvalido
 
-    public void updateSaldoDevolucao(Contrato contrato) {
+    public void updateSaldoDevolucao(Contrato contrato) throws ContratoInvalidoException {
+        if (contrato == null) {
+            throw new ContratoInvalidoException("Contrato inválido.");
+        }
         this.repositorioContrato.updateSaldoDevolucao(contrato);
     } //exceptions: CampoInvalido, ContratoInvalido
 
-    public void updateDataEncerramento(Contrato contrato, LocalDate dataEncerramento) {
+    public void updateDataEncerramento(Contrato contrato, LocalDate dataEncerramento) throws ContratoInvalidoException {
+        if (contrato == null) {
+            throw new ContratoInvalidoException("Contrato inválido.");
+        }
         this.repositorioContrato.updateDataEncerramento(contrato, dataEncerramento);
     } //exceptions: CampoInvalido, ContratoInvalido
 
-    public void deleteContrato(Contrato contrato) {
-        if (contrato != null) {
-            this.repositorioContrato.deleteContrato(contrato); //fornecer o idContrato como parâmetro ao invés do contrato em si
+    public void deleteContrato(Contrato contrato) throws ContratoInvalidoException {
+        if (contrato == null) {
+            throw new ContratoInvalidoException("Contrato inválido.");
         }
+        this.repositorioContrato.deleteContrato(contrato);
     } //throw contratoInexistente, contratoInvalido
 }

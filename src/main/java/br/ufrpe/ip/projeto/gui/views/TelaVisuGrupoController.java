@@ -2,9 +2,11 @@ package br.ufrpe.ip.projeto.gui.views;
 
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
+import br.ufrpe.ip.projeto.exceptions.IdGrupoConsorcioInexistenteException;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
 import br.ufrpe.ip.projeto.models.GrupoConsorcio;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -86,9 +88,9 @@ public class TelaVisuGrupoController {
     }
 
     private void carregarDadosGrupo(String idGrupo) {
-        grupoAtual = sistema.getGrupoById(idGrupo);
+        try {
+            grupoAtual = sistema.getGrupoById(idGrupo);
 
-        if (grupoAtual != null) {
             if (lbAutoConsor != null) {
                 lbAutoConsor.setText(grupoAtual.getNomeGrupo());
             } else {
@@ -97,12 +99,21 @@ public class TelaVisuGrupoController {
 
             lbValorTotal.setText(String.format("%.2f", grupoAtual.getValorTotal()));
             lbTaxaAdmin.setText(String.format("%.2f", grupoAtual.getTaxaAdmin()));
-            lbValorParcela.setText(String.format("%.2f", (grupoAtual.getValorParcela())));
+            lbValorParcela.setText(String.format("%.2f", grupoAtual.getValorParcela()));
             lbTotalParticipantes.setText(String.valueOf(grupoAtual.getNumeroParticipantes()));
-            lbAutoConsor.setText(grupoAtual.getNomeGrupo());
-        } else {
-            System.out.println("Nenhum grupo encontrado com o ID fornecido.");
+
+        } catch (IdGrupoConsorcioInexistenteException e) {
+            exibirAlertaErro("Grupo não encontrado", "Nenhum grupo foi encontrado com o ID fornecido: " + idGrupo);
+            limparDadosGrupo();
         }
+    }
+
+    private void exibirAlertaErro(String titulo, String mensagem) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erro");
+        alert.setHeaderText(titulo);
+        alert.setContentText(mensagem);
+        alert.showAndWait();
     }
 
     private void limparDadosGrupo() {

@@ -7,10 +7,7 @@ import br.ufrpe.ip.projeto.models.GrupoConsorcio;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class TelaPrincipalClienteController {
@@ -66,8 +63,21 @@ public class TelaPrincipalClienteController {
     }
 
     private void carregarDados() {
-        ObservableList<GrupoConsorcio> grupos = FXCollections.observableArrayList(sistema.getAllGrupos());
-        tbvGrupos.setItems(grupos);
+        try {
+            ObservableList<GrupoConsorcio> grupos = FXCollections.observableArrayList(sistema.getAllGrupos());
+            tbvGrupos.setItems(grupos);
+        } catch (Exception e) {
+            exibirAlertaErro("Erro ao Carregar Dados", e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void exibirAlertaErro(String titulo, String mensagem) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erro");
+        alert.setHeaderText(titulo);
+        alert.setContentText(mensagem);
+        alert.showAndWait();
     }
 
     @FXML

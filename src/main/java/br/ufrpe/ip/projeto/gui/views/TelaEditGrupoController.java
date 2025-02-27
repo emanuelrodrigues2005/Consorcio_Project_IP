@@ -3,6 +3,7 @@ package br.ufrpe.ip.projeto.gui.views;
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
 import br.ufrpe.ip.projeto.enums.StatusGrupoConsorcioEnum;
+import br.ufrpe.ip.projeto.exceptions.*;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
 import br.ufrpe.ip.projeto.models.Cliente;
 import br.ufrpe.ip.projeto.models.Contemplacao;
@@ -113,8 +114,19 @@ public class TelaEditGrupoController {
 
 	@FXML
 	public void handleRealizarContemplacao() {
-		String idContemplacao = this.sistema.sorteioContemplacao();
-		this.gerenciador.abrirPopUpSorteio(this.sistema.getContemplacaoById(idContemplacao));
+		try {
+			String idContemplacao = this.sistema.sorteioContemplacao();
+			Contemplacao contemplacao = this.sistema.getContemplacaoById(idContemplacao);
+			this.gerenciador.abrirPopUpSorteio(contemplacao);
+		} catch (ArrayVazioException e) {
+			exibirAlertaErro("Erro no sorteio", "Não há contratos ativos para contemplação.");
+		} catch (ContratoInvalidoException e) {
+			exibirAlertaErro("Contrato inválido", e.getMessage());
+		} catch (ContemplacaoInexistenteException e) {
+			exibirAlertaErro("Contemplação não encontrada", "A contemplação sorteada não existe.");
+		} catch (CampoInvalidoException e) {
+			exibirAlertaErro("Campo inválido", e.getMessage());
+		}
 	}
 
 	@FXML
@@ -149,21 +161,36 @@ public class TelaEditGrupoController {
 		alert.showAndWait();
 	}
 
-	private void carregarDadosGrupo(String idGrupo) {
-		grupoAtual = sistema.getGrupoById(idGrupo);
-		if (grupoAtual != null) {
-			if (lbAutomovel != null) {
-				lbAutomovel.setText(grupoAtual.getNomeGrupo());
-			} else {
-				System.out.println("lbAutoConsor está nulo!");
-			}
+	@FXML
+	private void handleInadimplencia() throws ArrayVazioException {
+		System.out.println(sistema.calcularInadimplencia(grupoAtual) + "% dos membros são inadimplentes");
+	}
 
-			lbValorTotal.setText(String.format("%.2f", grupoAtual.getValorTotal()));
-			lbTaxa.setText(String.format("%.2f", grupoAtual.getTaxaAdmin()));
-			lbStatus.setText(grupoAtual.getStatusGrupoConsorcioString());
-		} else {
-			System.out.println("Nenhum grupo encontrado com o ID fornecido.");
+	private void carregarDadosGrupo(String idGrupo) {
+		try {
+			grupoAtual = sistema.getGrupoById(idGrupo);
+			if (grupoAtual != null) {
+				if (lbAutomovel != null) {
+					lbAutomovel.setText(grupoAtual.getNomeGrupo());
+				} else {
+					System.out.println("lbAutoConsor está nulo!");
+				}
+
+				lbValorTotal.setText(String.format("%.2f", grupoAtual.getValorTotal()));
+				lbTaxa.setText(String.format("%.2f", grupoAtual.getTaxaAdmin()));
+				lbStatus.setText(grupoAtual.getStatusGrupoConsorcioString());
+			}
+		} catch (IdGrupoConsorcioInexistenteException e) {
+			exibirAlertaErro("Grupo não encontrado", "Nenhum grupo foi encontrado com o ID fornecido.");
 		}
+	}
+
+	private void exibirAlertaErro(String titulo, String mensagem) {
+		Alert alert = new Alert(Alert.AlertType.ERROR);
+		alert.setTitle("Erro");
+		alert.setHeaderText(titulo);
+		alert.setContentText(mensagem);
+		alert.showAndWait();
 	}
 
 	private void configurarTabela() {
