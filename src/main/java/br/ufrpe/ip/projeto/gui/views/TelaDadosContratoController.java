@@ -2,6 +2,7 @@ package br.ufrpe.ip.projeto.gui.views;
 
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
+import br.ufrpe.ip.projeto.enums.StatusBoletoEnum;
 import br.ufrpe.ip.projeto.enums.StatusContratoEnum;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
 import br.ufrpe.ip.projeto.models.Boleto;
@@ -127,11 +128,12 @@ public class TelaDadosContratoController {
     @FXML
     private void handleMudarStatusContrato(MouseEvent event) {
         if (contratoAtual != null) {
-            this.sistema.updateStatusContrato(contratoAtual, StatusContratoEnum.ENCERRADO);
+            this.sistema.cancelarContrato(contratoAtual.getCliente(), contratoAtual.getGrupoAssociado());
             System.out.println("Grupo Encerrado com sucesso!");
             carregarDadosContrato();
             btEncerrarContrato.setText("Contrato Encerrado");
             btEncerrarContrato.setDisable(true);
+            this.gerenciador.abrirPopUpEncerrarContrato(contratoAtual);
         }
     }
 
@@ -140,7 +142,11 @@ public class TelaDadosContratoController {
         Boleto boleto = tbvBoletos.getSelectionModel().getSelectedItem();
 
         if (boleto != null) {
-            this.gerenciador.abrirPopUpPagamento(boleto);
+            if (boleto.getStatusBoleto() == StatusBoletoEnum.PAGO) {
+                this.gerenciador.abrirPopUpPago(boleto);
+            } else {
+                this.gerenciador.abrirPopUpPagamento(boleto);
+            }
         } else {
             System.out.println("Nenhum boleto selecionado!");
         }
