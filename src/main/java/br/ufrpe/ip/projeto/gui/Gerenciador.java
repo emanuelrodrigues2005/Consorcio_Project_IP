@@ -206,8 +206,8 @@ public class Gerenciador {
     }
 
     public void abrirTelaDadosContrato(Contrato contrato) {
-        telaDadosContratoController.initialize();
         telaDadosContratoController.setContratoAtual(contrato);
+        telaDadosContratoController.initialize();
         scenePrincipal.setRoot(telaDadosContrato);
     }
 
