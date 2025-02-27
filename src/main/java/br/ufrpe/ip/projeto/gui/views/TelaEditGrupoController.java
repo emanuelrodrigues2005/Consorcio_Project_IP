@@ -66,7 +66,6 @@ public class TelaEditGrupoController {
 		this.grupoAtual = grupoAtual;
 		if (grupoAtual != null) {
 			carregarDadosGrupo(grupoAtual.getIdGrupo());
-			grupoAtual.setNumeroParticipantes(sistema.getAllClientesByGrupo(grupoAtual).size());
 		}
 	}
 
