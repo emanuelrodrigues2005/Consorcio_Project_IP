@@ -144,4 +144,9 @@ public class BoletoController {
         this.updateStatusBoleto(boleto, StatusBoletoEnum.PAGO);
         this.repositoryBoleto.salvarArquivo();
     }//exceptions: BoletoInexistente
+
+    public List<Boleto> getAllBoletosByContrato(String idContrato) {
+        return this.repositoryBoleto.getAllBoletosByContrato(idContrato);
+    }
+
 }
