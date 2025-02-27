@@ -134,7 +134,7 @@
                   <String fx:value="teg-button" />
                   <String fx:value="hand" />
                </styleClass></Button>
-            <TableView fx:id="tbvContratos" layoutX="444.0" layoutY="73.0" onMouseClicked="#handleContratoSelecionado" prefHeight="288.0" prefWidth="469.0" style="-fx-border-width: 4; -fx-background-color: #fafafa; -fx-border-color: #BA0F30;" styleClass="sombra" stylesheets="@style.css">
+            <TableView fx:id="tbvParticipantes" layoutX="444.0" layoutY="73.0" prefHeight="288.0" prefWidth="469.0" style="-fx-border-width: 4; -fx-background-color: #fafafa; -fx-border-color: #BA0F30;" styleClass="sombra" stylesheets="@style.css">
                <columns>
                   <TableColumn fx:id="tbvcolumnNome" prefWidth="148.0" text="Nome" />
                   <TableColumn fx:id="tbvcolumnStatus" prefWidth="156.0" text="Status" />
