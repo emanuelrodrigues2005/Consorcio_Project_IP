@@ -302,4 +302,27 @@ public class Gerenciador {
             e.printStackTrace();
         }
     }
+
+    public void abrirPopUpEncerrarContrato(Contrato contrato) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(TelasEnum.POP_UP_ENCERRAR_CONTRATO.getCaminho()));
+            Pane popupRoot = loader.load();
+
+            PopUpEncerrarContratoController controller = loader.getController();
+            controller.setGerenciador(this);
+            controller.setContratoAtual(contrato);
+
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.setTitle("Dados Boleto Pago");
+            popupStage.setScene(new Scene(popupRoot));
+            popupStage.setResizable(false);
+
+            controller.setPopupStage(popupStage);
+
+            popupStage.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
