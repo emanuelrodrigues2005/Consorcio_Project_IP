@@ -335,7 +335,7 @@ public class Gerenciador {
             PopUpInadimplenciaController controller = loader.getController();
             controller.setGerenciador(this);
             controller.setGrupoAtual(grupoAtual);
-
+            controller.initialize(grupoAtual);
             Stage popupStage = new Stage();
             popupStage.initModality(Modality.APPLICATION_MODAL);
             popupStage.setTitle("Dados Clientes Inadimplentes");

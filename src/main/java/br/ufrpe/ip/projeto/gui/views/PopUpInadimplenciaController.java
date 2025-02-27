@@ -50,8 +50,9 @@ public class PopUpInadimplenciaController {
     }
 
     @FXML
-    public void initialize() {
+    public void initialize(GrupoConsorcio grupo) {
         try {
+            setGrupoAtual(grupo);
             limparCampos();
             lbInadimplentes.setText(String.valueOf(sistema.calcularInadimplencia(grupoAtual)));
             configurarTabela();
@@ -67,7 +68,7 @@ public class PopUpInadimplenciaController {
     }
 
     private void carregarDados() throws ArrayVazioException {
-        ObservableList<Boleto> boletos = FXCollections.observableArrayList(this.getAllBoletosByGrupo(grupoAtual));
+        ObservableList<Boleto> boletos = FXCollections.observableArrayList(getAllBoletosByGrupo(grupoAtual));
         tbvInadimplencia.setItems(boletos);
     }
 
