@@ -7,6 +7,7 @@ import br.ufrpe.ip.projeto.exceptions.*;
 import br.ufrpe.ip.projeto.models.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ConsorcioFachada implements IConsorcio{
@@ -41,7 +42,7 @@ public class ConsorcioFachada implements IConsorcio{
     }
 
     @Override
-    public String getIdBoleto(Contrato contratoBoleto, int numeroParcela) throws BoletoInexistenteException, CampoInvalidoException, IdBoletoInexistenteException {
+    public String getIdBoleto(Contrato contratoBoleto, int numeroParcela) throws BoletoInexistenteException, CampoInvalidoException, BoletoInexistenteException {
         return this.boletoController.getIdBoleto(contratoBoleto, numeroParcela);
     }
 
@@ -171,7 +172,7 @@ public class ConsorcioFachada implements IConsorcio{
     }
 
     @Override
-    public void registrarPagamento(Cliente cliente, GrupoConsorcio grupoConsorcio, Boleto boleto) {
+    public void registrarPagamento(Cliente cliente, GrupoConsorcio grupoConsorcio, Boleto boleto) throws CampoInvalidoException {
         this.contratoController.registrarPagamento(cliente, grupoConsorcio, boleto);
     }
 
@@ -188,6 +189,11 @@ public class ConsorcioFachada implements IConsorcio{
     @Override
     public List<Contrato> getContratosByIdGrupo(GrupoConsorcio grupoAssociado) {
         return this.contratoController.getContratosByIdGrupo(grupoAssociado);
+    }
+
+    @Override
+    public List<Cliente> getAllClientesByGrupo(GrupoConsorcio grupoConsorcio) {
+        return this.contratoController.getAllClientesByGrupo(grupoConsorcio);
     }
 
     @Override
@@ -303,5 +309,19 @@ public class ConsorcioFachada implements IConsorcio{
     @Override
     public Cliente getClienteLogado() {
         return this.loginController.getClienteLogado();
+    }
+
+    @Override
+    public double calcularInadimplencia(GrupoConsorcio grupoConsorcio) throws ArrayVazioException {
+        List<Contrato> contratosInadimplentes = new ArrayList<>();
+        for (Boleto boleto : this.getAllBoletos()) {
+            if (getContratosByIdGrupo(grupoConsorcio).contains(boleto.getContratoBoleto())) {
+                if (boleto.getStatusBoleto() == StatusBoletoEnum.ATRASADO && !(contratosInadimplentes.contains(boleto.getContratoBoleto()))) {
+                    contratosInadimplentes.add(boleto.getContratoBoleto());
+                }
+            }
+        }
+        System.out.println((double)contratosInadimplentes.size()/grupoConsorcio.getNumeroParticipantes() * 100); //debugging
+        return grupoConsorcio.getNumeroParticipantes() != 0 ? (double)contratosInadimplentes.size()/grupoConsorcio.getNumeroParticipantes() * 100 : 0;
     }
 }

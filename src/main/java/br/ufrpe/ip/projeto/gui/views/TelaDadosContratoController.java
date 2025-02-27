@@ -2,10 +2,9 @@ package br.ufrpe.ip.projeto.gui.views;
 
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
+import br.ufrpe.ip.projeto.enums.StatusBoletoEnum;
 import br.ufrpe.ip.projeto.enums.StatusContratoEnum;
-import br.ufrpe.ip.projeto.exceptions.BoletoInexistenteException;
-import br.ufrpe.ip.projeto.exceptions.CampoInvalidoException;
-import br.ufrpe.ip.projeto.exceptions.ContratoInvalidoException;
+import br.ufrpe.ip.projeto.exceptions.*;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
 import br.ufrpe.ip.projeto.models.Boleto;
 import br.ufrpe.ip.projeto.models.Contrato;
@@ -68,16 +67,17 @@ public class TelaDadosContratoController {
 
     @FXML
     public void initialize() {
-        limparDadosGrupo();
-        carregarDados();
-        configurarTabela();
+        if (contratoAtual != null) {
+            carregarDados();
+            configurarTabela();
+        }
     }
 
     public void setContratoAtual(Contrato contratoAtual) {
         limparDadosGrupo();
         this.contratoAtual = contratoAtual;
         if (contratoAtual != null) {
-            carregarDadosContrato(contratoAtual.getIdContrato());
+            carregarDadosContrato();
         }
     }
 
@@ -136,7 +136,7 @@ public class TelaDadosContratoController {
                 this.sistema.updateStatusContrato(contratoAtual, StatusContratoEnum.ENCERRADO);
                 System.out.println("Grupo Encerrado com sucesso!");
 
-                carregarDadosContrato(contratoAtual.getIdContrato());
+                carregarDadosContrato();
                 btEncerrarContrato.setText("Contrato Encerrado");
                 btEncerrarContrato.setDisable(true);
             } catch (CampoInvalidoException e) {
@@ -162,29 +162,25 @@ public class TelaDadosContratoController {
         Boleto boleto = tbvBoletos.getSelectionModel().getSelectedItem();
 
         if (boleto != null) {
-            this.gerenciador.abrirPopUpPagamento(boleto);
+            if (boleto.getStatusBoleto() == StatusBoletoEnum.PAGO) {
+                this.gerenciador.abrirPopUpPago(boleto);
+            } else {
+                this.gerenciador.abrirPopUpPagamento(boleto);
+            }
         } else {
             System.out.println("Nenhum boleto selecionado!");
         }
     }
 
-    private void carregarDadosContrato(String idContrato) {
-        contratoAtual = sistema.getContratoByIdContrato(idContrato);
-
+    private void carregarDadosContrato() {
         if (contratoAtual != null) {
-            if (lbNomeGrupo != null) {
-                lbNomeGrupo.setText(contratoAtual.getGrupoAssociado().getNomeGrupo());
-            } else {
-                System.out.println("lbAutoConsor está nulo!");
-            }
 
+            lbNomeGrupo.setText(contratoAtual.getGrupoAssociado().getNomeGrupo());
             lbParcelasPagas.setText(String.valueOf(contratoAtual.getParcelasPagas()));
             lbValorPago.setText(String.format("R$ %.2f", contratoAtual.getValorPago()));
             lbSaldoDevedor.setText(String.format("R$ %.2f", contratoAtual.getSaldoDevedor()));
             lbStatusContrato.setText(contratoAtual.getStatusContrato() != null ? contratoAtual.getStatusContrato().toString() : "Não informado");
             lbDataInicio.setText(contratoAtual.getDataInicio() != null ? contratoAtual.getDataInicio().toString() : "Não informado");
-        } else {
-            System.out.println("Nenhum grupo encontrado com o ID fornecido.");
         }
     }
 

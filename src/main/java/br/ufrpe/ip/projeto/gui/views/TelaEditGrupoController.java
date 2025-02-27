@@ -7,12 +7,13 @@ import br.ufrpe.ip.projeto.exceptions.*;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
 import br.ufrpe.ip.projeto.models.Cliente;
 import br.ufrpe.ip.projeto.models.Contemplacao;
+import br.ufrpe.ip.projeto.models.Contrato;
 import br.ufrpe.ip.projeto.models.GrupoConsorcio;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class TelaEditGrupoController {
 	private IConsorcio sistema = ConsorcioFachada.getInstance();
@@ -29,16 +30,22 @@ public class TelaEditGrupoController {
 	private Label lbSair;
 
 	@FXML
-	private ListView<Cliente> ltvParticipantes;
+	private TableView<Contrato> tbvParticipantes;
+
+	@FXML
+	private TableColumn<Contrato, String> tbvcolumnNome;
+
+	@FXML
+	private TableColumn<Contrato, String> tbvcolumnStatus;
+
+	@FXML
+	private TableColumn<Contrato, String> tbvcolumnSaldo;
 
 	@FXML
 	private Button btEncerrarGrupo;
 
 	@FXML
 	private Button btRemoverParticipante;
-
-	@FXML
-	private Label lbQntdParticipantes;
 
 	@FXML
 	private Label lbAutomovel;
@@ -72,12 +79,14 @@ public class TelaEditGrupoController {
 
 	@FXML
 	public void initialize() {
-		lbAutomovel.setText("");
-		lbQntdParticipantes.setText("0");
-		lbValorTotal.setText("");
-		lbStatus.setText("");
-		lbTaxa.setText("");
-		ltvParticipantes.getItems().setAll(sistema.getAllClientes()); //ajustar pra pegar somente os cliente do grupo selecionado
+		if (grupoAtual != null) {
+			lbAutomovel.setText(String.valueOf(grupoAtual.getNomeGrupo()));
+			lbValorTotal.setText(String.valueOf(grupoAtual.getValorTotal()));
+			lbStatus.setText(String.valueOf(grupoAtual.getStatusGrupoConsorcio()));
+			lbTaxa.setText(String.valueOf(grupoAtual.getTaxaAdmin() * 100));
+			this.configurarTabela();
+			this.carregarDadosDaTabela();
+		}
 	}
 
 	@FXML
@@ -100,7 +109,7 @@ public class TelaEditGrupoController {
 	@FXML
 	public void handleAlterarTaxaAdmin() {
 		System.out.println("Redirecionando para a tela de escolha da taxa");
-		//this.gerenciador.abrirTelaAlterarTaxaAdmin();
+		this.gerenciador.abrirPopUpAtualizarTaxa(grupoAtual);
 	}
 
 	@FXML
@@ -133,12 +142,12 @@ public class TelaEditGrupoController {
 
 	@FXML
 	private void handleDeleteCliente() {
-		Cliente clienteSelecionado = ltvParticipantes.getSelectionModel().getSelectedItem();
+		Contrato clienteSelecionado = tbvParticipantes.getSelectionModel().getSelectedItem();
 
 		if(clienteSelecionado != null) {
-			this.sistema.deleteCliente(clienteSelecionado.getCpf());
-			ltvParticipantes.getItems().remove(clienteSelecionado);
-			mostrarAlerta("Cliente deletado", "Cliente " + clienteSelecionado.getCpf());
+			this.sistema.deleteCliente(clienteSelecionado.getCliente().getCpf());
+			tbvParticipantes.getItems().remove(clienteSelecionado);
+			mostrarAlerta("Cliente deletado", "Cliente " + clienteSelecionado.getCliente().getCpf());
 		} else {
 			mostrarAlerta("Not found!", "Nenhum cliente encontrado!");
 		}
@@ -150,6 +159,11 @@ public class TelaEditGrupoController {
 		alert.setHeaderText(null);
 		alert.setContentText(mensagem);
 		alert.showAndWait();
+	}
+
+	@FXML
+	private void handleInadimplencia() throws ArrayVazioException {
+		System.out.println(sistema.calcularInadimplencia(grupoAtual) + "% dos membros são inadimplentes");
 	}
 
 	private void carregarDadosGrupo(String idGrupo) {
@@ -164,9 +178,6 @@ public class TelaEditGrupoController {
 
 				lbValorTotal.setText(String.format("%.2f", grupoAtual.getValorTotal()));
 				lbTaxa.setText(String.format("%.2f", grupoAtual.getTaxaAdmin()));
-
-				int participantesAtuais = grupoAtual.getNumeroParticipantes();
-				lbQntdParticipantes.setText(String.valueOf(participantesAtuais));
 				lbStatus.setText(grupoAtual.getStatusGrupoConsorcioString());
 			}
 		} catch (IdGrupoConsorcioInexistenteException e) {
@@ -182,9 +193,19 @@ public class TelaEditGrupoController {
 		alert.showAndWait();
 	}
 
+	private void configurarTabela() {
+		tbvcolumnNome.setCellValueFactory(new PropertyValueFactory<>("nomeCliente"));
+		tbvcolumnStatus.setCellValueFactory(new PropertyValueFactory<>("statusContratoString"));
+		tbvcolumnSaldo.setCellValueFactory(new PropertyValueFactory<>("saldoDevedor"));
+	}
+
+	private void carregarDadosDaTabela() {
+		ObservableList<Contrato> contratos = FXCollections.observableArrayList(sistema.getContratosByIdGrupo(grupoAtual));
+		tbvParticipantes.setItems(contratos);
+	}
+
 	private void limparDadosGrupo() {
 		lbAutomovel.setText("");
-		lbQntdParticipantes.setText("0");
 		lbValorTotal.setText("");
 		lbStatus.setText("");
 		lbTaxa.setText("");

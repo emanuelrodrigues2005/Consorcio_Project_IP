@@ -5,9 +5,7 @@ import java.util.List;
 
 import br.ufrpe.ip.projeto.enums.StatusBoletoEnum;
 import br.ufrpe.ip.projeto.enums.StatusContratoEnum;
-import br.ufrpe.ip.projeto.exceptions.CampoInvalidoException;
-import br.ufrpe.ip.projeto.exceptions.ContratoDuplicadoException;
-import br.ufrpe.ip.projeto.exceptions.ContratoInvalidoException;
+import br.ufrpe.ip.projeto.exceptions.*;
 import br.ufrpe.ip.projeto.models.Boleto;
 import br.ufrpe.ip.projeto.models.Cliente;
 import br.ufrpe.ip.projeto.models.Contrato;
@@ -47,13 +45,17 @@ public class ContratoController {
     }
     // exceptions: contratoDuplicado, clienteInvalido, grupoInvalido, contratoInvalido
 
-    public void registrarPagamento(Cliente cliente, GrupoConsorcio grupoConsorcio, Boleto boleto)  {
+    public void registrarPagamento(Cliente cliente, GrupoConsorcio grupoConsorcio, Boleto boleto) throws CampoInvalidoException {
         Contrato contrato = this.repositorioContrato.getContratoByCPFIdGrupo(cliente, grupoConsorcio);
-
-        this.repositorioContrato.updateParcelasPagas(contrato);
-        this.repositorioContrato.updateSaldoDevedor(contrato);
-        this.repositorioContrato.updateValorPago(contrato);
-        this.repositorioContrato.salvarArquivo();
+        if (boleto.getStatusBoleto() == StatusBoletoEnum.PAGO) {
+            this.repositorioContrato.updateParcelasPagas(contrato);
+            this.repositorioContrato.updateSaldoDevedor(contrato);
+            this.repositorioContrato.updateValorPago(contrato);
+            this.repositorioContrato.salvarArquivo();
+            return;
+        } else if (boleto.getStatusBoleto() != StatusBoletoEnum.PAGO) {
+            throw new CampoInvalidoException("StatusBoleto");
+        }
     }// throw boletoPendente/Atrasado
 
     public Contrato getContratoByCPFNomeGrupo(Cliente cliente, GrupoConsorcio grupoAssociado) {

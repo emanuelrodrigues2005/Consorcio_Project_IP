@@ -12,7 +12,11 @@ import java.util.List;
 public interface IConsorcio {
     List<Boleto> getAllBoletos() throws ArrayVazioException;
 
-    String getIdBoleto(Contrato contratoBoleto, int numeroParcela) throws BoletoInexistenteException, CampoInvalidoException, IdBoletoInexistenteException;
+    String getIdBoleto(Contrato contratoBoleto, int numeroParcela) throws BoletoInexistenteException, CampoInvalidoException, BoletoInexistenteException;
+
+    List<Boleto> getAllBoletosByContrato(String idContrato);
+
+    double calcularInadimplencia(GrupoConsorcio grupoConsorcio) throws ArrayVazioException;
 
     Boleto getBoletoById(String idBoleto) throws BoletoInexistenteException, CampoInvalidoException;
 
@@ -64,7 +68,7 @@ public interface IConsorcio {
 
     void createContrato(Cliente cliente, GrupoConsorcio grupoConsorcio) throws CampoInvalidoException;
 
-    void registrarPagamento(Cliente cliente, GrupoConsorcio grupoConsorcio, Boleto boleto);
+    void registrarPagamento(Cliente cliente, GrupoConsorcio grupoConsorcio, Boleto boleto) throws CampoInvalidoException;
 
     Contrato getContratoByCPFNomeGrupo(Cliente cliente, GrupoConsorcio grupoAssociado);
 
@@ -73,6 +77,8 @@ public interface IConsorcio {
     List<Contrato> getContratosByIdGrupo(GrupoConsorcio grupoAssociado);
 
     List<Contrato> getAllContratosByCPF(Cliente cliente);
+
+    List<Cliente> getAllClientesByGrupo(GrupoConsorcio grupoConsorcio);
 
     boolean existeContrato(Contrato contrato);
 

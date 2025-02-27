@@ -109,15 +109,8 @@ public class TelaVisualizacaoContratoController {
         }
         try {
             sistema.createContrato(clienteLogado, grupoAtual);
+            Contrato contratoAtual = sistema.getContratoByCPFNomeGrupo(clienteLogado, grupoAtual);
             System.out.println("Contrato assinado!");
-
-            for (Contrato contrato : sistema.getAllContratosByCPF(clienteLogado)) {
-                System.out.println(contrato.getCliente());
-            }
-
-            int novoNumeroParticipantes = grupoAtual.getNumeroParticipantes() + 1;
-            sistema.updateParticipantes(grupoAtual, novoNumeroParticipantes);
-            grupoAtual.setNumeroParticipantes(novoNumeroParticipantes);
 
             btCriarContrato.setDisable(true);
             btCriarContrato.setText("Contrato Assinado");
@@ -128,12 +121,17 @@ public class TelaVisualizacaoContratoController {
                     telaPrincipal.atualizarTabela();
                 }
             }
+
+            for (int i = 0; i < 3; i++) {
+                sistema.createBoleto(contratoAtual);
+                System.out.printf("Boleto emitido %d\n", i);
+                Thread.sleep(100);
+            }
+
         } catch (ContratoDuplicadoException e) {
             exibirAlertaErro("Contrato Duplicado", "Você já possui um contrato neste grupo.");
         } catch (CampoInvalidoException e) {
             exibirAlertaErro("Campo Inválido", "Erro no campo: " + e.getMessage());
-        } catch (GrupoConsorcioInexistenteException e) {
-            exibirAlertaErro("Grupo Não Encontrado", "O grupo selecionado não foi encontrado.");
         } catch (Exception e) {
             exibirAlertaErro("Erro Desconhecido", "Ocorreu um erro inesperado ao criar o contrato.");
             e.printStackTrace();

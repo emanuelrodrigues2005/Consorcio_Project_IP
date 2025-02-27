@@ -4,6 +4,7 @@ import br.ufrpe.ip.projeto.enums.StatusBoletoEnum;
 import br.ufrpe.ip.projeto.exceptions.*;
 import br.ufrpe.ip.projeto.models.Boleto;
 import br.ufrpe.ip.projeto.models.Contrato;
+import br.ufrpe.ip.projeto.models.GrupoConsorcio;
 import br.ufrpe.ip.projeto.repositories.BoletoRepository;
 import br.ufrpe.ip.projeto.repositories.interfaces.IBoletoRepository;
 
@@ -34,7 +35,7 @@ public class BoletoController {
         return boletos;
     } //exceptions: ArrayVazio
 
-    public String getIdBoleto(Contrato contratoBoleto, int numeroParcela) throws IdBoletoInexistenteException, ContratoInexistenteException, CampoInvalidoException {
+    public String getIdBoleto(Contrato contratoBoleto, int numeroParcela) throws BoletoInexistenteException, ContratoInexistenteException, CampoInvalidoException {
         if (contratoBoleto == null) {
             throw new ContratoInexistenteException("Contrato não encontrado.");
         }
@@ -44,10 +45,10 @@ public class BoletoController {
         }
         String idBoleto = this.repositoryBoleto.getIdBoleto(contratoBoleto, numeroParcela);
         if (idBoleto == null) {
-            throw new IdBoletoInexistenteException("Boleto não encontrado.");
+            throw new BoletoInexistenteException("Boleto não encontrado.");
         }
         return idBoleto;
-    } //exceptions: IdBoletoInexistente, ContratoInexistente, CampoInvalido
+    } //exceptions: BoletoInexistente, ContratoInexistente, CampoInvalido
 
     public Boleto getBoletoById(String idBoleto) throws BoletoInexistenteException, CampoInvalidoException {
         if (idBoleto == null || idBoleto.trim().isEmpty()) {

@@ -47,12 +47,8 @@ public class PopUpSorteioController {
 
     @FXML
     public void initialize() {
-        try {
-            limparDadosContemplacao();
-            this.setContemplacaoAtual(contemplacao);
-        } catch (Exception e) {
-            exibirAlertaErro(e);
-        }
+        limparDadosContemplacao();
+        this.setContemplacaoAtual(contemplacao);
     }
 
     public void setContemplacaoAtual(Contemplacao contemplacao) {

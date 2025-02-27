@@ -5,10 +5,7 @@ import java.util.List;
 
 import br.ufrpe.ip.projeto.enums.StatusContratoEnum;
 import br.ufrpe.ip.projeto.enums.StatusGrupoConsorcioEnum;
-import br.ufrpe.ip.projeto.exceptions.ArrayVazioException;
-import br.ufrpe.ip.projeto.exceptions.CampoInvalidoException;
-import br.ufrpe.ip.projeto.exceptions.GrupoConsorcioInexistenteException;
-import br.ufrpe.ip.projeto.exceptions.IdGrupoConsorcioInexistenteException;
+import br.ufrpe.ip.projeto.exceptions.*;
 import br.ufrpe.ip.projeto.models.Contrato;
 import br.ufrpe.ip.projeto.models.GrupoConsorcio;
 import br.ufrpe.ip.projeto.repositories.ContratoRepository;
@@ -65,7 +62,7 @@ public class GrupoConsorcioController {
         if (grupoConsorcio == null) {
             throw new GrupoConsorcioInexistenteException("Grupo não encontrado");
         }
-        if (novoNumParticipantes <= 0) {
+        if (novoNumParticipantes < 0) {
             throw new CampoInvalidoException("Número de participantes");
         }
         this.repositorioGrupo.updateParticipantes(grupoConsorcio, novoNumParticipantes);

@@ -11,6 +11,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.util.List;
+
 public class TelaPrincipalADMController {
     private final IConsorcio sistema = ConsorcioFachada.getInstance();
     private Gerenciador gerenciador;
@@ -50,9 +52,15 @@ public class TelaPrincipalADMController {
 
     @FXML
     public void initialize() {
-        for (GrupoConsorcio grupo : sistema.getAllGrupos()) {
-            grupo.setNumeroParticipantes(sistema.getAllClientesByGrupo(grupo).size());
+        try {
+            List<GrupoConsorcio> grupos = sistema.getAllGrupos();
+            for (GrupoConsorcio grupo : grupos) {
+                grupo.setNumeroParticipantes(sistema.getAllClientesByGrupo(grupo).size());
+            }
+        } catch (ArrayVazioException e) {
+            exibirAlertaErro("Nenhum Grupo Encontrado", "Não há grupos de consórcio cadastrados.");
         }
+
         configurarTabela();
         carregarDados();
 
