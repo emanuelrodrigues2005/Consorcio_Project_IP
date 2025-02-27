@@ -22,7 +22,7 @@
       </Text>
       <TextField fx:id="txtCpf" layoutX="524.0" layoutY="289.0" prefHeight="20.0" prefWidth="230.0" promptText="CPF" />
       <CheckBox fx:id="cbManterConectado" layoutX="562.0" layoutY="385.0" mnemonicParsing="false" style="-fx-text-fill: #fafafa; -fx-font-family: arial;" stylesheets="@style.css" text="Mantenha-me conectado" textFill="#fafafa" />
-      <Button fx:id="btLogin" layoutX="507.0" layoutY="473.0" mnemonicParsing="false" onMouseClicked="#handleTelaPrincipalCliente" prefHeight="48.0" prefWidth="264.0" style="-fx-background-color: #fafafa; -fx-text-fill: #221F26; -fx-font-weight: Bold; -fx-font-size: 16;" stylesheets="@style.css" text="Entrar" textFill="#221f26">
+      <Button fx:id="btLogin" layoutX="507.0" layoutY="473.0" mnemonicParsing="false" onMouseClicked="#handleTelaPrincipalCliente" prefHeight="48.0" prefWidth="264.0" style="-fx-background-color: #fafafa; -fx-text-fill: #221F26; -fx-font-weight: Bold; -fx-font-size: 16;" styleClass="botaohand" stylesheets="@style.css" text="Entrar" textFill="#221f26">
          <font>
             <Font name="Verdana Bold" size="16.0" />
          </font>
@@ -32,7 +32,7 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <Text fx:id="btRegistro" fill="#fafafa" layoutX="687.0" layoutY="539.0" onMouseClicked="#handleTelaCadastro" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-cursor: hand;" text="Registre-se">
+      <Text fx:id="btRegistro" fill="#fafafa" layoutX="687.0" layoutY="539.0" onMouseClicked="#handleTelaCadastro" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-cursor: hand; -fx-underline: true;" styleClass="underline" text="Registre-se">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
