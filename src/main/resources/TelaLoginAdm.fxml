@@ -32,7 +32,7 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <Text fx:id="btRegistro" fill="#fafafa" layoutX="687.0" layoutY="539.0" onMouseClicked="#handleTelaCadastro" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-cursor: hand;" styleClass="underline" text="Registre-se">
+      <Text fx:id="btRegistro" fill="#fafafa" layoutX="687.0" layoutY="539.0" onMouseClicked="#handleTelaCadastro" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-cursor: hand; -fx-underline: true;" text="Registre-se">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
