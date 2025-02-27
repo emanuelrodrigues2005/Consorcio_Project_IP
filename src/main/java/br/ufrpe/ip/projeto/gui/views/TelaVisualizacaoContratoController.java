@@ -3,6 +3,7 @@ package br.ufrpe.ip.projeto.gui.views;
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.GrupoConsorcioController;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
+import br.ufrpe.ip.projeto.exceptions.ArrayVazioException;
 import br.ufrpe.ip.projeto.exceptions.CampoInvalidoException;
 import br.ufrpe.ip.projeto.exceptions.ContratoDuplicadoException;
 import br.ufrpe.ip.projeto.exceptions.GrupoConsorcioInexistenteException;
@@ -150,7 +151,7 @@ public class TelaVisualizacaoContratoController {
     }
 
     @FXML
-    private void handleTelaHome(MouseEvent event) {
+    private void handleTelaHome(MouseEvent event) throws ArrayVazioException {
         this.resetarBtCriarContrato();
         this.gerenciador.abrirTelaPrincipalCliente();
     }

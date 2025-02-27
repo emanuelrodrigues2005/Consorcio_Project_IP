@@ -52,6 +52,12 @@ public class ConsorcioFachada implements IConsorcio{
     }
 
     @Override
+    public List<Boleto> getAllBoletosByContrato(String idContrato) {
+        return this.boletoController.getAllBoletosByContrato(idContrato);
+    }
+
+
+    @Override
     public Boleto getBoletoByContrato(Contrato contratoBoleto) throws BoletoInexistenteException, CampoInvalidoException, ContratoInvalidoException {
         return this.boletoController.getBoletoByContrato(contratoBoleto);
     }
