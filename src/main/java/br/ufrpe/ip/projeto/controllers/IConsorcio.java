@@ -73,6 +73,8 @@ public interface IConsorcio {
 
     List<Contrato> getAllContratosByCPF(Cliente cliente);
 
+    List<Cliente> getAllClientesByGrupo(GrupoConsorcio grupoConsorcio);
+
     boolean existeContrato(Contrato contrato);
 
     Contrato getContratoByIdContrato(String idContrato);

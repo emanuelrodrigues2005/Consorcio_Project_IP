@@ -87,6 +87,18 @@ public class ContratoRepository implements IContratoRepository, Serializable{
     } // exceptions: semContratosRegistrados
 
     @Override
+    public List<Cliente> getAllClientesByGrupo(GrupoConsorcio grupoConsorcio) {
+        List<Cliente> clientesByGrupo = new ArrayList<>();
+        for (Contrato contrato : contratos) {
+            if (contrato.getCliente() != null && contrato.getGrupoAssociado() != null && grupoConsorcio != null &&
+                    contrato.getGrupoAssociado().getIdGrupo().equals(grupoConsorcio.getIdGrupo())) {
+                clientesByGrupo.add(contrato.getCliente());
+            }
+        }
+        return clientesByGrupo;
+    }
+
+    @Override
     public List<Contrato> getAllContratosByCPF(Cliente cliente) {
         List<Contrato> contratosCliente = new ArrayList<>();
         for (Contrato contrato : contratos) {
