@@ -76,7 +76,7 @@ public class TelaEditGrupoController {
 		lbValorTotal.setText("");
 		lbStatus.setText("");
 		lbTaxa.setText("");
-		ltvParticipantes.getItems().setAll(sistema.getAllClientes()); //ajustar pra pegar somente os cliente do grupo selecionado
+		ltvParticipantes.getItems().setAll(sistema.getAllClientesByGrupo(grupoAtual)); //ajustar pra pegar somente os cliente do grupo selecionado
 	}
 
 	@FXML
