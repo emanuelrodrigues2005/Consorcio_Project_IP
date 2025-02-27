@@ -165,6 +165,8 @@ public class TelaEditGrupoController {
 		System.out.println(sistema.calcularInadimplencia(grupoAtual) + "% dos membros são inadimplentes");
 	}
 
+
+
 	private void carregarDadosGrupo(String idGrupo) {
 		try {
 			grupoAtual = sistema.getGrupoById(idGrupo);
