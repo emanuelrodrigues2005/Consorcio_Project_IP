@@ -45,6 +45,11 @@ public class ConsorcioFachada implements IConsorcio{
     }
 
     @Override
+    public List<Boleto> getAllBoletosByContrato(String idContrato) {
+        return this.boletoController.getAllBoletosByContrato(idContrato);
+    }
+
+    @Override
     public Boleto getBoletoById(String idBoleto) {
         return this.boletoController.getBoletoById(idBoleto);
     }
