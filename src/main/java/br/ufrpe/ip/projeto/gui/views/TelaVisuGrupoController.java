@@ -72,19 +72,13 @@ public class TelaVisuGrupoController {
     @FXML
     private void handleTelaPerfilCliente() {
         System.out.println("Botão Perfil clicado");
-        screenManager.abrirTelaPerfilAdmin(this.sistema.getClienteLogado());
+        screenManager.abrirPerfilCliente(this.sistema.getClienteLogado());
     }
 
     @FXML
     private void handleTelaEscolherLogin() {
         System.out.println("Saindo...");
-        screenManager.abrirTelaPrincipalADM();
-    }
-
-    @FXML
-    private void handleTelaGruposCliente() {
-        System.out.println("Redirecionado para grupos ...");
-        //screenManager.abrirTelaGruposCliente;
+        screenManager.abrirTelaEscolhaLogin();
     }
 
     @FXML

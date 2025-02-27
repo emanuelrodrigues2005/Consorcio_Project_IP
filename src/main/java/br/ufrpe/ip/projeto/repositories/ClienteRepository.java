@@ -54,6 +54,8 @@ public class ClienteRepository implements IClienteRepository, Serializable {
         return Collections.unmodifiableList(clientes);
     }
 
+
+
     @Override
     public void salvarArquivo() {
         if(ClienteRepository.getInstance() == null) {

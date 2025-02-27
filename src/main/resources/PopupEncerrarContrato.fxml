@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane prefHeight="287.0" prefWidth="531.0" style="-fx-background-color: #FAFAFA; -fx-background-radius: 50 50 40 40;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label alignment="CENTER" prefHeight="50.0" prefWidth="531.0" style="-fx-background-color: #BA0F30; -fx-text-fill: #FAFAFA;" text="Contrato Encerrado!" textAlignment="CENTER" textFill="#fafafa">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <VBox alignment="CENTER" layoutX="242.0" layoutY="187.0" />
+      <Label layoutX="76.0" layoutY="79.0" text="Data de Encerramento:" underline="true">
+         <font>
+            <Font name="Verdana Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbDataEncerramento" layoutX="69.0" layoutY="101.0" style="-fx-text-fill: #221F26;" text="27/02/2025">
+         <font>
+            <Font name="Verdana Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="155.0" layoutY="164.0" text="Saldo a ser estornado:" underline="true">
+         <font>
+            <Font name="Verdana" size="20.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" layoutX="125.0" layoutY="192.0" prefHeight="0.0" prefWidth="281.0">
+         <children>
+            <HBox alignment="BOTTOM_LEFT" prefHeight="0.0" prefWidth="30.0">
+               <children>
+                  <Label style="-fx-padding: 0 0 8 0;" text="R$" textFill="#221f26">
+                     <font>
+                        <Font name="Arial Black" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Label fx:id="lbSaldoEstornado" text="12000" textFill="#221f26">
+               <font>
+                  <Font name="Verdana" size="40.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <Label layoutX="320.0" layoutY="79.0" text="Data de recebimento:" underline="true">
+         <font>
+            <Font name="Verdana Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbDataEstorno" layoutX="313.0" layoutY="101.0" style="-fx-text-fill: #221F26;" text="27/03/2025">
+         <font>
+            <Font name="Verdana Bold" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
