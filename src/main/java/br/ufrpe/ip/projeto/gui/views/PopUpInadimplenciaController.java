@@ -67,7 +67,7 @@ public class PopUpInadimplenciaController {
     }
 
     private void carregarDados() throws ArrayVazioException {
-        ObservableList<Boleto> boletos = FXCollections.observableArrayList(this.getAllBoletosByGrupo(grupoAtual));
+        ObservableList<Boleto> boletos = FXCollections.observableArrayList(getAllBoletosByGrupo(grupoAtual));
         tbvInadimplencia.setItems(boletos);
     }
 
