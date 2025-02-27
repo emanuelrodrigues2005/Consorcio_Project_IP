@@ -2,6 +2,7 @@ package br.ufrpe.ip.projeto.gui.views;
 
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
+import br.ufrpe.ip.projeto.exceptions.ArrayVazioException;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
 import br.ufrpe.ip.projeto.models.Cliente;
 import br.ufrpe.ip.projeto.models.Contrato;
@@ -89,7 +90,7 @@ public class TelaPerfilClienteController {
     }
 
     @FXML
-    public void handleTelaPrincipalCliente(MouseEvent event) {
+    public void handleTelaPrincipalCliente(MouseEvent event) throws ArrayVazioException {
         System.out.println("Redirecionando tela principal do cliente...");
         this.screenManager.abrirTelaPrincipalCliente();
     }

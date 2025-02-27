@@ -107,7 +107,7 @@ public class TelaDadosContratoController {
     }
 
     @FXML
-    private void handleTelaPrincipalCliente() {
+    private void handleTelaPrincipalCliente() throws ArrayVazioException {
         System.out.println("Botão Home clicado");
         gerenciador.abrirTelaPrincipalCliente();
     }
