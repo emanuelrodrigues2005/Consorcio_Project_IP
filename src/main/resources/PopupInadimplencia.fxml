@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="364.0" prefWidth="664.0" style="-fx-background-color: #FAFAFA;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane prefHeight="364.0" prefWidth="664.0" style="-fx-background-color: #FAFAFA;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.ip.projeto.gui.views.PopUpInadimplenciaController">
    <children>
       <Label alignment="CENTER" prefHeight="50.0" prefWidth="664.0" style="-fx-background-color: #BA0F30; -fx-text-fill: #FAFAFA;" text="Pagamentos do Grupo" textAlignment="CENTER" textFill="#fafafa">
          <font>
@@ -40,7 +40,7 @@
             </Label>
          </children>
       </HBox>
-      <TableView fx:id="tbvInadimplencia" layoutX="315.0" layoutY="61.0" onMouseClicked="#handleContratoSelecionado" prefHeight="288.0" prefWidth="340.0" style="-fx-border-width: 4; -fx-background-color: #fafafa; -fx-border-color: #BA0F30;" styleClass="sombra" stylesheets="@style.css">
+      <TableView fx:id="tbvInadimplencia" layoutX="315.0" layoutY="61.0" prefHeight="288.0" prefWidth="340.0" style="-fx-border-width: 4; -fx-background-color: #fafafa; -fx-border-color: #BA0F30;" styleClass="sombra" stylesheets="@style.css">
          <columns>
             <TableColumn fx:id="tbvcolumnCPFInadimplencia" prefWidth="200.0" text="CPF" />
             <TableColumn fx:id="tbvcolumnStatusInadimplencia" prefWidth="132.0" text="Status" />
