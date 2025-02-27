@@ -2,12 +2,14 @@ package br.ufrpe.ip.projeto.gui.views;
 
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
+import br.ufrpe.ip.projeto.enums.StatusBoletoEnum;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
 import br.ufrpe.ip.projeto.models.Boleto;
 import br.ufrpe.ip.projeto.models.Contrato;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class PopUpPagamentoController {
@@ -62,6 +64,20 @@ public class PopUpPagamentoController {
         } else {
             System.out.println("Nenhum boleto encontrado");
         }
+    }
+
+    @FXML
+    private void pagarBoletoPix(MouseEvent event) {
+        sistema.updateDataPagamento(boletoAtual);
+        sistema.updateParcelasPagas(boletoAtual.getContratoBoleto());
+        sistema.updateSaldoDevedor(boletoAtual.getContratoBoleto());
+        sistema.updateStatusBoleto(boletoAtual, StatusBoletoEnum.PAGO);
+        if (sistema.getAllBoletosByContrato(boletoAtual.getContratoBoleto().getIdContrato()).size() <
+        boletoAtual.getContratoBoleto().getGrupoAssociado().getNumeroMaximoParticipantes()) {
+            sistema.createBoleto(boletoAtual.getContratoBoleto());
+        }
+        gerenciador.abrirTelaDadosContrato(boletoAtual.getContratoBoleto());
+        popupStage.close();
     }
 
     private void limparDadosGrupo() {

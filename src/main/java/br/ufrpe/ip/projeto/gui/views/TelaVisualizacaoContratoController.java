@@ -73,6 +73,10 @@ public class TelaVisualizacaoContratoController {
         if (clienteLogado != null) {
             System.out.println("Tela de visualização de contrato inicializada.");
             carregarDadosContrato();
+            if (sistema.getContratoByCPFNomeGrupo(clienteLogado, grupoAtual) != null) {
+                btCriarContrato.setDisable(true);
+                btCriarContrato.setText("Contrato Assinado");
+            }
         }
     }
 
@@ -115,7 +119,7 @@ public class TelaVisualizacaoContratoController {
             }
             for (int i = 0; i < 3; i++) {
                 sistema.createBoleto(contratoAtual);
-                System.out.printf("boleto emitido %d\n", i);
+                System.out.printf("boleto emitido %d\n", i+1);
                 Thread.sleep(100);
             }
         } else {

@@ -87,6 +87,10 @@ public class TelaDadosContratoController {
     }
 
     private void carregarDados() {
+        for (Boleto boleto : sistema.getAllBoletos()) {
+            System.out.println(boleto.getContratoBoleto().getNomeGrupoConsorcio());
+        }
+        System.out.println(contratoAtual.getNomeGrupoConsorcio());
         ObservableList<Boleto> boletos = FXCollections.observableArrayList(sistema.getAllBoletosByContrato(contratoAtual.getIdContrato()));
         tbvBoletos.setItems(boletos);
     }
