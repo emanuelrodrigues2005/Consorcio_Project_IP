@@ -56,7 +56,7 @@ public class GrupoConsorcio implements Serializable {
     }
 
     public double getTaxaAdmin() {
-        return taxaAdmin;
+        return taxaAdmin*100;
     }
 
     public void setTaxaAdmin(double taxaAdmin) {

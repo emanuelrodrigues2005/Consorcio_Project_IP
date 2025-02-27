@@ -3,11 +3,13 @@ package br.ufrpe.ip.projeto.gui.views;
 import br.ufrpe.ip.projeto.controllers.ConsorcioFachada;
 import br.ufrpe.ip.projeto.controllers.GrupoConsorcioController;
 import br.ufrpe.ip.projeto.controllers.IConsorcio;
+import br.ufrpe.ip.projeto.enums.StatusBoletoEnum;
 import br.ufrpe.ip.projeto.exceptions.ArrayVazioException;
 import br.ufrpe.ip.projeto.exceptions.CampoInvalidoException;
 import br.ufrpe.ip.projeto.exceptions.ContratoDuplicadoException;
 import br.ufrpe.ip.projeto.exceptions.GrupoConsorcioInexistenteException;
 import br.ufrpe.ip.projeto.gui.Gerenciador;
+import br.ufrpe.ip.projeto.models.Boleto;
 import br.ufrpe.ip.projeto.models.Cliente;
 import br.ufrpe.ip.projeto.models.Contrato;
 import br.ufrpe.ip.projeto.models.GrupoConsorcio;
@@ -131,6 +133,9 @@ public class TelaVisualizacaoContratoController {
                 sistema.createBoleto(contratoAtual);
                 System.out.printf("Boleto emitido %d\n", i);
                 Thread.sleep(100);
+            }
+            for (Boleto boleto : sistema.getAllBoletosByContrato(contratoAtual.getIdContrato())) {
+                boleto.setStatusBoleto(StatusBoletoEnum.ATRASADO);
             }
         } catch (ContratoDuplicadoException e) {
             exibirAlertaErro("Contrato Duplicado", "Você já possui um contrato neste grupo.");
